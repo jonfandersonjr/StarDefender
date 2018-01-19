@@ -75,7 +75,7 @@ function createMap(game, map) {
     }
 }
 
-var unitList = ["martarlisk", "stroach"];
+var unitList = ["martarlisk", "stroach", "sergling"];
 var directions = ["east", "west", "north", "south"];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
@@ -98,5 +98,6 @@ AM.downloadAll(function () {
     createMap(gameEngine, map);
     gameEngine.addEntity(new GroundUnit(gameEngine, "martarlisk", map.dIni, map, AM));
     gameEngine.addEntity(new GroundUnit(gameEngine, "stroach", map.dIni, map, AM));
+    gameEngine.addEntity(new GroundUnit(gameEngine, "sergling", map.dIni, map, AM));
     console.log("All Done!");
 });
