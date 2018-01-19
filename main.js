@@ -93,7 +93,7 @@ AM.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
-    
+
     var map = new Map(map_1);
     createMap(gameEngine, map);
     gameEngine.addEntity(new GroundUnit(gameEngine, "martarlisk", map.dIni, map, AM));
