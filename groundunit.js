@@ -38,37 +38,37 @@ GroundUnit.prototype.constructor = GroundUnit;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 GroundUnit.prototype.update = function () {
-	let canvas = document.getElementById("gameWorld");
 	let row = Math.floor(this.x / this.map.tileSize);
 	let column = Math.floor(this.y / this.map.tileSize)
-		if (this.direction === "east") {
-			this.x += this.game.clockTick * this.speed; //Next position
-			if (this.map.map[Math.floor(this.x / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
-				row = Math.floor(this.x / this.map.tileSize);
-				this.changeDirection(newDirection(this.map, row, column, this.direction));
-			}
-		} else if (this.direction === "west") {
-			let tempX = this.x - this.game.clockTick * this.speed; //Next position
-			if (this.map.map[Math.floor(tempX / this.map.tileSize) + column * this.map.mapSize] === '+') { //Checks if next position is a path.
-				this.changeDirection(newDirection(this.map, row, column, this.direction));
-			} else {
-				this.x = tempX;
-			}
-		} else if (this.direction === "south") {
-			this.y += this.game.clockTick * this.speed; //Next position
-			if (this.map.map[row + (Math.floor(this.y / this.map.tileSize) + 1) * this.map.mapSize] === '+') { //Checks if next position is a path.
-				column = Math.floor(this.y / this.map.tileSize);
-				this.changeDirection(newDirection(this.map, row, column, this.direction));
-			}
-		} else if (this.direction === "north") {
-			let tempY = this.y - this.game.clockTick * this.speed; //Next position
-			if (this.map.map[row + Math.floor(tempY / this.map.tileSize) * this.map.mapSize] === '+') { //Checks if next position is a path.
-				this.changeDirection(newDirection(this.map, row, column, this.direction));
-			} else {
-				this.y = tempY;
-			}
-		}
-		Entity.prototype.update.call(this);
+    
+    if (this.direction === "east") {
+        this.x += this.game.clockTick * this.speed; //Next position
+        if (this.map.map[Math.floor(this.x / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
+            row = Math.floor(this.x / this.map.tileSize);
+            this.changeDirection(newDirection(this.map, row, column, this.direction));
+        }
+    } else if (this.direction === "west") {
+        let tempX = this.x - this.game.clockTick * this.speed; //Next position
+        if (this.map.map[Math.floor(tempX / this.map.tileSize) + column * this.map.mapSize] === '+') { //Checks if next position is a path.
+            this.changeDirection(newDirection(this.map, row, column, this.direction));
+        } else {
+            this.x = tempX;
+        }
+    } else if (this.direction === "south") {
+        this.y += this.game.clockTick * this.speed; //Next position
+        if (this.map.map[row + (Math.floor(this.y / this.map.tileSize) + 1) * this.map.mapSize] === '+') { //Checks if next position is a path.
+            column = Math.floor(this.y / this.map.tileSize);
+            this.changeDirection(newDirection(this.map, row, column, this.direction));
+        }
+    } else if (this.direction === "north") {
+        let tempY = this.y - this.game.clockTick * this.speed; //Next position
+        if (this.map.map[row + Math.floor(tempY / this.map.tileSize) * this.map.mapSize] === '+') { //Checks if next position is a path.
+            this.changeDirection(newDirection(this.map, row, column, this.direction));
+        } else {
+            this.y = tempY;
+        }
+    }
+    Entity.prototype.update.call(this);
 }
 
 GroundUnit.prototype.draw = function () {
@@ -77,8 +77,11 @@ GroundUnit.prototype.draw = function () {
 }
 
 GroundUnit.prototype.changeDirection = function (direction) {
-	this.direction = direction;
-	this.animation.setSprite(this.AM.getAsset(`./img/${this.unitName}_${direction}.png`));
+    for (let i = 0; i < direction.length; i++) {
+        this.direction = direction[i];
+        this.animation.setSprite(this.AM.getAsset(`./img/${this.unitName}_${direction[i]}.png`));
+    }
+	
 }
 
 //Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.
@@ -86,15 +89,15 @@ function newDirection(map, x, y, currentDirection) {
 	if (currentDirection === "east" || currentDirection === "west") {
 
 		if (map.map[x + (y - 1) * map.mapSize] === '-') {
-			return "north";
+			return [`n${currentDirection}`, "north"];
 		} else {
-			return "south";
+			return [`s${currentDirection}`, "south"];
 		}
 	} else {
 		if (map.map[x - 1 + y * map.mapSize] === '-') {
-			return "west";
+			return [`${currentDirection}w`, "west"];
 		} else {
-			return "east";
+			return [`${currentDirection}e`, "east"];
 		}
 	}
 }
