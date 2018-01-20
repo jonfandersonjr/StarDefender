@@ -31,7 +31,7 @@ function createMap(game, map) {
 }
 
 var unitList = ["martarlisk", "stroach", "sergling"];
-var directions = ["east", "west", "north", "south"];
+var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
 for (let i = 0; i < unitList.length; i++) {
 	for (let j = 0; j < directions.length; j++) {
 		AM.queueDownload(`./img/${unitList[i]}_${directions[j]}.png`);
