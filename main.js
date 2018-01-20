@@ -42,12 +42,12 @@ AM.queueDownload("./tiles/grass.png");
 
 AM.downloadAll(function () {
 	var canvas = document.getElementById("gameWorld");
-	var ctx = canvas.getContext("2d");
-	var gameEngine = new GameEngine();
+    var ctx = canvas.getContext("2d");
+    var map = new Map(map_1);
+    var gameEngine = new GameEngine(new Mouse(map.mapSize));
 	gameEngine.init(ctx);
 	gameEngine.start();
 
-	var map = new Map(map_1);
 	createMap(gameEngine, map);
 	console.log("Map Loaded!");
 

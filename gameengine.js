@@ -9,11 +9,12 @@ window.requestAnimFrame = (function () {
             };
 })();
 
-function GameEngine() {
+function GameEngine(mouse) {
     this.entities = [];
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
+    this.mouse = mouse;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -37,6 +38,9 @@ GameEngine.prototype.start = function () {
 GameEngine.prototype.startInput = function () {
     console.log('Starting input');
 
+    var that = this;
+    var thisMouse = this.mouse;
+
     var getXandY = function (e) {
         var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
         var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
@@ -49,19 +53,19 @@ GameEngine.prototype.startInput = function () {
         return { x: x, y: y };
     }
 
-    var that = this;
-
     // event listeners are added here
-
     this.ctx.canvas.addEventListener("click", function (e) {
-        that.click = getXandY(e);
-        console.log(e);
-        console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
+        thisMouse.loadDefender("Some");
+        //that.click = getXandY(e);
+        //console.log(e);
+        thisMouse.calcLocation(e);
+        //console.log("suraface height: "+ that.surfaceHeight)
+        //console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
     }, false);
 
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
         that.click = getXandY(e);
-        console.log(e);
+        //console.log(e);
         console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
         e.preventDefault();
     }, false);
