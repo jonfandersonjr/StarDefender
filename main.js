@@ -98,6 +98,7 @@ AM.downloadAll(function () {
 
     gameEngine.addEntity(new GroundUnit(gameEngine, "martarlisk", map.dIni, map, AM));
     gameEngine.addEntity(new GroundUnit(gameEngine, "stroach", map.dIni, map, AM));
+    gameEngine.addEntity(new GroundUnit(gameEngine, "sergling", map.dIni, map, AM));
     console.log("Enemies Loaded!");
 
     //UI Load
