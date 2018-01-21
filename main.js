@@ -61,13 +61,6 @@ AM.downloadAll(function () {
 	createMap(gameEngine, map);
     console.log("Map Loaded!");
 
-    gameEngine.addEntity(new Defender(gameEngine, "marine", map.dIni, map, AM));
-
-	gameEngine.addEntity(new GroundUnit(gameEngine, "martarlisk", map.dIni, map, AM));
-	gameEngine.addEntity(new GroundUnit(gameEngine, "stroach", map.dIni, map, AM));
-	gameEngine.addEntity(new GroundUnit(gameEngine, "sergling", map.dIni, map, AM));
-	console.log("Enemies Loaded!");
-
 	//UI Load
 	ctx = document.getElementById("ui").getContext("2d");
 	var imageObj = new Image();
@@ -75,5 +68,20 @@ AM.downloadAll(function () {
 	imageObj.onload = function () {
 		ctx.drawImage(imageObj, 0, 0);
 	};
-	console.log("UI Loaded!");
+    console.log("UI Loaded!");
+
+
+    //gameEngine.addEntity(new Defender(gameEngine, "marine", map.dIni, map, AM));
+
+    console.log("Enemies Loaded!");
+
+    //This generator will allow us to easily create enemies or towers and not just in main when the code loads
+    this.generator = new Generator(gameEngine, map, AM);
+
+    //Load in entities
+    this.generator.createEnemy("martarlisk");
+    this.generator.createEnemy("stroach");
+    this.generator.createEnemy("sergling");
+
+
 });

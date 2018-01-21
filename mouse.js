@@ -8,10 +8,9 @@ function Mouse(mapSize) {
     this.mapSize = mapSize;
 }
 
+Mouse.prototype.selectDefender = function (defenderName) {
 
-Mouse.prototype.selectDefender = function(defenderName) {
-    this.animation = new Animation()
-}
+};
 
 Mouse.prototype.notifyMouse = function (event) {
     if (isBusy) {
@@ -21,19 +20,21 @@ Mouse.prototype.notifyMouse = function (event) {
         isBusy = true;
         this.loadDefender(event)
     }
-}
+};
 
-Mouse.prototype.dropTower = function () {
+Mouse.prototype.dropTower = function (e) {
     //
     if (isBusy) {
+
+        isBusy = false;
         //drop tower
     }
-}
+};
 
 Mouse.prototype.loadDefender = function (defenderType) {
     console.log("in load defender");
     //console.log("this x = " + location[x] + " and this y = " + location[y]);
-}
+};
 
 Mouse.prototype.calcLocation = function (e) {
     var that = this;
@@ -49,7 +50,7 @@ Mouse.prototype.calcLocation = function (e) {
         return { x: x, y: y };
     }
     console.log("Left Click Event - X, Y " + e.clientX + ", " + e.clientY);
-}
+};
 
 
 

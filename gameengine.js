@@ -54,9 +54,13 @@ GameEngine.prototype.startInput = function () {
     }
 
     // event listeners are added here
-    this.ctx.canvas.addEventListener("click", function (e) {
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
         thisMouse.notifyMouse(e);
     }, false);
+
+    this.ctx.canvas.addEventListener("mouseup", function (e) {
+        thisMouse.dropTower(e);
+    }, false)
 
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
         that.click = getXandY(e);
@@ -66,7 +70,7 @@ GameEngine.prototype.startInput = function () {
     }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
-        //console.log(e);
+        console.log(e);
         that.mouse = getXandY(e);
     }, false);
 
@@ -89,8 +93,7 @@ GameEngine.prototype.startInput = function () {
     }, false);
 
     this.ctx.canvas.addEventListener("keyup", function (e) {
-        console.log(e);
-        console.log("Key Up Event - Char " + e.code + " Code " + e.keyCode);
+
     }, false);
 
     console.log('Input started');
