@@ -10,7 +10,7 @@ function Generator(engine, map, assetManager) {
 }
 
 Generator.prototype.createEnemy = function (enemyName) {
-    this.gameEngine.addEntity(new GroundUnit(this.gameEngine, enemyName, this.map.dIni, this.map, this.AM));
+    this.gameEngine.addEntity(new GroundUnit(this.gameEngine, enemyName, this.map.dIni, this.map, this.AM, 1));
 }
 
 Generator.prototype.createDefender = function (defenderName, x, y) {
