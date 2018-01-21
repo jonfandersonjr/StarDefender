@@ -54,7 +54,13 @@ AM.downloadAll(function () {
 	var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
     var map = new Map(map_1);
-    var gameEngine = new GameEngine(new Mouse(map.mapSize));
+    var myMouse = new Mouse(map.mapSize)
+    var gameEngine = new GameEngine(myMouse);
+
+    //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
+    this.generator = new Generator(gameEngine, map, AM);
+    myMouse.setGenerator(this.generator);
+
 	gameEngine.init(ctx);
 	gameEngine.start();
 
@@ -70,18 +76,11 @@ AM.downloadAll(function () {
 	};
     console.log("UI Loaded!");
 
-
-    //gameEngine.addEntity(new Defender(gameEngine, "marine", map.dIni, map, AM));
-
     console.log("Enemies Loaded!");
 
-    //This generator will allow us to easily create enemies or towers and not just in main when the code loads
-    this.generator = new Generator(gameEngine, map, AM);
-
-    //Load in entities
+    //Load in entities for prototype
     this.generator.createEnemy("martarlisk");
     this.generator.createEnemy("stroach");
     this.generator.createEnemy("sergling");
-
 
 });

@@ -13,8 +13,8 @@ Generator.prototype.createEnemy = function (enemyName) {
     this.gameEngine.addEntity(new GroundUnit(this.gameEngine, enemyName, this.map.dIni, this.map, this.AM));
 }
 
-Generator.prototype.createDefender = function (defenderName) {
-    this.gameEngine.addEntity(new Defender(this.gameEngine, defenderName, this.map.dIni, this.map, this.AM));
+Generator.prototype.createDefender = function (defenderName, x, y) {
+    this.gameEngine.addEntity(new Defender(this.gameEngine, defenderName, x, y, this.map, this.AM));
 }
 
 

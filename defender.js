@@ -1,8 +1,8 @@
 //Create new array with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
-var marine = [40, 32, 1, 0.1, 1, true, 0.5, 0];
+var marine = [40, 32, 1, 0.1, 1, true, 1, 0];
 
-function Defender(game, unitName, direction, map, assetManager) {
+function Defender(game, unitName, x, y, map, assetManager) {
     this.AM = assetManager;
     this.unitName = unitName;
 
@@ -17,10 +17,10 @@ function Defender(game, unitName, direction, map, assetManager) {
         this.settings[0], this.settings[1], this.settings[2], this.settings[3], this.settings[4], this.settings[5], this.settings[6]);
     this.speed = this.settings[7];
     this.ctx = game.ctx;
-    this.direction = direction;
+    this.location = location;
     this.map = map;
-    this.x = this.map.xIni * this.map.tileSize;
-    this.y = this.map.yIni * this.map.tileSize;
+    this.x = x;
+    this.y = y;
 
     Entity.call(this, game, this.x, this.y);
 }
@@ -30,8 +30,8 @@ Defender.prototype.constructor = Defender;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 Defender.prototype.update = function () {
-    let row = Math.floor(this.x / this.map.tileSize);
-    let column = Math.floor(this.y / this.map.tileSize)
+    //let row = Math.floor(this.x / this.map.tileSize);
+    //let column = Math.floor(this.y / this.map.tileSize)
     
     Entity.prototype.update.call(this);
 }

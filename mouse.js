@@ -6,6 +6,11 @@ var isBusy = false;
 function Mouse(mapSize) {
     this.doc = document.getElementById("gameWorld");
     this.mapSize = mapSize;
+    this.generator = null;
+}
+
+Mouse.prototype.setGenerator = function (mainGenerator) {
+    this.generator = mainGenerator;
 }
 
 Mouse.prototype.selectDefender = function (defenderName) {
@@ -18,7 +23,7 @@ Mouse.prototype.notifyMouse = function (event) {
     }
     else {
         isBusy = true;
-        this.loadDefender(event)
+        this.loadDefender("marine", event)
     }
 };
 
@@ -31,8 +36,8 @@ Mouse.prototype.dropTower = function (e) {
     }
 };
 
-Mouse.prototype.loadDefender = function (defenderType) {
-    console.log("in load defender");
+Mouse.prototype.loadDefender = function (defenderType, event) {
+    this.generator.createDefender(defenderType, event.clientX, event.clientY);
     //console.log("this x = " + location[x] + " and this y = " + location[y]);
 };
 

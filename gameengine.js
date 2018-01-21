@@ -53,7 +53,7 @@ GameEngine.prototype.startInput = function () {
         return { x: x, y: y };
     }
 
-    // event listeners are added here
+    // Mouse events
     this.ctx.canvas.addEventListener("mousedown", function (e) {
         thisMouse.notifyMouse(e);
     }, false);
@@ -62,27 +62,19 @@ GameEngine.prototype.startInput = function () {
         thisMouse.dropTower(e);
     }, false)
 
-    this.ctx.canvas.addEventListener("contextmenu", function (e) {
-        that.click = getXandY(e);
-        //console.log(e);
-        console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
-        e.preventDefault();
-    }, false);
-
     this.ctx.canvas.addEventListener("mousemove", function (e) {
-        console.log(e);
+        //console.log(e);
         that.mouse = getXandY(e);
     }, false);
 
-    this.ctx.canvas.addEventListener("mousewheel", function (e) {
-        console.log(e);
-        that.wheel = e;
-        console.log("Click Event - X,Y " + e.clientX + ", " + e.clientY + " Delta " + e.deltaY);
-    }, false);
-
+    // Key events
     this.ctx.canvas.addEventListener("keydown", function (e) {
         console.log(e);
         console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
+    }, false);
+
+    this.ctx.canvas.addEventListener("keyup", function (e) {
+
     }, false);
 
     this.ctx.canvas.addEventListener("keypress", function (e) {
@@ -92,8 +84,18 @@ GameEngine.prototype.startInput = function () {
         console.log("Key Pressed Event - Char " + e.charCode + " Code " + e.keyCode);
     }, false);
 
-    this.ctx.canvas.addEventListener("keyup", function (e) {
+    // Optional events
+    this.ctx.canvas.addEventListener("contextmenu", function (e) {
+        that.click = getXandY(e);
+        //console.log(e);
+        console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
+        e.preventDefault();
+    }, false);
 
+    this.ctx.canvas.addEventListener("mousewheel", function (e) {
+        console.log(e);
+        that.wheel = e;
+        console.log("Click Event - X,Y " + e.clientX + ", " + e.clientY + " Delta " + e.deltaY);
     }, false);
 
     console.log('Input started');
