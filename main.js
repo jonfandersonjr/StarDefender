@@ -30,13 +30,23 @@ function createMap(game, map) {
 	}
 }
 
-var unitList = ["martarlisk", "stroach", "sergling"];
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
+
+//load defenders
+var defenderList = ["marine"];
+for (let i = 0; i < defenderList.length; i++) {
+    AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}.png`);
+}
+
+//load enemies
+var unitList = ["martarlisk", "stroach", "sergling"];
 for (let i = 0; i < unitList.length; i++) {
 	for (let j = 0; j < directions.length; j++) {
-		AM.queueDownload(`./img/${unitList[i]}_${directions[j]}.png`);
+        AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
 	}
 }
+
+//load tiles
 AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass.png");
 
@@ -49,7 +59,9 @@ AM.downloadAll(function () {
 	gameEngine.start();
 
 	createMap(gameEngine, map);
-	console.log("Map Loaded!");
+    console.log("Map Loaded!");
+
+    gameEngine.addEntity(new Defender(gameEngine, "marine", map.dIni, map, AM));
 
 	gameEngine.addEntity(new GroundUnit(gameEngine, "martarlisk", map.dIni, map, AM));
 	gameEngine.addEntity(new GroundUnit(gameEngine, "stroach", map.dIni, map, AM));

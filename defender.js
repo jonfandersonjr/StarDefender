@@ -1,6 +1,6 @@
 //Create new array with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
-var marine = [40, 32, 5, 0.1, 5, true, 0.5, 0];
+var marine = [40, 32, 1, 0.1, 1, true, 0.5, 0];
 
 function Defender(game, unitName, direction, map, assetManager) {
     this.AM = assetManager;
@@ -13,7 +13,7 @@ function Defender(game, unitName, direction, map, assetManager) {
             break;
         default:
     }
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unitName}_${direction}.png`),
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unitName}/${this.unitName}.png`),
         this.settings[0], this.settings[1], this.settings[2], this.settings[3], this.settings[4], this.settings[5], this.settings[6]);
     this.speed = this.settings[7];
     this.ctx = game.ctx;

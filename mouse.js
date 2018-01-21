@@ -1,5 +1,6 @@
 // JavaScript source code
 
+var defenderList = ["marine"];
 var isBusy = false;
 
 function Mouse(mapSize) {
@@ -12,6 +13,16 @@ Mouse.prototype.selectDefender = function(defenderName) {
     this.animation = new Animation()
 }
 
+Mouse.prototype.notifyMouse = function (event) {
+    if (isBusy) {
+        return;
+    }
+    else {
+        isBusy = true;
+        this.loadDefender(event)
+    }
+}
+
 Mouse.prototype.dropTower = function () {
     //
     if (isBusy) {
@@ -19,10 +30,7 @@ Mouse.prototype.dropTower = function () {
     }
 }
 
-Mouse.prototype.loadDefender = function (location) {
-    //this.x = location.x;
-    //this.y = location.y;
-    //console.log("Testing location: " + location);
+Mouse.prototype.loadDefender = function (defenderType) {
     console.log("in load defender");
     //console.log("this x = " + location[x] + " and this y = " + location[y]);
 }

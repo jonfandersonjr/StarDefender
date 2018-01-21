@@ -21,7 +21,7 @@ function GroundUnit(game, unitName, direction, map, assetManager) {
 		break;
 	default:
 	}
-	this.animation = new Animation(this.AM.getAsset(`./img/${this.unitName}_${direction}.png`),
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unitName}/${this.unitName}_${direction}.png`),
 			this.settings[0], this.settings[1], this.settings[2], this.settings[3], this.settings[4], this.settings[5], this.settings[6]);
 	this.speed = this.settings[7];
 	this.ctx = game.ctx;
@@ -79,7 +79,7 @@ GroundUnit.prototype.draw = function () {
 GroundUnit.prototype.changeDirection = function (direction) {
     for (let i = 0; i < direction.length; i++) {
         this.direction = direction[i];
-        this.animation.setSprite(this.AM.getAsset(`./img/${this.unitName}_${direction[i]}.png`));
+        this.animation.setSprite(this.AM.getAsset(`./img/${this.unitName}/${this.unitName}_${direction[i]}.png`));
     }
 	
 }
