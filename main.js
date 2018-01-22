@@ -26,7 +26,10 @@ function createMap(game, map) {
 			j++;
 		} else if (mapString[i + j * map.mapSize] === '-') {
 			game.addEntity(new Background(game, AM.getAsset("./tiles/dirt.png"), i * map.tileSize, j * map.tileSize));
-		}
+        } else if (mapString[i + j * map.mapSize] === '=') {
+            game.addEntity(new Background(game, AM.getAsset("./tiles/dirt.png"), i * map.tileSize, j * map.tileSize));
+            game.addEntity(new Background(game, AM.getAsset("./tiles/base.png"), i * map.tileSize, j * map.tileSize));
+        }
 	}
 }
 
@@ -49,6 +52,7 @@ for (let i = 0; i < unitList.length; i++) {
 //load tiles
 AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass.png");
+AM.queueDownload("./tiles/base.png")
 
 AM.downloadAll(function () {
 	var canvas = document.getElementById("gameWorld");

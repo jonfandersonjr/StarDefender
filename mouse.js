@@ -1,5 +1,3 @@
-// JavaScript source code
-
 var defenderList = ["marine"];
 var isBusy = false;
 
