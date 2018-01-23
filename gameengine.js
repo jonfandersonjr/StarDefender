@@ -9,7 +9,8 @@ window.requestAnimFrame = (function () {
             };
 })();
 
-function GameEngine(mouse) {
+function GameEngine(mouse, ui) {
+    this.ui = ui;
     this.entities = [];
     this.ctx = null;
     this.surfaceWidth = null;
@@ -131,6 +132,8 @@ GameEngine.prototype.update = function () {
             this.entities.splice(i, 1);
         }
     }
+
+    //UPDATE UI HERE
 }
 
 GameEngine.prototype.loop = function () {
