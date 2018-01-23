@@ -9,8 +9,7 @@ window.requestAnimFrame = (function () {
             };
 })();
 
-function GameEngine(mouse, ui) {
-    this.ui = ui;
+function GameEngine(mouse) {
     this.entities = [];
     this.ctx = null;
     this.surfaceWidth = null;
@@ -25,6 +24,7 @@ GameEngine.prototype.init = function (ctx) {
     this.timer = new Timer();
     this.startInput();
     console.log('game initialized');
+    this.uiUpdateBool = false;
 }
 
 GameEngine.prototype.start = function () {
@@ -134,12 +134,23 @@ GameEngine.prototype.update = function () {
     }
 
     //UPDATE UI HERE
+    if (this.uiUpdateBool === true) {
+      ui.updateTime(this.gameTime);
+    }
+
 }
 
 GameEngine.prototype.loop = function () {
     this.clockTick = this.timer.tick();
     this.update();
     this.draw();
+}
+
+//Attaches UI to engine
+GameEngine.prototype.attachUI = function (ui) {
+  this.ui = ui;
+  this.uiUpdateBool = true;
+  console.log("UI Attached");
 }
 
 function Timer() {
