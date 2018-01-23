@@ -69,18 +69,15 @@ AM.downloadAll(function () {
 	gameEngine.start();
 
 	createMap(gameEngine, map);
-    console.log("Map Loaded!");
+  console.log("Map Loaded!");
 
 	//UI Load
-	ctx = document.getElementById("ui").getContext("2d");
-	var imageObj = new Image();
-	imageObj.src = './ui/ui.png';
-	imageObj.onload = function () {
-		ctx.drawImage(imageObj, 0, 0);
-	};
-    console.log("UI Loaded!");
+		buttonCanvas = document.getElementById("uiButtons").getContext("2d");
+		textCanvas = document.getElementById("uiText");
+		var ui = new UI(buttonCanvas, textCanvas, gameEngine);
 
-    console.log("Enemies Loaded!");
+
+  	console.log("Enemies Loaded!");
 
     //Load in entities for prototype
     this.generator.createEnemy("martarlisk");
