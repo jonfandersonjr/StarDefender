@@ -66,7 +66,7 @@ AM.downloadAll(function () {
 	textCanvas = document.getElementById("uiText");
 	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
   console.log("UI Loaded!");
-	
+
 	var gameEngine = new GameEngine(myMouse, ui);
 
 
