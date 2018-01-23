@@ -61,8 +61,9 @@ AM.downloadAll(function () {
   var map = new Map(map_1);
   var myMouse = new Mouse(map.mapSize)
   var gameEngine = new GameEngine(myMouse);
+  var statTracker = new Stats(100, 100, 100, 1, 0, 0, "00", "00");
 
-  //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
+	//This generator will allow us to easily create enemies or towers and not just in main when the code first loads
   this.generator = new Generator(gameEngine, map, AM);
   myMouse.setGenerator(this.generator);
 
@@ -77,7 +78,7 @@ AM.downloadAll(function () {
 	//UI Load
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
 	textCanvas = document.getElementById("uiText");
-	var ui = new UI(buttonCanvas, textCanvas, gameEngine);
+	var ui = new UI(buttonCanvas, textCanvas, gameEngine, statTracker);
 
   //Load in entities for prototype
   this.generator.createEnemy("martarlisk");
