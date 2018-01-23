@@ -60,7 +60,13 @@ AM.downloadAll(function () {
   var ctx = canvas.getContext("2d");
   var map = new Map(map_1);
   var myMouse = new Mouse(map.mapSize)
-	var gameEngine = new GameEngine(myMouse);
+
+	//UI Load
+	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
+	textCanvas = document.getElementById("uiText");
+	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
+
+	var gameEngine = new GameEngine(myMouse, ui);
 
 
   //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
@@ -75,10 +81,7 @@ AM.downloadAll(function () {
 	createMap(gameEngine, map);
   console.log("Map Loaded!");
 
-	//UI Load
-	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
-	textCanvas = document.getElementById("uiText");
-	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
+
 
 
 	console.log("UI Loaded!");
