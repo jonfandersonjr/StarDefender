@@ -24,7 +24,6 @@ GameEngine.prototype.init = function (ctx) {
     this.timer = new Timer();
     this.startInput();
     console.log('game initialized');
-    this.uiUpdateBool = false;
 }
 
 GameEngine.prototype.start = function () {
@@ -133,10 +132,7 @@ GameEngine.prototype.update = function () {
         }
     }
 
-    //UPDATE UI HERE
-    if (this.uiUpdateBool === true) {
-      ui.updateTime(this.gameTime);
-    }
+
 
 }
 
@@ -146,12 +142,6 @@ GameEngine.prototype.loop = function () {
     this.draw();
 }
 
-//Attaches UI to engine
-GameEngine.prototype.attachUI = function (ui) {
-  this.ui = ui;
-  this.uiUpdateBool = true;
-  console.log("UI Attached");
-}
 
 function Timer() {
     this.gameTime = 0;

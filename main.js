@@ -79,8 +79,7 @@ AM.downloadAll(function () {
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
 	textCanvas = document.getElementById("uiText");
 	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
-	gameEngine.attachUI(ui);
-	gameEngine.uiUpdateBool = true;
+
 
 	console.log("UI Loaded!");
 
