@@ -9,8 +9,8 @@ window.requestAnimFrame = (function () {
             };
 })();
 
-function GameEngine(mouse, gameUI) {
-    this.ui = gameUI;
+function GameEngine(mouse, ui) {
+    this.gameUI = ui;
     this.entities = [];
     this.ctx = null;
     this.surfaceWidth = null;
@@ -134,7 +134,7 @@ GameEngine.prototype.update = function () {
     }
 
     //Update UI Here
-    ui.updateTime(this.gameTime);
+    gameUI.updateTime(this.gameTime);
 
 }
 

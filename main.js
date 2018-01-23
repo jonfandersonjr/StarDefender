@@ -65,7 +65,8 @@ AM.downloadAll(function () {
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
 	textCanvas = document.getElementById("uiText");
 	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
-
+  console.log("UI Loaded!");
+	
 	var gameEngine = new GameEngine(myMouse, ui);
 
 
@@ -81,15 +82,10 @@ AM.downloadAll(function () {
 	createMap(gameEngine, map);
   console.log("Map Loaded!");
 
-
-
-
-	console.log("UI Loaded!");
-
-    //Load in entities for prototype
-    this.generator.createEnemy("martarlisk");
-    this.generator.createEnemy("stroach");
-    this.generator.createEnemy("sergling");
+	//Load in entities for prototype
+  this.generator.createEnemy("martarlisk");
+  this.generator.createEnemy("stroach");
+  this.generator.createEnemy("sergling");
 	console.log("Enemies Loaded!");
 
 });

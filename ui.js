@@ -86,6 +86,6 @@ UI.prototype.reset = function() {
   this.time = this.inittime;
 }
 
-UI.prototype.updateTime = function(value) {
+UI.prototype.updateTime = function (value) {
     this.time = value;
 }
