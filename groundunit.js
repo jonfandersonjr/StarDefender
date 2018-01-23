@@ -1,7 +1,7 @@
 //Create new array with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
-var martarlisk = [64, 72, 5, 0.1, 5, true, 0.6, 50];
-var stroach = [75, 68, 5, 0.1, 5, true, 0.6, 25];
+var martarlisk = [64, 72, 5, 0.1, 5, true, 0.5, 50];
+var stroach = [75, 68, 5, 0.1, 5, true, 0.5, 25];
 var sergling = [45, 45, 7, 0.1, 7, true, 0.6, 75];
 
 function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) {
@@ -42,27 +42,35 @@ GroundUnit.prototype.update = function () {
 	let column = Math.floor(this.y / this.map.tileSize)
     
     if (this.direction === "east") {
-        this.x += this.game.clockTick * this.speed * this.speedSetting; //Next position
-        if (this.map.map[Math.floor(this.x / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
-            row = Math.floor(this.x / this.map.tileSize);
+        let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
+        if (this.map.map[Math.floor(tempX / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
+            row++;
+            this.x = row * this.map.tileSize;
             this.changeDirection(newDirection(this.map, row, column, this.direction));
+        } else {
+            this.x = tempX;
         }
     } else if (this.direction === "west") {
         let tempX = this.x - this.game.clockTick * this.speed * this.speedSetting; //Next position
         if (this.map.map[Math.floor(tempX / this.map.tileSize) + column * this.map.mapSize] === '+') { //Checks if next position is a path.
+            this.x = row * this.map.tileSize;
             this.changeDirection(newDirection(this.map, row, column, this.direction));
         } else {
             this.x = tempX;
         }
     } else if (this.direction === "south") {
-        this.y += this.game.clockTick * this.speed * this.speedSetting; //Next position
-        if (this.map.map[row + (Math.floor(this.y / this.map.tileSize) + 1) * this.map.mapSize] === '+') { //Checks if next position is a path.
-            column = Math.floor(this.y / this.map.tileSize);
+        let tempY = this.y + this.game.clockTick * this.speed * this.speedSetting; //Next position
+        if (this.map.map[row + (Math.floor(tempY / this.map.tileSize) + 1) * this.map.mapSize] === '+') { //Checks if next position is a path.
+            column++;
+            this.y = column * this.map.tileSize;
             this.changeDirection(newDirection(this.map, row, column, this.direction));
+        } else {
+            this.y = tempY;
         }
     } else if (this.direction === "north") {
         let tempY = this.y - this.game.clockTick * this.speed * this.speedSetting; //Next position
         if (this.map.map[row + Math.floor(tempY / this.map.tileSize) * this.map.mapSize] === '+') { //Checks if next position is a path.
+            this.y = column * this.map.tileSize;
             this.changeDirection(newDirection(this.map, row, column, this.direction));
         } else {
             this.y = tempY;
