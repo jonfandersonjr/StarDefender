@@ -86,5 +86,15 @@ AM.downloadAll(function () {
     this.generator.createEnemy("sergling");
 	console.log("Enemies Loaded!");
 
+	/* Stat tracker usage EXAMPLE
+	//Resource adjust test
+	//Adds 50 resource to pool via stat tracker, then updates text based on stattracker
+	statTracker.resourceAdjust(50);
+	ui.updateText(textCanvas, statTracker);
+	console.log("Resource Adjust Test");
 
+	//Reset stat tracker to init values usage EXAMPLE
+	statTracker.reset();
+	ui.updateText(textCanvas, statTracker);
+	console.log("Reset Stats Test");*/
 });

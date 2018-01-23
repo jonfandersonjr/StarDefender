@@ -29,21 +29,19 @@ function UI(buttonCanvas, textCanvas, engine, statTracker) {
   console.log("UI Image Loaded!");
 
   //Load Default Text
-  updateText(text, stats.healthCur, stats.healthMax, stats.resourcesTotal,
-             stats.curLevel, stats.wavesC, stats.enemiesKilled, stats.curMin, stats.curSec);
+  this.updateText(text, stats);
   console.log("Default stats text loaded!");
 
 
 }
 
-function updateText(textBox, healthCur, healthMax, resources, curLevel,
-                    wavesCleared, enemiesKilled, minutes, seconds) {
+UI.prototype.updateText = function (textBox, stats) {
           var tempString = "Health: ";
-          tempString += healthCur + " / " + healthMax + "\n";
-          tempString += "Resources: " + resources + "\n";
-          tempString += "Level: " + curLevel + "\n";
-          tempString += "Waves Cleared: " + wavesCleared + "\n";
-          tempString += "Enemies Killed: " + enemiesKilled + "\n";
-          tempString += "Time: " + minutes + ":" + seconds + "\n";
+          tempString += stats.healthCur + " / " + stats.healthMax + "\n";
+          tempString += "Resources: " + stats.resourcesTotal + "\n";
+          tempString += "Level: " + stats.curLevel + "\n";
+          tempString += "Waves Cleared: " + stats.wavesC + "\n";
+          tempString += "Enemies Killed: " + stats.enemiesKilled + "\n";
+          tempString += "Time: " + stats.curMin + ":" + stats.curSec + "\n";
           textBox.value = tempString;
 }
