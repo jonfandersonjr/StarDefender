@@ -5,9 +5,8 @@ textCanvas - textArea that holds this
 */
 function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   startRes, startLevel, wavesCleared, enemiesK) {
-  var ctx = buttonCanvas;
-  var text = textCanvas;
-
+  ctx = buttonCanvas;
+  this.textBox = textCanvas;
   //Load UI Image on image canvas
   var imageObj = new Image();
   imageObj.src = './img/ui/defenseUIButtons.png';
@@ -33,13 +32,13 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
 
   this.time = "00:00";
   //Load Default Text
-  this.updateText(text);
+  this.updateText();
   console.log("Default stats text loaded!");
 
 
 };
 
-UI.prototype.updateText = function (textBox) {
+UI.prototype.updateText = function () {
           var tempString = "Health: ";
           tempString += this.healthCur + " / " + this.healthMax + "\n";
           tempString += "Resources: " + this.resourcesTotal + "\n";
@@ -47,32 +46,37 @@ UI.prototype.updateText = function (textBox) {
           tempString += "Waves Cleared: " + this.wavesC + "\n";
           tempString += "Enemies Killed: " + this.enemiesKilled + "\n";
           tempString += "Time: " + this.time + "\n";
-          textBox.value = tempString;
+          this.textBox.value = tempString;
 }
 
 //Takes health away from current health pool
 UI.prototype.dmg = function (amount) {
   this.healthCur -= amount;
+  this.updateText();
 }
 
 //Adjust resource + or -
 UI.prototype.resourceAdjust = function (amount) {
   this.resourcesTotal += amount;
+  this.updateText();
 }
 
 //Adjust waves Cleared
 UI.prototype.wavesAdjust = function(amount) {
   this.wavesC += amount;
+  this.updateText();
 }
 
 //Adjust enemies Killed
 UI.prototype.enemiesKilledAdjust = function(amount) {
   this.enemiesKilled += amount;
+  this.updateText();
 }
 
 //Adjust level
 UI.prototype.adjustLevel = function(amount) {
   this.curLevel += amount;
+  this.updateText();
 }
 
 //Reset this to init values from initial new Stat() call
@@ -84,8 +88,11 @@ UI.prototype.reset = function() {
   this.wavesC = this.initwavesC;
   this.enemiesKilled = this.initenemiesKilled;
   this.time = this.inittime;
+  this.updateText();
 }
 
-UI.prototype.updateTime = function(value) {
-    this.time = value;
+UI.prototype.updateTime = function (value) {
+    var timeString = parseFloat(value).toFixed(2);
+    this.time = timeString;
+    this.updateText();
 }
