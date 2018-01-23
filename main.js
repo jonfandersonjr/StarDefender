@@ -57,14 +57,16 @@ AM.queueDownload("./tiles/base.png")
 
 AM.downloadAll(function () {
 	var canvas = document.getElementById("gameWorld");
-  var ctx = canvas.getContext("2d");
-  var map = new Map(map_1);
-  var myMouse = new Mouse(map.mapSize)
+
+    var ctx = canvas.getContext("2d");
+    var map = new Map(map_1);
+    var myMouse = new Mouse(map.mapSize)
 	var gameEngine = new GameEngine(myMouse);
 
-	//This generator will allow us to easily create enemies or towers and not just in main when the code first loads
-  this.generator = new Generator(gameEngine, map, AM);
-  myMouse.setGenerator(this.generator);
+
+    //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
+    this.generator = new Generator(gameEngine, map, AM);
+    myMouse.setGenerator(this.generator);
 
 	//Game Engine Start
 	gameEngine.init(ctx);
@@ -72,7 +74,7 @@ AM.downloadAll(function () {
 
 	//Map Load
 	createMap(gameEngine, map);
-  console.log("Map Loaded!");
+    console.log("Map Loaded!");
 
 	//UI Load
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
@@ -80,10 +82,10 @@ AM.downloadAll(function () {
 	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
 	console.log("UI Loaded!");
 
-  //Load in entities for prototype
-  this.generator.createEnemy("martarlisk");
-  this.generator.createEnemy("stroach");
-  this.generator.createEnemy("sergling");
+    //Load in entities for prototype
+    this.generator.createEnemy("martarlisk");
+    this.generator.createEnemy("stroach");
+    this.generator.createEnemy("sergling");
 	console.log("Enemies Loaded!");
 
 });
