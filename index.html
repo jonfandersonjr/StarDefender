@@ -20,9 +20,24 @@
 body {
     background-color: black;
 }
+ textarea {
+   resize: none;
+   width: 300px;
+   height: 294px;
+   font-size: 20px;
+   font: Georgia;
+ }
+#gameWorld {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+}
 </style>
 <body>
-    <canvas id="gameWorld" tabindex="1" width="770" height="770" style="border: 1px green; background: purple"></canvas>
-    <canvas id="ui" tabindex="1" width="300" height="770" style="border: 1px green; background: transparent"></canvas>
+        <canvas id="gameWorld" tabindex="1" width="770" height="770" style="border: 1px green; background: purple"></canvas>
+        <textarea id="uiText" readonly=true></textarea>
+        <canvas id="uiButtons" width="470" height="300" style="background: red"></canvas>
 </body>
 </html>
