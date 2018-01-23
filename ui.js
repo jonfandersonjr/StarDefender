@@ -1,14 +1,12 @@
 /*
 Constructor
 buttonCanvas - canvas that has defence structure uiButtons
-textCanvas - textArea that holds stats
-engine - Game engine passed by main.js
+textCanvas - textArea that holds this
 */
 function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   startRes, startLevel, wavesCleared, enemiesK) {
   var ctx = buttonCanvas;
   var text = textCanvas;
-  var stats = statTracker;
 
   //Load UI Image on image canvas
   var imageObj = new Image();
@@ -25,7 +23,6 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   this.initcurLevel = startLevel;
   this.initwavesC = wavesCleared;
   this.initenemiesKilled = enemiesK;
-  this.inittime = time;
 
   this.healthCur = startHealth;
   this.healthMax = maxHealth;
@@ -33,22 +30,23 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   this.curLevel = startLevel;
   this.wavesC = wavesCleared;
   this.enemiesKilled = enemiesK;
-  this.time = time;
+
+  this.time = "00:00";
   //Load Default Text
-  this.updateText(text, stats);
+  this.updateText(text);
   console.log("Default stats text loaded!");
 
 
-}
+};
 
-UI.prototype.updateText = function (textBox, stats) {
+UI.prototype.updateText = function (textBox) {
           var tempString = "Health: ";
-          tempString += stats.healthCur + " / " + stats.healthMax + "\n";
-          tempString += "Resources: " + stats.resourcesTotal + "\n";
-          tempString += "Level: " + stats.curLevel + "\n";
-          tempString += "Waves Cleared: " + stats.wavesC + "\n";
-          tempString += "Enemies Killed: " + stats.enemiesKilled + "\n";
-          tempString += "Time: " + stats.time + "\n";
+          tempString += this.healthCur + " / " + this.healthMax + "\n";
+          tempString += "Resources: " + this.resourcesTotal + "\n";
+          tempString += "Level: " + this.curLevel + "\n";
+          tempString += "Waves Cleared: " + this.wavesC + "\n";
+          tempString += "Enemies Killed: " + this.enemiesKilled + "\n";
+          tempString += "Time: " + this.time + "\n";
           textBox.value = tempString;
 }
 
@@ -77,7 +75,7 @@ UI.prototype.adjustLevel = function(amount) {
   this.curLevel += amount;
 }
 
-//Reset STATS to init values from initial new Stat() call
+//Reset this to init values from initial new Stat() call
 UI.prototype.reset = function() {
   this.healthCur = this.inithealthCur;
   this.healthMax = this.inithealthMax;
@@ -90,3 +88,4 @@ UI.prototype.reset = function() {
 
 UI.prototype.updateTime = function(value) {
     this.time = value;
+}

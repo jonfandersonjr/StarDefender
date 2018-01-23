@@ -78,6 +78,7 @@ AM.downloadAll(function () {
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
 	textCanvas = document.getElementById("uiText");
 	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
+	console.log("UI Loaded!");
 
   //Load in entities for prototype
   this.generator.createEnemy("martarlisk");
