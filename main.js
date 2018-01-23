@@ -39,6 +39,7 @@ var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
 var defenderList = ["marine"];
 for (let i = 0; i < defenderList.length; i++) {
     AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}.png`);
+    AM.queueDownload(`./img/${defenderList[i]}/projectile.png`);
 }
 
 //load enemies
@@ -81,10 +82,11 @@ AM.downloadAll(function () {
     console.log("UI Loaded!");
 
     console.log("Enemies Loaded!");
-
+   
     //Load in entities for prototype
     this.generator.createEnemy("martarlisk");
     this.generator.createEnemy("stroach");
     this.generator.createEnemy("sergling");
 
+    
 });
