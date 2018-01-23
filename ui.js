@@ -15,9 +15,10 @@ buttonCanvas - canvas that has defence structure uiButtons
 textCanvas - textArea that holds stats
 engine - Game engine passed by main.js
 */
-function UI(buttonCanvas, textCanvas, engine) {
+function UI(buttonCanvas, textCanvas, engine, statTracker) {
   var ctx = buttonCanvas;
   var text = textCanvas;
+  var stats = statTracker;
 
   //Load UI Image on image canvas
   var imageObj = new Image();
@@ -28,17 +29,21 @@ function UI(buttonCanvas, textCanvas, engine) {
   console.log("UI Image Loaded!");
 
   //Load Default Text
-  updateText(text, "100", "100", "0", "1", "0", "0", "00:00");
+  updateText(text, stats.healthCur, stats.healthMax, stats.resourcesTotal,
+             stats.curLevel, stats.wavesC, stats.enemiesKilled, stats.curMin, stats.curSec);
+  console.log("Default stats text loaded!");
+
+
 }
 
 function updateText(textBox, healthCur, healthMax, resources, curLevel,
-                    wavesCleared, enemiesKilled, time) {
+                    wavesCleared, enemiesKilled, minutes, seconds) {
           var tempString = "Health: ";
           tempString += healthCur + " / " + healthMax + "\n";
           tempString += "Resources: " + resources + "\n";
           tempString += "Level: " + curLevel + "\n";
           tempString += "Waves Cleared: " + wavesCleared + "\n";
           tempString += "Enemies Killed: " + enemiesKilled + "\n";
-          tempString += "Time: " + time + "\n";
+          tempString += "Time: " + minutes + ":" + seconds + "\n";
           textBox.value = tempString;
 }
