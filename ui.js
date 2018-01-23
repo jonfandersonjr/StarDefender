@@ -22,7 +22,7 @@ function UI(buttonCanvas, textCanvas, engine) {
 
   //Load UI Image on image canvas
   var imageObj = new Image();
-  imageObj.src = './ui/ui.png';
+  imageObj.src = './img/ui/defenseUIButtons.png';
 	imageObj.onload = function () {
 		ctx.drawImage(imageObj, 0, 0);
 	};

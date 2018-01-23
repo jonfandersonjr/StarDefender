@@ -3,7 +3,8 @@
 <html>
 <head>
     <link rel="icon" type="image/png" href="./misc/favicon.png">
-""    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <meta charset="utf-8">
     <title>Star Defender</title>
     <script type="text/javascript" src="./gameengine.js"></script>
     <script type="text/javascript" src="./assetmanager.js"></script>
@@ -17,57 +18,15 @@
 	  <script type="text/javascript" src="./generator.js"></script>
     <script type="text/javascript" src="./projectile.js"></script>
 </head>
-<style>
-body {
-    background-color: black;
-}
- textarea {
-   resize: none;
-   width: 295px;
-   height: 385px;
-   font-size: 20px;
-   font: Georgia;
- }
-}
 
-.wrapper {
-  box-sizing: border-box;
-}
-.leftBox {
-  width: 30%;
-  height: 770px;
-  float: left;
-
-}
-.middleBox {
-  width: 42%;
-  float: left;
-  height: 770px;
-}
-.rightTopBox {
-  width: 25%;
-  float: left;
-}
-
-.rightBottomBox {
-  width: 25%;
-  float: left;
-}
-</style>
 <body>
-  <div class="wrapper">
-      <div class="leftBox">
-        <canvas id="gameInfo" style="background: red" width="500" height="770"></canvas>
-      </div>
-      <div class="middleBox">
-        <canvas id="gameWorld" tabindex="1" width="770" height="770" style="background: purple"></canvas>
-      </div>
-      <div class="rightTopBox">
-        <textarea id="uiText" readonly=true height="385" width="300"></textarea>
-      </div>
-      <div class="rightBottomBox">
-        <canvas id="uiButtons" width="300" height="385" style="background: red"></canvas>
-      </div>
-    </div>
+<div class="container generalStyles">
+  <div class="leftPanel generalStyles"><canvas id="gameInfo" style="background: red" width="300" height="770"></canvas></div>
+  <div class="middlePanel generalStyles"><canvas id="gameWorld" tabindex="1" width="770" height="770" style="background: transparent"></canvas></div>
+  <div class="rightPanel generalStyles">
+     <div class="topPanel generalStyles"><textarea id="uiText" readonly=true height="385" width="300" ></textarea></div>
+     <div class="bottomPanel generalStyles"><canvas id="uiButtons" width="300" height="385" style="background: transparent"></canvas></div>
+  </div>
+</div>
 </body>
 </html>
