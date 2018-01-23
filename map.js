@@ -27,7 +27,8 @@ var map_1 = "+++++++++++++++++++++++++\n" +
 function Map(map) {
     this.map = map;
     this.mapSize = Math.sqrt(this.map.length);
-    this.tileSize = 31;
+    this.canvas = document.getElementById("gameWorld");
+    this.tileSize = this.canvas.height / (this.mapSize - 1);
     if (this.map === map_1) {
         this.xIni = 0;
         this.yIni = 1;

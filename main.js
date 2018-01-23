@@ -1,5 +1,5 @@
 var AM = new AssetManager();
-
+  
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
 
 //load defender sprites
@@ -46,8 +46,6 @@ AM.downloadAll(function () {
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
 	textCanvas = document.getElementById("uiText");
 	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
-
-
 	console.log("UI Loaded!");
 
     //Load in entities for prototype

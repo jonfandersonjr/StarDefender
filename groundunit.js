@@ -87,7 +87,7 @@ GroundUnit.prototype.draw = function () {
 GroundUnit.prototype.changeDirection = function (direction) {
     for (let i = 0; i < direction.length; i++) {
         this.direction = direction[i];
-        this.animation.setSprite(this.AM.getAsset(`./img/${this.unitName}/${this.unitName}_${direction[i]}.png`));
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unitName}/${this.unitName}_${direction[i]}.png`);
     }
 	
 }

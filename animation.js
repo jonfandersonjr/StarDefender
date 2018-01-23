@@ -11,10 +11,6 @@ function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDurati
 	this.scale = scale;
 }
 
-Animation.prototype.setSprite = function (spriteSheet) {
-	this.spriteSheet = spriteSheet;
-}
-
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
 	this.elapsedTime += tick;
 	if (this.isDone()) {

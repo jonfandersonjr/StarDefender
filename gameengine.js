@@ -150,7 +150,7 @@ GameEngine.prototype.update = function () {
     }
     
     for (let i = 0; i < this.defenderEntities.length; i++) {
-        let entity = defenderEntities[i];
+        let entity = this.defenderEntities[i];
         if (!entity.removeFromWorld) {
             entity.update();
         }
@@ -167,7 +167,7 @@ GameEngine.prototype.update = function () {
             this.defenderEntities.splice(i, 1);
         }
     }
-
+    resize();
 }
 
 GameEngine.prototype.loop = function () {
@@ -176,6 +176,13 @@ GameEngine.prototype.loop = function () {
     this.draw();
 }
 
+function resize() {
+    this.canvas = document.getElementById("gameWorld");
+    if (canvas.height != window.innerHeight) {
+        canvas.width = window.innerHeight;
+        canvas.height = window.innerHeight;
+    }
+}
 
 function Timer() {
     this.gameTime = 0;
