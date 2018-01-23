@@ -60,8 +60,7 @@ AM.downloadAll(function () {
   var ctx = canvas.getContext("2d");
   var map = new Map(map_1);
   var myMouse = new Mouse(map.mapSize)
-  var gameEngine = new GameEngine(myMouse);
-  var statTracker = new Stats(100, 100, 100, 1, 0, 0, "00", "00");
+	var gameEngine = new GameEngine(myMouse);
 
 	//This generator will allow us to easily create enemies or towers and not just in main when the code first loads
   this.generator = new Generator(gameEngine, map, AM);
@@ -78,7 +77,7 @@ AM.downloadAll(function () {
 	//UI Load
 	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
 	textCanvas = document.getElementById("uiText");
-	var ui = new UI(buttonCanvas, textCanvas, gameEngine, statTracker);
+	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
 
   //Load in entities for prototype
   this.generator.createEnemy("martarlisk");
@@ -86,15 +85,4 @@ AM.downloadAll(function () {
   this.generator.createEnemy("sergling");
 	console.log("Enemies Loaded!");
 
-	/* Stat tracker usage EXAMPLE
-	//Resource adjust test
-	//Adds 50 resource to pool via stat tracker, then updates text based on stattracker
-	statTracker.resourceAdjust(50);
-	ui.updateText(textCanvas, statTracker);
-	console.log("Resource Adjust Test");
-
-	//Reset stat tracker to init values usage EXAMPLE
-	statTracker.reset();
-	ui.updateText(textCanvas, statTracker);
-	console.log("Reset Stats Test");*/
 });
