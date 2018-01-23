@@ -86,5 +86,30 @@ AM.downloadAll(function () {
   this.generator.createEnemy("sergling");
 	console.log("Enemies Loaded!");
 
-
+	/* STATS TESTS */
+	//Resource adjust test
+	//Adds 50 resource to pool via stat tracker, then updates text based on stattracker
+	statTracker.resourceAdjust(50);
+	ui.updateText(textCanvas, statTracker);
+	console.log("Resource Adjust Test");
+	//Damage adjust test
+	statTracker.dmg(50);
+	ui.updateText(textCanvas, statTracker);
+	console.log("Damage Adjust Test");
+	//Waves Cleared test
+	statTracker.wavesAdjust(1);
+  ui.updateText(textCanvas, statTracker);
+	console.log("Waves Adjust Test");
+	//Enemies Killed test
+	statTracker.enemiesKilledAdjust(50);
+	ui.updateText(textCanvas, statTracker);
+	console.log("Enemies Killed Adjust Test");
+	//Level Adjust test
+	statTracker.adjustLevel(2);
+	ui.updateText(textCanvas, statTracker);
+	console.log("Level Adjust Test");
+	//Reset test
+	statTracker.reset();
+	ui.updateText(textCanvas, statTracker);
+	console.log("Reset Stats Test");
 });
