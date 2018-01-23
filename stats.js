@@ -44,7 +44,7 @@ Stats.prototype.adjustLevel = function(amount) {
   this.curLevel += amount;
 }
 
-//Reset STATS
+//Reset STATS to init values from initial new Stat() call
 Stats.prototype.reset = function() {
   this.healthCur = this.inithealthCur;
   this.healthMax = this.inithealthMax;
