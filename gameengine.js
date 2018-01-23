@@ -22,7 +22,7 @@ GameEngine.prototype.init = function (ctx) {
     this.ctx = ctx;
     this.surfaceWidth = this.ctx.canvas.width;
     this.surfaceHeight = this.ctx.canvas.height;
-    this.timer = new Timer();
+    this.timer = new Timer(this.gameUI);
     this.startInput();
     console.log('game initialized');
 }
@@ -133,8 +133,6 @@ GameEngine.prototype.update = function () {
         }
     }
 
-    //Update UI Here
-    gameUI.updateTime(this.gameTime);
 
 }
 
@@ -145,7 +143,8 @@ GameEngine.prototype.loop = function () {
 }
 
 
-function Timer() {
+function Timer(gameUI) {
+    this.gameUI = gameUI;
     this.gameTime = 0;
     this.maxStep = 0.05;
     this.wallLastTimestamp = 0;
@@ -158,6 +157,7 @@ Timer.prototype.tick = function () {
 
     var gameDelta = Math.min(wallDelta, this.maxStep);
     this.gameTime += gameDelta;
+    this.gameUI.updateTime(this.gameTime);
     return gameDelta;
 }
 
