@@ -3,6 +3,7 @@ var isBusy = false;
 
 function Mouse(mapSize) {
     this.doc = document.getElementById("gameWorld");
+    //access to other canvas
     this.mapSize = mapSize;
     this.generator = null;
 }
@@ -21,9 +22,13 @@ Mouse.prototype.notifyMouse = function (event) {
     }
     else {
         isBusy = true;
-        this.loadDefender("marine", event)
+        this.loadDefender("marine", event);
     }
 };
+
+Mouse.prototype.followMouse = function (event) {
+
+}
 
 Mouse.prototype.dropTower = function (e) {
     //
