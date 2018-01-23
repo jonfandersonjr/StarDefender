@@ -6,8 +6,7 @@
   Waves Cleared
   Enemies Killed
   Time
--Get images done for defense structures
--Work on mouse interaction
+-Get images done for defense structures - waiting on finished sprites
 */
 
 /*

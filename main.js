@@ -35,14 +35,14 @@ function createMap(game, map) {
 
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
 
-//load defenders
+//load defender sprites
 var defenderList = ["marine"];
 for (let i = 0; i < defenderList.length; i++) {
     AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}.png`);
     AM.queueDownload(`./img/${defenderList[i]}/projectile.png`);
 }
 
-//load enemies
+//load enemy sprites
 var unitList = ["martarlisk", "stroach", "sergling"];
 for (let i = 0; i < unitList.length; i++) {
 	for (let j = 0; j < directions.length; j++) {
@@ -66,9 +66,11 @@ AM.downloadAll(function () {
   this.generator = new Generator(gameEngine, map, AM);
   myMouse.setGenerator(this.generator);
 
+	//Game Engine Start
 	gameEngine.init(ctx);
 	gameEngine.start();
 
+	//Map Load
 	createMap(gameEngine, map);
   console.log("Map Loaded!");
 
