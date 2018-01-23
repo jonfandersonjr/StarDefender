@@ -22,22 +22,51 @@ body {
 }
  textarea {
    resize: none;
-   width: 300px;
-   height: 294px;
+   width: 295px;
+   height: 385px;
    font-size: 20px;
    font: Georgia;
  }
-#gameWorld {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: auto;
-  margin-top: auto;
+}
+
+.wrapper {
+  box-sizing: border-box;
+}
+.leftBox {
+  width: 30%;
+  height: 770px;
+  float: left;
+
+}
+.middleBox {
+  width: 42%;
+  float: left;
+  height: 770px;
+}
+.rightTopBox {
+  width: 25%;
+  float: left;
+}
+
+.rightBottomBox {
+  width: 25%;
+  float: left;
 }
 </style>
 <body>
+  <div class="wrapper">
+      <div class="leftBox">
+        <canvas id="gameInfo" style="background: red" width="500" height="770"></canvas>
+      </div>
+      <div class="middleBox">
         <canvas id="gameWorld" tabindex="1" width="770" height="770" style="border: 1px green; background: purple"></canvas>
-        <textarea id="uiText" readonly=true></textarea>
-        <canvas id="uiButtons" width="470" height="300" style="background: red"></canvas>
+      </div>
+      <div class="rightTopBox">
+        <textarea id="uiText" readonly=true height="385" width="300"></textarea>
+      </div>
+      <div class="rightBottomBox">
+        <canvas id="uiButtons" width="300" height="385" style="background: red"></canvas>
+      </div>
+    </div>
 </body>
 </html>
