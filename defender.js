@@ -1,6 +1,6 @@
 //Create new array with settings as specified below. Add new switch case after adding a new variable.
-//frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
-var marine = [40, 32, 1, 0.1, 1, true, 1, 0];
+//frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
+var marine = [40, 32, 1, 0.1, 1, true, 1, 0, 100];
 
 function Defender(game, unitName, x, y, map, assetManager) {
     this.AM = assetManager;

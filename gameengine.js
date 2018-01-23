@@ -10,7 +10,9 @@ window.requestAnimFrame = (function () {
 })();
 
 function GameEngine(mouse) {
-    this.entities = [];
+    this.tileEntities = [];
+    this.unitEntities = [];
+    this.defenderEntities = [];
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
@@ -101,38 +103,70 @@ GameEngine.prototype.startInput = function () {
     console.log('Input started');
 }
 
-GameEngine.prototype.addEntity = function (entity) {
-    console.log('added entity');
-    this.entities.push(entity);
+GameEngine.prototype.addTile = function (tileEntity) {
+    this.tileEntities.push(tileEntity);
+    console.log('Added tile entity!')
+}
+
+GameEngine.prototype.addUnit = function (unitEntity) {
+    this.unitEntities.push(unitEntity);
+    console.log('Added unit entity!');
+}
+
+GameEngine.prototype.addDefender = function (defenderEntity) {
+    this.defenderEntities.push(defenderEntity);
+    console.log('Added defender entity!')
 }
 
 GameEngine.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
-    for (var i = 0; i < this.entities.length; i++) {
-        this.entities[i].draw(this.ctx);
+    
+    for (let i = 0; i < this.tileEntities.length; i++) {
+        this.tileEntities[i].draw(this.ctx);
     }
+    
+    for (let i = 0; i < this.unitEntities.length; i++) {
+        this.unitEntities[i].draw(this.ctx);
+    }
+    
+    for (let i = 0; i < this.defenderEntities.length; i++) {
+        this.defenderEntities[i].draw(this.ctx);
+    }
+    
     this.ctx.restore();
 }
 
 GameEngine.prototype.update = function () {
-    var entitiesCount = this.entities.length;
-
-    for (var i = 0; i < entitiesCount; i++) {
-        var entity = this.entities[i];
-
+    for (let i = 0; i < this.tileEntities.length; i++) {
+        this.tileEntities[i].update();
+    }
+    
+    for (let i = 0; i < this.unitEntities.length; i++) {
+        let entity = this.unitEntities[i];
+        if (!entity.removeFromWorld) {
+            entity.update();
+        }
+    }
+    
+    for (let i = 0; i < this.defenderEntities.length; i++) {
+        let entity = defenderEntities[i];
         if (!entity.removeFromWorld) {
             entity.update();
         }
     }
 
-    for (var i = this.entities.length - 1; i >= 0; --i) {
-        if (this.entities[i].removeFromWorld) {
-            this.entities.splice(i, 1);
+    for (let i = this.unitEntities.length - 1; i >= 0; --i) {
+        if (this.unitEntities[i].removeFromWorld) {
+            this.unitEntities.splice(i, 1);
         }
     }
-
-
+    
+    for (let i = this.defenderEntities.length - 1; i >= 0; --i) {
+        if (this.defenderEntities[i].removeFromWorld) {
+            this.defenderEntities.splice(i, 1);
+        }
+    }
 
 }
 
