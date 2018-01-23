@@ -33,7 +33,7 @@ Projectile.prototype.update = function () {
         this.x += this.gameEngine.clockTick * this.xSpeed;
         this.y += this.gameEngine.clockTick * this.ySpeed;
     } else {
-        this.gameEngine.removeEntity(this);
+        this.removeFromWorld = true;
     }
     Entity.prototype.update.call(this);
 }

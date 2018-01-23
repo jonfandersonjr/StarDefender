@@ -87,6 +87,6 @@ AM.downloadAll(function () {
     this.generator.createEnemy("martarlisk");
     this.generator.createEnemy("stroach");
     this.generator.createEnemy("sergling");
-
+    
     
 });
