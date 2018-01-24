@@ -29,17 +29,17 @@ AM.downloadAll(function () {
   var myMouse = new Mouse(map.mapSize)
 
 	//UI Load
-	buttonCanvas = document.getElementById("uiButtons").getContext("2d");
+	buttonCanvas = document.getElementById("uiButtons");
 	textCanvas = document.getElementById("uiText");
-	var ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
+	this.ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
   console.log("UI Loaded!");
 
-	var gameEngine = new GameEngine(myMouse, ui);
+	var gameEngine = new GameEngine(myMouse, this.ui);
 
 
-    //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
-    this.generator = new Generator(gameEngine, map, AM);
-    myMouse.setGenerator(this.generator);
+  //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
+  this.generator = new Generator(gameEngine, map, AM);
+  myMouse.setGenerator(this.generator);
 
 	//Game Engine Start
 	gameEngine.init(ctx);

@@ -5,15 +5,69 @@ textCanvas - textArea that holds this
 */
 function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   startRes, startLevel, wavesCleared, enemiesK) {
-  ctx = buttonCanvas;
+  this.canvas = buttonCanvas;
+  this.ctx = this.canvas.getContext("2d");
   this.textBox = textCanvas;
-  //Load UI Image on image canvas
+
+  /*//Load UI Image on image canvas
   var imageObj = new Image();
   imageObj.src = './img/ui/defenseUIButtons.png';
 	imageObj.onload = function () {
 		ctx.drawImage(imageObj, 0, 0);
 	};
-  console.log("UI Image Loaded!");
+  console.log("UI Image Loaded!");*/
+
+  //Button generator array
+  const buttons = [
+    {
+      x: 0, y: 150, width: 100, height: 100, color: 'rgb(255,0,0)', id:'1'
+    },
+    {
+      x: 140, y: 150, width: 100, height: 100, color: 'rgb(255,150,0)', id:'2'
+    },
+    {
+      x: 0, y: 270, width: 100, height: 100, color: 'rgb(255,200,0)', id:'3'
+    },
+    {
+      x: 140, y: 270, width: 100, height: 100, color: 'rgb(255,250,0)', id:'4'
+    }];
+
+    //Draw buttons
+    buttons.forEach(button => {
+      this.ctx.beginPath();
+      this.ctx.rect(button.x, button.y, button.width, button.height);
+      this.ctx.fillStyle = button.color;
+      this.ctx.fill();
+    });
+
+    function isIntersect(mp, button) {
+      if(mp.x >= button.x && mp.x <= button.x + button.width &&
+          mp.y >= button.y && mp.y <= button.y + button.height) {
+            return true;
+          } else {
+            return false;
+          }
+    };
+
+    //gets relative mouse position based on canvas
+    function getMousePos(canvas, e) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+    }
+
+    //Add mouse click listener which gets mouse point and compares to each button area
+    this.canvas.addEventListener('click', (e) => {
+      var mousePos = getMousePos(this.canvas, e);
+      buttons.forEach(theButton => {
+        if(isIntersect(mousePos, theButton)) {
+          alert("Clicked on button: " + theButton.id);
+        }
+      });
+    });
+
 
   //init values
   this.inithealthCur = startHealth;
@@ -31,11 +85,10 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   this.enemiesKilled = enemiesK;
 
   this.time = "00:00";
+
   //Load Default Text
   this.updateText();
   console.log("Default stats text loaded!");
-
-
 };
 
 UI.prototype.updateText = function () {
@@ -93,6 +146,23 @@ UI.prototype.reset = function() {
 
 UI.prototype.updateTime = function (value) {
     var timeString = parseFloat(value).toFixed(2);
-    this.time = timeString;
+    var timeString = Math.floor(timeString);
+
+    if (timeString < 10) { //seconds format < 10
+        timeString = "00:0" + timeString;
+        this.time = timeString;
+    } else if(timeString < 60) { //seconds format
+          timeString = "00:" + timeString;
+          this.time = timeString;
+    } else { //Minutes:Seconds format
+          minutes = Math.floor(timeString / 60);
+          seconds = Math.floor(timeString % 60);
+          if (seconds < 10) {
+            timeString = minutes + ":0" + seconds;
+          } else {
+            timeString = minutes + ":" + seconds;
+          }
+          this.time = timeString;
+    }
     this.updateText();
 }

@@ -4,7 +4,7 @@ body {
 textarea {
   resize: none;
   width: 295px;
-  height: 385px;
+  height: 300px;
   font-size: 20px;
   font: Georgia;
   background-color: black;
@@ -59,7 +59,7 @@ textarea {
 {
   width:100%;
   margin:0;
-  height:385px;
+  height:300px;
 }
 
 .bottomPanel
