@@ -11,7 +11,9 @@ window.requestAnimFrame = (function () {
 
 function GameEngine(mouse, ui) {
     this.gameUI = ui;
-    this.entities = [];
+    this.tileEntities = [];
+    this.unitEntities = [];
+    this.defenderEntities = [];
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
