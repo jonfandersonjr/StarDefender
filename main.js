@@ -30,10 +30,7 @@ AM.downloadAll(function() {
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
-    buttonCanvas = document.getElementById("uiButtons");
-    textCanvas = document.getElementById("uiText");
-
-    this.ui = new UI(buttonCanvas, textCanvas, myMouse, 100, 100, 100, 1, 0, 0);
+    this.ui = new UI(myMouse, 100, 100, 100, 1, 0, 0);
     console.log("UI Loaded!");
 
     var gameEngine = new GameEngine(myMouse, this.ui);
@@ -56,5 +53,4 @@ AM.downloadAll(function() {
     this.generator.createEnemy("stroach");
     this.generator.createEnemy("sergling");
     console.log("Enemies Loaded!");
-
 });
