@@ -2,7 +2,7 @@ var defenderList = ["marine"];
 var isBusy = false;
 
 function Mouse(mapSize) {
-    this.doc = document.getElementById("gameWorld");
+    this.canvas = document.getElementById("gameWorld");
     //access to other canvas
     this.mapSize = mapSize;
     this.generator = null;
@@ -40,10 +40,22 @@ Mouse.prototype.dropTower = function (e) {
 };
 
 Mouse.prototype.loadDefender = function (defenderType, event) {
-    this.generator.createDefender(defenderType, event.clientX, event.clientY);
+    var mouseLoc = getMousePos(this.canvas,event);
+    mouseLoc.x -= 20;
+    mouseLoc.y -= 16;
+    this.generator.createDefender(defenderType, mouseLoc.x, mouseLoc.y);
     //console.log("this x = " + location[x] + " and this y = " + location[y]);
 };
 
+function getMousePos(canvas, e) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+}
+
+/*
 Mouse.prototype.calcLocation = function (e) {
     var that = this;
     var getXandY = function (e) {
@@ -58,7 +70,7 @@ Mouse.prototype.calcLocation = function (e) {
         return { x: x, y: y };
     }
     console.log("Left Click Event - X, Y " + e.clientX + ", " + e.clientY);
-};
+};*/
 
 
 
