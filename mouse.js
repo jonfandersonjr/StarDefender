@@ -41,8 +41,6 @@ Mouse.prototype.dropTower = function (e) {
 
 Mouse.prototype.loadDefender = function (defenderType, event) {
     var mouseLoc = getMousePos(this.canvas,event);
-    mouseLoc.x -= 20;
-    mouseLoc.y -= 16;
     this.generator.createDefender(defenderType, mouseLoc.x, mouseLoc.y);
     //console.log("this x = " + location[x] + " and this y = " + location[y]);
 };

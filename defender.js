@@ -19,8 +19,8 @@ function Defender(game, unitName, x, y, map, assetManager) {
     this.ctx = game.ctx;
     this.location = location;
     this.map = map;
-    this.x = x;
-    this.y = y;
+    this.x = x - this.settings[0] / 2;
+    this.y = y - this.settings[1] / 2;
 
     Entity.call(this, game, this.x, this.y);
 }
