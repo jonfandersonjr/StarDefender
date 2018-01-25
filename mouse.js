@@ -1,11 +1,14 @@
 var defenderList = ["marine"];
 var isBusy = false;
 
-function Mouse(mapSize) {
+function Mouse(map, ctx) {
     this.canvas = document.getElementById("gameWorld");
+    this.ctx = ctx;
     //access to other canvas
-    this.mapSize = mapSize;
+    this.map = map;
     this.generator = null;
+    this.defenderName = null;
+    this.attachListeners();
 }
 
 Mouse.prototype.setGenerator = function (mainGenerator) {
@@ -13,6 +16,8 @@ Mouse.prototype.setGenerator = function (mainGenerator) {
 }
 
 Mouse.prototype.selectDefender = function (defenderName) {
+    isBusy = true;
+    this.defenderName = defenderName;
     console.log("Defender " + defenderName + " Selected!");
 };
 
@@ -25,10 +30,6 @@ Mouse.prototype.notifyMouse = function (event) {
         this.loadDefender("marine", event);
     }
 };
-
-Mouse.prototype.followMouse = function (event) {
-
-}
 
 Mouse.prototype.dropTower = function (e) {
     //
@@ -53,24 +54,61 @@ function getMousePos(canvas, e) {
   };
 }
 
-/*
-Mouse.prototype.calcLocation = function (e) {
+
+
+Mouse.prototype.attachListeners = function () {
+
+    console.log('Starting input');
+
     var that = this;
-    var getXandY = function (e) {
-        var x = e.clientX - this.doc.getBoundingClientRect().left;
-        var y = e.clientY - this.doc.getBoundingClientRect().top;
 
-        if (x < 1024) {
-            x = Math.floor(x / 32);
-            y = Math.floor(y / 32);
-        }
+    // Mouse events
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
+        that.notifyMouse(e);
+    }, false);
 
-        return { x: x, y: y };
-    }
-    console.log("Left Click Event - X, Y " + e.clientX + ", " + e.clientY);
-};*/
+    this.ctx.canvas.addEventListener("mouseup", function (e) {
+        that.dropTower(e);
+    }, false);
 
+    this.ctx.canvas.addEventListener("mousemove", function (e) {
+        
+    }, false);
 
+    // Key events
+    this.ctx.canvas.addEventListener("keydown", function (e) {
+        console.log(e);
+        console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
+    }, false);
+
+    this.ctx.canvas.addEventListener("keyup", function (e) {
+
+    }, false);
+
+    this.ctx.canvas.addEventListener("keypress", function (e) {
+        if (e.code === "KeyD") that.d = true;
+        that.chars[e.code] = true;
+        console.log(e);
+        console.log("Key Pressed Event - Char " + e.charCode + " Code " + e.keyCode);
+    }, false);
+
+    // Optional events
+    this.ctx.canvas.addEventListener("contextmenu", function (e) {
+        that.click = getXandY(e);
+        //console.log(e);
+        console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
+        e.preventDefault();
+    }, false);
+
+    this.ctx.canvas.addEventListener("mousewheel", function (e) {
+        console.log(e);
+        that.wheel = e;
+        console.log("Click Event - X,Y " + e.clientX + ", " + e.clientY + " Delta " + e.deltaY);
+    }, false);
+
+    console.log('Input started');
+
+}
 
 //Send in mouse class to game engine
 //Modify stuff in game engine

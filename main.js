@@ -26,7 +26,7 @@ AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
     var map = new Map(map_1);
-    var myMouse = new Mouse(map.mapSize);
+    var myMouse = new Mouse(map, ctx)
 
 	//UI Load
 	buttonCanvas = document.getElementById("uiButtons");
@@ -38,7 +38,7 @@ AM.downloadAll(function () {
 	var gameEngine = new GameEngine(myMouse, this.ui);
 
 
-  //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
+    //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
     this.generator = new Generator(gameEngine, map, AM);
     myMouse.setGenerator(this.generator);
 
