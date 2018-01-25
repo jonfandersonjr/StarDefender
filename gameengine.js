@@ -63,7 +63,7 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("mouseup", function (e) {
         thisMouse.dropTower(e);
-    }, false)
+    }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
         //console.log(e);
