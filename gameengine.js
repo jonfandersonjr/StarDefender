@@ -1,12 +1,12 @@
-window.requestAnimFrame = (function () {
+window.requestAnimFrame = (function() {
     return window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            window.oRequestAnimationFrame ||
-            window.msRequestAnimationFrame ||
-            function (/* function */ callback, /* DOMElement */ element) {
-                window.setTimeout(callback, 1000 / 60);
-            };
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        function( /* function */ callback, /* DOMElement */ element) {
+            window.setTimeout(callback, 1000 / 60);
+        };
 })();
 
 function GameEngine(mouse, ui) {
@@ -21,7 +21,7 @@ function GameEngine(mouse, ui) {
     this.mouse = mouse;
 }
 
-GameEngine.prototype.init = function (ctx) {
+GameEngine.prototype.init = function(ctx) {
     this.ctx = ctx;
     this.surfaceWidth = this.ctx.canvas.width;
     this.surfaceHeight = this.ctx.canvas.height;
@@ -30,7 +30,7 @@ GameEngine.prototype.init = function (ctx) {
     console.log('game initialized');
 }
 
-GameEngine.prototype.start = function () {
+GameEngine.prototype.start = function() {
     console.log("starting game");
     var that = this;
     (function gameLoop() {
@@ -39,13 +39,13 @@ GameEngine.prototype.start = function () {
     })();
 }
 
-GameEngine.prototype.startInput = function () {
+GameEngine.prototype.startInput = function() {
     console.log('Starting input');
 
     var that = this;
     var thisMouse = this.mouse;
 
-    var getXandY = function (e) {
+    var getXandY = function(e) {
         var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
         var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
 
@@ -54,34 +54,37 @@ GameEngine.prototype.startInput = function () {
             y = Math.floor(y / 32);
         }
 
-        return { x: x, y: y };
+        return {
+            x: x,
+            y: y
+        };
     }
 
     // Mouse events
-    this.ctx.canvas.addEventListener("mousedown", function (e) {
+    this.ctx.canvas.addEventListener("mousedown", function(e) {
         thisMouse.notifyMouse(e);
     }, false);
 
-    this.ctx.canvas.addEventListener("mouseup", function (e) {
+    this.ctx.canvas.addEventListener("mouseup", function(e) {
         thisMouse.dropTower(e);
     }, false);
 
-    this.ctx.canvas.addEventListener("mousemove", function (e) {
+    this.ctx.canvas.addEventListener("mousemove", function(e) {
         //console.log(e);
         that.mouse = getXandY(e);
     }, false);
 
     // Key events
-    this.ctx.canvas.addEventListener("keydown", function (e) {
+    this.ctx.canvas.addEventListener("keydown", function(e) {
         console.log(e);
         console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
     }, false);
 
-    this.ctx.canvas.addEventListener("keyup", function (e) {
+    this.ctx.canvas.addEventListener("keyup", function(e) {
 
     }, false);
 
-    this.ctx.canvas.addEventListener("keypress", function (e) {
+    this.ctx.canvas.addEventListener("keypress", function(e) {
         if (e.code === "KeyD") that.d = true;
         that.chars[e.code] = true;
         console.log(e);
@@ -89,14 +92,14 @@ GameEngine.prototype.startInput = function () {
     }, false);
 
     // Optional events
-    this.ctx.canvas.addEventListener("contextmenu", function (e) {
+    this.ctx.canvas.addEventListener("contextmenu", function(e) {
         that.click = getXandY(e);
         //console.log(e);
         console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
         e.preventDefault();
     }, false);
 
-    this.ctx.canvas.addEventListener("mousewheel", function (e) {
+    this.ctx.canvas.addEventListener("mousewheel", function(e) {
         console.log(e);
         that.wheel = e;
         console.log("Click Event - X,Y " + e.clientX + ", " + e.clientY + " Delta " + e.deltaY);
@@ -105,27 +108,27 @@ GameEngine.prototype.startInput = function () {
     console.log('Input started');
 }
 
-GameEngine.prototype.addTile = function (tileEntity) {
+GameEngine.prototype.addTile = function(tileEntity) {
     this.tileEntities.push(tileEntity);
     console.log('Added tile entity!')
 }
 
-GameEngine.prototype.addUnit = function (unitEntity) {
+GameEngine.prototype.addUnit = function(unitEntity) {
     this.unitEntities.push(unitEntity);
     console.log('Added unit entity!');
 }
 
-GameEngine.prototype.addDefender = function (defenderEntity) {
+GameEngine.prototype.addDefender = function(defenderEntity) {
     this.defenderEntities.push(defenderEntity);
     console.log('Added defender entity!')
 }
 
-GameEngine.prototype.addProjectile = function (projectileEntity) {
+GameEngine.prototype.addProjectile = function(projectileEntity) {
     this.projectileEntities.push(projectileEntity);
     console.log('Added projectile entity!')
 }
 
-GameEngine.prototype.draw = function () {
+GameEngine.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
 
@@ -140,15 +143,15 @@ GameEngine.prototype.draw = function () {
     for (let i = 0; i < this.defenderEntities.length; i++) {
         this.defenderEntities[i].draw(this.ctx);
     }
-    
+
     for (let i = 0; i < this.projectileEntities.length; i++) {
         this.projectileEntities[i].draw(this.ctx);
-    }    
+    }
 
     this.ctx.restore();
 }
 
-GameEngine.prototype.update = function () {
+GameEngine.prototype.update = function() {
     for (let i = 0; i < this.tileEntities.length; i++) {
         this.tileEntities[i].update();
     }
@@ -178,7 +181,7 @@ GameEngine.prototype.update = function () {
             this.defenderEntities.splice(i, 1);
         }
     }
-    
+
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
         if (this.projectileEntities[i].removeFromWorld) {
             this.projectileEntities.splice(i, 1);
@@ -187,7 +190,7 @@ GameEngine.prototype.update = function () {
     resize();
 }
 
-GameEngine.prototype.loop = function () {
+GameEngine.prototype.loop = function() {
     this.clockTick = this.timer.tick();
     this.update();
     this.draw();
@@ -208,7 +211,7 @@ function Timer(gameUI) {
     this.wallLastTimestamp = 0;
 }
 
-Timer.prototype.tick = function () {
+Timer.prototype.tick = function() {
     var wallCurrent = Date.now();
     var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
     this.wallLastTimestamp = wallCurrent;
@@ -226,10 +229,9 @@ function Entity(game, x, y) {
     this.removeFromWorld = false;
 }
 
-Entity.prototype.update = function () {
-}
+Entity.prototype.update = function() {}
 
-Entity.prototype.draw = function (ctx) {
+Entity.prototype.draw = function(ctx) {
     if (this.game.showOutlines && this.radius) {
         this.game.ctx.beginPath();
         this.game.ctx.strokeStyle = "green";
@@ -239,7 +241,7 @@ Entity.prototype.draw = function (ctx) {
     }
 }
 
-Entity.prototype.rotateAndCache = function (image, angle) {
+Entity.prototype.rotateAndCache = function(image, angle) {
     var offscreenCanvas = document.createElement('canvas');
     var size = Math.max(image.width, image.height);
     offscreenCanvas.width = size;
