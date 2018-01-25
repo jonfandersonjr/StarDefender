@@ -28,6 +28,7 @@ textarea {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    z-index: -1;
 }
 
 .gameInfo {
@@ -49,6 +50,7 @@ textarea {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    z-index: -1;
 }
 
 .generalStyles {
@@ -70,6 +72,7 @@ textarea {
 .leftPanel {
     width: 24%;
     margin: 0 1% 0 0;
+    z-index: -1;
 }
 
 .rightPanel {
@@ -77,6 +80,7 @@ textarea {
     margin: 0 0 0 1%;
     background-color: #000;
     padding: 0;
+    z-index: -1;
 }
 
 .middlePanel {
@@ -91,6 +95,7 @@ textarea {
     -o-user-select: none;
     user-select: none;
     outline-color: black;
+    z-index: 1;
 }
 
 .topPanel {
