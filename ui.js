@@ -3,11 +3,12 @@ Constructor
 buttonCanvas - canvas that has defence structure uiButtons
 textCanvas - textArea that holds this
 */
-function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
-  startRes, startLevel, wavesCleared, enemiesK) {
-  this.canvas = buttonCanvas;
-  this.ctx = this.canvas.getContext("2d");
-  this.textBox = textCanvas;
+function UI(buttonCanvas, textCanvas, mouse, startHealth, maxHealth,
+    startRes, startLevel, wavesCleared, enemiesK) {
+        this.canvas = buttonCanvas;
+        this.ctx = this.canvas.getContext("2d");
+        this.textBox = textCanvas;
+        this.mouse = mouse;
 
   /*//Load UI Image on image canvas
   var imageObj = new Image();
@@ -20,7 +21,7 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
   //Button generator array
   const buttons = [
     {
-      x: 0, y: 150, width: 100, height: 100, color: 'rgb(255,0,0)', id:'1'
+      x: 0, y: 150, width: 100, height: 100, color: 'rgb(255,0,0)', id:'marine'
     },
     {
       x: 140, y: 150, width: 100, height: 100, color: 'rgb(255,150,0)', id:'2'
@@ -40,6 +41,7 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
       this.ctx.fill();
     });
 
+    //Returns true if mouse pointer is on button
     function isIntersect(mp, button) {
       if(mp.x >= button.x && mp.x <= button.x + button.width &&
           mp.y >= button.y && mp.y <= button.y + button.height) {
@@ -63,7 +65,7 @@ function UI(buttonCanvas, textCanvas, startHealth, maxHealth,
       var mousePos = getMousePos(this.canvas, e);
       buttons.forEach(theButton => {
         if(isIntersect(mousePos, theButton)) {
-          alert("Clicked on button: " + theButton.id);
+          mouse.selectDefender(theButton.id);
         }
       });
     });

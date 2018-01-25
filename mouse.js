@@ -13,7 +13,7 @@ Mouse.prototype.setGenerator = function (mainGenerator) {
 }
 
 Mouse.prototype.selectDefender = function (defenderName) {
-
+    console.log("Defender " + defenderName + " Selected!");
 };
 
 Mouse.prototype.notifyMouse = function (event) {
