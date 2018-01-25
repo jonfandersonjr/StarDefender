@@ -54,8 +54,6 @@ function getMousePos(canvas, e) {
   };
 }
 
-
-
 Mouse.prototype.attachListeners = function () {
 
     console.log('Starting input');
@@ -95,15 +93,11 @@ Mouse.prototype.attachListeners = function () {
     // Optional events
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
         that.click = getXandY(e);
-        //console.log(e);
-        console.log("Right Click Event - X,Y " + e.clientX + ", " + e.clientY);
         e.preventDefault();
     }, false);
 
     this.ctx.canvas.addEventListener("mousewheel", function (e) {
         console.log(e);
-        that.wheel = e;
-        console.log("Click Event - X,Y " + e.clientX + ", " + e.clientY + " Delta " + e.deltaY);
     }, false);
 
     console.log('Input started');
