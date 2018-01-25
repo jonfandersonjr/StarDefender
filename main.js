@@ -26,7 +26,7 @@ AM.downloadAll(function () {
   var canvas = document.getElementById("gameWorld");
   var ctx = canvas.getContext("2d");
   var map = new Map(map_1);
-  var myMouse = new Mouse(map.mapSize)
+  var myMouse = new Mouse(map, ctx)
 
 	//UI Load
 	buttonCanvas = document.getElementById("uiButtons");
