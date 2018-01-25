@@ -14,6 +14,7 @@ function GameEngine(mouse, ui) {
     this.tileEntities = [];
     this.unitEntities = [];
     this.defenderEntities = [];
+    this.projectileEntities = [];
     this.ctx = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
@@ -119,6 +120,11 @@ GameEngine.prototype.addDefender = function (defenderEntity) {
     console.log('Added defender entity!')
 }
 
+GameEngine.prototype.addProjectile = function (projectileEntity) {
+    this.projectileEntities.push(projectileEntity);
+    console.log('Added projectile entity!')
+}
+
 GameEngine.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
@@ -134,6 +140,10 @@ GameEngine.prototype.draw = function () {
     for (let i = 0; i < this.defenderEntities.length; i++) {
         this.defenderEntities[i].draw(this.ctx);
     }
+    
+    for (let i = 0; i < this.projectileEntities.length; i++) {
+        this.projectileEntities[i].draw(this.ctx);
+    }    
 
     this.ctx.restore();
 }
@@ -166,6 +176,12 @@ GameEngine.prototype.update = function () {
     for (let i = this.defenderEntities.length - 1; i >= 0; --i) {
         if (this.defenderEntities[i].removeFromWorld) {
             this.defenderEntities.splice(i, 1);
+        }
+    }
+    
+    for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
+        if (this.projectileEntities[i].removeFromWorld) {
+            this.projectileEntities.splice(i, 1);
         }
     }
     resize();
