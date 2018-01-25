@@ -29,17 +29,14 @@ Defender.prototype = new Entity();
 Defender.prototype.constructor = Defender;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
-Defender.prototype.update = function () {
+Defender.prototype.update = function() {
     //let row = Math.floor(this.x / this.map.tileSize);
     //let column = Math.floor(this.y / this.map.tileSize)
-    
+
     Entity.prototype.update.call(this);
 }
 
-Defender.prototype.draw = function () {
+Defender.prototype.draw = function() {
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }
-
-
-
