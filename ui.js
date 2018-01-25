@@ -42,7 +42,7 @@ function UI(mouse, startHealth, maxHealth,
             width: 100,
             height: 100,
             color: 'rgb(255,150,0)',
-            id: '2'
+            id: 'battlecruiser'
         },
         {
             x: 0,
@@ -212,17 +212,12 @@ function makeUnselectable(elem) {
     }
 }
 
+//Generates game info in box
 function generateGameInfo() {
     this.gameInfoBox = document.getElementById("gameInfo");
     makeUnselectable(this.gameInfoBox);
     this.gameInfoBox.addEventListener('mousedown', function(e) {
         e.preventDefault();
     }, false);
-    this.gameInfoBox.value = "Star Defender\nis a point-click tower defense game based" +
-        "on Starcraft with a resource pool and multiple types of enemies " +
-        "that head down lanes towards your main base. You can place multiple " +
-        "types of defensive structures along the lane’s paths to defend your base." +
-        " Waves of enemies will spawn on a timer, but beware each wave gets more " +
-        "difficult, after all waves have been defeated you win the round and move on " +
-        "to the next map. If your base’s health reaches zero you lose! Build as if your life depends on it!";
+    this.gameInfoBox.value = "Star Defender\nGame Description Info";
 }

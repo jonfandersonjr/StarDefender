@@ -1,5 +1,5 @@
 var defenderList = ["marine"];
-var isBusy = false;
+this.isBusy = false;
 
 function Mouse(map, ctx) {
     this.canvas = document.getElementById("gameWorld");
@@ -16,16 +16,17 @@ Mouse.prototype.setGenerator = function(mainGenerator) {
 }
 
 Mouse.prototype.selectDefender = function(defenderName) {
-    isBusy = true;
+    this.isBusy = true;
     this.defenderName = defenderName;
     console.log("Defender " + defenderName + " Selected!");
+    console.log("isBusy:" + this.isBusy);
 };
 
 Mouse.prototype.notifyMouse = function(event) {
-    if (isBusy) {
+    if (this.isBusy) {
         return;
     } else {
-        isBusy = true;
+        this.isBusy = true;
         this.loadDefender("marine", event);
     }
 };
@@ -33,16 +34,14 @@ Mouse.prototype.notifyMouse = function(event) {
 Mouse.prototype.dropTower = function(e) {
     //
     if (isBusy) {
-
         isBusy = false;
-        //drop tower
+        //drop tower on location code here
     }
 };
 
 Mouse.prototype.loadDefender = function(defenderType, event) {
     var mouseLoc = getMousePos(this.canvas, event);
     this.generator.createDefender(defenderType, mouseLoc.x, mouseLoc.y);
-    //console.log("this x = " + location[x] + " and this y = " + location[y]);
 };
 
 function getMousePos(canvas, e) {
@@ -60,16 +59,37 @@ Mouse.prototype.attachListeners = function() {
     var that = this;
 
     // Mouse events
-    this.ctx.canvas.addEventListener("mousedown", function(e) {
+    /*this.ctx.canvas.addEventListener("mousedown", function(e) {
         that.notifyMouse(e);
     }, false);
 
     this.ctx.canvas.addEventListener("mouseup", function(e) {
         that.dropTower(e);
-    }, false);
+    }, false);*/
+
+    this.ctx.canvas.addEventListener("click", (e) => {
+
+    })
 
     this.ctx.canvas.addEventListener("mousemove", function(e) {
+        //as mouse moves if busy draw image on mouse moves
+        //if defender is selected
 
+        if (this.isBusy) {
+            console.log("Drawing image on mouse pointer");
+            var img = new Image();
+            img.src = `./img/${this.defenderName}/${this.defenderName}.png`;
+            e = e || window.event;
+            var tag = document.createElement('img');
+            console.log(e);
+            tag.src = img.src;
+            tag.style.position = 'absolute';
+            tag.style.height = '50px';
+            tag.style.width = '50px';
+            tag.style.top = (e.pageY || e.clientY) + 'px';
+            tag.style.left = (e.pageX || e.clientX) + 'px';
+            this.body.appendChild(tag);
+        }
     }, false);
 
     // Key events

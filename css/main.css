@@ -39,7 +39,7 @@ textarea {
     background-color: black;
     color: red;
     border: none;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
