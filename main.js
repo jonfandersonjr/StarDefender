@@ -29,6 +29,7 @@ AM.downloadAll(function () {
     var myMouse = new Mouse(map, ctx)
 
 	//UI Load
+  canvas.style.outlineColor = "#000000"; //prevent highlighting
 	buttonCanvas = document.getElementById("uiButtons");
 	textCanvas = document.getElementById("uiText");
 
