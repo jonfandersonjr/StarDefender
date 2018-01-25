@@ -15,6 +15,11 @@ textarea {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   outline: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+   user-select: none;
 }
 .generalStyles
 {

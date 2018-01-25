@@ -8,7 +8,9 @@ function UI(buttonCanvas, textCanvas, mouse, startHealth, maxHealth,
         this.canvas = buttonCanvas;
         this.ctx = this.canvas.getContext("2d");
         this.textBox = textCanvas;
+        makeUnselectable(this.textBox);
         this.mouse = mouse;
+        this.textBox.addEventListener('mousedown', function(e){ e.preventDefault(); }, false);
 
   /*//Load UI Image on image canvas
   var imageObj = new Image();
@@ -167,4 +169,15 @@ UI.prototype.updateTime = function (value) {
           this.time = timeString;
     }
     this.updateText();
+}
+
+function makeUnselectable(elem) {
+  if (typeof(elem) == 'string')
+    elem = document.getElementById(elem);
+  if (elem) {
+    elem.onselectstart = function() { return false; };
+    elem.style.MozUserSelect = "none";
+    elem.style.KhtmlUserSelect = "none";
+    elem.unselectable = "on";
+  }
 }
