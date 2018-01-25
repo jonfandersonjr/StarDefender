@@ -2,7 +2,7 @@
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
 var martarlisk = [64, 72, 5, 0.1, 5, true, 0.5, 50];
 var stroach = [75, 68, 5, 0.1, 5, true, 0.5, 25];
-var sergling = [45, 45, 7, 0.1, 7, true, 0.6, 75];
+var sergling = [40, 39, 7, 0.1, 7, true, 0.6, 75];
 
 function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) {
 	this.AM = assetManager;
