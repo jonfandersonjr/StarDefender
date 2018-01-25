@@ -26,7 +26,7 @@ Mouse.prototype.notifyMouse = function(event) {
         return;
     } else {
         isBusy = true;
-        this.loadDefender("marine", event);
+        this.loadDefender("marinetemp", event);
     }
 };
 
@@ -53,13 +53,7 @@ function getMousePos(canvas, e) {
     };
 }
 
-<<<<<<< HEAD
-Mouse.prototype.attachListeners = function () {
-=======
-
-
 Mouse.prototype.attachListeners = function() {
->>>>>>> fe4f2ab8aa84582c9784f2c54079b4a9a350587a
 
     console.log('Starting input');
 
