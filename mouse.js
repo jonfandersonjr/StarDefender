@@ -26,7 +26,7 @@ Mouse.prototype.notifyMouse = function(event) {
         return;
     } else {
         isBusy = true;
-        this.loadDefender("marinetemp", event);
+        this.loadDefender("marine", event);
     }
 };
 
