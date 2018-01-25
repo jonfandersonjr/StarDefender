@@ -23,7 +23,7 @@ AM.queueDownload("./tiles/grass.png");
 AM.queueDownload("./tiles/base.png")
 
 AM.downloadAll(function () {
-	var canvas = document.getElementById("gameWorld");
+  var canvas = document.getElementById("gameWorld");
   var ctx = canvas.getContext("2d");
   var map = new Map(map_1);
   var myMouse = new Mouse(map.mapSize)
@@ -31,8 +31,8 @@ AM.downloadAll(function () {
 	//UI Load
 	buttonCanvas = document.getElementById("uiButtons");
 	textCanvas = document.getElementById("uiText");
-	this.ui = new UI(buttonCanvas, textCanvas,  100, 100, 100, 1, 0, 0);
-  console.log("UI Loaded!");
+	this.ui = new UI(buttonCanvas, textCanvas, myMouse, 100, 100, 100, 1, 0, 0);
+    console.log("UI Loaded!");
 
 	var gameEngine = new GameEngine(myMouse, this.ui);
 
