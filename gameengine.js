@@ -122,6 +122,13 @@ GameEngine.prototype.update = function() {
             entity.update();
         }
     }
+    
+    for (let i = 0; i < this.projectileEntities.length; i++) {
+        let entity = this.projectileEntities[i];
+        if (!entity.removeFromWorld) {
+            entity.update();
+        }
+    }
 
     for (let i = this.unitEntities.length - 1; i >= 0; --i) {
         if (this.unitEntities[i].removeFromWorld) {
