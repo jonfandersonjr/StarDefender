@@ -1,29 +1,28 @@
-//Create new array with settings as specified below. Add new switch case after adding a new variable.
-//frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
-var martarlisk = [64, 72, 5, 0.1, 5, true, 0.5, 50];
-var stroach = [75, 68, 5, 0.1, 5, true, 0.5, 25];
-var sergling = [40, 39, 7, 0.1, 7, true, 0.6, 75];
+//Create new object with settings as specified below. Add new switch case after adding a new variable.
+//name, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
+var martarlisk = {name : "martarlisk", frameWidth : 64, frameHeight : 72, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 50};
+var stroach = {name : "stroach", frameWidth : 75, frameHeight : 68, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 25};
+var sergling = {name : "sergling", frameWidth : 40, frameHeight : 39, sheetWidth : 7, frameDuration : 0.1, frames : 7, loop : true, scale : 0.6, speed : 75};
 
 function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) {
     this.AM = assetManager;
-    this.unitName = unitName;
     this.speedSetting = speedSetting;
     //Switch case for units.
     switch (unitName) {
         case "martarlisk":
-            this.settings = martarlisk;
+            this.unit = martarlisk;
             break;
         case "stroach":
-            this.settings = stroach;
+            this.unit = stroach;
             break;
         case "sergling":
-            this.settings = sergling;
+            this.unit = sergling;
             break;
         default:
     }
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unitName}/${this.unitName}_${direction}.png`),
-        this.settings[0], this.settings[1], this.settings[2], this.settings[3], this.settings[4], this.settings[5], this.settings[6]);
-    this.speed = this.settings[7] * this.speedSetting;
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction}.png`),
+        this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
+    this.speed = this.unit.speed * this.speedSetting;
     this.ctx = game.ctx;
     this.direction = direction;
     this.map = map;
@@ -87,7 +86,7 @@ GroundUnit.prototype.draw = function() {
 GroundUnit.prototype.changeDirection = function(direction) {
     for (let i = 0; i < direction.length; i++) {
         this.direction = direction[i];
-        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unitName}/${this.unitName}_${direction[i]}.png`);
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction[i]}.png`);
     }
 
 }
