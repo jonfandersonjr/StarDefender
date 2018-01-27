@@ -1,26 +1,25 @@
-//Create new array with settings as specified below. Add new switch case after adding a new variable.
+//Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
-var marine = [40, 32, 1, 0.1, 1, true, 1, 0, 100];
+var marine = {frameWidth : 40, frameHeight : 32, sheetWidth : 1, frameDuration : 0.1, frames : 1, loop : true, scale : 1, speed : 0, range : 100};
 
 function Defender(game, unitName, x, y, map, assetManager) {
     this.AM = assetManager;
-    this.unitName = unitName;
 
     //Switch case for units.
     switch (unitName) {
         case "marine":
-            this.settings = marine;
+            this.unit = marine;
             break;
         default:
     }
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unitName}/${this.unitName}.png`),
-        this.settings[0], this.settings[1], this.settings[2], this.settings[3], this.settings[4], this.settings[5], this.settings[6]);
-    this.speed = this.settings[7];
+    this.animation = new Animation(this.AM.getAsset(`./img/${unitName}/${unitName}.png`),
+        this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
+    this.speed = this.unit.speed;
     this.ctx = game.ctx;
     this.location = location;
     this.map = map;
-    this.x = x - this.settings[0] / 2;
-    this.y = y - this.settings[0] / 2;
+    this.x = x - this.unit.frameWidth / 2;
+    this.y = y - this.unit.frameHeight / 2;
 
     Entity.call(this, game, this.x, this.y);
 }
