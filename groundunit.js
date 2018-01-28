@@ -28,7 +28,8 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.map = map;
     this.x = this.map.xIni * this.map.tileSize;
     this.y = this.map.yIni * this.map.tileSize;
-
+    this.trueX = this.x + (this.unit.frameWidth / 2);
+    this.trueY = this.y + (this.unit.frameHeight / 2);
     Entity.call(this, game, this.x, this.y);
 }
 
@@ -49,6 +50,7 @@ GroundUnit.prototype.update = function() {
         } else {
             this.x = tempX;
         }
+        this.getTrueCordinates();
     } else if (this.direction === "west") {
         let tempX = this.x - this.game.clockTick * this.speed * this.speedSetting; //Next position
         if (this.map.map[Math.floor(tempX / this.map.tileSize) + column * this.map.mapSize] === '+') { //Checks if next position is a path.
@@ -57,6 +59,7 @@ GroundUnit.prototype.update = function() {
         } else {
             this.x = tempX;
         }
+        this.getTrueCordinates();
     } else if (this.direction === "south") {
         let tempY = this.y + this.game.clockTick * this.speed * this.speedSetting; //Next position
         if (this.map.map[row + (Math.floor(tempY / this.map.tileSize) + 1) * this.map.mapSize] === '+') { //Checks if next position is a path.
@@ -66,6 +69,7 @@ GroundUnit.prototype.update = function() {
         } else {
             this.y = tempY;
         }
+        this.getTrueCordinates();
     } else if (this.direction === "north") {
         let tempY = this.y - this.game.clockTick * this.speed * this.speedSetting; //Next position
         if (this.map.map[row + Math.floor(tempY / this.map.tileSize) * this.map.mapSize] === '+') { //Checks if next position is a path.
@@ -74,6 +78,7 @@ GroundUnit.prototype.update = function() {
         } else {
             this.y = tempY;
         }
+        this.getTrueCordinates();
     }
     Entity.prototype.update.call(this);
 }
@@ -89,6 +94,11 @@ GroundUnit.prototype.changeDirection = function(direction) {
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction[i]}.png`);
     }
 
+}
+
+GroundUnit.prototype.getTrueCordinates = function() {
+    this.trueX = this.x + (this.unit.frameWidth / 2);
+    this.trueY = this.y + (this.unit.frameHeight / 2);
 }
 
 //Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.

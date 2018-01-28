@@ -105,31 +105,6 @@ GameEngine.prototype.draw = function() {
 }
 
 GameEngine.prototype.update = function() {
-    for (let i = 0; i < this.tileEntities.length; i++) {
-        this.tileEntities[i].update();
-    }
-
-    for (let i = 0; i < this.unitEntities.length; i++) {
-        let entity = this.unitEntities[i];
-        if (!entity.removeFromWorld) {
-            entity.update();
-        }
-    }
-
-    for (let i = 0; i < this.defenderEntities.length; i++) {
-        let entity = this.defenderEntities[i];
-        if (!entity.removeFromWorld) {
-            entity.update();
-        }
-    }
-    
-    for (let i = 0; i < this.projectileEntities.length; i++) {
-        let entity = this.projectileEntities[i];
-        if (!entity.removeFromWorld) {
-            entity.update();
-        }
-    }
-
     for (let i = this.unitEntities.length - 1; i >= 0; --i) {
         if (this.unitEntities[i].removeFromWorld) {
             this.unitEntities.splice(i, 1);
@@ -147,6 +122,31 @@ GameEngine.prototype.update = function() {
             this.projectileEntities.splice(i, 1);
         }
     }
+    
+    for (let i = 0; i < this.unitEntities.length; i++) {
+        let enemy = this.unitEntities[i];
+        if (!enemy.removeFromWorld) {
+            for (let j = 0; j < this.defenderEntities.length; j++) {
+                let defender = this.defenderEntities[j];
+                let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
+                if (!defender.removeFromWorld) {
+                    if (distance <= defender.unit.range) {
+                        defender.shoot(enemy);
+                        defender.update();
+                    }
+                }
+            }
+            enemy.update()
+        }
+    }
+    
+    for (let i = 0; i < this.projectileEntities.length; i++) {
+        let entity = this.projectileEntities[i];
+        if (!entity.removeFromWorld) {
+            entity.update();
+        }
+    }
+
     resize();
 }
 
