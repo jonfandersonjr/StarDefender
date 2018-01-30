@@ -1,5 +1,4 @@
-var defenderList = ["marine", "battlecruiser", "ghost"];
-
+var defenderList = ["marine", "battlecruiser", "ghost"]
 function Mouse(map, ctx) {
     this.selectSquare = {
             width: 25,
@@ -41,7 +40,12 @@ Mouse.prototype.dropTower = function(e) {
         //drop tower on location
         console.log("Dropping tower");
         var mouseLoc = getMousePos(this.canvas, event);
-        this.generator.createDefender(this.defenderName, mouseLoc.x, mouseLoc.y);
+        if(this.defenderName === "marine" || this.defenderName === "ghost") {
+            this.generator.createDefender(this.defenderName, mouseLoc.x, mouseLoc.y);
+        } else {
+            this.generator.createDefender(this.defenderName, mouseLoc.x + 15, mouseLoc.y + 15);
+        }
+
         this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
     } else {
         return;
