@@ -219,5 +219,11 @@ function generateGameInfo() {
     this.gameInfoBox.addEventListener('mousedown', function(e) {
         e.preventDefault();
     }, false);
-    this.gameInfoBox.value = "Star Defender\nGame Description Info";
+    this.gameInfoBox.value = "Star Defender\nA point-click tower defense game based on Starcraft" +
+                            " with a resource pool and multiple types of enemies that head down lanes" +
+                            " towards your main base.\nYou can place multiple types of defensive structures" +
+                            "along the lane’s paths to defend your base. Waves of enemies will spawn on a timer," +
+                            "but beware each wave gets more difficult, after all waves have been defeated you win the" +
+                            " round and move on to the next map. If your base’s health reaches zero you lose!" +
+                            "\nBuild as if your life depends on it!";
 }

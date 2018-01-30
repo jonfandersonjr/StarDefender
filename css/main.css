@@ -45,6 +45,8 @@ textarea {
     position: absolute;
     left: 0px;
     top: 0px;
+    height: 770px;
+    color: white;
 }
 
 #gameWorld {

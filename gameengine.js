@@ -122,7 +122,7 @@ GameEngine.prototype.update = function() {
             this.projectileEntities.splice(i, 1);
         }
     }
-    
+
     for (let i = 0; i < this.unitEntities.length; i++) {
         let enemy = this.unitEntities[i];
         if (!enemy.removeFromWorld) {
@@ -139,7 +139,7 @@ GameEngine.prototype.update = function() {
             enemy.update()
         }
     }
-    
+
     for (let i = 0; i < this.projectileEntities.length; i++) {
         let entity = this.projectileEntities[i];
         if (!entity.removeFromWorld) {
