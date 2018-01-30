@@ -1,8 +1,8 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
-var marine = {frameWidth : 40, frameHeight : 32, sheetWidth : 1, frameDuration : 0.1, frames : 1, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5, damage : 20};
-var battlecruiser = {frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.[1], frames : 8, loop : true, scale : .5, speed : 0, range : 100, cooldown : 0.5, damage : 20};
-var ghost = {frameWidth : 40, frameHeight : 36, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5, damage : 20};
+var marine = {name : "marine", frameWidth : 64, frameHeight : 64, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
+var battlecruiser = {name : "battlecruiser", frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.[1], frames : 8, loop : true, scale : .5, range : 100, cooldown : 0.5, damage : 20};
+var ghost = {name : "ghost", frameWidth : 40, frameHeight : 36, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
 
 function Defender(game, unitName, x, y, map, assetManager) {
     this.AM = assetManager;
@@ -21,9 +21,8 @@ function Defender(game, unitName, x, y, map, assetManager) {
         default:
             break;
     }
-    this.animation = new Animation(this.AM.getAsset(`./img/${unitName}/${unitName}.png`),
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
-    this.speed = this.unit.speed;
     this.ctx = this.gameEngine.ctx;
     this.location = location;
     this.map = map;
@@ -33,6 +32,7 @@ function Defender(game, unitName, x, y, map, assetManager) {
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;
     this.damage = this.unit.damage;
+    this.frame = 0;
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
 
@@ -46,6 +46,7 @@ Defender.prototype.update = function() {
     if(this.cooldown <= 0) {
         this.isBusy = false;
         this.cooldown = this.unit.cooldown;
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`);
     } else if(this.isBusy) {
         this.cooldown -= this.game.clockTick;
     }
@@ -53,7 +54,7 @@ Defender.prototype.update = function() {
 }
 
 Defender.prototype.draw = function() {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     Entity.prototype.draw.call(this);
 }
 
@@ -66,6 +67,8 @@ Defender.prototype.shoot = function(enemy) {
     if(!this.isBusy) {
         this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
         this.isBusy = true;
+        this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
     }
 }
 
@@ -75,5 +78,5 @@ function angle(cx, cy, ex, ey) {
   var theta = Math.atan2(dy, dx); // range (-PI, PI]
   theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
   //if (theta < 0) theta = 360 + theta; // range [0, 360)
-  return theta;
+  return theta + 180;
 }

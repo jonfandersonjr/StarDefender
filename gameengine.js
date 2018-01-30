@@ -63,22 +63,18 @@ GameEngine.prototype.startInput = function() {
 
 GameEngine.prototype.addTile = function(tileEntity) {
     this.tileEntities.push(tileEntity);
-    console.log('Added tile entity!')
 }
 
 GameEngine.prototype.addUnit = function(unitEntity) {
     this.unitEntities.push(unitEntity);
-    console.log('Added unit entity!');
 }
 
 GameEngine.prototype.addDefender = function(defenderEntity) {
     this.defenderEntities.push(defenderEntity);
-    console.log('Added defender entity!')
 }
 
 GameEngine.prototype.addProjectile = function(projectileEntity) {
     this.projectileEntities.push(projectileEntity);
-    console.log('Added projectile entity!')
 }
 
 GameEngine.prototype.draw = function() {
@@ -106,44 +102,43 @@ GameEngine.prototype.draw = function() {
 
 GameEngine.prototype.update = function() {
     for (let i = this.unitEntities.length - 1; i >= 0; --i) {
-        if (this.unitEntities[i].removeFromWorld) {
+        let enemy = this.unitEntities[i];
+        if (!enemy.removeFromWorld) {
+            for (let j = this.defenderEntities.length - 1; j >= 0; --j) {
+                let defender = this.defenderEntities[j];
+                let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
+                if (!defender.removeFromWorld){
+                    if (distance <= defender.unit.range && enemy.health > 0) {
+                        defender.shoot(enemy);
+                        defender.update();
+                    }
+                } else {
+                    this.defenderEntities.splice(i, 1);
+                }
+            }
+            enemy.update()
+        } else {
             this.unitEntities.splice(i, 1);
         }
     }
-
-    for (let i = this.defenderEntities.length - 1; i >= 0; --i) {
-        if (this.defenderEntities[i].removeFromWorld) {
-            this.defenderEntities.splice(i, 1);
+    
+    if(this.unitEntities.length <= 0) {
+        for (let i = 0; i < this.defenderEntities.length; i++) {
+            let defender = this.defenderEntities[i];
+             if (!defender.removeFromWorld) {
+                defender.update();
+             } else {
+                this.defenderEntities.splice(i, 1);
+             }
         }
     }
 
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
-        if (this.projectileEntities[i].removeFromWorld) {
-            this.projectileEntities.splice(i, 1);
-        }
-    }
-
-    for (let i = 0; i < this.unitEntities.length; i++) {
-        let enemy = this.unitEntities[i];
-        if (!enemy.removeFromWorld) {
-            for (let j = 0; j < this.defenderEntities.length; j++) {
-                let defender = this.defenderEntities[j];
-                let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
-                if (!defender.removeFromWorld && enemy.health > 0){
-                    if (distance <= defender.unit.range) {
-                        defender.shoot(enemy);
-                        defender.update();
-                    }
-                }
-            }
-            enemy.update()
-        }
-    }
-
-    for (let i = 0; i < this.projectileEntities.length; i++) {
         let entity = this.projectileEntities[i];
         if (!entity.removeFromWorld) {
             entity.update();
+        } else {
+            this.projectileEntities.splice(i, 1);
         }
     }
 

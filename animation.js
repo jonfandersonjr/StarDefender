@@ -31,6 +31,15 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
         this.frameHeight * this.scale);
 }
 
+Animation.prototype.drawDefender = function(ctx, x, y, frame) {
+    ctx.drawImage(this.spriteSheet,
+        frame * this.frameWidth, 0, // source from sheet
+        this.frameWidth, this.frameHeight,
+        x, y,
+        this.frameWidth * this.scale,
+        this.frameHeight * this.scale);
+}
+
 Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTime) {
     this.elapsedTime += tick;
     if (this.isDone()) {

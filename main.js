@@ -1,12 +1,14 @@
 var AM = new AssetManager();
 
-var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
+var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
 
 //load defender sprites
+var defenderAction = ["stand", "shoot", "projectile"]
 var defenderList = ["marine", "battlecruiser", "ghost"];
 for (let i = 0; i < defenderList.length; i++) {
-    AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}.png`);
-    AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}_projectile.png`);
+    for (let j = 0; j < defenderAction.length; j++) {
+        AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}_${defenderAction[j]}.png`);
+    }
 }
 
 //load enemy sprites
@@ -15,7 +17,6 @@ for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
     }
-    AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_death.png`);
 }
 
 //load tiles
