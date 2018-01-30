@@ -8,6 +8,7 @@ body {
     -o-user-select: none;
     user-select: none;
 }
+
 textarea {
     resize: none;
     width: 295px;
@@ -31,14 +32,15 @@ textarea {
 
 #uiText {
     position: absolute;
-    left: 1090px;
+    right: 0px;
     top: 0px;
 }
 
 #uiButtons {
     position: absolute;
-    left: 1090px;
+    right: 0px;
     top: 310px;
+    z-index: 3;
 }
 
 #gameInfo {
@@ -50,21 +52,21 @@ textarea {
 }
 
 #gameWorld {
-     background: transparent;
-     position: absolute;
-     left: 300px;
-     top: 0px;
-     z-index: 1;
- }
+    background: transparent;
+    position: absolute;
+    left: 330px;
+    top: 0px;
+    z-index: 1;
+}
 
- #gameWorld2 {
-     background: transparent;
-     position: absolute;
-     left: 300px;
-     top: 0px;
-     z-index: 2;
-     pointer-events:none;
- }
+#gameWorld2 {
+    background: transparent;
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    z-index: 2;
+    pointer-events: none;
+}
 
 .gameInfo {
     resize: none;

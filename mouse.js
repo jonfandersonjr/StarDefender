@@ -1,9 +1,10 @@
 var defenderList = ["marine", "battlecruiser", "ghost"]
+
 function Mouse(map, ctx) {
     this.selectSquare = {
-            width: 25,
-            height: 25,
-            color: 'rgba(255, 204, 0, .1)' //Yellow 20% transparent
+        width: 25,
+        height: 25,
+        color: 'rgba(255, 204, 0, .1)' //Yellow 20% transparent
     };
 
     this.canvas = document.getElementById("gameWorld");
@@ -40,7 +41,7 @@ Mouse.prototype.dropTower = function(e) {
         //drop tower on location
         console.log("Dropping tower");
         var mouseLoc = getMousePos(this.canvas, event);
-        if(this.defenderName === "marine" || this.defenderName === "ghost") {
+        if (this.defenderName === "marine" || this.defenderName === "ghost") {
             this.generator.createDefender(this.defenderName, mouseLoc.x, mouseLoc.y);
         } else {
             this.generator.createDefender(this.defenderName, mouseLoc.x + 15, mouseLoc.y + 15);
@@ -80,8 +81,8 @@ Mouse.prototype.attachListeners = function() {
             console.log("Drawing image on mouse pointer.");
             var mousePos = getMousePos(that.canvas2, e);
             that.ctx2.beginPath();
-            that.ctx2.rect(mousePos.x - 15 , mousePos.y -5, that.selectSquare.width,
-                            that.selectSquare.height);
+            that.ctx2.rect(mousePos.x - 15, mousePos.y - 5, that.selectSquare.width,
+                that.selectSquare.height);
             that.ctx2.fillStyle = that.selectSquare.color;
             that.ctx2.fill();
         }
