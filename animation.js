@@ -31,6 +31,30 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
         this.frameHeight * this.scale);
 }
 
+Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTime) {
+    this.elapsedTime += tick;
+    if (this.isDone()) {
+        if (this.loop)
+            this.elapsedTime = 0;
+    }
+    if (deathAnimationTime >= 1){
+        var frame = 0;
+    } else {
+        var frame = this.currentFrame();
+    }
+    var xindex = 0;
+    var yindex = 0;
+    xindex = frame % this.sheetWidth;
+    yindex = Math.floor(frame / this.sheetWidth);
+
+    ctx.drawImage(this.spriteSheet,
+        xindex * this.frameWidth, yindex * this.frameHeight, // source from sheet
+        this.frameWidth, this.frameHeight,
+        x, y,
+        this.frameWidth * this.scale,
+        this.frameHeight * this.scale);
+}
+
 Animation.prototype.currentFrame = function() {
     return Math.floor(this.elapsedTime / this.frameDuration);
 }

@@ -6,7 +6,7 @@ var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
 var defenderList = ["marine", "battlecruiser", "ghost"];
 for (let i = 0; i < defenderList.length; i++) {
     AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}.png`);
-    AM.queueDownload(`./img/${defenderList[i]}/projectile.png`);
+    AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}_projectile.png`);
 }
 
 //load enemy sprites
@@ -15,6 +15,7 @@ for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
     }
+    AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_death.png`);
 }
 
 //load tiles
@@ -49,8 +50,8 @@ AM.downloadAll(function() {
     console.log("Map Loaded!");
 
     //Load in entities for prototype
-    this.generator.createEnemy("martarlisk");
-    this.generator.createEnemy("stroach");
+    //this.generator.createEnemy("martarlisk");
+    //this.generator.createEnemy("stroach");
     this.generator.createEnemy("sergling");
     console.log("Enemies Loaded!");
 });

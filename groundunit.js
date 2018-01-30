@@ -2,7 +2,8 @@
 //name, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
 var martarlisk = {name : "martarlisk", frameWidth : 64, frameHeight : 72, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 50, health : 100};
 var stroach = {name : "stroach", frameWidth : 75, frameHeight : 68, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 25, health : 100};
-var sergling = {name : "sergling", frameWidth : 40, frameHeight : 39, sheetWidth : 7, frameDuration : 0.1, frames : 7, loop : true, scale : 0.6, speed : 75, health : 100};
+var sergling = {name : "sergling", frameWidth : 40, frameHeight : 39, sheetWidth : 7, frameDuration : 0.1, frames : 7, loop : true, scale : 0.6, speed : 75, health : 100, 
+                deathAnimation : {name : "sergling", frameWidth : 65, frameHeight : 53, sheetWidth : 7, frameDuration : 0.15, frames : 7, loop : false, scale : 0.5}};
 
 function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) {
     this.AM = assetManager;
@@ -27,6 +28,8 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.direction = direction;
     this.map = map;
     this.health = this.unit.health;
+    this.isDead = false;
+    this.deadAnimationTimme = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = this.map.xIni * this.map.tileSize;
     this.y = this.map.yIni * this.map.tileSize;
     this.trueX = this.x + (this.unit.frameWidth / 2);
@@ -41,8 +44,15 @@ GroundUnit.prototype.constructor = GroundUnit;
 GroundUnit.prototype.update = function() {
     let row = Math.floor(this.x / this.map.tileSize);
     let column = Math.floor(this.y / this.map.tileSize)
-    if (this.health <= 0) {
-        this.removeFromWorld = true;
+    if (this.health <= 0 && !this.isDead) {
+        this.isDead = true;
+        this.setDeathAnimation();
+    } else if (this.isDead) {
+        if (this.deadAnimationTimme > 0) {
+            this.deadAnimationTimme -= this.game.clockTick;
+        } else {
+            this.removeFromWorld = true;
+        }
     } else {
         if (this.direction === "east") {
             let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
@@ -88,7 +98,11 @@ GroundUnit.prototype.update = function() {
 }
 
 GroundUnit.prototype.draw = function() {
-    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    if (!this.isDead){
+        this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    } else {
+        this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
+    }
     Entity.prototype.draw.call(this);
 }
 
@@ -97,7 +111,18 @@ GroundUnit.prototype.changeDirection = function(direction) {
         this.direction = direction[i];
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction[i]}.png`);
     }
+}
 
+GroundUnit.prototype.setDeathAnimation = function() {
+    this.unit = this.unit.deathAnimation;
+    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_death.png`);
+    this.animation.frameWidth = this.unit.frameWidth;
+    this.animation.frameDuration = this.unit.frameDuration;
+    this.animation.frameHeight = this.unit.frameHeight;
+    this.animation.sheetWidth = this.unit.sheetWidth;
+    this.animation.frames = this.unit.frames;
+    this.animation.loop = this.unit.loop;
+    this.animation.scale = this.unit.scale;
 }
 
 GroundUnit.prototype.getTrueCordinates = function() {

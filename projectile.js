@@ -9,7 +9,7 @@ function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSe
     this.x = x0;
     this.y = y0;
     this.speed = speedSetting;
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.defenderName}/projectile.png`), 42, 42, 1, 1, 1, true, 0.2);
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.defenderName}/${this.defenderName}_projectile.png`), 42, 42, 1, 1, 1, true, 0.2);
     this.calculateSpeed();
     Entity.call(this, gameEngine, this.x, this.y);
 }
