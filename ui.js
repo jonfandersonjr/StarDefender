@@ -50,7 +50,7 @@ function UI(mouse, startHealth, maxHealth,
             width: 100,
             height: 100,
             color: 'rgb(255,200,0)',
-            id: '3'
+            id: 'ghost'
         },
         {
             x: 140,

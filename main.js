@@ -3,7 +3,7 @@ var AM = new AssetManager();
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw"];
 
 //load defender sprites
-var defenderList = ["marine"];
+var defenderList = ["marine", "battlecruiser", "ghost"];
 for (let i = 0; i < defenderList.length; i++) {
     AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}.png`);
     AM.queueDownload(`./img/${defenderList[i]}/projectile.png`);

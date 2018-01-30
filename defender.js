@@ -10,7 +10,14 @@ function Defender(game, unitName, x, y, map, assetManager) {
         case "marine":
             this.unit = marine;
             break;
+        case "battlecruiser":
+            this.unit = battlecruiser;
+            break;
+        case "ghost":
+            this.unit = ghost;
+            break;
         default:
+            break;
     }
     this.animation = new Animation(this.AM.getAsset(`./img/${unitName}/${unitName}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);

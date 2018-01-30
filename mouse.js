@@ -1,4 +1,4 @@
-var defenderList = ["marine"];
+var defenderList = ["marine", "battlecruiser", "ghost"];
 
 function Mouse(map, ctx) {
     this.canvas = document.getElementById("gameWorld");
