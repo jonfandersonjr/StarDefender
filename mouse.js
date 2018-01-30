@@ -1,6 +1,12 @@
 var defenderList = ["marine", "battlecruiser", "ghost"];
 
 function Mouse(map, ctx) {
+    this.selectSquare = {
+            width: 25,
+            height: 25,
+            color: 'rgba(255, 204, 0, .1)' //Yellow 20% transparent
+    };
+
     this.canvas = document.getElementById("gameWorld");
     this.ctx = ctx;
     //access to other canvas
@@ -9,6 +15,11 @@ function Mouse(map, ctx) {
     this.defenderName = null;
     this.attachListeners();
     this.isBusy = false;
+
+    //Layer 2 canvas for drawing mouse move
+    this.canvas2 = document.getElementById("gameWorld2");
+    this.ctx2 = this.canvas2.getContext("2d");
+    this.drawOffset = true;
 }
 
 Mouse.prototype.setGenerator = function(mainGenerator) {
@@ -49,24 +60,26 @@ Mouse.prototype.attachListeners = function() {
     var that = this;
     // Mouse events
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
-    this.canvas.addEventListener("click", (e) => {
-        if (this.isBusy === true) {
+    that.canvas.addEventListener("click", (e) => {
+        if (that.isBusy === true) {
             that.dropTower(e);
+            that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
         } else {
             return;
         }
     }, false);
 
 
-    this.canvas.addEventListener("mousemove", function(e) {
-        //If button was select, isBusy = true, then draw image that follows mouse around canvas until not busy
-        //this.canvasTwo = document.getElementById("gameWorldLayer2");
-        //this.ctxTwo = this.canvasTwo.getContext("2d");
-        //I am thinking we make a 2nd canvas, that sits on top of gameWorld canvasTwo
-        //To draw the image to follow mouse and clear it repeatedly upon moving
-        if (this.isBusy) {
-            console.log("Drawing image on mouse pointer");
-
+    that.canvas.addEventListener("mousemove", function(e) {
+        that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
+        if (that.isBusy) {
+            console.log("Drawing image on mouse pointer.");
+            var mousePos = getMousePos(that.canvas2, e);
+            that.ctx2.beginPath();
+            that.ctx2.rect(mousePos.x - 15 , mousePos.y -5, that.selectSquare.width,
+                            that.selectSquare.height);
+            that.ctx2.fillStyle = that.selectSquare.color;
+            that.ctx2.fill();
         }
     }, false);
 
