@@ -1,8 +1,8 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
-var marine = {frameWidth : 40, frameHeight : 32, sheetWidth : 1, frameDuration : 0.1, frames : 1, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5};
-var battlecruiser = {frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5};
-var ghost = {frameWidth : 40, frameHeight : 36, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5};
+var marine = {frameWidth : 40, frameHeight : 32, sheetWidth : 1, frameDuration : 0.1, frames : 1, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5, damage : 20};
+var battlecruiser = {frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5, damage : 20};
+var ghost = {frameWidth : 40, frameHeight : 36, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, speed : 0, range : 100, cooldown : 0.5, damage : 20};
 
 function Defender(game, unitName, x, y, map, assetManager) {
     this.AM = assetManager;
@@ -32,6 +32,7 @@ function Defender(game, unitName, x, y, map, assetManager) {
     this.getTrueCordinates();
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;
+    this.damage = this.unit.damage;
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
 
@@ -63,7 +64,7 @@ Defender.prototype.getTrueCordinates = function() {
 
 Defender.prototype.shoot = function(enemy) {
     if(!this.isBusy) {
-        this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, 2));
+        this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
         this.isBusy = true;
     }
 }
