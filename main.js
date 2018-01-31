@@ -12,7 +12,7 @@ for (let i = 0; i < defenderList.length; i++) {
 }
 
 //load enemy sprites
-var unitList = ["martarlisk", "stroach", "sergling"];
+var unitList = ["mutalisk", "queen", "zergling","ultralisk","hydralisk","defiler"];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
@@ -51,8 +51,11 @@ AM.downloadAll(function() {
     console.log("Map Loaded!");
 
     //Load in entities for prototype
-    //this.generator.createEnemy("martarlisk");
-    //this.generator.createEnemy("stroach");
-    this.generator.createEnemy("sergling");
+    this.generator.createEnemy("hydralisk");
+    this.generator.createEnemy("mutalisk");
+    this.generator.createEnemy("queen"); 
+    this.generator.createEnemy("zergling");
+    this.generator.createEnemy("ultralisk");
+    this.generator.createEnemy("defiler");
     console.log("Enemies Loaded!");
 });
