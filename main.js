@@ -52,10 +52,10 @@ AM.downloadAll(function() {
 
     //Load in entities for prototype
     this.generator.createEnemy("hydralisk");
-    //this.generator.createEnemy("mutalisk");
-    //this.generator.createEnemy("queen"); 
-    //this.generator.createEnemy("zergling");
-    //this.generator.createEnemy("ultralisk");
+    this.generator.createEnemy("mutalisk");
+    this.generator.createEnemy("queen"); 
+    this.generator.createEnemy("zergling");
+    this.generator.createEnemy("ultralisk");
     this.generator.createEnemy("defiler");
     console.log("Enemies Loaded!");
 });
