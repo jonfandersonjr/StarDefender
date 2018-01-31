@@ -63,7 +63,12 @@ GroundUnit.prototype.update = function () {
     let row = Math.floor(this.x / this.map.tileSize);
     let column = Math.floor(this.y / this.map.tileSize)
 
-    if (this.health <= 0 && !this.isDead) {
+    if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
+                //**base loses health**
+                //**image for base taking damage**
+        this.isDead = true;
+        this.removeFromWorld = true;
+    } else if (this.health <= 0 && !this.isDead) {
         this.isDead = true;
         this.setDeathAnimation();
     } else if (this.isDead) {
