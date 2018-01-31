@@ -1,7 +1,7 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
 var marine = {name : "marine", frameWidth : 64, frameHeight : 64, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
-var battlecruiser = {name : "battlecruiser", frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.[1], frames : 8, loop : true, scale : .5, range : 100, cooldown : 0.5, damage : 20};
+var battlecruiser = {name : "battlecruiser", frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : .5, range : 100, cooldown : 0.5, damage : 20};
 var ghost = {name : "ghost", frameWidth : 40, frameHeight : 36, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
 
 function Defender(game, unitName, x, y, map, assetManager) {
