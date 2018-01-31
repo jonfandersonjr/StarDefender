@@ -51,6 +51,10 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.y = this.map.yIni * this.map.tileSize;
     this.trueX = this.x + (this.unit.frameWidth / 2);
     this.trueY = this.y + (this.unit.frameHeight / 2);
+
+    //**testing purposes**
+    this.speed = this.speed * 2;
+
     Entity.call(this, game, this.x, this.y);
 }
 
