@@ -58,9 +58,11 @@ GroundUnit.prototype = new Entity();
 GroundUnit.prototype.constructor = GroundUnit;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
-GroundUnit.prototype.update = function() {
+GroundUnit.prototype.update = function () {
+    console.log("in update function")
     let row = Math.floor(this.x / this.map.tileSize);
     let column = Math.floor(this.y / this.map.tileSize)
+
     if (this.health <= 0 && !this.isDead) {
         this.isDead = true;
         this.setDeathAnimation();
@@ -70,14 +72,17 @@ GroundUnit.prototype.update = function() {
         } else {
             this.removeFromWorld = true;
         }
-    } /*else {
+    } else {
+
         if (this.unit.name === "mutalisk") {
-            console.log("In mutalisk block");
             let b = this.map.yIni;
-            let slope = ((this.map.baseY - b) / this.map.baseX - this.x));
-            let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
+            let slope = ((this.map.baseY - b) / (this.map.baseX - 0));
+            this.x = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
+            this.y = (slope * this.x) + b;
             this.getTrueCordinates();
-        } else*/ if (this.direction === "east") {
+        }
+
+        else if (this.direction === "east") {
             let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
             if (this.map.map[Math.floor(tempX / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
                 row++;
@@ -117,10 +122,11 @@ GroundUnit.prototype.update = function() {
             this.getTrueCordinates();
         }
     }
+    
     Entity.prototype.update.call(this);
 }
 
-GroundUnit.prototype.draw = function() {
+GroundUnit.prototype.draw = function () {
     if (!this.isDead){
         this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     } else {
