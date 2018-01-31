@@ -27,7 +27,10 @@ AM.queueDownload("./tiles/base.png")
 AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-    var map = new Map(map_1);
+
+//    var map = new Map(map_1);
+    var map = new Map(map_2);
+
     var myMouse = new Mouse(map, ctx)
 
     //UI Load
@@ -57,5 +60,9 @@ AM.downloadAll(function() {
     this.generator.createEnemy("zergling");
     this.generator.createEnemy("ultralisk");
     this.generator.createEnemy("defiler");
+
+    this.wave = new Wave(this.generator);
+    this.wave.createWave("zergling", 5);
+
     console.log("Enemies Loaded!");
 });
