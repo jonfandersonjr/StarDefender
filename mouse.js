@@ -26,6 +26,10 @@ Mouse.prototype.setGenerator = function(mainGenerator) {
     this.generator = mainGenerator;
 }
 
+Mouse.prototype.setMap = function (gameMap) {
+    this.map = gameMap;
+}
+
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     this.isBusy = true; //makes mouse unable to select other defenders, one time drop
@@ -119,7 +123,3 @@ Mouse.prototype.attachListeners = function() {
     console.log('Input started');
 */
 }
-
-//Send in mouse class to game engine
-//Modify stuff in game engine
-//this.mouse.
