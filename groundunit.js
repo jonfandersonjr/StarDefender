@@ -63,7 +63,6 @@ GroundUnit.prototype.constructor = GroundUnit;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 GroundUnit.prototype.update = function () {
-    console.log("in update function")
     let row = Math.floor(this.x / this.map.tileSize);
     let column = Math.floor(this.y / this.map.tileSize)
 
@@ -137,7 +136,7 @@ GroundUnit.prototype.update = function () {
 
 GroundUnit.prototype.draw = function () {
     if (!this.isDead){
-        this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+        this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.health, this.unit.health);
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
     }

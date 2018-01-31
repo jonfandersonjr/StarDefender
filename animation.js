@@ -31,6 +31,31 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
         this.frameHeight * this.scale);
 }
 
+Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHealth) {
+    this.elapsedTime += tick;
+    if (this.isDone()) {
+        if (this.loop)
+            this.elapsedTime = 0;
+    }
+    var frame = this.currentFrame();
+    var xindex = 0;
+    var yindex = 0;
+    xindex = frame % this.sheetWidth;
+    yindex = Math.floor(frame / this.sheetWidth);
+
+    ctx.drawImage(this.spriteSheet,
+        xindex * this.frameWidth, yindex * this.frameHeight, // source from sheet
+        this.frameWidth, this.frameHeight,
+        x, y,
+        this.frameWidth * this.scale,
+        this.frameHeight * this.scale);
+    ctx.fillStyle = "green";
+    ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
+    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(x, y - 2, this.frameWidth * this.scale, 5);
+}
+
 Animation.prototype.drawDefender = function(ctx, x, y, frame) {
     ctx.drawImage(this.spriteSheet,
         frame * this.frameWidth, 0, // source from sheet
