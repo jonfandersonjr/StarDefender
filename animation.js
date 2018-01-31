@@ -9,6 +9,8 @@ function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDurati
     this.elapsedTime = 0;
     this.loop = loop;
     this.scale = scale;
+    this.lastHealth = 0;
+    this.damageTime = 0;
 }
 
 Animation.prototype.drawFrame = function(tick, ctx, x, y) {
@@ -32,6 +34,9 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
 }
 
 Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHealth) {
+    if(this.damageTime > 0) {
+        this.damageTime -= tick;
+    }
     this.elapsedTime += tick;
     if (this.isDone()) {
         if (this.loop)
@@ -51,6 +56,14 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
         this.frameHeight * this.scale);
     ctx.fillStyle = "green";
     ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
+    if (currentHealth !== this.lastHealth) {
+        this.damageTime = 1;
+    }
+    if (this.damageTime > 0) {
+        ctx.fillStyle = "red";
+        ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2,this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
+        this.lastHealth = currentHealth;
+    }
     ctx.lineWidth = 0.5;
     ctx.strokeStyle = "black";
     ctx.strokeRect(x, y - 2, this.frameWidth * this.scale, 5);

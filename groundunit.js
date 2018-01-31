@@ -45,13 +45,14 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.direction = direction;
     this.map = map;
     this.health = this.unit.health;
+    this.animation.lastHealth = this.health;
     this.isDead = false;
     this.deadAnimationTimme = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = this.map.xIni * this.map.tileSize;
     this.y = this.map.yIni * this.map.tileSize;
     this.trueX = this.x + (this.unit.frameWidth / 2);
     this.trueY = this.y + (this.unit.frameHeight / 2);
-
+    
     //**testing purposes**
     this.speed = this.speed * 2;
 
