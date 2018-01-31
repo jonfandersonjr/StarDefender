@@ -70,8 +70,14 @@ GroundUnit.prototype.update = function() {
         } else {
             this.removeFromWorld = true;
         }
-    } else {
-        if (this.direction === "east") {
+    } /*else {
+        if (this.unit.name === "mutalisk") {
+            console.log("In mutalisk block");
+            let b = this.map.yIni;
+            let slope = ((this.map.baseY - b) / this.map.baseX - this.x));
+            let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
+            this.getTrueCordinates();
+        } else*/ if (this.direction === "east") {
             let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
             if (this.map.map[Math.floor(tempX / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
                 row++;
