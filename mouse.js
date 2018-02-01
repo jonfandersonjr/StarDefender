@@ -1,11 +1,17 @@
 var defenderList = ["marine", "battlecruiser", "ghost"]
 var tileSize = 31;
 
+
 function Mouse(map, ctx) {
     this.radiusOfFire = {
         radius: 30,
         color: 'rgba(0,0,0, .9)', //white 30%
         thick: 2
+    };
+    this.resources = {
+        marine: -50,
+        ghost: -100,
+        battlecruiser: -150
     };
     this.canvas = document.getElementById("gameWorld");
     this.ctx = ctx;
@@ -41,7 +47,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
     this.isBusy = true; //makes mouse unable to select other defenders, one time drop
     this.defenderName = defenderName;
     console.log("Defender " + this.defenderName + " Selected!");
-    console.log("isBusy:" + this.isBusy);
 };
 
 
@@ -58,7 +63,20 @@ Mouse.prototype.dropTower = function(e) {
             this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
         }
 
-        //Draw radius of fire
+        //Update Resources in UI
+        switch (this.defenderName) {
+            case "marine":
+                that.ui.resourceAdjust(that.resources.marine);
+                break;
+            case "ghost":
+                that.ui.resourceAdjust(that.resources.ghost);
+                break;
+            case "battlecruiser":
+                that.ui.resourceAdjust(that.resources.battlecruiser);
+                break;
+        }
+
+        //Draw radius of fire - NOT WORKING
         that.ctx.beginPath();
         console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
             that.radiusOfFire.radius);
@@ -71,6 +89,8 @@ Mouse.prototype.dropTower = function(e) {
     }
 };
 
+/*
+Gets Mouse position*/
 function getMousePos(canvas, e) {
     var rect = canvas.getBoundingClientRect();
     return {
@@ -170,3 +190,7 @@ TileBox.prototype.draw = function () {
 function getTile(mouseLoc, map) {
     return {col: Math.floor(mouseLoc.x / map.tileSize), row: Math.floor(mouseLoc.y / map.tileSize)}
 } 
+/* Attach UI for calling updates*/
+Mouse.prototype.attachUI = function(ui) {
+    this.ui = ui;
+}

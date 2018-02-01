@@ -1,8 +1,44 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
-var marine = {name : "marine", frameWidth : 64, frameHeight : 64, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 0.75, range : 100, cooldown : 0.5, damage : 20};
-var battlecruiser = {name : "battlecruiser", frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : .5, range : 100, cooldown : 0.5, damage : 20};
-var ghost = {name : "ghost", frameWidth : 40, frameHeight : 36, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
+var marine = {
+    name: "marine",
+    frameWidth: 64,
+    frameHeight: 64,
+    sheetWidth: 32,
+    frameDuration: 0.1,
+    frames: 32,
+    loop: true,
+    scale: 1,
+    range: 100,
+    cooldown: 0.5,
+    damage: 20
+};
+var battlecruiser = {
+    name: "battlecruiser",
+    frameWidth: 111,
+    frameHeight: 81,
+    sheetWidth: 32,
+    frameDuration: 0.1,
+    frames: 32,
+    loop: true,
+    scale: .5,
+    range: 100,
+    cooldown: 0.5,
+    damage: 20
+};
+var ghost = {
+    name: "ghost",
+    frameWidth: 40,
+    frameHeight: 36,
+    sheetWidth: 32,
+    frameDuration: 0.1,
+    frames: 32,
+    loop: true,
+    scale: 1,
+    range: 100,
+    cooldown: 0.5,
+    damage: 20
+};
 
 function Defender(game, unitName, row, col, map, assetManager) {
     this.AM = assetManager;
@@ -45,7 +81,7 @@ Defender.prototype.update = function() {
         this.isBusy = false;
         this.cooldown = this.unit.cooldown;
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`);
-    } else if(this.isBusy) {
+    } else if (this.isBusy) {
         this.cooldown -= this.game.clockTick;
     }
     Entity.prototype.update.call(this);
@@ -62,7 +98,7 @@ Defender.prototype.getTrueCordinates = function() {
 }
 
 Defender.prototype.shoot = function(enemy) {
-    if(!this.isBusy) {
+    if (!this.isBusy) {
         this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
         this.isBusy = true;
         this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
@@ -71,10 +107,10 @@ Defender.prototype.shoot = function(enemy) {
 }
 
 function angle(cx, cy, ex, ey) {
-  var dy = ey - cy;
-  var dx = ex - cx;
-  var theta = Math.atan2(dy, dx); // range (-PI, PI]
-  theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-  //if (theta < 0) theta = 360 + theta; // range [0, 360)
-  return theta + 180;
+    var dy = ey - cy;
+    var dx = ex - cx;
+    var theta = Math.atan2(dy, dx); // range (-PI, PI]
+    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+    //if (theta < 0) theta = 360 + theta; // range [0, 360)
+    return theta + 180;
 }

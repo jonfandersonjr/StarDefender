@@ -33,7 +33,6 @@ function Background(game, spritesheet, x, y) {
 };
 
 Background.prototype.draw = function () {
-    var that = this;
     this.ctx.drawImage(this.spritesheet,
         this.x, this.y);
 };

@@ -20,6 +20,8 @@ function GameEngine(mouse, ui) {
     this.surfaceHeight = null;
     this.mouse = mouse;
     this.tileBox = null;
+    this.wave = null;
+    this.isNewWave = true;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -38,28 +40,6 @@ GameEngine.prototype.start = function() {
         that.loop();
         requestAnimFrame(gameLoop, that.ctx.canvas);
     })();
-}
-
-GameEngine.prototype.startInput = function() {
-    console.log('Starting input');
-
-    var that = this;
-    var thisMouse = this.mouse;
-
-    var getXandY = function(e) {
-        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
-
-        if (x < 1024) {
-            x = Math.floor(x / 32);
-            y = Math.floor(y / 32);
-        }
-
-        return {
-            x: x,
-            y: y
-        };
-    }
 }
 
 GameEngine.prototype.addTile = function(tileEntity) {
@@ -81,6 +61,7 @@ GameEngine.prototype.addProjectile = function(projectileEntity) {
 GameEngine.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
+    this.wave.createWave();
 
     for (let i = 0; i < this.tileEntities.length; i++) {
         this.tileEntities[i].draw(this.ctx);
@@ -103,14 +84,36 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
-GameEngine.prototype.update = function() {
+GameEngine.prototype.startInput = function() {
+     console.log('Starting input');
+ 
+    var that = this;
+    var thisMouse = this.mouse;
+    var getXandY = function(e) {
+        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+
+         if (x < 1024) {
+             x = Math.floor(x / 32);
+             y = Math.floor(y / 32);
+         }
+ 
+        return {
+            x: x,
+            y: y
+        };
+    }
+}
+
+GameEngine.prototype.update = function () {
+
     for (let i = this.unitEntities.length - 1; i >= 0; --i) {
         let enemy = this.unitEntities[i];
         if (!enemy.removeFromWorld) {
             for (let j = this.defenderEntities.length - 1; j >= 0; --j) {
                 let defender = this.defenderEntities[j];
                 let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
-                if (!defender.removeFromWorld){
+                if (!defender.removeFromWorld) {
                     if (distance <= defender.unit.range && enemy.health > 0) {
                         defender.shoot(enemy);
                     }
@@ -123,7 +126,7 @@ GameEngine.prototype.update = function() {
             this.unitEntities.splice(i, 1);
         }
     }
-    
+
     for (let i = this.defenderEntities.length - 1; i >= 0; --i) {
         let entity = this.defenderEntities[i];
         if (!entity.removeFromWorld) {
@@ -132,7 +135,7 @@ GameEngine.prototype.update = function() {
             this.defenderEntities.splice(i, 1);
         }
     }
-    
+
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
         let entity = this.projectileEntities[i];
         if (!entity.removeFromWorld) {
@@ -141,8 +144,10 @@ GameEngine.prototype.update = function() {
             this.projectileEntities.splice(i, 1);
         }
     }
-    
     this.tileBox.update();
+    if (this.isNewWave) {
+        this.wave.update();
+    }
     resize();
 }
 
@@ -171,7 +176,6 @@ Timer.prototype.tick = function() {
     var wallCurrent = Date.now();
     var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
     this.wallLastTimestamp = wallCurrent;
-
     var gameDelta = Math.min(wallDelta, this.maxStep);
     this.gameTime += gameDelta;
     this.gameUI.updateTime(this.gameTime);
