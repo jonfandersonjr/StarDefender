@@ -30,7 +30,7 @@ function Mouse(map, ctx) {
 
 Mouse.prototype.init = function(gameEngine) {
     this.gameEngine = gameEngine;
-    this.tileBox = new TileBox(this.gameEngine, this.canvas, this.ctx, this.map);
+    this.tileBox = new TileBox(this.gameEngine, this.canvas, this.ctx, this.map, this.isBusy);
     this.gameEngine.tileBox = this.tileBox;
 }
 
@@ -45,6 +45,7 @@ Mouse.prototype.setMap = function(gameMap) {
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     this.isBusy = true; //makes mouse unable to select other defenders, one time drop
+    this.tileBox.isBusy = this.isBusy;
     this.defenderName = defenderName;
     console.log("Defender " + this.defenderName + " Selected!");
 };
@@ -61,7 +62,7 @@ Mouse.prototype.dropTower = function(e) {
         if (isValid(this.map, tileLoc.row, tileLoc.col)) {
             this.generator.createDefender(this.defenderName, tileLoc.row, tileLoc.col);
             this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
-            
+            this.tileBox.isBusy = this.isBusy;
             //Update Resources in UI
             switch (this.defenderName) {
             case "marine":
@@ -157,11 +158,12 @@ function isValid(map, row, col) {
     }
 }
 
-function TileBox (gameEngine, canvas, ctx, map) {
+function TileBox (gameEngine, canvas, ctx, map, isBusy) {
     this.gameEngine = gameEngine;
     this.canvas = canvas;
     this.ctx = ctx;
     this.map = map;
+    this.isBusy = isBusy;
 }
 
 TileBox.prototype.update = function () {
@@ -176,7 +178,8 @@ TileBox.prototype.update = function () {
 TileBox.prototype.draw = function () {
     if(this.mouseLoc != null && this.mouseLoc.x > 0
         && this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row
-        && this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col){
+        && this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col
+        && this.isBusy){
         if (isValid(this.map, this.tileLoc.row, this.tileLoc.col)){
             this.ctx.strokeStyle = 'rgb(0, 255, 38)';
         } else {
