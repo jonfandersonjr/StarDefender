@@ -1,6 +1,7 @@
 var defenderList = ["marine", "battlecruiser", "ghost"]
 var tileSize = 31;
 
+
 function Mouse(map, ctx) {
     this.selectSquare = {
         width: 31,
@@ -15,6 +16,11 @@ function Mouse(map, ctx) {
         thick: 2
     };
 
+    this.resources = {
+        marine: -50,
+        ghost: -100,
+        battlecruiser: -150
+    };
     this.canvas = document.getElementById("gameWorld");
     this.ctx = ctx;
     //access to other canvas
@@ -43,7 +49,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
     this.isBusy = true; //makes mouse unable to select other defenders, one time drop
     this.defenderName = defenderName;
     console.log("Defender " + this.defenderName + " Selected!");
-    console.log("isBusy:" + this.isBusy);
 };
 
 
@@ -60,7 +65,20 @@ Mouse.prototype.dropTower = function(e) {
             this.generator.createDefender(this.defenderName, mouseLoc.x + 5, mouseLoc.y);
         }
 
-        //Draw radius of fire
+        //Update Resources in UI
+        switch (this.defenderName) {
+            case "marine":
+                that.ui.resourceAdjust(that.resources.marine);
+                break;
+            case "ghost":
+                that.ui.resourceAdjust(that.resources.ghost);
+                break;
+            case "battlecruiser":
+                that.ui.resourceAdjust(that.resources.battlecruiser);
+                break;
+        }
+
+        //Draw radius of fire - NOT WORKING
         that.ctx.beginPath();
         console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
             that.radiusOfFire.radius);
@@ -68,6 +86,7 @@ Mouse.prototype.dropTower = function(e) {
         that.ctx.lineWidth = that.radiusOfFire.thick;
         that.ctx.strokeStyle = that.radiusOfFire.color;
         that.ctx.stroke();
+        /////
 
         this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
     } else {
@@ -75,6 +94,8 @@ Mouse.prototype.dropTower = function(e) {
     }
 };
 
+/*
+Gets Mouse position*/
 function getMousePos(canvas, e) {
     var rect = canvas.getBoundingClientRect();
     return {
@@ -104,6 +125,9 @@ Mouse.prototype.attachListeners = function() {
             that.ctx2.beginPath();
             that.ctx2.rect(mousePos.x - 31, mousePos.y - 27, that.selectSquare.width,
                 that.selectSquare.height);
+
+            /* This code below is to try to get map array and find where user is selecting based on array and mouse pointer
+            DOES NOT FULLY WORK, only registers some + or - signs */
             var mapXI = Math.floor(mousePos.x / 31) - 1;
             var mapYI = Math.floor(mousePos.y / 31);
             //console.log(`XI: ${mapXI}, YI: ${mapYI}`);
@@ -115,6 +139,8 @@ Mouse.prototype.attachListeners = function() {
                 that.ctx2.fillStyle = that.selectSquare.color;
             }
             that.ctx2.fill();
+            /*-------------------*/
+
         }
     }, false);
 
@@ -148,4 +174,9 @@ Mouse.prototype.attachListeners = function() {
 
     console.log('Input started');
 */
+}
+
+/* Attach UI for calling updates*/
+Mouse.prototype.attachUI = function(ui) {
+    this.ui = ui;
 }

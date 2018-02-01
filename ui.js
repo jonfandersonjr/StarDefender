@@ -116,6 +116,8 @@ function UI(mouse, startHealth, maxHealth,
     this.enemiesKilled = enemiesK;
 
     this.time = "00:00";
+    this.timeReal = 0;
+    this.timeChange = 0;
 
     //Load Default Text
     this.updateText();
@@ -141,7 +143,7 @@ UI.prototype.dmg = function(amount) {
 
 //Adjust resource + or -
 UI.prototype.resourceAdjust = function(amount) {
-    this.resourcesTotal += amount;
+    this.resourcesTotal += Math.floor(amount);
     this.updateText();
 }
 
@@ -176,9 +178,10 @@ UI.prototype.reset = function() {
 }
 
 UI.prototype.updateTime = function(value) {
+    var that = this;
     var timeString = parseFloat(value).toFixed(2);
     var timeString = Math.floor(timeString);
-
+    this.timeReal = timeString;
     if (timeString < 10) { //seconds format < 10
         timeString = "00:0" + timeString;
         this.time = timeString;
@@ -195,6 +198,7 @@ UI.prototype.updateTime = function(value) {
         }
         this.time = timeString;
     }
+
     this.updateText();
 }
 
@@ -220,10 +224,10 @@ function generateGameInfo() {
         e.preventDefault();
     }, false);
     this.gameInfoBox.value = "Star Defender\nA point-click tower defense game based on Starcraft" +
-                            " with a resource pool and multiple types of enemies that head down lanes" +
-                            " towards your main base.\nYou can place multiple types of defensive structures" +
-                            "along the lane’s paths to defend your base. Waves of enemies will spawn on a timer," +
-                            "but beware each wave gets more difficult, after all waves have been defeated you win the" +
-                            " round and move on to the next map. If your base’s health reaches zero you lose!" +
-                            "\nBuild as if your life depends on it!";
+        " with a resource pool and multiple types of enemies that head down lanes" +
+        " towards your main base.\nYou can place multiple types of defensive structures" +
+        "along the lane’s paths to defend your base. Waves of enemies will spawn on a timer," +
+        "but beware each wave gets more difficult, after all waves have been defeated you win the" +
+        " round and move on to the next map. If your base’s health reaches zero you lose!" +
+        "\nBuild as if your life depends on it!";
 }

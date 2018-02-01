@@ -107,7 +107,7 @@ GameEngine.prototype.update = function() {
             for (let j = this.defenderEntities.length - 1; j >= 0; --j) {
                 let defender = this.defenderEntities[j];
                 let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
-                if (!defender.removeFromWorld){
+                if (!defender.removeFromWorld) {
                     if (distance <= defender.unit.range && enemy.health > 0) {
                         defender.shoot(enemy);
                     }
@@ -120,7 +120,7 @@ GameEngine.prototype.update = function() {
             this.unitEntities.splice(i, 1);
         }
     }
-    
+
     for (let i = this.defenderEntities.length - 1; i >= 0; --i) {
         let entity = this.defenderEntities[i];
         if (!entity.removeFromWorld) {
@@ -129,7 +129,7 @@ GameEngine.prototype.update = function() {
             this.defenderEntities.splice(i, 1);
         }
     }
-    
+
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
         let entity = this.projectileEntities[i];
         if (!entity.removeFromWorld) {
