@@ -62,8 +62,8 @@ function Defender(game, unitName, row, col, map, assetManager) {
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
     this.ctx = this.gameEngine.ctx;
     this.location = location;
-    this.x = col * this.map.tileSize;
-    this.y = row * this.map.tileSize;
+    this.x = col * this.map.tileSize - (this.unit.frameWidth - this.map.tileSize)/2;
+    this.y = row * this.map.tileSize - (this.unit.frameHeight - this.map.tileSize)/2;
     this.getTrueCordinates();
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;

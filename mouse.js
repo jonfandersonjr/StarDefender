@@ -61,10 +61,9 @@ Mouse.prototype.dropTower = function(e) {
         if (isValid(this.map, tileLoc.row, tileLoc.col)) {
             this.generator.createDefender(this.defenderName, tileLoc.row, tileLoc.col);
             this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
-        }
-
-        //Update Resources in UI
-        switch (this.defenderName) {
+            
+            //Update Resources in UI
+            switch (this.defenderName) {
             case "marine":
                 that.ui.resourceAdjust(that.resources.marine);
                 break;
@@ -74,8 +73,9 @@ Mouse.prototype.dropTower = function(e) {
             case "battlecruiser":
                 that.ui.resourceAdjust(that.resources.battlecruiser);
                 break;
+            }
         }
-
+        
         //Draw radius of fire - NOT WORKING
         that.ctx.beginPath();
         console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
