@@ -38,12 +38,16 @@ AM.downloadAll(function() {
     this.ui = new UI(myMouse, 100, 100, 100, 1, 0, 0);
     console.log("UI Loaded!");
 
-    var gameEngine = new GameEngine(myMouse, this.ui);
 
+
+    var gameEngine = new GameEngine(myMouse, this.ui);
 
     //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
     this.generator = new Generator(gameEngine, map, AM);
     myMouse.setGenerator(this.generator);
+
+    this.wave = new Wave(this.generator, gameEngine);
+    gameEngine.wave = this.wave;
 
     //Game Engine Start
     gameEngine.init(ctx);
@@ -54,15 +58,15 @@ AM.downloadAll(function() {
     console.log("Map Loaded!");
 
     //Load in entities for prototype
-    this.generator.createEnemy("hydralisk");
-    this.generator.createEnemy("mutalisk");
-    this.generator.createEnemy("queen"); 
-    this.generator.createEnemy("zergling");
-    this.generator.createEnemy("ultralisk");
-    this.generator.createEnemy("defiler");
+   // this.generator.createEnemy("hydralisk");
+   // this.generator.createEnemy("mutalisk");
+   // this.generator.createEnemy("queen"); 
+   // this.generator.createEnemy("zergling");
+   // this.generator.createEnemy("ultralisk");
+   // this.generator.createEnemy("defiler");
 
-    this.wave = new Wave(this.generator);
-    this.wave.createWave("zergling", 5);
+
+
 
     console.log("Enemies Loaded!");
 });

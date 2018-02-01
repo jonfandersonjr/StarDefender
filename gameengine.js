@@ -19,6 +19,8 @@ function GameEngine(mouse, ui) {
     this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.mouse = mouse;
+    this.wave = null;
+    this.isNewWave = true;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -26,7 +28,6 @@ GameEngine.prototype.init = function(ctx) {
     this.surfaceWidth = this.ctx.canvas.width;
     this.surfaceHeight = this.ctx.canvas.height;
     this.timer = new Timer(this.gameUI);
-    this.startInput();
     console.log('game initialized');
 }
 
@@ -37,28 +38,6 @@ GameEngine.prototype.start = function() {
         that.loop();
         requestAnimFrame(gameLoop, that.ctx.canvas);
     })();
-}
-
-GameEngine.prototype.startInput = function() {
-    console.log('Starting input');
-
-    var that = this;
-    var thisMouse = this.mouse;
-
-    var getXandY = function(e) {
-        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
-
-        if (x < 1024) {
-            x = Math.floor(x / 32);
-            y = Math.floor(y / 32);
-        }
-
-        return {
-            x: x,
-            y: y
-        };
-    }
 }
 
 GameEngine.prototype.addTile = function(tileEntity) {
@@ -81,6 +60,8 @@ GameEngine.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
 
+    this.wave.createWave();
+
     for (let i = 0; i < this.tileEntities.length; i++) {
         this.tileEntities[i].draw(this.ctx);
     }
@@ -100,7 +81,8 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
-GameEngine.prototype.update = function() {
+GameEngine.prototype.update = function () {
+
     for (let i = this.unitEntities.length - 1; i >= 0; --i) {
         let enemy = this.unitEntities[i];
         if (!enemy.removeFromWorld) {
@@ -138,6 +120,15 @@ GameEngine.prototype.update = function() {
             this.projectileEntities.splice(i, 1);
         }
     }
+
+    if (this.isNewWave) {
+        this.wave.update();
+    }
+        
+
+
+
+
 
     resize();
 }
