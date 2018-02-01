@@ -1,72 +1,42 @@
-function Wave(generator) {
+var unitType = ["zergling", "mutalisk", "queen"];
+
+function Wave(generator, game) {
     this.doc = document.getElementById("gameWorld");
     this.generator = generator;
+    this.game = game;
+    this.unitName = unitType[0];
+    this.delay = 1;
+    this.count = 0;
+    this.next = 0;
+    this.unitAmount = 5;
 }
 
-Wave.prototype.createWave = function (unitName, unitAmount) {
-    this.unitName = unitName;
-    switch (unitName) {
-        case "mutalisk":
-            this.generateMutalisk(unitAmount);
-            break;
-        case "queen":
-            this.generateQueen(unitAmount);
-            break;
-        case "zergling":
-            this.generateZergling(unitAmount);;
-            break;
-        case "ultralisk":
-            this.generateUltralisk(unitAmount);
-            break;
-        case "hydralisk":
-            this.generateHydralisk(unitAmount);
-            break;
-        case "defiler":
-            this.generateDefiler(unitAmount);
-            break;
-        default:
-            console.log("Not a valid unit.");
-    }
-}
+Wave.prototype.constructor = Wave;
 
-//Creates unitAmount enemies of the specified type 
-Wave.prototype.generateMutalisk = function (unitAmount) {
-    for (let i = 0; i < unitAmount; i++) {
+Wave.prototype.createWave = function () {
+
+    if (this.delay <= 0) {
         this.generator.createEnemy(this.unitName);
+        this.count++;
+        this.delay = 0.5;
     }
+
 }
 
-//Creates unitAmount enemies of the specified type 
-Wave.prototype.generateQueen = function (unitAmount) {
-    for (let i = 0; i < unitAmount; i++) {
-        this.generator.createEnemy(this.unitName);
+Wave.prototype.update = function () {
+    if (this.count < this.unitAmount) {
+        this.delay -= this.game.clockTick;
+    } else {
+        this.count = 0;
+        this.next++;
+        if (this.next >= unitType.length) {
+            this.next = 0;
+        }
+        this.unitName = unitType[this.next];
     }
+
+
+
 }
 
-//Creates unitAmount enemies of the specified type 
-Wave.prototype.generateZergling = function (unitAmount) {
-    for (let i = 0; i < unitAmount; i++) {
-        this.generator.createEnemy(this.unitName);
-    }
-}
 
-//Creates unitAmount enemies of the specified type 
-Wave.prototype.generateUltralisk = function (unitAmount) {
-    for (let i = 0; i < unitAmount; i++) {
-        this.generator.createEnemy(this.unitName);
-    }
-}
-
-//Creates unitAmount enemies of the specified type 
-Wave.prototype.generateHydrolisk = function (unitAmount) {
-    for (let i = 0; i < unitAmount; i++) {
-        this.generator.createEnemy(this.unitName);
-    }
-}
-
-//Creates unitAmount enemies of the specified type 
-Wave.prototype.generateDefiler = function (unitAmount) {
-    for (let i = 0; i < unitAmount; i++) {
-        this.generator.createEnemy(this.unitName);
-    }
-}

@@ -40,9 +40,14 @@ AM.downloadAll(function() {
     console.log("UI Attached to Mouse");
     this.gameEngine = new GameEngine(myMouse, ui);
 
+    var gameEngine = new GameEngine(myMouse, this.ui);
+
     //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
     this.generator = new Generator(gameEngine, map, AM);
     myMouse.setGenerator(this.generator);
+
+    this.wave = new Wave(this.generator, gameEngine);
+    gameEngine.wave = this.wave;
 
     //Game Engine Start
     gameEngine.init(ctx);
