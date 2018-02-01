@@ -9,6 +9,12 @@ function Mouse(map, ctx) {
         badColor: 'rgba(255,0,0,.2)' //RED %20
     };
 
+    this.radiusOfFire = {
+        radius: 30,
+        color: 'rgba(0,0,0, .9)', //white 30%
+        thick: 2
+    };
+
     this.canvas = document.getElementById("gameWorld");
     this.ctx = ctx;
     //access to other canvas
@@ -42,6 +48,7 @@ Mouse.prototype.selectDefender = function(defenderName) {
 
 
 Mouse.prototype.dropTower = function(e) {
+    var that = this;
     //Drop tower if something was selected from buttons isBusy = true
     if (this.isBusy) {
         //drop tower on location
@@ -52,6 +59,15 @@ Mouse.prototype.dropTower = function(e) {
         } else {
             this.generator.createDefender(this.defenderName, mouseLoc.x + 5, mouseLoc.y);
         }
+
+        //Draw radius of fire
+        that.ctx.beginPath();
+        console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
+            that.radiusOfFire.radius);
+        that.ctx.arc(mouseLoc.x, mouseLoc.y, that.radiusOfFire.radius, 0, 2 * Math.PI, false);
+        that.ctx.lineWidth = that.radiusOfFire.thick;
+        that.ctx.strokeStyle = that.radiusOfFire.color;
+        that.ctx.stroke();
 
         this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
     } else {
@@ -90,8 +106,8 @@ Mouse.prototype.attachListeners = function() {
                 that.selectSquare.height);
             var mapXI = Math.floor(mousePos.x / 31) - 1;
             var mapYI = Math.floor(mousePos.y / 31);
-            console.log(`XI: ${mapXI}, YI: ${mapYI}`);
-            console.log("Map Tile: " + that.map.map[mapYI].charAt(mapXI));
+            //console.log(`XI: ${mapXI}, YI: ${mapYI}`);
+            //console.log("Map Tile: " + that.map.map[mapYI].charAt(mapXI));
             var tileID = that.map.map[mapYI].charAt(mapXI);
             if (tileID === "+") {
                 that.ctx2.fillStyle = that.selectSquare.badColor;
