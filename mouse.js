@@ -1,10 +1,18 @@
 var defenderList = ["marine", "battlecruiser", "ghost"]
+var tileSize = 31;
 
 function Mouse(map, ctx) {
     this.selectSquare = {
-        width: 25,
-        height: 25,
-        color: 'rgba(255, 204, 0, .1)' //Yellow 20% transparent
+        width: 31,
+        height: 31,
+        color: 'rgba(255, 204, 0, .1)', //Yellow 10% transparent
+        badColor: 'rgba(255,0,0,.2)' //RED %20
+    };
+
+    this.radiusOfFire = {
+        radius: 30,
+        color: 'rgba(0,0,0, .9)', //white 30%
+        thick: 2
     };
 
     this.canvas = document.getElementById("gameWorld");
@@ -26,7 +34,7 @@ Mouse.prototype.setGenerator = function(mainGenerator) {
     this.generator = mainGenerator;
 }
 
-Mouse.prototype.setMap = function (gameMap) {
+Mouse.prototype.setMap = function(gameMap) {
     this.map = gameMap;
 }
 
@@ -40,16 +48,26 @@ Mouse.prototype.selectDefender = function(defenderName) {
 
 
 Mouse.prototype.dropTower = function(e) {
+    var that = this;
     //Drop tower if something was selected from buttons isBusy = true
     if (this.isBusy) {
         //drop tower on location
         console.log("Dropping tower");
         var mouseLoc = getMousePos(this.canvas, event);
         if (this.defenderName === "marine" || this.defenderName === "ghost") {
-            this.generator.createDefender(this.defenderName, mouseLoc.x, mouseLoc.y);
+            this.generator.createDefender(this.defenderName, mouseLoc.x - 15, mouseLoc.y - 15);
         } else {
-            this.generator.createDefender(this.defenderName, mouseLoc.x + 15, mouseLoc.y + 15);
+            this.generator.createDefender(this.defenderName, mouseLoc.x + 5, mouseLoc.y);
         }
+
+        //Draw radius of fire
+        that.ctx.beginPath();
+        console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
+            that.radiusOfFire.radius);
+        that.ctx.arc(mouseLoc.x, mouseLoc.y, that.radiusOfFire.radius, 0, 2 * Math.PI, false);
+        that.ctx.lineWidth = that.radiusOfFire.thick;
+        that.ctx.strokeStyle = that.radiusOfFire.color;
+        that.ctx.stroke();
 
         this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
     } else {
@@ -82,12 +100,20 @@ Mouse.prototype.attachListeners = function() {
     that.canvas.addEventListener("mousemove", function(e) {
         that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
         if (that.isBusy) {
-            console.log("Drawing image on mouse pointer.");
             var mousePos = getMousePos(that.canvas2, e);
             that.ctx2.beginPath();
-            that.ctx2.rect(mousePos.x - 15, mousePos.y - 5, that.selectSquare.width,
+            that.ctx2.rect(mousePos.x - 31, mousePos.y - 27, that.selectSquare.width,
                 that.selectSquare.height);
-            that.ctx2.fillStyle = that.selectSquare.color;
+            var mapXI = Math.floor(mousePos.x / 31) - 1;
+            var mapYI = Math.floor(mousePos.y / 31);
+            //console.log(`XI: ${mapXI}, YI: ${mapYI}`);
+            //console.log("Map Tile: " + that.map.map[mapYI].charAt(mapXI));
+            var tileID = that.map.map[mapYI].charAt(mapXI);
+            if (tileID === "+") {
+                that.ctx2.fillStyle = that.selectSquare.badColor;
+            } else {
+                that.ctx2.fillStyle = that.selectSquare.color;
+            }
             that.ctx2.fill();
         }
     }, false);
