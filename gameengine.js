@@ -19,6 +19,7 @@ function GameEngine(mouse, ui) {
     this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.mouse = mouse;
+    this.tileBox = null;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -96,6 +97,8 @@ GameEngine.prototype.draw = function() {
     for (let i = 0; i < this.projectileEntities.length; i++) {
         this.projectileEntities[i].draw(this.ctx);
     }
+    
+    this.tileBox.draw();
 
     this.ctx.restore();
 }
@@ -138,7 +141,8 @@ GameEngine.prototype.update = function() {
             this.projectileEntities.splice(i, 1);
         }
     }
-
+    
+    this.tileBox.update();
     resize();
 }
 

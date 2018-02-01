@@ -29,9 +29,9 @@ AM.downloadAll(function() {
     var ctx = canvas.getContext("2d");
 
 //    var map = new Map(map_1);
-    var map = new Map(map_3);
+    var map = new Map(map_4);
 
-    var myMouse = new Mouse(map, ctx)
+    var myMouse = new Mouse(map, ctx);
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
@@ -39,7 +39,7 @@ AM.downloadAll(function() {
     console.log("UI Loaded!");
 
     var gameEngine = new GameEngine(myMouse, this.ui);
-
+    myMouse.init(gameEngine);
 
     //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
     this.generator = new Generator(gameEngine, map, AM);

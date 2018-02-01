@@ -1,10 +1,10 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
-var marine = {name : "marine", frameWidth : 64, frameHeight : 64, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
+var marine = {name : "marine", frameWidth : 64, frameHeight : 64, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 0.75, range : 100, cooldown : 0.5, damage : 20};
 var battlecruiser = {name : "battlecruiser", frameWidth : 86, frameHeight : 76, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : .5, range : 100, cooldown : 0.5, damage : 20};
 var ghost = {name : "ghost", frameWidth : 40, frameHeight : 36, sheetWidth : 32, frameDuration : 0.1, frames : 32, loop : true, scale : 1, range : 100, cooldown : 0.5, damage : 20};
 
-function Defender(game, unitName, x, y, map, assetManager) {
+function Defender(game, unitName, row, col, map, assetManager) {
     this.AM = assetManager;
     this.gameEngine = game;
     //Switch case for units.
@@ -21,13 +21,13 @@ function Defender(game, unitName, x, y, map, assetManager) {
         default:
             break;
     }
+    this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
     this.ctx = this.gameEngine.ctx;
     this.location = location;
-    this.map = map;
-    this.x = x - this.unit.frameWidth / 2;
-    this.y = y - this.unit.frameHeight / 2;
+    this.x = col * this.map.tileSize;
+    this.y = row * this.map.tileSize;
     this.getTrueCordinates();
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;
@@ -41,8 +41,6 @@ Defender.prototype.constructor = Defender;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 Defender.prototype.update = function() {
-    //let row = Math.floor(this.x / this.map.tileSize);
-    //let column = Math.floor(this.y / this.map.tileSize)
     if(this.cooldown <= 0) {
         this.isBusy = false;
         this.cooldown = this.unit.cooldown;

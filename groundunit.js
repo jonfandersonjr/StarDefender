@@ -48,8 +48,8 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.animation.lastHealth = this.health;
     this.isDead = false;
     this.deadAnimationTimme = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
-    this.x = this.map.xIni * this.map.tileSize;
-    this.y = this.map.yIni * this.map.tileSize;
+    this.x = this.map.corIni.x * this.map.tileSize;
+    this.y = this.map.corIni.y * this.map.tileSize;
     this.trueX = this.x + (this.unit.frameWidth / 2);
     this.trueY = this.y + (this.unit.frameHeight / 2);
     
@@ -64,9 +64,6 @@ GroundUnit.prototype.constructor = GroundUnit;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 GroundUnit.prototype.update = function () {
-    let row = Math.floor(this.x / this.map.tileSize);
-    let column = Math.floor(this.y / this.map.tileSize)
-
     if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
         this.hitBase();
     } else if (this.health <= 0 && !this.isDead) {
@@ -78,51 +75,57 @@ GroundUnit.prototype.update = function () {
         } else {
             this.removeFromWorld = true;
         }
-    } else {
-
-        if (this.unit.name === "mutalisk") {
+    } else if (this.unit.name === "mutalisk") {
             this.flyingMovement();
-        } else if (this.direction === "east") {
-            let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
-            if (this.map.map[Math.floor(tempX / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
-                row++;
-                this.x = row * this.map.tileSize;
-                this.changeDirection(newDirection(this.map, row, column, this.direction));
-            } else {
-                this.x = tempX;
-            }
-            this.getTrueCordinates();
-        } else if (this.direction === "west") {
-            let tempX = this.x - this.game.clockTick * this.speed * this.speedSetting; //Next position
-            if (this.map.map[Math.floor(tempX / this.map.tileSize) + column * this.map.mapSize] === '+') { //Checks if next position is a path.
-                this.x = row * this.map.tileSize;
-                this.changeDirection(newDirection(this.map, row, column, this.direction));
-            } else {
-                this.x = tempX;
-            }
-            this.getTrueCordinates();
-        } else if (this.direction === "south") {
-            let tempY = this.y + this.game.clockTick * this.speed * this.speedSetting; //Next position
-            if (this.map.map[row + (Math.floor(tempY / this.map.tileSize) + 1) * this.map.mapSize] === '+') { //Checks if next position is a path.
-                column++;
-                this.y = column * this.map.tileSize;
-                this.changeDirection(newDirection(this.map, row, column, this.direction));
-            } else {
-                this.y = tempY;
-            }
-            this.getTrueCordinates();
-        } else if (this.direction === "north") {
-            let tempY = this.y - this.game.clockTick * this.speed * this.speedSetting; //Next position
-            if (this.map.map[row + Math.floor(tempY / this.map.tileSize) * this.map.mapSize] === '+') { //Checks if next position is a path.
-                this.y = column * this.map.tileSize;
-                this.changeDirection(newDirection(this.map, row, column, this.direction));
-            } else {
-                this.y = tempY;
-            }
-            this.getTrueCordinates();
+    } else {
+        this.col = Math.floor(this.x / this.map.tileSize);
+        this.row = Math.floor(this.y / this.map.tileSize);
+        let tempX, tempY;
+        switch (this.direction) {
+            case 'east':
+                tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
+                if (this.map.map[this.row][Math.floor(tempX / this.map.tileSize) + 1] === '+') { //Checks if next position is a path.
+                    this.col++;
+                    this.x = this.col * this.map.tileSize;
+                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+                } else {
+                    this.x = tempX;
+                }
+                this.getTrueCordinates();
+                break;
+            case 'west':
+                tempX = this.x - this.game.clockTick * this.speed * this.speedSetting; //Next position
+                if (this.map.map[this.row][Math.floor(tempX / this.map.tileSize)] === '+') { //Checks if next position is a path.
+                    this.x = this.col * this.map.tileSize;
+                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+                } else {
+                    this.x = tempX;
+                }
+                this.getTrueCordinates();
+                break;
+            case 'south':
+                tempY = this.y + this.game.clockTick * this.speed * this.speedSetting; //Next position
+                if (this.map.map[Math.floor(tempY / this.map.tileSize) + 1][this.col] === '+') { //Checks if next position is a path.
+                    this.row = Math.floor(tempY / this.map.tileSize);
+                    this.y = this.row * this.map.tileSize;
+                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+                } else {
+                    this.y = tempY;
+                }
+                this.getTrueCordinates();
+                break;
+            case 'north':
+                tempY = this.y - this.game.clockTick * this.speed * this.speedSetting; //Next position
+                if (this.map.map[Math.floor(tempY / this.map.tileSize)][this.col] === '+') { //Checks if next position is a path.
+                    this.y = this.row * this.map.tileSize;
+                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+                } else {
+                    this.y = tempY;
+                }
+                this.getTrueCordinates();
+                break;
         }
     }
-    
     Entity.prototype.update.call(this);
 }
 
@@ -136,14 +139,12 @@ GroundUnit.prototype.draw = function () {
 }
 
 GroundUnit.prototype.changeDirection = function(direction) {
-    for (let i = 0; i < direction.length; i++) {
-        this.direction = direction[i];
-        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction[i]}.png`);
-    }
+    this.direction = direction;
+    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`);
 }
 
 GroundUnit.prototype.flyingMovement = function () {
-    let b = this.map.yIni;
+    let b = this.map.corIni.y;
     let slope = ((this.map.baseY - b) / (this.map.baseX - 0));
     this.x = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
     this.y = (slope * this.x) + b;
@@ -177,17 +178,16 @@ GroundUnit.prototype.getTrueCordinates = function() {
 //Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.
 function newDirection(map, x, y, currentDirection) {
     if (currentDirection === "east" || currentDirection === "west") {
-
-        if (map.map[x + (y - 1) * map.mapSize] === '-') {
-            return [`n${currentDirection}`, "north"];
+        if (map.map[y - 1][x] === '-') {
+            return 'north';
         } else {
-            return [`s${currentDirection}`, "south"];
+            return 'south';
         }
     } else {
-        if (map.map[x - 1 + y * map.mapSize] === '-') {
-            return [`${currentDirection}w`, "west"];
+        if (map.map[y][x - 1] === '-') {
+            return 'west';
         } else {
-            return [`${currentDirection}e`, "east"];
+            return 'east';
         }
     }
 }

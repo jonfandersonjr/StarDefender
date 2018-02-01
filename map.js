@@ -3,11 +3,9 @@ var tileSize = 31;
 function Map(map) {
     this.map = map;
     this.mapSize = Math.sqrt(this.map.length);
+    this.mapDim = {row : this.map.length, col : this.map[0].length};
     this.canvas = document.getElementById("gameWorld");
-    //this.tileSize = this.canvas.height / (this.mapSize - 1);
     this.tileSize = tileSize;
-    this.baseX = null;
-    this.baseY = null;
     if (this.map === map_1) {
         this.xIni = 0;
         this.yIni = 1;
@@ -17,6 +15,10 @@ function Map(map) {
         this.xIni = 0;
         this.yIni = 1;
         this.dIni = "east";
+    }
+    if (this.map === map_4) {
+        this.corIni = {x : 0, y : 1};
+        this.dIni = 'east';
     }
 }
 
@@ -40,20 +42,25 @@ Background.prototype.update = function () { };
 
 //Creates a map based on the selection.
 Map.prototype.createMap = function (gameEngine, assetManager) {
-    for (let i = 0, j = 0; i < this.mapSize; i++) {
-        if (this.map[i + j * this.mapSize] === '+' || this.map[i + j * this.mapSize] === '=') {
-            gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass.png"), i * this.tileSize, j * this.tileSize));
-            if (this.map[i + j * this.mapSize] === '=') {
-                this.baseX = i * this.tileSize;
-                this.baseY = j * this.tileSize;
+    for (let i = 0; i < this.mapDim.col; i++) {
+        for (let j = 0; j < this.mapDim.row; j++) {
+            let tile = this.map[j][i];
+            switch (tile) {
+                case '+' :
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass.png"), i * this.tileSize, j * this.tileSize));
+                    break;
+                case '-' :
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    break;
+                case '=' :
+                    this.baseX = i * this.tileSize;
+                    this.baseY = j * this.tileSize;
+                default :
+                    break;
             }
-        } else if (this.map[i + j * this.mapSize] === '\n') {
-            i = -1;
-            j++;
-        } else if (this.map[i + j * this.mapSize] === '-') {
-            gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
         }
     }
+    
     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/base.png"), this.baseX, this.baseY));
 }
 
@@ -134,3 +141,25 @@ var map_3 = "++++++++++++++++++++++\n" +
     "++--------------------\n" +
     "++++++++++++++++++++++\n" +
     "~~~~~~~~~~~~~~~~~~~~~~~"
+var map_4 = [['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
+             ['-', '-', '-', '-', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '-', '-', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+', '+', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '-', '-', '-', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '+', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '=', '+', '+'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '-', '-', '-'],
+             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+']]
