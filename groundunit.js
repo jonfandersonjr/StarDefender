@@ -68,10 +68,7 @@ GroundUnit.prototype.update = function () {
     let column = Math.floor(this.y / this.map.tileSize)
 
     if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
-                //**base loses health**
-                //**image for base taking damage**
-        this.isDead = true;
-        this.removeFromWorld = true;
+        this.hitBase();
     } else if (this.health <= 0 && !this.isDead) {
         this.isDead = true;
         this.setDeathAnimation();
@@ -84,14 +81,8 @@ GroundUnit.prototype.update = function () {
     } else {
 
         if (this.unit.name === "mutalisk") {
-            let b = this.map.yIni;
-            let slope = ((this.map.baseY - b) / (this.map.baseX - 0));
-            this.x = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
-            this.y = (slope * this.x) + b;
-            this.getTrueCordinates();
-        }
-
-        else if (this.direction === "east") {
+            this.flyingMovement();
+        } else if (this.direction === "east") {
             let tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
             if (this.map.map[Math.floor(tempX / this.map.tileSize) + 1 + column * this.map.mapSize] === '+') { //Checks if next position is a path.
                 row++;
@@ -149,6 +140,21 @@ GroundUnit.prototype.changeDirection = function(direction) {
         this.direction = direction[i];
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction[i]}.png`);
     }
+}
+
+GroundUnit.prototype.flyingMovement = function () {
+    let b = this.map.yIni;
+    let slope = ((this.map.baseY - b) / (this.map.baseX - 0));
+    this.x = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
+    this.y = (slope * this.x) + b;
+    this.getTrueCordinates();
+}
+
+GroundUnit.prototype.hitBase = function () {
+    //**base loses health**
+    //**image for base taking damage**
+    this.isDead = true;
+    this.removeFromWorld = true;
 }
 
 GroundUnit.prototype.setDeathAnimation = function() {

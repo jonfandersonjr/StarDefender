@@ -29,7 +29,7 @@ AM.downloadAll(function() {
     var ctx = canvas.getContext("2d");
 
 //    var map = new Map(map_1);
-    var map = new Map(map_2);
+    var map = new Map(map_3);
 
     var myMouse = new Mouse(map, ctx)
 
