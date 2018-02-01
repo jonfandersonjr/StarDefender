@@ -10,8 +10,8 @@ var marine = {
     loop: true,
     scale: 1,
     range: 100,
-    cooldown: 0.5,
-    damage: 20
+    cooldown: 0.1,
+    damage: 5
 };
 var battlecruiser = {
     name: "battlecruiser",
@@ -59,12 +59,13 @@ function Defender(game, unitName, row, col, map, assetManager) {
     }
     this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`),
-        this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
+        this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = this.gameEngine.ctx;
     this.location = location;
-    this.x = col * this.map.tileSize - (this.unit.frameWidth - this.map.tileSize)/2;
-    this.y = row * this.map.tileSize - (this.unit.frameHeight - this.map.tileSize)/2;
-    this.getTrueCordinates();
+    this.x = col * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
+    this.y = row * this.map.tileSize - (this.unit.frameHeight * this.unit.scale - this.map.tileSize)/2;
+    this.trueX = (col + 0.5) * this.map.tileSize;
+    this.trueY = (row + 0.5) * this.map.tileSize;
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;
     this.damage = this.unit.damage;
@@ -90,11 +91,6 @@ Defender.prototype.update = function() {
 Defender.prototype.draw = function() {
     this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     Entity.prototype.draw.call(this);
-}
-
-Defender.prototype.getTrueCordinates = function() {
-    this.trueX = this.x + this.unit.frameWidth / 2;
-    this.trueY = this.y + this.unit.frameHeight / 2;
 }
 
 Defender.prototype.shoot = function(enemy) {

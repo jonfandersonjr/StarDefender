@@ -107,10 +107,10 @@ GameEngine.prototype.startInput = function() {
 
 GameEngine.prototype.update = function () {
 
-    for (let i = this.unitEntities.length - 1; i >= 0; --i) {
+    for (let i = 0; i < this.unitEntities.length; i++) {
         let enemy = this.unitEntities[i];
         if (!enemy.removeFromWorld) {
-            for (let j = this.defenderEntities.length - 1; j >= 0; --j) {
+            for (let j = 0; j < this.defenderEntities.length; j++) {
                 let defender = this.defenderEntities[j];
                 let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
                 if (!defender.removeFromWorld) {

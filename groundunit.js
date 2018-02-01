@@ -38,12 +38,12 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
             break;
         default:
     }
+    this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction}.png`),
-        this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale);
+        this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.speed = this.unit.speed * this.speedSetting;
     this.ctx = game.ctx;
     this.direction = direction;
-    this.map = map;
     this.health = this.unit.health;
     this.animation.lastHealth = this.health;
     this.isDead = false;
