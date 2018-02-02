@@ -44,6 +44,7 @@ AM.downloadAll(function() {
     this.generator = new Generator(gameEngine, map, AM);
     myMouse.setGenerator(this.generator);
 
+
     this.wave = new Wave(this.generator, gameEngine);
     gameEngine.wave = this.wave;
 
@@ -54,17 +55,6 @@ AM.downloadAll(function() {
     //Map Load
     map.createMap(gameEngine, AM);
     console.log("Map Loaded!");
-
-    //Load in entities for prototype
-/*     this.generator.createEnemy("hydralisk");
-    this.generator.createEnemy("mutalisk");
-    this.generator.createEnemy("queen");
-    this.generator.createEnemy("zergling");
-    this.generator.createEnemy("ultralisk");
-    this.generator.createEnemy("defiler");
-
-    this.wave = new Wave(this.generator);
-    this.wave.createWave("zergling", 5); */
 
     console.log("Enemies Loaded!");
 });

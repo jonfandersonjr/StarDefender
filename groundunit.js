@@ -1,5 +1,4 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
-//name, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed
 var mutalisk = {name : "mutalisk", frameWidth : 64, frameHeight : 72, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 50, health : 100,
                 deathAnimation : {name : "mutalisk", frameWidth : 68, frameHeight : 68, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : false, scale : 0.5}};
 var queen = {name : "queen", frameWidth : 75, frameHeight : 68, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 25, health : 100,
@@ -47,7 +46,7 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.health = this.unit.health;
     this.animation.lastHealth = this.health;
     this.isDead = false;
-    this.deadAnimationTimme = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
+    this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = this.map.corIni.x * this.map.tileSize;
     this.y = this.map.corIni.y * this.map.tileSize;
     this.trueX = this.x + (this.unit.frameWidth / 2);
@@ -144,7 +143,7 @@ GroundUnit.prototype.changeDirection = function(direction) {
 }
 
 GroundUnit.prototype.flyingMovement = function () {
-    let b = this.map.corIni.y;
+    let b = this.map.corIni.y * this.map.tileSize;
     let slope = ((this.map.baseY - b) / (this.map.baseX - 0));
     this.x = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
     this.y = (slope * this.x) + b;

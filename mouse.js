@@ -18,9 +18,11 @@ function Mouse(map, ctx) {
     //access to other canvas
     this.map = map;
     this.generator = null;
+    this.gameEngine = null;
     this.defenderName = null;
     this.attachListeners();
     this.isBusy = false;
+    this.canAddLevel = true;
     
     //Layer 2 canvas for drawing mouse move
     this.canvas2 = document.getElementById("gameWorld2");
@@ -42,6 +44,16 @@ Mouse.prototype.setMap = function(gameMap) {
     this.map = gameMap;
 }
 
+Mouse.prototype.levelCompleted = function () {
+    this.canAddLevel = true;
+}
+
+Mouse.prototype.createLevel = function (levelNum) {
+    this.gameEngine.addNewWave = true;
+    this.gameEngine.levelNum = levelNum;
+    this.canAddLevel = false;
+}
+
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     this.isBusy = true; //makes mouse unable to select other defenders, one time drop
@@ -49,7 +61,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
     this.defenderName = defenderName;
     console.log("Defender " + this.defenderName + " Selected!");
 };
-
 
 Mouse.prototype.dropTower = function(e) {
     var that = this;
@@ -118,6 +129,23 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
     }, false);
 
+    this.canvas.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        console.log("right clicked");
+        if (that.canAddLevel) {
+            that.createLevel("level_1")
+        }
+    }, false);
+
+    this.canvas.addEventListener("mousewheel", function (e) {
+        e.preventDefault();
+        if (that.canAddLevel) {
+            that.createLevel("level_2")
+        }
+    }, false);
+
+    console.log('Input started');
+
     // Key events
     /*
     this.canvas.addEventListener("keydown", function(e) {
@@ -137,16 +165,6 @@ Mouse.prototype.attachListeners = function() {
     }, false);
 
     // Optional events
-    this.canvas.addEventListener("contextmenu", function(e) {
-        that.click = getXandY(e);
-        e.preventDefault();
-    }, false);
-
-    this.canvas.addEventListener("mousewheel", function(e) {
-        console.log(e);
-    }, false);
-
-    console.log('Input started');
 */
 }
 

@@ -51,7 +51,8 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
                 case '-' :
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
                     break;
-                case '=' :
+                case '=':
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass.png"), i * this.tileSize, j * this.tileSize));
                     this.baseX = i * this.tileSize;
                     this.baseY = j * this.tileSize;
                 default :

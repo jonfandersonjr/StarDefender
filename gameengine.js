@@ -10,6 +10,7 @@ window.requestAnimFrame = (function() {
 })();
 
 function GameEngine(mouse, ui) {
+    this.canvas = document.getElementById("gameWorld");
     this.gameUI = ui;
     this.tileEntities = [];
     this.unitEntities = [];
@@ -21,7 +22,10 @@ function GameEngine(mouse, ui) {
     this.mouse = mouse;
     this.tileBox = null;
     this.wave = null;
-    this.isNewWave = true;
+    this.addNewWave = false;
+    this.level = null;
+    this.levelNum = 0;
+    this.initialCall = true;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -29,7 +33,6 @@ GameEngine.prototype.init = function(ctx) {
     this.surfaceWidth = this.ctx.canvas.width;
     this.surfaceHeight = this.ctx.canvas.height;
     this.timer = new Timer(this.gameUI);
-    this.startInput();
     console.log('game initialized');
 }
 
@@ -58,10 +61,17 @@ GameEngine.prototype.addProjectile = function(projectileEntity) {
     this.projectileEntities.push(projectileEntity);
 }
 
+GameEngine.prototype.runLevel = function (numWaves) {
+    this.level = new Level(this.levelNum, this.wave);
+}
+
 GameEngine.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
-    this.wave.createWave();
+
+    if (this.addNewWave) {
+        this.wave.createWave();
+    }
 
     for (let i = 0; i < this.tileEntities.length; i++) {
         this.tileEntities[i].draw(this.ctx);
@@ -84,28 +94,21 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
-GameEngine.prototype.startInput = function() {
-     console.log('Starting input');
- 
-    var that = this;
-    var thisMouse = this.mouse;
-    var getXandY = function(e) {
-        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+GameEngine.prototype.update = function () {
 
-         if (x < 1024) {
-             x = Math.floor(x / 32);
-             y = Math.floor(y / 32);
-         }
- 
-        return {
-            x: x,
-            y: y
+    if (this.addNewWave) {
+        if (this.initialCall) {
+            this.runLevel(this.waveCount);
+            this.initialCall = false;
+        }
+        this.wave.update();
+        if (this.level.isDone) {
+            this.addNewWave = false;
+            this.mouse.levelCompleted();
+            this.waveCount = 0;
+            this.initialCall = true;
         };
     }
-}
-
-GameEngine.prototype.update = function () {
 
     for (let i = 0; i < this.unitEntities.length; i++) {
         let enemy = this.unitEntities[i];
@@ -145,9 +148,7 @@ GameEngine.prototype.update = function () {
         }
     }
     this.tileBox.update();
-    if (this.isNewWave) {
-        this.wave.update();
-    }
+
     resize();
 }
 
