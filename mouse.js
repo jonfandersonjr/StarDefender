@@ -49,7 +49,7 @@ Mouse.prototype.levelCompleted = function () {
 }
 
 Mouse.prototype.createLevel = function (levelNum) {
-    this.gameEngine.addNewWave = true;
+    this.gameEngine.addNewLevel = true;
     this.gameEngine.levelNum = levelNum;
     this.canAddLevel = false;
 }
@@ -133,14 +133,15 @@ Mouse.prototype.attachListeners = function() {
         e.preventDefault();
         console.log("right clicked");
         if (that.canAddLevel) {
-            that.createLevel("level_1")
+            that.createLevel(1)
         }
     }, false);
 
     this.canvas.addEventListener("mousewheel", function (e) {
         e.preventDefault();
         if (that.canAddLevel) {
-            that.createLevel("level_2")
+            //creates level_2
+            that.createLevel(2)
         }
     }, false);
 

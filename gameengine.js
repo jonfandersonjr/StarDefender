@@ -22,10 +22,11 @@ function GameEngine(mouse, ui) {
     this.mouse = mouse;
     this.tileBox = null;
     this.wave = null;
-    this.addNewWave = false;
+    this.addNewLevel = false;
     this.level = null;
     this.levelNum = 0;
-    this.initialCall = true;
+    this.isBootingLevel = true;
+    this.waveDelay = .25; //time between waves in seconds.
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -61,16 +62,12 @@ GameEngine.prototype.addProjectile = function(projectileEntity) {
     this.projectileEntities.push(projectileEntity);
 }
 
-GameEngine.prototype.runLevel = function (numWaves) {
-    this.level = new Level(this.levelNum, this.wave);
-}
-
 GameEngine.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
 
-    if (this.addNewWave) {
-        this.wave.createWave();
+    if (this.addNewLevel) {
+        this.wave.drawWave();
     }
 
     for (let i = 0; i < this.tileEntities.length; i++) {
@@ -94,20 +91,35 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
+GameEngine.prototype.runLevel = function () {
+
+    //If starting a level, need to make a level object.
+    if (this.isBootingLevel) {
+        console.log("Instantiating level " + this.levelNum);
+        this.level = new Level(this.levelNum, this.wave);
+        this.isBootingLevel = false;
+    }
+    //Sends waves for this level at specified interval.
+    this.waveDelay -= this.clockTick;
+    this.wave.update();
+
+    if (this.waveDelay <= 0) {
+        console.log("Sending wave")
+        this.level.createWave();
+        this.waveDelay = 5;
+    }
+
+    if (this.level.isDone) {
+        this.addNewLevel = false;
+        this.mouse.levelCompleted();
+        this.isBootingLevel = true;
+    };
+}
+
 GameEngine.prototype.update = function () {
 
-    if (this.addNewWave) {
-        if (this.initialCall) {
-            this.runLevel(this.waveCount);
-            this.initialCall = false;
-        }
-        this.wave.update();
-        if (this.level.isDone) {
-            this.addNewWave = false;
-            this.mouse.levelCompleted();
-            this.waveCount = 0;
-            this.initialCall = true;
-        };
+    if (this.addNewLevel) {
+        this.runLevel();
     }
 
     for (let i = 0; i < this.unitEntities.length; i++) {

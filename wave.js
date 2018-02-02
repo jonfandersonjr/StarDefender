@@ -14,21 +14,22 @@ function Wave(generator, game) {
 
 Wave.prototype.constructor = Wave;
 
-Wave.prototype.createWave = function () {
+Wave.prototype.drawWave = function () {
 
     if (this.delay <= 0) {
         this.generator.createEnemy(this.unit.name);
+        console.log(this.unit.name + " spawned");
         this.delay = this.unit.delay;
         this.unitAmount--;
         if (this.unitAmount <= 0) {
-            this.level.isDone = true;
+            this.delay = 100000;
         }
     }
 
 }
 
 Wave.prototype.update = function () {
-    if (this.gameEngine.addNewWave) {
+    if (this.gameEngine.addNewLevel) {
         this.delay -= this.gameEngine.clockTick;
     }
 }
@@ -56,9 +57,10 @@ Wave.prototype.setWave = function (unitName, unitAmount) {
         default:
             console.log("Illegal input");
     }
-    this.unitAmount = unitAmount;
 
-    console.log(this.unitAmount);
+    console.log("set a wave of " + this.unit.name);
+    this.delay = this.unit.delay;
+    this.unitAmount = unitAmount;
 
 }
 
