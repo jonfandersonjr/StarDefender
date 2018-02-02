@@ -1,9 +1,9 @@
-var mutalisk1 = {name : "mutalisk", delay : .5 };
-var queen1 = {name : "queen", delay : .75 };
-var zergling1 = {name : "zergling", delay : .4 };
-var ultralisk1 = {name : "ultralisk", delay : .6 };
-var hydralisk1 = {name : "hydralisk", delay : .5 };
-var defiler1 = {name : "defiler", delay : .7 };
+var mutaliskWave = {name : "mutalisk", delay : .5 };
+var queenWave = {name : "queen", delay : 1 };
+var zerglingWave = {name : "zergling", delay : .25 };
+var ultraliskWave = {name : "ultralisk", delay : 1 };
+var hydraliskWave = {name : "hydralisk", delay : .7 };
+var defilerWave = {name : "defiler", delay : .75 };
 
 function Wave(generator, game) {
     this.generator = generator;
@@ -37,22 +37,22 @@ Wave.prototype.update = function () {
 Wave.prototype.setWave = function (unitName, unitAmount) {
     switch (unitName) {
         case "mutalisk":
-            this.unit = mutalisk1;
+            this.unit = mutaliskWave;
             break;
         case "queen":
-            this.unit = queen1;
+            this.unit = queenWave;
             break;
         case "zergling":
-            this.unit = zergling1;
+            this.unit = zerglingWave;
             break;
         case "ultralisk":
-            this.unit = ultralisk1;
+            this.unit = ultraliskWave;
             break;
         case "hydralisk":
-            this.unit = hydralisk1;
+            this.unit = hydraliskWave;
             break;
         case "defiler":
-            this.unit = defiler1;
+            this.unit = defilerWave;
             break;
         default:
             console.log("Illegal input");

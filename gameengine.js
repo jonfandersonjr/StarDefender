@@ -66,6 +66,7 @@ GameEngine.prototype.draw = function() {
     this.ctx.clearRect(0, 0, this.surfaceWidth, this.surfaceHeight);
     this.ctx.save();
 
+    //If level is running, draw the waves.
     if (this.addNewLevel) {
         this.wave.drawWave();
     }
@@ -99,16 +100,19 @@ GameEngine.prototype.runLevel = function () {
         this.level = new Level(this.levelNum, this.wave);
         this.isBootingLevel = false;
     }
+
     //Sends waves for this level at specified interval.
     this.waveDelay -= this.clockTick;
     this.wave.update();
 
+    //Sends next wave for this level
     if (this.waveDelay <= 0) {
         console.log("Sending wave")
         this.level.createWave();
         this.waveDelay = 5;
     }
 
+    //Level us finished so allow user to play more levels
     if (this.level.isDone) {
         this.addNewLevel = false;
         this.mouse.levelCompleted();
@@ -118,6 +122,7 @@ GameEngine.prototype.runLevel = function () {
 
 GameEngine.prototype.update = function () {
 
+    //If mouse selects a level, run it.
     if (this.addNewLevel) {
         this.runLevel();
     }

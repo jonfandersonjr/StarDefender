@@ -1,3 +1,6 @@
+/*
+*  Choose which enemies for each wave and how many are in that wave. 
+*/
 var firstLevelEnemies = ["zergling", "queen", "mutalisk", "ultralisk", "hydralisk", "defiler"];
 var firstLevelWaveSize = [5, 3, 3, 4, 2, 5];
 
@@ -28,6 +31,8 @@ Level.prototype.createWave = function () {
         this.waveNumber++;
     }
 
+    //Once all the waves have run, end the level.
+    //used ">" because update() happens before draw() in the gameEngine.
     if (this.waveNumber > firstLevelEnemies.length) {
         this.waveNumber = 0;
         this.isDone = true;
