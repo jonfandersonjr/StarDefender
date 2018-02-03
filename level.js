@@ -1,15 +1,15 @@
 /*
 *  Choose which enemy, quantity, and stat boosts to apply.
 */
-var firstLevelEnemies = ["zergling", "queen", "mutalisk", "ultralisk", "hydralisk", "defiler"];
-var firstLevelWaveSize = [5, 3, 3, 4, 2, 5];
-var firstLevelSpeedBuff = [1, 1.5, 2, 3, 4];
-var firstLevelHealthBuff = [1, 1.5, 2, 3, 4];
+var firstLevelEnemies = ["zergling", "queen", "zergling", "mutalisk", "ultralisk", "hydralisk", "defiler"];
+var firstLevelWaveSize = [5, 4, 6, 3, 4, 2, 5];
+var firstLevelSpeedBuff = [1, 2, 2, 1.5, 2, 2, 2];
+var firstLevelHealthBuff = [1, 2, .75, 1, 3, 2, 2];
 
-var secondLevelEnemies = ["zergling", "mutalisk", "zergling", "mutalisk", "zergling", "defiler"];
-var secondLevelWaveSize = [5, 3, 7, 4, 10, 15];
-var secondLevelSpeedBuff = [1, 1.5, 2, 3, 4];
-var secondLevelHealthBuff = [1, 1.5, 2, 3, 4];
+var secondLevelEnemies = ["zergling", "mutalisk", "zergling", "mutalisk", "defiler", "zergling"];
+var secondLevelWaveSize = [5, 3, 7, 4, 10, 10, 8];
+var secondLevelSpeedBuff = [1, 1, 2, 1.5, 1, 1.75];
+var secondLevelHealthBuff = [1, 1.5, 2, 3, 4, .5];
 
 function Level(levelNum, waveObject) {
     this.canvas = document.getElementById("gameWorld");

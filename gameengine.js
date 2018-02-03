@@ -96,9 +96,11 @@ GameEngine.prototype.runLevel = function () {
 
     //If starting a level, need to make a level object.
     if (this.isBootingLevel) {
-        console.log("Instantiating level " + this.levelNum);
+
         this.level = new Level(this.levelNum, this.wave);
         this.isBootingLevel = false;
+
+        console.log("Instantiating level " + this.levelNum);
     }
 
     //Sends waves for this level at specified interval.
@@ -107,16 +109,19 @@ GameEngine.prototype.runLevel = function () {
 
     //Sends next wave for this level
     if (this.waveDelay <= 0) {
-        console.log("Sending wave")
+
         this.level.createWave();
         this.waveDelay = 5;
+
+        console.log("Sending wave")
     }
 
     //Level us finished so allow user to play more levels
     if (this.level.isDone) {
         this.addNewLevel = false;
-        this.mouse.levelCompleted();
         this.isBootingLevel = true;
+        this.waveDelay = .25;
+        this.mouse.levelCompleted();
     };
 }
 
