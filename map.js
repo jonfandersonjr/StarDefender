@@ -46,18 +46,18 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
             let tile = this.map[j][i];
             switch (tile) {
                 case '+' :
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
                     break;
                 case '-' :
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
                     break;
                 case '=':
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
                     this.baseX = i * this.tileSize;
                     this.baseY = j * this.tileSize;
                     break;
                 case '*':
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
                     this.mineralX = i * this.tileSize;
                     this.mineralY = j * this.tileSize;
                     break;

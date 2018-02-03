@@ -21,7 +21,7 @@ for (let i = 0; i < unitList.length; i++) {
 
 //load tiles
 AM.queueDownload("./tiles/dirt.png");
-AM.queueDownload("./tiles/grass.png");
+AM.queueDownload("./tiles/grass/grass.png");
 AM.queueDownload("./tiles/base.png")
 AM.queueDownload("./tiles/mineral.png");
 
