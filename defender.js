@@ -11,7 +11,9 @@ var marine = {
     scale: 1,
     range: 100,
     cooldown: 0.1,
-    damage: 5
+    damage: 5,
+    targetGround: true,
+    targetFlying: true,
 };
 var battlecruiser = {
     name: "battlecruiser",
@@ -24,7 +26,9 @@ var battlecruiser = {
     scale: .5,
     range: 100,
     cooldown: 0.5,
-    damage: 20
+    damage: 20,
+    targetGround: true,
+    targetFlying: false,
 };
 var ghost = {
     name: "ghost",
@@ -37,7 +41,25 @@ var ghost = {
     scale: 1,
     range: 100,
     cooldown: 0.5,
-    damage: 20
+    damage: 20,
+    targetGround: true,
+    targetFlying: false,
+};
+
+var antiair = {
+    name: "antiair",
+    frameWidth: 40,
+    frameHeight: 36,
+    sheetWidth: 32,
+    frameDuration: 0.1,
+    frames: 32,
+    loop: true,
+    scale: 1,
+    range: 150,
+    cooldown: 0.5,
+    damage: 50,
+    targetGround: false,
+    targetFlying: true,
 };
 
 function Defender(game, unitName, row, col, map, assetManager) {

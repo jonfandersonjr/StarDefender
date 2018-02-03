@@ -4,7 +4,7 @@ var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "dea
 
 //load defender sprites
 var defenderAction = ["stand", "shoot", "projectile"]
-var defenderList = ["marine", "battlecruiser", "ghost"];
+var defenderList = ["marine", "battlecruiser", "ghost", "antiair"];
 for (let i = 0; i < defenderList.length; i++) {
     for (let j = 0; j < defenderAction.length; j++) {
         AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}_${defenderAction[j]}.png`);
@@ -12,7 +12,7 @@ for (let i = 0; i < defenderList.length; i++) {
 }
 
 //load enemy sprites
-var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler"];
+var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "sarahkerrigan"];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
@@ -23,6 +23,7 @@ for (let i = 0; i < unitList.length; i++) {
 AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass.png");
 AM.queueDownload("./tiles/base.png")
+AM.queueDownload("./tiles/mineral.png");
 
 AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
