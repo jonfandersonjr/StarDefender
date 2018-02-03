@@ -12,7 +12,7 @@ var hydralisk = {name : "hydralisk", frameWidth : 42, frameHeight : 55, sheetWid
 var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.6, speed : 30, health : 100, 
                 deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
 
-function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) {
+function GroundUnit(game, unitName, direction, map, assetManager, speedSetting, theSpeedBuff, theHealthBuff) {
     this.AM = assetManager;
     this.speedSetting = speedSetting;
     //Switch case for units.
@@ -53,7 +53,11 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting) 
     this.trueY = this.y + (this.unit.frameHeight / 2);
     
     //**testing purposes**
-    this.speed = this.speed * 2;
+    this.speed *= 2;
+
+    //perform statbuffs depending on wave
+    this.speed *= theSpeedBuff;
+    this.health *= theHealthBuff;
 
     Entity.call(this, game, this.x, this.y);
 }

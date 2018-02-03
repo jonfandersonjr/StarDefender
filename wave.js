@@ -1,9 +1,9 @@
-var mutaliskWave = {name : "mutalisk", delay : .5 };
-var queenWave = {name : "queen", delay : 1 };
-var zerglingWave = {name : "zergling", delay : .25 };
-var ultraliskWave = {name : "ultralisk", delay : 1 };
-var hydraliskWave = {name : "hydralisk", delay : .7 };
-var defilerWave = {name : "defiler", delay : .75 };
+var mutaliskWave = {name : "mutalisk", delay : .5 , speedBuff: 1, healthBuff : 1};
+var queenWave = { name: "queen", delay: 1, speedBuff: 1, healthBuff: 1};
+var zerglingWave = { name: "zergling", delay: .25, speedBuff: 1, healthBuff: 1};
+var ultraliskWave = { name: "ultralisk", delay: 1, speedBuff: 1, healthBuff: 1};
+var hydraliskWave = { name: "hydralisk", delay: .7, speedBuff: 1, healthBuff: 1};
+var defilerWave = { name: "defiler", delay: .75, speedBuff: 1, healthBuff: 1};
 
 function Wave(generator, game) {
     this.generator = generator;
@@ -17,7 +17,7 @@ Wave.prototype.constructor = Wave;
 Wave.prototype.drawWave = function () {
 
     if (this.delay <= 0) {
-        this.generator.createEnemy(this.unit.name);
+        this.generator.createEnemy(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
         console.log(this.unit.name + " spawned");
         this.delay = this.unit.delay;
         this.unitAmount--;
@@ -34,7 +34,7 @@ Wave.prototype.update = function () {
     }
 }
 
-Wave.prototype.setWave = function (unitName, unitAmount) {
+Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealthBuff) {
     switch (unitName) {
         case "mutalisk":
             this.unit = mutaliskWave;
@@ -58,10 +58,12 @@ Wave.prototype.setWave = function (unitName, unitAmount) {
             console.log("Illegal input");
     }
 
-    console.log("set a wave of " + this.unit.name);
+    this.unit.speedBuff = theSpeedBuff;
+    this.unit.healthBuff = theHealthBuff;
     this.delay = this.unit.delay;
     this.unitAmount = unitAmount;
 
+    console.log("set a wave of " + this.unit.name);
 }
 
 Wave.prototype.setLevel = function (theLevel) {

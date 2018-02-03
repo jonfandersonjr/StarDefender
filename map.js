@@ -1,4 +1,4 @@
-var tileSize = 31;
+var tileSize = 40;
 
 function Map(map) {
     this.map = map;
