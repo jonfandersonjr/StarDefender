@@ -7,11 +7,11 @@ function Generator(engine, map, assetManager) {
 
 //Creates enemy of specified type at beginning of given map
 Generator.prototype.createEnemyFirstEntry = function(enemyName, speedBuff, healthBuff) {
-    this.gameEngine.addUnit(new GroundUnit(this.gameEngine, enemyName, this.map.firstEntry, this.map, this.AM, 1, speedBuff, healthBuff));
+    this.gameEngine.addUnit(new GroundUnit(this.gameEngine, enemyName, this.map.firstEntry, this.map, this.AM, speedBuff, healthBuff));
 }
 
 Generator.prototype.createEnemySecondEntry = function (enemyName, speedBuff, healthBuff) {
-    this.gameEngine.addUnit(new GroundUnit(this.gameEngine, enemyName, this.map.secondEntry, this.map, this.AM, 1, speedBuff, healthBuff));
+    this.gameEngine.addUnit(new GroundUnit(this.gameEngine, enemyName, this.map.secondEntry, this.map, this.AM, speedBuff, healthBuff));
 }
 
 //Creates defender of given type at a location specified by the mouse

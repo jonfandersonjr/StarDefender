@@ -9,7 +9,7 @@ function Map(map) {
 
     if (this.map === map_5) {
         this.firstEntry = { column: 0, row: 1 };
-        this.secondEntry = { column: 0, row: 6 };
+        this.secondEntry = { column: 5, row: 0 };
     }
 
     if (this.map === map_4) {
