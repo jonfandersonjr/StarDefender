@@ -17,7 +17,15 @@ Wave.prototype.constructor = Wave;
 Wave.prototype.drawWave = function () {
 
     if (this.delay <= 0) {
-        this.generator.createEnemy(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+        if (this.entranceNum === 1) {
+            this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+        } else if (this.entranceNum === 2) {
+            this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+        } else {
+            this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+        }
+
         console.log(this.unit.name + " spawned");
         this.delay = this.unit.delay;
         this.unitAmount--;
@@ -34,7 +42,7 @@ Wave.prototype.update = function () {
     }
 }
 
-Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealthBuff) {
+Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealthBuff, theEntranceNum) {
     switch (unitName) {
         case "mutalisk":
             this.unit = mutaliskWave;
@@ -56,8 +64,10 @@ Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealth
             break;
         default:
             console.log("Illegal input");
+            break;
     }
 
+    this.entranceNum = theEntranceNum;
     this.unit.speedBuff = theSpeedBuff;
     this.unit.healthBuff = theHealthBuff;
     this.delay = this.unit.delay;

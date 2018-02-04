@@ -1,22 +1,22 @@
 var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 100, direction : "west", gatherTime: 3 };
 
-function SCV(game, map, assetManager) {
+function SCV(game, map, assetManager, theUI) {
     this.AM = assetManager;
     this.map = map;
     this.game = game;
+    this.UI = theUI;
     this.unit = scv;
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.unit.direction}.png`),
+    this.direction = this.unit.direction;
+    this.name = this.unit.name;
+
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
 
-    this.x = this.map.baseX + this.map.tileSize;
+    this.x = this.map.baseX - 1;
     this.y = this.map.baseY + (this.map.tileSize * 2);
 
-    this.isAtBase = false;
-    this.isAtMineral = false;
-
     this.speed = this.unit.speed;
-    this.direction = this.unit.direction;
 
     this.gatherTime = this.unit.gatherTime;
 
@@ -30,6 +30,7 @@ SCV.prototype.update = function () {
 
     if (this.atBase()) {
         this.changeDirection("west");
+        this.UI.resourceAdjust(50);
         //add minerals to resources
         this.moveWest();
     } else if (this.atMineral()) {
@@ -54,9 +55,9 @@ SCV.prototype.atMineral = function () {
 
 SCV.prototype.getMinerals = function () {
 
+    this.gatherTime -= this.game.clockTick;
     if (this.gatherTime >= 0) {
-        this.gatherTime -= this.game.clockTick;
-        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}_mine.png`);
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.name}/${this.name}_mine.png`);
     } else {
         this.gatherTime = 3;
         this.changeDirection("east");
@@ -74,7 +75,8 @@ SCV.prototype.moveWest = function () {
 
 SCV.prototype.changeDirection = function (direction) {
     this.direction = direction;
-    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`);
+    temp1 = `./img/${this.name}/${this.name}_${this.direction}.png`;
+    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.name}/${this.name}_${this.direction}.png`);
 }
 
 SCV.prototype.draw = function () {

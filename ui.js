@@ -3,82 +3,57 @@ Constructor
 buttonCanvas - canvas that has defence structure uiButtons
 textCanvas - textArea that holds this
 */
+var images = [
+    "./img/marine/marine_portrait.png",
+    "./img/scv/scv_portrait.png",
+    "./img/ghost/ghost_portrait.png",
+    "./img/battlecruiser/battlecruiser_portrait.png",
+    "./img/antiair/antiair_portrait.png"
+];
+
 function UI(mouse, startHealth, maxHealth,
     startRes, startLevel, wavesCleared, enemiesK) {
     this.canvas = document.getElementById("uiButtons");
     this.ctx = this.canvas.getContext("2d");
-
     //Text box - prevents highlighting
     this.textBox = document.getElementById("uiText");
     makeUnselectable(this.textBox);
     this.mouse = mouse;
-    this.textBox.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-    }, false);
+
+    //Music
+    var audio = new Audio(),
+        i = 0;
+    var playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3');
+    audio.addEventListener('ended', function() {
+        i = ++i < playlist.length ? i : 0;
+        console.log(i)
+        audio.src = playlist[i];
+        audio.play();
+    }, true);
+    audio.volume = 0.3;
+    audio.loop = false;
+    audio.src = playlist[0];
+    audio.play();
+
 
     //Game info text panel
     generateGameInfo();
-
-    /*//Load UI Image on image canvas
-  var imageObj = new Image();
-  imageObj.src = './img/ui/defenseUIButtons.png';
-	imageObj.onload = function () {
-		ctx.drawImage(imageObj, 0, 0);
-	};
-  console.log("UI Image Loaded!");*/
-
-    //Button generator array
-    const buttons = [{
-            x: 0,
-            y: 150,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,0,0)',
-            id: 'marine'
-        },
-        {
-            x: 140,
-            y: 150,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,150,0)',
-            id: 'battlecruiser'
-        },
-        {
-            x: 0,
-            y: 270,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,200,0)',
-            id: 'ghost'
-        },
-        {
-            x: 140,
-            y: 270,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,250,0)',
-            id: 'antiair'
+    drawImages(this.ctx);
+    this.canvas.addEventListener("click", function(e) {
+        var mousePos = getMousePos(document.getElementById("uiButtons"), e);
+        console.log(mousePos);
+        if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
+            mouse.selectDefender("marine");
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
+            mouse.selectDefender("ghost");
+        } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
+            mouse.selectDefender("battlecruiser");
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 110 && mousePos.y <= 210) {
+            mouse.selectDefender("antiair");
+        } else if (mousePos.x >= 58 && mousePos.x <= 162 && mousePos.y >= 210 && mousePos.y <= 320) {
+            mouse.selectDefender("scv");
         }
-    ];
-
-    //Draw buttons
-    buttons.forEach(button => {
-        this.ctx.beginPath();
-        this.ctx.rect(button.x, button.y, button.width, button.height);
-        this.ctx.fillStyle = button.color;
-        this.ctx.fill();
-    });
-
-    //Returns true if mouse pointer is on button
-    function isIntersect(mp, button) {
-        if (mp.x >= button.x && mp.x <= button.x + button.width &&
-            mp.y >= button.y && mp.y <= button.y + button.height) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+    }, false);
 
     //gets relative mouse position based on canvas
     function getMousePos(canvas, e) {
@@ -89,16 +64,43 @@ function UI(mouse, startHealth, maxHealth,
         };
     }
 
-    //Add mouse click listener which gets mouse point and compares to each button area
-    this.canvas.addEventListener('click', (e) => {
-        var mousePos = getMousePos(this.canvas, e);
-        buttons.forEach(theButton => {
-            if (isIntersect(mousePos, theButton)) {
-                mouse.selectDefender(theButton.id);
-            }
-        });
-    });
+    //Draws button images
+    function drawImages(ctx) {
+        //Marine
+        var marine_img = new Image();
+        marine_img.onload = function() {
+            ctx.drawImage(marine_img, 0, 0);
+        }
+        marine_img.src = images[0];
 
+        //Ghost
+        var ghost_img = new Image();
+        ghost_img.onload = function() {
+            ctx.drawImage(ghost_img, 110, 0);
+        }
+        ghost_img.src = images[2];
+
+        //Battlecruiser
+        var battle_img = new Image();
+        battle_img.onload = function() {
+            ctx.drawImage(battle_img, 0, 110);
+        }
+        battle_img.src = images[3];
+
+        //AntiAir
+        var antiair_img = new Image();
+        antiair_img.onload = function() {
+            ctx.drawImage(antiair_img, 110, 110);
+        }
+        antiair_img.src = images[4];
+
+        //SCV
+        var scv_img = new Image();
+        scv_img.onload = function() {
+            ctx.drawImage(scv_img, 60, 220);
+        }
+        scv_img.src = images[1];
+    };
 
     //init values
     this.inithealthCur = startHealth;

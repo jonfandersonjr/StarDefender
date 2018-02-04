@@ -22,15 +22,17 @@ for (let i = 0; i < unitList.length; i++) {
 //load scv sprites
 AM.queueDownload("./img/scv/scv_east.png");
 AM.queueDownload("./img/scv/scv_west.png");
-AM.queueDownload("./img/scv/scv_west_mine.png");
+AM.queueDownload("./img/scv/scv_mine.png");
 
+//load tiles
 for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
     AM.queueDownload(`./tiles/grass/grass_bot${i}.png`);
+    AM.queueDownload(`./tiles/blue/blue_top${i}.png`);
+    AM.queueDownload(`./tiles/blue/blue_bot${i}.png`);
+    AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
 }
 
-//load tiles
-AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass/grass.png");
 AM.queueDownload("./tiles/base.png")
 AM.queueDownload("./tiles/mineral.png");
@@ -38,7 +40,7 @@ AM.queueDownload("./tiles/mineral.png");
 AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-    var map = new Map(map_4);
+    var map = new Map(testMovementMap);
     var myMouse = new Mouse(map, ctx);
 
     //UI Load
@@ -52,7 +54,7 @@ AM.downloadAll(function() {
     myMouse.init(gameEngine);
 
     //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
-    this.generator = new Generator(gameEngine, map, AM);
+    this.generator = new Generator(gameEngine, map, AM, ui);
     myMouse.setGenerator(this.generator);
 
 

@@ -2,32 +2,17 @@
 <html>
 
 <head>
-    <link rel="icon" type="image/png" href="./misc/favicon.png">
-    <link rel="stylesheet" type="text/css" href="./css/main.css">
-    <meta charset="utf-8">
     <title>Star Defender</title>
-    <script type="text/javascript" src="./gameengine.js"></script>
-    <script type="text/javascript" src="./assetmanager.js"></script>
-    <script type="text/javascript" src="./main.js"></script>
-    <script type="text/javascript" src="./ui.js"></script>
-    <script type="text/javascript" src="./map.js"></script>
-    <script type="text/javascript" src="./groundunit.js"></script>
-    <script type="text/javascript" src="./animation.js"></script>
-    <script type="text/javascript" src="./defender.js"></script>
-    <script type="text/javascript" src="./mouse.js"></script>
-    <script type="text/javascript" src="./generator.js"></script>
-    <script type="text/javascript" src="./projectile.js"></script>
-	<script type="text/javascript" src="./wave.js"></script>
-	<script type="text/javascript" src="./level.js"></script>
-	<script type="text/javascript" src="./scv.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/intro.css">
 </head>
 
-<body unselectable="on">
-<textarea id="gameInfo" readonly=true height="770" width="300"></textarea>
-<canvas id="gameWorld" tabindex="1" width="770" height="770"></canvas>
-<canvas id="gameWorld2" tabindex="1" width="770" height="770"></canvas>
-<textarea id="uiText" readonly=true height="385" width="300"></textarea>
-<canvas id="uiButtons" width="300" height="385" style="background: transparent"></canvas>
+<body>
+    <video autoplay muted loop id="introVideo">
+        <source src="./video/menu.mp4" type="video/mp4">
+        </video>
+    <img src="./img/menu/menu.png" id="menuImage"></img>
+    <canvas id="game" width="1024" height="768"></canvas>
+    <script type="text/javascript" src="./intro.js"></script>
 </body>
 
 </html>
