@@ -45,7 +45,7 @@ SCV.prototype.update = function () {
 }
 
 SCV.prototype.atBase = function () {
-    return this.x >= (this.map.baseX + (this.map.tileSize / 2));
+    return this.x >= this.map.baseX;
 }
 
 SCV.prototype.atMineral = function () {
