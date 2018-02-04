@@ -23,7 +23,7 @@ function Mouse(map, ctx) {
     this.attachListeners();
     this.isBusy = false;
     this.canAddLevel = true;
-    
+
     //Layer 2 canvas for drawing mouse move
     this.canvas2 = document.getElementById("gameWorld2");
     this.ctx2 = this.canvas2.getContext("2d");
@@ -45,12 +45,12 @@ Mouse.prototype.setMap = function(gameMap) {
 }
 
 //Setter for cleanliness, handles if mouse can choose a new level.
-Mouse.prototype.levelCompleted = function () {
+Mouse.prototype.levelCompleted = function() {
     this.canAddLevel = true;
 }
 
 //Sets up game engine to start level_levelNum
-Mouse.prototype.createLevel = function (levelNum) {
+Mouse.prototype.createLevel = function(levelNum) {
     this.gameEngine.addNewLevel = true;
     this.gameEngine.levelNum = levelNum;
     this.canAddLevel = false;
@@ -78,18 +78,18 @@ Mouse.prototype.dropTower = function(e) {
             this.tileBox.isBusy = this.isBusy;
             //Update Resources in UI
             switch (this.defenderName) {
-            case "marine":
-                that.ui.resourceAdjust(that.resources.marine);
-                break;
-            case "ghost":
-                that.ui.resourceAdjust(that.resources.ghost);
-                break;
-            case "battlecruiser":
-                that.ui.resourceAdjust(that.resources.battlecruiser);
-                break;
+                case "marine":
+                    that.ui.resourceAdjust(that.resources.marine);
+                    break;
+                case "ghost":
+                    that.ui.resourceAdjust(that.resources.ghost);
+                    break;
+                case "battlecruiser":
+                    that.ui.resourceAdjust(that.resources.battlecruiser);
+                    break;
             }
         }
-        
+
         //Draw radius of fire - NOT WORKING
         that.ctx.beginPath();
         console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
@@ -131,7 +131,7 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
     }, false);
 
-    this.canvas.addEventListener("keypress", function (e) {
+    this.canvas.addEventListener("keypress", function(e) {
         e.preventDefault();
         if (e.code === "Space") {
             console.log("pressed space");
@@ -143,7 +143,7 @@ Mouse.prototype.attachListeners = function() {
 
 
 
-    this.canvas.addEventListener("mousewheel", function (e) {
+    this.canvas.addEventListener("mousewheel", function(e) {
         e.preventDefault();
         if (that.canAddLevel) {
             //creates level_2
@@ -165,7 +165,7 @@ Mouse.prototype.attachListeners = function() {
     }, false);
         */
 
-    this.canvas.addEventListener("contextmenu", function (e) {
+    this.canvas.addEventListener("contextmenu", function(e) {
         e.preventDefault();
         console.log("right clicked");
     }, false);
@@ -183,14 +183,14 @@ Mouse.prototype.attachListeners = function() {
 }
 
 function isValid(map, row, col) {
-    if(map.map[row][col] === '+') {
+    if (map.map[row][col] === '+') {
         return true;
     } else {
         return false;
     }
 }
 
-function TileBox (gameEngine, canvas, ctx, map, isBusy) {
+function TileBox(gameEngine, canvas, ctx, map, isBusy) {
     this.gameEngine = gameEngine;
     this.canvas = canvas;
     this.ctx = ctx;
@@ -198,33 +198,36 @@ function TileBox (gameEngine, canvas, ctx, map, isBusy) {
     this.isBusy = isBusy;
 }
 
-TileBox.prototype.update = function () {
-    if (this.e != null){
+TileBox.prototype.update = function() {
+    if (this.e != null) {
         this.mouseLoc = getMousePos(this.canvas, this.e);
         this.tileLoc = getTile(this.mouseLoc, this.map);
-        this.x =  this.tileLoc.col * this.map.tileSize;
-        this.y =  this.tileLoc.row * this.map.tileSize;
+        this.x = this.tileLoc.col * this.map.tileSize;
+        this.y = this.tileLoc.row * this.map.tileSize;
     }
 }
 
-TileBox.prototype.draw = function () {
-    if(this.mouseLoc != null && this.mouseLoc.x > 0
-        && this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row
-        && this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col
-        && this.isBusy){
-        if (isValid(this.map, this.tileLoc.row, this.tileLoc.col)){
+TileBox.prototype.draw = function() {
+    if (this.mouseLoc != null && this.mouseLoc.x > 0 &&
+        this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row &&
+        this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col &&
+        this.isBusy) {
+        if (isValid(this.map, this.tileLoc.row, this.tileLoc.col)) {
             this.ctx.strokeStyle = 'rgb(0, 255, 38)';
         } else {
             this.ctx.strokeStyle = 'rgb(255, 0, 12)';
         }
-        
+
         this.ctx.strokeRect(this.x, this.y, this.map.tileSize, this.map.tileSize);
     }
 }
 
 function getTile(mouseLoc, map) {
-    return {col: Math.floor(mouseLoc.x / map.tileSize), row: Math.floor(mouseLoc.y / map.tileSize)}
-} 
+    return {
+        col: Math.floor(mouseLoc.x / map.tileSize),
+        row: Math.floor(mouseLoc.y / map.tileSize)
+    }
+}
 /* Attach UI for calling updates*/
 Mouse.prototype.attachUI = function(ui) {
     this.ui = ui;

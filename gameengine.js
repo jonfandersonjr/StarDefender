@@ -72,14 +72,14 @@ GameEngine.prototype.draw = function() {
     this.ctx.save();
 
     //If level is running, draw the waves.
-    if (this.addNewLevel) {
-        this.wave.drawWave();
-    }
-
     for (let i = 0; i < this.tileEntities.length; i++) {
         this.tileEntities[i].draw(this.ctx);
     }
-
+    
+    if (this.addNewLevel) {
+        this.wave.drawWave();
+    }
+    
     for (let i = 0; i < this.unitEntities.length; i++) {
         this.unitEntities[i].draw(this.ctx);
     }
@@ -91,12 +91,13 @@ GameEngine.prototype.draw = function() {
     for (let i = 0; i < this.scvEntities.length; i++) {
         this.scvEntities[i].draw(this.ctx);
     }
-
+    
+    this.tileBox.draw();
+    
     for (let i = 0; i < this.projectileEntities.length; i++) {
         this.projectileEntities[i].draw(this.ctx);
     }
     
-    this.tileBox.draw();
     this.ctx.restore();
 }
 

@@ -42,8 +42,13 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
 
     this.isAir = this.unit.isAir;
     this.entrance = entrance;
-    this.direction = findDirection(map, entrance.row, entrance.column);
     this.map = map;
+
+    if (this.isAir) {
+        this.direction = this.map.airDirection;
+    } else {
+        this.direction = findDirection(map, entrance.row, entrance.column);
+    }
 
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
@@ -52,9 +57,13 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = entrance.column * this.map.tileSize;
     this.y = entrance.row * this.map.tileSize;
+    if(this.unit.name === 'mutalisk'){
+        console.log('x ' + this.x + ' y ' + this.y);
+    }
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
+    this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
     this.maxHealth = this.unit.health * theHealthBuff;
     this.currentHealth = this.maxHealth;
@@ -169,8 +178,8 @@ GroundUnit.prototype.flyingMovement = function () {
     let y = this.entrance.row * this.map.tileSize;
     let x = this.entrance.column * this.map.tileSize;
     let slope = (this.map.baseY - y) / (this.map.baseX - x);
-    this.x = this.x + this.game.clockTick * this.speed; //Next position
-    this.y = (slope * this.x) + y;
+    this.x += this.game.clockTick * this.speed; //Next position
+    this.y += this.game.clockTick * this.speed * slope;
     this.getTrueCordinates();
 }
 
@@ -225,22 +234,5 @@ function findDirection(map, row, col) {
             console.log(c);
             console.log("You're going down!");
             break;
-    }
-}
-
-//Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.
-function newDirection(map, x, y, currentDirection) {
-    if (currentDirection === "east" || currentDirection === "west") {
-        if (map.map[y - 1][x] === '-') {
-            return 'north';
-        } else {
-            return 'south';
-        }
-    } else {
-        if (map.map[y][x - 1] === '-') {
-            return 'west';
-        } else {
-            return 'east';
-        }
     }
 }
