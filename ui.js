@@ -3,82 +3,29 @@ Constructor
 buttonCanvas - canvas that has defence structure uiButtons
 textCanvas - textArea that holds this
 */
+var images = [
+    "./img/marine/marine_portrait.png",
+    "./img/scv/scv_portrait.png",
+    "./img/ghost/ghost_portrait.png",
+    "./img/battlecruiser/battlecruiser_portrait.png",
+    "./img/antiair/antiair_portrait.png"
+];
+
 function UI(mouse, startHealth, maxHealth,
     startRes, startLevel, wavesCleared, enemiesK) {
     this.canvas = document.getElementById("uiButtons");
     this.ctx = this.canvas.getContext("2d");
-
     //Text box - prevents highlighting
     this.textBox = document.getElementById("uiText");
     makeUnselectable(this.textBox);
     this.mouse = mouse;
-    this.textBox.addEventListener('mousedown', function(e) {
-        e.preventDefault();
-    }, false);
+    //this.textBox.addEventListener('mousedown', function(e) {
+    //    e.preventDefault();
+    //}, false);
 
     //Game info text panel
     generateGameInfo();
-
-    /*//Load UI Image on image canvas
-  var imageObj = new Image();
-  imageObj.src = './img/ui/defenseUIButtons.png';
-	imageObj.onload = function () {
-		ctx.drawImage(imageObj, 0, 0);
-	};
-  console.log("UI Image Loaded!");*/
-
-    //Button generator array
-    const buttons = [{
-            x: 0,
-            y: 150,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,0,0)',
-            id: 'marine'
-        },
-        {
-            x: 140,
-            y: 150,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,150,0)',
-            id: 'battlecruiser'
-        },
-        {
-            x: 0,
-            y: 270,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,200,0)',
-            id: 'ghost'
-        },
-        {
-            x: 140,
-            y: 270,
-            width: 100,
-            height: 100,
-            color: 'rgb(255,250,0)',
-            id: 'antiair'
-        }
-    ];
-
-    //Draw buttons
-    buttons.forEach(button => {
-        this.ctx.beginPath();
-        this.ctx.rect(button.x, button.y, button.width, button.height);
-        this.ctx.fillStyle = button.color;
-        this.ctx.fill();
-    });
-
-    //Returns true if mouse pointer is on button
-    function isIntersect(mp, button) {
-        if (mp.x >= button.x && mp.x <= button.x + button.width &&
-            mp.y >= button.y && mp.y <= button.y + button.height) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+    drawImages(this.ctx, this.mouse);
 
     //gets relative mouse position based on canvas
     function getMousePos(canvas, e) {
@@ -89,16 +36,63 @@ function UI(mouse, startHealth, maxHealth,
         };
     }
 
-    //Add mouse click listener which gets mouse point and compares to each button area
-    this.canvas.addEventListener('click', (e) => {
-        var mousePos = getMousePos(this.canvas, e);
-        buttons.forEach(theButton => {
-            if (isIntersect(mousePos, theButton)) {
-                mouse.selectDefender(theButton.id);
-            }
-        });
-    });
+    //Draws button images
+    function drawImages(ctx, mouse) {
+        //Marine
+        var marine_img = new Image();
+        marine_img.onload = function() {
+            ctx.drawImage(marine_img, 0, 0);
+        }
+        marine_img.addEventListener("click", function() {
+            mouse.selectDefender('marine');
+        }, false);
+        marine_img.id = 'marine';
+        marine_img.src = images[0];
 
+        //Ghost
+        var ghost_img = new Image();
+        ghost_img.onload = function() {
+            ctx.drawImage(ghost_img, 110, 0);
+        }
+        ghost_img.addEventListener("click", function() {
+            mouse.selectDefender('ghost');
+        }, false);
+        ghost_img.id = 'ghost';
+        ghost_img.src = images[2];
+
+        //Battlecruiser
+        var battle_img = new Image();
+        battle_img.onload = function() {
+            ctx.drawImage(battle_img, 0, 110);
+        }
+        battle_img.addEventListener("click", function() {
+            mouse.selectDefender('battlecruiser');
+        }, false);
+        battle_img.id = 'battlecruiser';
+        battle_img.src = images[3];
+
+        //AntiAir
+        var antiair_img = new Image();
+        antiair_img.onload = function() {
+            ctx.drawImage(antiair_img, 110, 110);
+        }
+        antiair_img.addEventListener("click", function() {
+            mouse.selectDefender('antiair');
+        }, false);
+        antiair_img.id = 'antiair';
+        antiair_img.src = images[4];
+
+        //SCV
+        var scv_img = new Image();
+        scv_img.onload = function() {
+            ctx.drawImage(scv_img, 60, 220);
+        }
+        scv_img.addEventListener("click", function() {
+            mouse.selectDefender('scv');
+        }, false);
+        scv_img.id = 'scv';
+        scv_img.src = images[1];
+    };
 
     //init values
     this.inithealthCur = startHealth;
