@@ -1,20 +1,25 @@
-var scv = { name: "scv", frameWidth: 64, frameHeight: 72, sheetWidth: 5, frameDuration: 0.1, frames: 5, loop: true, scale: 0.5, speed: 50}
+var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 50, direction : "west", gatherTime: 3 };
 
-function SCV(game, direction, map, assetManager, speedSetting) {
+function SCV(game, map, assetManager) {
     this.AM = assetManager;
-    this.speedSetting = speedSetting;
-    this.unit = scv;
     this.map = map;
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction}.png`),
+    this.game = game;
+    this.unit = scv;
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.unit.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
-    this.speed = this.unit.speed * this.speedSetting;
     this.ctx = game.ctx;
-    this.direction = direction;
-    //this.x = this.map.corIni.x * this.map.tileSize;
-    //this.y = this.map.corIni.y * this.map.tileSize;
+
+    this.x = this.map.baseX + this.map.tileSize;
+    this.y = this.map.baseY + (this.map.tileSize * 2);
+
+    //this.x = this.map.baseX;
+    //this.y = this.map.baseY;
+
+    this.isAtBase = false;
+    this.isAtMineral = false;
 
     //**testing purposes**
-    this.speed *= 2;
+    this.unit.speed *= 2;
 
     Entity.call(this, game, this.x, this.y);
 }
@@ -23,37 +28,79 @@ SCV.prototype = new Entity();
 SCV.prototype.constructor = SCV;
 
 SCV.prototype.update = function () {
-    if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
-        this.atBase();
-    } else if (this.x <= (this.map.mineralX + this.map.tileSize) && this.y <= this.map.mineralY) {
-        this.atMineral();
-    } 
+
+    if (this.atBase()) {
+        console.log("this scv is at base");
+        this.changeDirection("west");
+        //add minerals to resources
+        this.moveWest();
+    } else if (this.atMineral()) {
+        console.log("this scv is at minerals");
+        this.getMinerals();
+    } else {
+        if (this.unit.direction === "east") {
+            console.log("Should be going east");
+            this.moveEast();
+        } else if (this.unit.direction === "west") {
+            console.log("Should be going west");
+            this.moveWest();
+        }
+    }
     Entity.prototype.update.call(this);
 }
 
-SCV.prototype.draw = function () {
-    if (!this.isDead) {
-        this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.health, this.unit.health);
-    } else {
-        this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
-    }
-    Entity.prototype.draw.call(this);
-}
-
-SCV.prototype.changeDirection = function (direction) {
-    this.direction = direction;
-    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`);
-}
-
-
 SCV.prototype.atBase = function () {
-    this.toMineral();
+
+    if (this.x >= (this.map.baseX + this.map.tileSize)) {
+        this.isAtBase = true;
+    } else {
+        this.isAtBase = false;
+    }
+    return this.isAtBase;
 }
 
 SCV.prototype.atMineral = function () {
-    //wait a few seconds to gather minerals
-    //update sprite to mining animation
-    this.toBase();
+
+    if (this.x <= (this.map.mineralX + (2* this.map.tileSize))) {
+        this.isAtMineral = true;
+    } else {
+        this.isAtMineral = false;
+    }
+    return this.isAtMineral;
 }
+
+SCV.prototype.getMinerals = function () {
+
+    if (this.unit.gatherTime >= 0) {
+        this.unit.gatherTime -= this.game.clockTick;
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.unit.direction}_mine.png`);
+    } else {
+        this.unit.gatherTime = 3;
+        this.changeDirection("east");
+        this.moveEast();
+        //this.x = this.x + 5 + this.game.clockTick * this.unit.speed; //progresses unit east
+    }
+}
+
+SCV.prototype.moveEast = function () {
+    this.x = this.x + this.game.clockTick * this.unit.speed; //progresses unit east
+}
+
+SCV.prototype.moveWest = function () {
+    this.x = this.x - this.game.clockTick * this.unit.speed; //progresses unit west
+}
+
+SCV.prototype.changeDirection = function (direction) {
+    this.unit.direction = direction;
+    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.unit.direction}.png`);
+}
+
+SCV.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
+
+
 
 

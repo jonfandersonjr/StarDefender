@@ -14,3 +14,8 @@ Generator.prototype.createEnemy = function(enemyName, speedBuff, healthBuff) {
 Generator.prototype.createDefender = function(defenderName, x, y) {
     this.gameEngine.addDefender(new Defender(this.gameEngine, defenderName, x, y, this.map, this.AM));
 }
+
+//Creates an SCV at the base location.
+Generator.prototype.createSCV = function () {
+    this.gameEngine.addSCV(new SCV(this.gameEngine, this.map, this.AM));
+}

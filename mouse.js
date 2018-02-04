@@ -159,16 +159,17 @@ Mouse.prototype.attachListeners = function() {
     this.canvas.addEventListener("keyup", function(e) {
 
     }, false);
-
+    */
     this.canvas.addEventListener("keypress", function(e) {
-        if (e.code === "KeyD") that.d = true;
-        that.chars[e.code] = true;
-        console.log(e);
-        console.log("Key Pressed Event - Char " + e.charCode + " Code " + e.keyCode);
+        if (e.code === "KeyS") {
+            console.log("pressed s for scv");
+            that.d = true;
+            that.generator.createSCV();
+        }
     }, false);
 
     // Optional events
-*/
+
 }
 
 function isValid(map, row, col) {

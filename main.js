@@ -19,6 +19,11 @@ for (let i = 0; i < unitList.length; i++) {
     }
 }
 
+//load scv sprites
+AM.queueDownload("./img/scv/scv_east.png");
+AM.queueDownload("./img/scv/scv_west.png");
+AM.queueDownload("./img/scv/scv_west_mine.png");
+
 //load tiles
 AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass/grass.png");

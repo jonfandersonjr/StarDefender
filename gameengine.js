@@ -15,6 +15,7 @@ function GameEngine(mouse, ui) {
     this.tileEntities = [];
     this.unitEntities = [];
     this.defenderEntities = [];
+    this.scvEntities = [];
     this.projectileEntities = [];
     this.ctx = null;
     this.surfaceWidth = null;
@@ -58,6 +59,10 @@ GameEngine.prototype.addDefender = function(defenderEntity) {
     this.defenderEntities.push(defenderEntity);
 }
 
+GameEngine.prototype.addSCV = function (scvEntity) {
+    this.scvEntities.push(scvEntity);
+}
+
 GameEngine.prototype.addProjectile = function(projectileEntity) {
     this.projectileEntities.push(projectileEntity);
 }
@@ -83,36 +88,34 @@ GameEngine.prototype.draw = function() {
         this.defenderEntities[i].draw(this.ctx);
     }
 
+    for (let i = 0; i < this.scvEntities.length; i++) {
+        this.scvEntities[i].draw(this.ctx);
+    }
+
     for (let i = 0; i < this.projectileEntities.length; i++) {
         this.projectileEntities[i].draw(this.ctx);
     }
     
     this.tileBox.draw();
-
     this.ctx.restore();
 }
 
 GameEngine.prototype.runLevel = function () {
-
     //If starting a level, need to make a level object.
     if (this.isBootingLevel) {
-
         this.level = new Level(this.levelNum, this.wave);
         this.isBootingLevel = false;
-
         console.log("Instantiating level " + this.levelNum);
     }
-
     //Sends waves for this level at specified interval.
+
     this.waveDelay -= this.clockTick;
     this.wave.update();
 
     //Sends next wave for this level
     if (this.waveDelay <= 0) {
-
         this.level.createWave();
         this.waveDelay = 5;
-
         console.log("Sending wave")
     }
 
@@ -159,6 +162,10 @@ GameEngine.prototype.update = function () {
         } else {
             this.defenderEntities.splice(i, 1);
         }
+    }
+
+    for (let i = this.scvEntities.length - 1; i >= 0; --i) {
+        this.scvEntities[i].update();
     }
 
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
