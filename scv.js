@@ -1,4 +1,4 @@
-var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 50, direction : "west", gatherTime: 3 };
+var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 100, direction : "west", gatherTime: 3 };
 
 function SCV(game, map, assetManager) {
     this.AM = assetManager;
@@ -12,14 +12,11 @@ function SCV(game, map, assetManager) {
     this.x = this.map.baseX + this.map.tileSize;
     this.y = this.map.baseY + (this.map.tileSize * 2);
 
-    //this.x = this.map.baseX;
-    //this.y = this.map.baseY;
-
     this.isAtBase = false;
     this.isAtMineral = false;
 
-    //**testing purposes**
-    this.unit.speed *= 2;
+    this.speed = this.unit.speed;
+    this.direction = this.unit.direction;
 
     Entity.call(this, game, this.x, this.y);
 }
@@ -38,11 +35,9 @@ SCV.prototype.update = function () {
         console.log("this scv is at minerals");
         this.getMinerals();
     } else {
-        if (this.unit.direction === "east") {
-            console.log("Should be going east");
+        if (this.direction === "east") {
             this.moveEast();
-        } else if (this.unit.direction === "west") {
-            console.log("Should be going west");
+        } else if (this.direction === "west") {
             this.moveWest();
         }
     }
@@ -51,7 +46,7 @@ SCV.prototype.update = function () {
 
 SCV.prototype.atBase = function () {
 
-    if (this.x >= (this.map.baseX + this.map.tileSize)) {
+    if (this.x >= (this.map.baseX + (this.map.tileSize / 2))) {
         this.isAtBase = true;
     } else {
         this.isAtBase = false;
@@ -73,7 +68,7 @@ SCV.prototype.getMinerals = function () {
 
     if (this.unit.gatherTime >= 0) {
         this.unit.gatherTime -= this.game.clockTick;
-        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.unit.direction}_mine.png`);
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}_mine.png`);
     } else {
         this.unit.gatherTime = 3;
         this.changeDirection("east");
@@ -83,24 +78,20 @@ SCV.prototype.getMinerals = function () {
 }
 
 SCV.prototype.moveEast = function () {
-    this.x = this.x + this.game.clockTick * this.unit.speed; //progresses unit east
+    this.x = this.x + this.game.clockTick * this.speed; //progresses unit east
 }
 
 SCV.prototype.moveWest = function () {
-    this.x = this.x - this.game.clockTick * this.unit.speed; //progresses unit west
+    this.x = this.x - this.game.clockTick * this.speed; //progresses unit west
 }
 
 SCV.prototype.changeDirection = function (direction) {
-    this.unit.direction = direction;
-    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.unit.direction}.png`);
+    this.direction = direction;
+    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`);
 }
 
 SCV.prototype.draw = function () {
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }
-
-
-
-
 
