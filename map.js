@@ -11,6 +11,11 @@ function Map(map) {
         this.firstEntry = { column: 0, row: 1 };
         this.secondEntry = { column: 0, row: 6 };
     }
+
+    if (this.map === map_4) {
+        this.firstEntry = { column: 0, row: 1 };
+        this.secondEntry = { column: 0, row: 6 };
+    }
 }
 
 Map.prototype.constructor = Map;

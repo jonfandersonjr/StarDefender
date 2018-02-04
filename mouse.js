@@ -131,13 +131,17 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
     }, false);
 
-    this.canvas.addEventListener("contextmenu", function (e) {
+    this.canvas.addEventListener("keypress", function (e) {
         e.preventDefault();
-        console.log("right clicked");
-        if (that.canAddLevel) {
-            that.createLevel(1)
+        if (e.code === "(space)") {
+            console.log("pressed space");
+            if (that.canAddLevel) {
+                that.createLevel(1)
+            }
         }
     }, false);
+
+
 
     this.canvas.addEventListener("mousewheel", function (e) {
         e.preventDefault();
@@ -159,6 +163,17 @@ Mouse.prototype.attachListeners = function() {
     this.canvas.addEventListener("keyup", function(e) {
 
     }, false);
+
+    this.canvas.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        console.log("right clicked");
+        if (that.canAddLevel) {
+            that.createLevel(1)
+        }
+    }, false);
+
+
+
     */
     this.canvas.addEventListener("keypress", function(e) {
         if (e.code === "KeyS") {
