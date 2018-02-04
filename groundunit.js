@@ -41,8 +41,12 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     // AIR UNIT
     this.isAir = this.unit.isAir;
     this.entrance = entrance;
-    this.direction = findDirection(map, entrance.row, entrance.column);
     this.map = map;
+    if (this.isAir) {
+        this.direction = this.map.airDirection;
+    } else {
+        this.direction = findDirection(map, entrance.row, entrance.column);
+    }
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
@@ -50,9 +54,13 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = entrance.column * this.map.tileSize;
     this.y = entrance.row * this.map.tileSize;
+    if(this.unit.name === 'mutalisk'){
+        console.log('x ' + this.x + ' y ' + this.y);
+    }
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
+    this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
     this.maxHealth = this.unit.health * theHealthBuff;
     this.currentHealth = this.maxHealth;
@@ -167,8 +175,8 @@ GroundUnit.prototype.flyingMovement = function () {
     let y = this.entrance.row * this.map.tileSize;
     let x = this.entrance.column * this.map.tileSize;
     let slope = (this.map.baseY - y) / (this.map.baseX - x);
-    this.x = this.x + this.game.clockTick * this.speed; //Next position
-    this.y = (slope * this.x) + y;
+    this.x += this.game.clockTick * this.speed; //Next position
+    this.y += this.game.clockTick * this.speed * slope;
     this.getTrueCordinates();
 }
 

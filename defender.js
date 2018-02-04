@@ -24,9 +24,9 @@ var battlecruiser = {
     frames: 32,
     loop: true,
     scale: .5,
-    range: 100,
-    cooldown: 0.5,
-    damage: 20,
+    range: 500,
+    cooldown: 5,
+    damage: 100,
     targetGround: true,
     targetFlying: false,
 };
@@ -125,7 +125,7 @@ Defender.prototype.shoot = function(enemy) {
     if (!this.isBusy) {
         var audio = new Audio("./music/Pew_Pew-DKnight556-1379997159.mp3");
         //audio.play();
-        this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
+        this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff));
         this.isBusy = true;
         this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
