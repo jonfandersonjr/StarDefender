@@ -12,7 +12,7 @@ var hydralisk = {name : "hydralisk", frameWidth : 42, frameHeight : 55, sheetWid
 var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.6, speed : 30, health : 100, isAir : false,
                 deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
 
-function GroundUnit(game, unitName, direction, map, assetManager, speedSetting, theSpeedBuff, theHealthBuff) {
+function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, theSpeedBuff, theHealthBuff) {
     this.AM = assetManager;
     this.speedSetting = speedSetting;
     //Switch case for units.
@@ -39,16 +39,15 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting, 
     }
     // AIR UNIT
     this.air = this.unit.isAir;
-
+    this.direction = findDirection(map, entrance.row, entrance.column);
     this.map = map;
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction}.png`),
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
-    this.direction = direction;
     this.isDead = false;
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
-    this.x = this.map.corIni.x * this.map.tileSize;
-    this.y = this.map.corIni.y * this.map.tileSize;
+    this.x = entrance.column * this.map.tileSize;
+    this.y = entrance.row * this.map.tileSize;
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
@@ -179,6 +178,27 @@ GroundUnit.prototype.getTrueCordinates = function() {
 
 GroundUnit.prototype.returnAir = function() {
     return this.air;
+}
+
+function findDirection(map, row, col) {
+    let c = map[row][col];
+    switch (c) {
+        case '<' :
+            return "west"
+            break;
+        case '>' :
+            return "east"
+            break;
+        case 'v' :
+            return "south"
+            break;
+        case '^' :
+            return 'north'
+            break;
+        default:
+            console.log("You're going down");
+            break;
+    }
 }
 
 //Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.

@@ -133,7 +133,7 @@ Mouse.prototype.attachListeners = function() {
 
     this.canvas.addEventListener("keypress", function (e) {
         e.preventDefault();
-        if (e.code === "(space)") {
+        if (e.code === "Space") {
             console.log("pressed space");
             if (that.canAddLevel) {
                 that.createLevel(1)

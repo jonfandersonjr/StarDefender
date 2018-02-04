@@ -65,7 +65,7 @@ Level.prototype.playLevel1 = function () {
                       firstLevelWaveSize[this.waveNumber],
                       firstLevelSpeedBuff[this.waveNumber],
                       firstLevelHealthBuff[this.waveNumber],
-                      firstLevelEntranceNum[this.waveNumber);
+                      firstLevelEntranceNum[this.waveNumber]);
     this.waveNumber++;
 }
 
@@ -73,8 +73,8 @@ Level.prototype.playLevel2 = function () {
     this.wave.setWave(secondLevelEnemies[this.waveNumber],
                       secondLevelWaveSize[this.waveNumber],
                       secondLevelSpeedBuff[this.waveNumber],
-                      secondLevelHealthBuff[this.waveNumber]);
-                      secondLevelEntranceNum[this.waveNumber);
+                      secondLevelHealthBuff[this.waveNumber],
+                      secondLevelEntranceNum[this.waveNumber]);
     this.waveNumber++;
 }
 
@@ -82,8 +82,8 @@ Level.prototype.playLevel3 = function () {
     this.wave.setWave(thirdLevelEnemies[this.waveNumber],
                       thirdLevelWaveSize[this.waveNumber],
                       thirdLevelSpeedBuff[this.waveNumber],
-                      thirdLevelHealthBuff[this.waveNumber]);
-                      thirdLevelEntranceNum[this.waveNumber);
+                      thirdLevelHealthBuff[this.waveNumber],
+                      thirdLevelEntranceNum[this.waveNumber]);
     this.waveNumber++;
 }
 
