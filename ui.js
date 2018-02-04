@@ -19,13 +19,25 @@ function UI(mouse, startHealth, maxHealth,
     this.textBox = document.getElementById("uiText");
     makeUnselectable(this.textBox);
     this.mouse = mouse;
-    //this.textBox.addEventListener('mousedown', function(e) {
-    //    e.preventDefault();
-    //}, false);
 
     //Game info text panel
     generateGameInfo();
-    drawImages(this.ctx, this.mouse);
+    drawImages(this.ctx);
+    this.canvas.addEventListener("click", function(e) {
+        var mousePos = getMousePos(document.getElementById("uiButtons"), e);
+        console.log(mousePos);
+        if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
+            mouse.selectDefender("marine");
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
+            mouse.selectDefender("ghost");
+        } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
+            mouse.selectDefender("battlecruiser");
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 110 && mousePos.y <= 210) {
+            mouse.selectDefender("antiair");
+        } else if (mousePos.x >= 58 && mousePos.x <= 162 && mousePos.y >= 210 && mousePos.y <= 320) {
+            mouse.selectDefender("scv");
+        }
+    }, false);
 
     //gets relative mouse position based on canvas
     function getMousePos(canvas, e) {
@@ -37,16 +49,12 @@ function UI(mouse, startHealth, maxHealth,
     }
 
     //Draws button images
-    function drawImages(ctx, mouse) {
+    function drawImages(ctx) {
         //Marine
         var marine_img = new Image();
         marine_img.onload = function() {
             ctx.drawImage(marine_img, 0, 0);
         }
-        marine_img.addEventListener("click", function() {
-            mouse.selectDefender('marine');
-        }, false);
-        marine_img.id = 'marine';
         marine_img.src = images[0];
 
         //Ghost
@@ -54,10 +62,6 @@ function UI(mouse, startHealth, maxHealth,
         ghost_img.onload = function() {
             ctx.drawImage(ghost_img, 110, 0);
         }
-        ghost_img.addEventListener("click", function() {
-            mouse.selectDefender('ghost');
-        }, false);
-        ghost_img.id = 'ghost';
         ghost_img.src = images[2];
 
         //Battlecruiser
@@ -65,10 +69,6 @@ function UI(mouse, startHealth, maxHealth,
         battle_img.onload = function() {
             ctx.drawImage(battle_img, 0, 110);
         }
-        battle_img.addEventListener("click", function() {
-            mouse.selectDefender('battlecruiser');
-        }, false);
-        battle_img.id = 'battlecruiser';
         battle_img.src = images[3];
 
         //AntiAir
@@ -76,10 +76,6 @@ function UI(mouse, startHealth, maxHealth,
         antiair_img.onload = function() {
             ctx.drawImage(antiair_img, 110, 110);
         }
-        antiair_img.addEventListener("click", function() {
-            mouse.selectDefender('antiair');
-        }, false);
-        antiair_img.id = 'antiair';
         antiair_img.src = images[4];
 
         //SCV
@@ -87,10 +83,6 @@ function UI(mouse, startHealth, maxHealth,
         scv_img.onload = function() {
             ctx.drawImage(scv_img, 60, 220);
         }
-        scv_img.addEventListener("click", function() {
-            mouse.selectDefender('scv');
-        }, false);
-        scv_img.id = 'scv';
         scv_img.src = images[1];
     };
 

@@ -1,6 +1,11 @@
-var defenderList = ["marine", "battlecruiser", "ghost"]
+var defenderList = ["marine", "battlecruiser", "ghost", "antiair"];
 var tileSize = 31;
-
+var costs = {
+    marine: 50,
+    battlecruiser: 150,
+    ghost: 150,
+    antiair: 100
+};
 
 function Mouse(map, ctx) {
     this.radiusOfFire = {
@@ -67,7 +72,33 @@ Mouse.prototype.selectDefender = function(defenderName) {
 Mouse.prototype.dropTower = function(e) {
     var that = this;
     //Drop tower if something was selected from buttons isBusy = true
-    if (this.isBusy) {
+
+    //Drop only if enough resources
+    var costOfDrop = 0;
+    var okToDrop = false;
+    switch (this.defenderName) {
+        case "marine":
+            costOfDrop = 50;
+            break;
+        case "ghost":
+            costOfDrop = 150;
+            break;
+        case "battlecruiser":
+            costOfDrop = 150;
+            break;
+        case "antiair":
+            costOfDrop = 100;
+            break;
+        default:
+            break;
+    }
+    if (this.ui.resourcesTotal >= costOfDrop) {
+        okToDrop = true;
+    } else {
+        alert("Not enough resources!");
+    }
+
+    if (this.isBusy && okToDrop) {
         //drop tower on location
         console.log("Dropping tower");
         var mouseLoc = getMousePos(this.canvas, event);
@@ -152,18 +183,6 @@ Mouse.prototype.attachListeners = function() {
     }, false);
 
     console.log('Input started');
-
-    // Key events
-    /*
-    this.canvas.addEventListener("keydown", function(e) {
-        console.log(e);
-        console.log("Key Down Event - Char " + e.code + " Code " + e.keyCode);
-    }, false);
-
-    this.canvas.addEventListener("keyup", function(e) {
-
-    }, false);
-        */
 
     this.canvas.addEventListener("contextmenu", function(e) {
         e.preventDefault();
