@@ -163,18 +163,13 @@ Mouse.prototype.attachListeners = function() {
     this.canvas.addEventListener("keyup", function(e) {
 
     }, false);
+        */
 
     this.canvas.addEventListener("contextmenu", function (e) {
         e.preventDefault();
         console.log("right clicked");
-        if (that.canAddLevel) {
-            that.createLevel(1)
-        }
     }, false);
 
-
-
-    */
     this.canvas.addEventListener("keypress", function(e) {
         if (e.code === "KeyS") {
             console.log("pressed s for scv");

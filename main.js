@@ -24,13 +24,14 @@ AM.queueDownload("./img/scv/scv_east.png");
 AM.queueDownload("./img/scv/scv_west.png");
 AM.queueDownload("./img/scv/scv_mine.png");
 
+//load tiles
 for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
     AM.queueDownload(`./tiles/grass/grass_bot${i}.png`);
+    AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
 }
 
-//load tiles
-AM.queueDownload("./tiles/dirt.png");
+//load other tiles
 AM.queueDownload("./tiles/grass/grass.png");
 AM.queueDownload("./tiles/base.png")
 AM.queueDownload("./tiles/mineral.png");
