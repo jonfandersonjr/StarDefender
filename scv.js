@@ -18,6 +18,8 @@ function SCV(game, map, assetManager) {
     this.speed = this.unit.speed;
     this.direction = this.unit.direction;
 
+    this.gatherTime = this.unit.gatherTime;
+
     Entity.call(this, game, this.x, this.y);
 }
 
@@ -66,11 +68,11 @@ SCV.prototype.atMineral = function () {
 
 SCV.prototype.getMinerals = function () {
 
-    if (this.unit.gatherTime >= 0) {
-        this.unit.gatherTime -= this.game.clockTick;
+    if (this.gatherTime >= 0) {
+        this.gatherTime -= this.game.clockTick;
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}_mine.png`);
     } else {
-        this.unit.gatherTime = 3;
+        this.gatherTime = 3;
         this.changeDirection("east");
         this.moveEast();
         //this.x = this.x + 5 + this.game.clockTick * this.unit.speed; //progresses unit east
