@@ -12,9 +12,8 @@ var hydralisk = {name : "hydralisk", frameWidth : 42, frameHeight : 55, sheetWid
 var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.6, speed : 30, health : 100, isAir : false,
                 deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
 
-function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, theSpeedBuff, theHealthBuff) {
+function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff) {
     this.AM = assetManager;
-    this.speedSetting = speedSetting;
     //Switch case for units.
     switch (unitName) {
         case "mutalisk":
@@ -40,8 +39,8 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
             break;
     }
     // AIR UNIT
-    this.air = this.unit.isAir;
-    console.log(map[entrance.row][entrance.column])
+    this.isAir = this.unit.isAir;
+    this.entrance = entrance;
     this.direction = findDirection(map, entrance.row, entrance.column);
     this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
@@ -51,7 +50,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = entrance.column * this.map.tileSize;
     this.y = entrance.row * this.map.tileSize;
-    console.log(this.x)
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
@@ -60,8 +58,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
     this.currentHealth = this.maxHealth;
     this.animation.lastHealth = this.currentHealth;
     Entity.call(this, game, this.x, this.y);
-
-    
 }
 
 GroundUnit.prototype = new Entity();
@@ -80,56 +76,75 @@ GroundUnit.prototype.update = function () {
         } else {
             this.removeFromWorld = true;
         }
-    } else if (this.unit.name === "mutalisk") {
+    } else if (this.isAir) {
             this.flyingMovement();
     } else {
-        this.col = Math.floor(this.x / this.map.tileSize);
+        this.column = Math.floor(this.x / this.map.tileSize);
         this.row = Math.floor(this.y / this.map.tileSize);
-        let tempX, tempY;
-        switch (this.direction) {
-            case 'east':
-                tempX = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
-                if (this.map.map[this.row][Math.floor(tempX / this.map.tileSize) + 1] === '+') { //Checks if next position is a path.
-                    this.col++;
-                    this.x = this.col * this.map.tileSize;
-                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+        let c = this.map.map[this.row][this.column];
+        let tempY = this.y - this.game.clockTick * this.speed;
+        let tempRow = Math.floor(tempY / this.map.tileSize);
+        
+        let tempX = this.x - this.game.clockTick * this.speed;
+        let tempColumn = Math.floor(tempX / this.map.tileSize);
+        switch (c) {
+            case '>' :
+                if (this.map.map[this.row + 1][this.column] === '^' && isLegalMove(this.map.map[tempRow][this.column])) {
+                    this.y -= this.game.clockTick * this.speed;
                 } else {
-                    this.x = tempX;
+                    this.x += this.game.clockTick * this.speed;
+                    this.col = Math.floor(this.x / this.map.tileSize);
+                    this.row = Math.floor(this.y / this.map.tileSize);
+                    c = this.map.map[this.row][this.column];
+                    if (c !== '>') {
+                        this.x = this.column * this.map.tileSize;
+                    }
+                    this.changeDirection('east');
                 }
-                this.getTrueCordinates();
                 break;
-            case 'west':
-                tempX = this.x - this.game.clockTick * this.speed * this.speedSetting; //Next position
-                if (this.map.map[this.row][Math.floor(tempX / this.map.tileSize)] === '+') { //Checks if next position is a path.
-                    this.x = this.col * this.map.tileSize;
-                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
-                } else {
-                    this.x = tempX;
+            case '<' :
+                this.x -= this.game.clockTick * this.speed;
+                this.column = Math.floor(this.x / this.map.tileSize);
+                this.row = Math.floor(this.y / this.map.tileSize);
+                c = this.map.map[this.row][this.column];
+                if (!isLegalMove(c)) {
+                    this.x = this.column * this.map.tileSize;
                 }
-                this.getTrueCordinates();
+                this.changeDirection('west');
                 break;
-            case 'south':
-                tempY = this.y + this.game.clockTick * this.speed * this.speedSetting; //Next position
-                if (this.map.map[Math.floor(tempY / this.map.tileSize) + 1][this.col] === '+') { //Checks if next position is a path.
-                    this.row = Math.floor(tempY / this.map.tileSize);
-                    this.y = this.row * this.map.tileSize;
-                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+            case '^' :
+                if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][this.column])) {
+                    this.x -= this.game.clockTick * this.speed;
                 } else {
-                    this.y = tempY;
+                    this.y -= this.game.clockTick * this.speed;
+                    this.column = Math.floor(this.x / this.map.tileSize);
+                    this.row = Math.floor(this.y / this.map.tileSize);
+                    c = this.map.map[this.row][this.column];
+                    if (!isLegalMove(c)) {
+                        this.y = this.row * this.map.tileSize;
+                    }
+                    this.changeDirection('north');
                 }
-                this.getTrueCordinates();
                 break;
-            case 'north':
-                tempY = this.y - this.game.clockTick * this.speed * this.speedSetting; //Next position
-                if (this.map.map[Math.floor(tempY / this.map.tileSize)][this.col] === '+') { //Checks if next position is a path.
-                    this.y = this.row * this.map.tileSize;
-                    this.changeDirection(newDirection(this.map, this.col, this.row, this.direction));
+            case 'v' :
+                if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][tempColumn])){
+                    this.x -= this.game.clockTick * this.speed;
                 } else {
-                    this.y = tempY;
+                    this.y += this.game.clockTick * this.speed;
+                    this.column = Math.floor(this.x / this.map.tileSize);
+                    this.row = Math.floor(this.y / this.map.tileSize);
+                    c = this.map.map[this.row][this.column];
+                    if (c !== 'v') {
+                        this.y = this.row * this.map.tileSize;
+                    }
+                    this.changeDirection('south');
                 }
-                this.getTrueCordinates();
+                break;
+            default:
+                console.log('go home');
                 break;
         }
+      
     }
     Entity.prototype.update.call(this);
 }
@@ -149,10 +164,11 @@ GroundUnit.prototype.changeDirection = function(direction) {
 }
 
 GroundUnit.prototype.flyingMovement = function () {
-    let b = this.map.corIni.y * this.map.tileSize;
-    let slope = ((this.map.baseY - b) / (this.map.baseX - 0));
-    this.x = this.x + this.game.clockTick * this.speed * this.speedSetting; //Next position
-    this.y = (slope * this.x) + b;
+    let y = this.entrance.row * this.map.tileSize;
+    let x = this.entrance.column * this.map.tileSize;
+    let slope = (this.map.baseY - y) / (this.map.baseX - x);
+    this.x = this.x + this.game.clockTick * this.speed; //Next position
+    this.y = (slope * this.x) + y;
     this.getTrueCordinates();
 }
 
@@ -181,11 +197,15 @@ GroundUnit.prototype.getTrueCordinates = function() {
 }
 
 GroundUnit.prototype.returnAir = function() {
-    return this.air;
+    return this.isAir;
+}
+
+function isLegalMove(c) {
+    return c === '<' || c === '>' || c === '^' || c === 'v';
 }
 
 function findDirection(map, row, col) {
-    let c = map[row][col];
+    let c = map.map[row][col];
     switch (c) {
         case '<' :
             return "west"
@@ -200,6 +220,7 @@ function findDirection(map, row, col) {
             return 'north'
             break;
         default:
+            console.log(c);
             console.log("You're going down!");
             break;
     }
