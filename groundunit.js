@@ -225,20 +225,3 @@ function findDirection(map, row, col) {
             break;
     }
 }
-
-//Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.
-function newDirection(map, x, y, currentDirection) {
-    if (currentDirection === "east" || currentDirection === "west") {
-        if (map.map[y - 1][x] === '-') {
-            return 'north';
-        } else {
-            return 'south';
-        }
-    } else {
-        if (map.map[y][x - 1] === '-') {
-            return 'west';
-        } else {
-            return 'east';
-        }
-    }
-}
