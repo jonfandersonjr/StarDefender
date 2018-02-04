@@ -54,7 +54,7 @@ AM.downloadAll(function() {
     myMouse.init(gameEngine);
 
     //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
-    this.generator = new Generator(gameEngine, map, AM);
+    this.generator = new Generator(gameEngine, map, AM, ui);
     myMouse.setGenerator(this.generator);
 
 

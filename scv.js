@@ -1,9 +1,10 @@
 var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 100, direction : "west", gatherTime: 3 };
 
-function SCV(game, map, assetManager) {
+function SCV(game, map, assetManager, theUI) {
     this.AM = assetManager;
     this.map = map;
     this.game = game;
+    this.UI = theUI;
     this.unit = scv;
     this.direction = this.unit.direction;
     this.name = this.unit.name;
@@ -12,7 +13,7 @@ function SCV(game, map, assetManager) {
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
 
-    this.x = this.map.baseX + this.map.tileSize;
+    this.x = this.map.baseX - 1;
     this.y = this.map.baseY + (this.map.tileSize * 2);
 
     this.speed = this.unit.speed;
@@ -29,6 +30,7 @@ SCV.prototype.update = function () {
 
     if (this.atBase()) {
         this.changeDirection("west");
+        this.UI.resourceAdjust(50);
         //add minerals to resources
         this.moveWest();
     } else if (this.atMineral()) {
