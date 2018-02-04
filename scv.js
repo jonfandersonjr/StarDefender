@@ -29,12 +29,10 @@ SCV.prototype.constructor = SCV;
 SCV.prototype.update = function () {
 
     if (this.atBase()) {
-        console.log("this scv is at base");
         this.changeDirection("west");
         //add minerals to resources
         this.moveWest();
     } else if (this.atMineral()) {
-        console.log("this scv is at minerals");
         this.getMinerals();
     } else {
         if (this.direction === "east") {
