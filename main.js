@@ -22,7 +22,7 @@ for (let i = 0; i < unitList.length; i++) {
 //load scv sprites
 AM.queueDownload("./img/scv/scv_east.png");
 AM.queueDownload("./img/scv/scv_west.png");
-AM.queueDownload("./img/scv/scv_west_mine.png");
+AM.queueDownload("./img/scv/scv_mine.png");
 
 for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
