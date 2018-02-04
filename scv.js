@@ -75,7 +75,6 @@ SCV.prototype.getMinerals = function () {
         this.gatherTime = 3;
         this.changeDirection("east");
         this.moveEast();
-        //this.x = this.x + 5 + this.game.clockTick * this.unit.speed; //progresses unit east
     }
 }
 

@@ -42,11 +42,19 @@ Background.prototype.update = function () { };
 //Creates a map based on the selection.
 Map.prototype.createMap = function (gameEngine, assetManager) {
     for (let i = 0; i < this.mapDim.col; i++) {
+        
         for (let j = 0; j < this.mapDim.row; j++) {
+            let cycle = (j % 6) + 1;
             let tile = this.map[j][i];
             switch (tile) {
-                case '+' :
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
+                case '+':
+                    if (i % 2 === 0) {
+                        gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
+                    } else {
+                        gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_bot${cycle}.png`), i * this.tileSize, j * this.tileSize));
+                    }
+                    //gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
+
                     break;
                 case '-' :
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
