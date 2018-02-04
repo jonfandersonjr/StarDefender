@@ -40,25 +40,19 @@ function GroundUnit(game, unitName, direction, map, assetManager, speedSetting, 
     this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
-    this.speed = this.unit.speed * this.speedSetting;
     this.ctx = game.ctx;
     this.direction = direction;
-    this.health = this.unit.health;
-    this.animation.lastHealth = this.health;
     this.isDead = false;
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = this.map.corIni.x * this.map.tileSize;
     this.y = this.map.corIni.y * this.map.tileSize;
-    this.trueX = this.x + (this.unit.frameWidth / 2);
-    this.trueY = this.y + (this.unit.frameHeight / 2);
-    
-    //**testing purposes**
-    this.speed *= 2;
+    this.getTrueCordinates();
 
     //perform statbuffs depending on wave
-    this.speed *= theSpeedBuff;
-    this.health *= theHealthBuff;
-
+    this.speed = this.unit.speed * theSpeedBuff;
+    this.maxHealth = this.unit.health * theHealthBuff;
+    this.currentHealth = this.maxHealth;
+    this.animation.lastHealth = this.currentHealth;
     Entity.call(this, game, this.x, this.y);
 }
 
@@ -69,7 +63,7 @@ GroundUnit.prototype.constructor = GroundUnit;
 GroundUnit.prototype.update = function () {
     if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
         this.hitBase();
-    } else if (this.health <= 0 && !this.isDead) {
+    } else if (this.currentHealth <= 0 && !this.isDead) {
         this.isDead = true;
         this.setDeathAnimation();
     } else if (this.isDead) {
@@ -134,7 +128,7 @@ GroundUnit.prototype.update = function () {
 
 GroundUnit.prototype.draw = function () {
     if (!this.isDead){
-        this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.health, this.unit.health);
+        this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth);
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
     }
@@ -174,8 +168,8 @@ GroundUnit.prototype.setDeathAnimation = function() {
 }
 
 GroundUnit.prototype.getTrueCordinates = function() {
-    this.trueX = this.x + (this.unit.frameWidth / 2);
-    this.trueY = this.y + (this.unit.frameHeight / 2);
+    this.trueX = this.x + (this.unit.frameWidth * this.unit.scale / 2);
+    this.trueY = this.y + (this.unit.frameHeight * this.unit.scale / 2);
 }
 
 //Finds new direction by checking tiles next to the current one (x, y). Should not go back to where it came from.
