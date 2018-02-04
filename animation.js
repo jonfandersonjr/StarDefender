@@ -66,7 +66,12 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
     }
     ctx.lineWidth = 0.5;
     ctx.strokeStyle = "black";
-    ctx.strokeRect(x, y - 2, this.frameWidth * this.scale, 5);
+    var amountOfBlocks = Math.floor(maxHealth / 20);
+    var blockWidth = this.frameWidth * this.scale / amountOfBlocks;
+    for (let i = 0; i < amountOfBlocks; i++) {
+        ctx.strokeRect(x + i * blockWidth, y - 2, blockWidth, 5);
+    }
+    
 }
 
 Animation.prototype.drawDefender = function(ctx, x, y, frame) {

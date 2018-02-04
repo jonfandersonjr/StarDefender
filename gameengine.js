@@ -139,7 +139,7 @@ GameEngine.prototype.update = function () {
                 let defender = this.defenderEntities[j];
                 let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
                 if (!defender.removeFromWorld) {
-                    if (distance <= defender.unit.range && enemy.health > 0) {
+                    if (distance <= defender.unit.range && enemy.currentHealth > 0) {
                         defender.shoot(enemy);
                     }
                 } else {

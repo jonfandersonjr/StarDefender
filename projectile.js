@@ -20,12 +20,12 @@ Projectile.prototype.constructor = Projectile;
 Projectile.prototype.update = function() {
     this.xDif -= Math.abs(this.gameEngine.clockTick * this.xSpeed);
 
-    if (this.xDif > 0 && this.enemy.health > 0) {
+    if (this.xDif > 0 && this.enemy.currentHealth > 0) {
         this.x += this.gameEngine.clockTick * this.xSpeed;
         this.y += this.gameEngine.clockTick * this.ySpeed;
         this.calculateSpeed();
     } else {
-        this.enemy.health -= this.damage;
+        this.enemy.currentHealth -= this.damage;
         this.removeFromWorld = true;
     }
     Entity.prototype.update.call(this);
