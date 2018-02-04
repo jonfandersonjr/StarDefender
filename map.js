@@ -47,29 +47,40 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
             let cycle = Math.ceil(Math.random() * 6)
             let tile = this.map[j][i];
             switch (tile) {
-                case '+':
-                    if (i % 2 == 0) {
-                        gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
-                    } else {
-                        gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_bot${cycle}.png`), i * this.tileSize, j * this.tileSize));
-                    }
-                    //gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
-
-                    break;
-                case '-' :
+                case '>' :
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
                     break;
+
+                case 'v' :
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    break;
+
+                case '^' :
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    break;
+
+                case '<' :
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    break;
+
                 case '=':
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
                     this.baseX = i * this.tileSize;
                     this.baseY = j * this.tileSize;
                     break;
+
                 case '*':
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/grass/grass.png"), i * this.tileSize, j * this.tileSize));
                     this.mineralX = i * this.tileSize;
                     this.mineralY = j * this.tileSize;
                     break;
-                default :
+
+                default:
+                    if (i % 2 == 0) {
+                        gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
+                    } else {
+                        gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_bot${cycle}.png`), i * this.tileSize, j * this.tileSize));
+                    }
                     break;
             }
         }
@@ -179,9 +190,9 @@ var map_4 = [['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '
              ['*', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '-', '-', '+', '+'],
              ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+']];
 
-var map_5 = [['+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
-            ['>', '>', '>', 'v', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
-            ['+', '+', '+', 'v', '>', '>', '>', '>', '>', '>', '>', '>', '>', '>', '>', '>', 'v', '+', '+', '+', '+', '+'],
+var map_5 = [['+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
+            ['>', '>', '>', 'v', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
+            ['+', '+', '+', 'v', '+', '>', '>', '>', '>', '>', '>', '>', '>', '>', '>', '>', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '<', '<', '+', '+', '+', '+', '+'],
@@ -199,7 +210,7 @@ var map_5 = [['+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '
             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '=', '+', '+'],
-            ['*', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '>', '>', '>', '>', '>', '>'],
+            ['*', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '>', '>', '>', '>', '>', '+'],
             ['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+']]
 
 

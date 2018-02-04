@@ -51,17 +51,13 @@ SCV.prototype.atMineral = function () {
     return this.x <= (this.map.mineralX + (2 * this.map.tileSize));
 }
 
-var temp1;
-
 SCV.prototype.getMinerals = function () {
 
     this.gatherTime -= this.game.clockTick;
     if (this.gatherTime >= 0) {
-        temp1 = `./img/${this.name}/${this.name}_${this.direction}_mine.png`;
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.name}/${this.name}_mine.png`);
     } else {
         this.gatherTime = 3;
-        this.x = this.x + this.game.clockTick * this.speed + 20;
         this.changeDirection("east");
         this.moveEast();
     }
@@ -82,7 +78,6 @@ SCV.prototype.changeDirection = function (direction) {
 }
 
 SCV.prototype.draw = function () {
-    console.dir(temp1);
     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }

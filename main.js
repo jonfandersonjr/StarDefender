@@ -38,7 +38,7 @@ AM.queueDownload("./tiles/mineral.png");
 AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-    var map = new Map(map_4);
+    var map = new Map(map_5);
     var myMouse = new Mouse(map, ctx);
 
     //UI Load
