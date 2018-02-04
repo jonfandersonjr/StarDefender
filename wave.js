@@ -64,6 +64,7 @@ Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealth
             break;
         default:
             console.log("Illegal input");
+            break;
     }
 
     this.entranceNum = theEntranceNum;

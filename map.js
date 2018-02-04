@@ -44,19 +44,19 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
             let tile = this.map[j][i];
             switch (tile) {
                 case '>' :
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/dirt/dirt${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     break;
 
                 case 'v' :
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/dirt/dirt${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     break;
 
                 case '^' :
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/dirt/dirt${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     break;
 
                 case '<' :
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/dirt.png"), i * this.tileSize, j * this.tileSize));
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/dirt/dirt${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     break;
 
                 case '=':
