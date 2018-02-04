@@ -63,10 +63,21 @@ Mouse.prototype.createLevel = function(levelNum) {
 
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
-    this.isBusy = true; //makes mouse unable to select other defenders, one time drop
-    this.tileBox.isBusy = this.isBusy;
-    this.defenderName = defenderName;
-    console.log("Defender " + this.defenderName + " Selected!");
+    if (defenderName === "scv") {
+        if (this.ui.resourcesTotal >= 25) {
+            this.generator.createSCV();
+            this.ui.resourceAdjust(-25);
+            console.log("Generating SCV");
+        } else {
+            alert("Not enough resources!");
+        }
+    } else {
+        this.isBusy = true; //makes mouse unable to select other defenders, one time drop
+        this.tileBox.isBusy = this.isBusy;
+        this.defenderName = defenderName;
+        console.log("Defender " + this.defenderName + " Selected!");
+    }
+
 };
 
 Mouse.prototype.dropTower = function(e) {
@@ -81,7 +92,7 @@ Mouse.prototype.dropTower = function(e) {
             costOfDrop = 50;
             break;
         case "ghost":
-            costOfDrop = 150;
+            costOfDrop = 100;
             break;
         case "battlecruiser":
             costOfDrop = 150;
@@ -123,8 +134,6 @@ Mouse.prototype.dropTower = function(e) {
 
         //Draw radius of fire - NOT WORKING
         that.ctx.beginPath();
-        console.log("Mouse X: " + mouseLoc.x + " Mouse y: " + mouseLoc.y + " radius:" +
-            that.radiusOfFire.radius);
         that.ctx.arc(mouseLoc.x, mouseLoc.y, that.radiusOfFire.radius, 0, 2 * Math.PI, false);
         that.ctx.lineWidth = that.radiusOfFire.thick;
         that.ctx.strokeStyle = that.radiusOfFire.color;
@@ -146,7 +155,9 @@ function getMousePos(canvas, e) {
 
 Mouse.prototype.attachListeners = function() {
     var that = this;
+
     // Mouse events
+
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
     that.canvas.addEventListener("click", (e) => {
         if (that.isBusy === true) {
@@ -157,23 +168,37 @@ Mouse.prototype.attachListeners = function() {
         }
     }, false);
 
-
+    //Mouseover square select
     that.canvas.addEventListener("mousemove", function(e) {
         that.tileBox.e = e;
     }, false);
 
-    this.canvas.addEventListener("keypress", function(e) {
-        e.preventDefault();
-        if (e.code === "Space") {
-            console.log("pressed space");
+    //Keypress binds
+    this.canvas.addEventListener("keydown", function(e) {
+        if (e.keyCode === 70) {
+            console.log("Pressed F for SCV");
+            that.selectDefender("scv");
+        } else if (e.keyCode === 65) {
+            console.log("Pressed A for Marine");
+            that.selectDefender("marine");
+        } else if (e.keyCode === 83) {
+            console.log("Pressed S for Ghost");
+            that.selectDefender("ghost");
+        } else if (e.keyCode === 68) {
+            console.log("Pressed D for Battlecruiser");
+            that.selectDefender("battlecruiser");
+        } else if (e.keyCode === 87) {
+            console.log("Pressed W for Anti-Air");
+            that.selectDefender("antiair");
+        } else if (e.keyCode === 32) {
+            console.log("Pressed Space");
             if (that.canAddLevel) {
                 that.createLevel(1)
             }
         }
     }, false);
 
-
-
+    //Mouse Wheel
     this.canvas.addEventListener("mousewheel", function(e) {
         e.preventDefault();
         if (that.canAddLevel) {
@@ -187,14 +212,6 @@ Mouse.prototype.attachListeners = function() {
     this.canvas.addEventListener("contextmenu", function(e) {
         e.preventDefault();
         console.log("right clicked");
-    }, false);
-
-    this.canvas.addEventListener("keypress", function(e) {
-        if (e.code === "KeyS") {
-            console.log("pressed s for scv");
-            that.d = true;
-            that.generator.createSCV();
-        }
     }, false);
 
     // Optional events
