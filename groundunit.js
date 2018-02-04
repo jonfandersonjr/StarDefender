@@ -41,6 +41,7 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
     }
     // AIR UNIT
     this.air = this.unit.isAir;
+    console.log(map[entrance.row][entrance.column])
     this.direction = findDirection(map, entrance.row, entrance.column);
     this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
@@ -50,6 +51,7 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = entrance.column * this.map.tileSize;
     this.y = entrance.row * this.map.tileSize;
+    console.log(this.x)
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
@@ -198,7 +200,7 @@ function findDirection(map, row, col) {
             return 'north'
             break;
         default:
-            console.log("You're going down");
+            console.log("You're going down!");
             break;
     }
 }

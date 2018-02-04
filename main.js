@@ -29,6 +29,10 @@ for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/grass/grass_bot${i}.png`);
 }
 
+for (let i = 1; i <= 6; i++) {
+    AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
+}
+
 //load tiles
 AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass/grass.png");
