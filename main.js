@@ -68,4 +68,8 @@ AM.downloadAll(function() {
     console.log("Map Loaded!");
 
     console.log("Enemies Loaded!");
+
+    var audio = new Audio("./music/Starcraft2.mp3");
+    audio.play();
+    console.log("Music Loaded!");
 });

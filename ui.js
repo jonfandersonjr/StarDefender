@@ -58,7 +58,7 @@ function UI(mouse, startHealth, maxHealth,
             width: 100,
             height: 100,
             color: 'rgb(255,250,0)',
-            id: '4'
+            id: 'antiair'
         }
     ];
 

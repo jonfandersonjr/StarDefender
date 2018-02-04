@@ -48,11 +48,11 @@ var ghost = {
 
 var antiair = {
     name: "antiair",
-    frameWidth: 40,
-    frameHeight: 36,
-    sheetWidth: 32,
+    frameWidth: 43,
+    frameHeight: 55,
+    sheetWidth: 16,
     frameDuration: 0.1,
-    frames: 32,
+    frames: 16,
     loop: true,
     scale: 1,
     range: 150,
@@ -76,9 +76,14 @@ function Defender(game, unitName, row, col, map, assetManager) {
         case "ghost":
             this.unit = ghost;
             break;
+        case "antiair":
+            this.unit = antiair;
+            break;
         default:
             break;
     }
+    this.canTargetGround = this.unit.targetGround;
+    this.canTargetFlying = this.unit.targetFlying;
     this.map = map;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
@@ -116,11 +121,18 @@ Defender.prototype.draw = function() {
 }
 
 Defender.prototype.shoot = function(enemy) {
+    
     if (!this.isBusy) {
-        this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
-        this.isBusy = true;
-        this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
+        
+        
+            var audio = new Audio("./music/Pew_Pew-DKnight556-1379997159.mp3");
+            audio.play();
+            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
+            this.isBusy = true;
+            this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
+            this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
+        
+        
     }
 }
 
