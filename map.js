@@ -44,11 +44,11 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
     for (let i = 0; i < this.mapDim.col; i++) {
         
         for (let j = 0; j < this.mapDim.row; j++) {
-            let cycle = (j % 6) + 1;
+            let cycle = Math.ceil(Math.random() * 6)
             let tile = this.map[j][i];
             switch (tile) {
                 case '+':
-                    if (i % 2 === 0) {
+                    if (i % 2 == 0) {
                         gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     } else {
                         gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/grass/grass_bot${cycle}.png`), i * this.tileSize, j * this.tileSize));
@@ -155,6 +155,7 @@ var map_3 = "++++++++++++++++++++++\n" +
     "++--------------------\n" +
     "++++++++++++++++++++++\n" +
     "~~~~~~~~~~~~~~~~~~~~~~~"
+
 var map_4 = [['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
              ['-', '-', '-', '-', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
              ['+', '+', '+', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '+', '+', '+', '+', '+'],
