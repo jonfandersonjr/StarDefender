@@ -54,8 +54,8 @@ SCV.prototype.atMineral = function () {
 
 SCV.prototype.getMinerals = function () {
 
+    this.gatherTime -= this.game.clockTick;
     if (this.gatherTime >= 0) {
-        this.gatherTime -= this.game.clockTick;
         this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}_mine.png`);
     } else {
         this.gatherTime = 3;
