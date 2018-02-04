@@ -32,13 +32,13 @@ textarea {
 
 #uiText {
     position: absolute;
-    right: 0px;
+    right: 30px;
     top: 0px;
 }
 
 #uiButtons {
     position: absolute;
-    right: 0px;
+    right: 30px;
     top: 310px;
     z-index: 3;
 }
@@ -48,13 +48,13 @@ textarea {
     left: 0px;
     top: 0px;
     height: 770px;
-    color: white;
+    color: #8400d6;
 }
 
 #gameWorld {
     background: transparent;
     position: absolute;
-    left: 330px;
+    left: 360px;
     top: 0px;
     z-index: 1;
 }
@@ -62,7 +62,7 @@ textarea {
 #gameWorld2 {
     background: transparent;
     position: absolute;
-    left: 300px;
+    left: 360px;
     top: 0px;
     z-index: 2;
     pointer-events: none;

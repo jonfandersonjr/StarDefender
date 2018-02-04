@@ -13,6 +13,8 @@ audio.addEventListener('ended', function() {
     i = ++i < playlist.length ? i : 0;
     console.log(i)
     audio.src = playlist[i];
+    this.audio.volume = 0.3;
+    this.audio.loop = true;
     audio.play();
 }, true);
 audio.volume = 0.3;
