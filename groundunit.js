@@ -41,9 +41,10 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
     }
     // AIR UNIT
     this.air = this.unit.isAir;
-    console.log(map[entrance.row][entrance.column])
-    this.direction = findDirection(map, entrance.row, entrance.column);
+
+    this.direction = findDirection(map.map, entrance.row, entrance.column);
     this.map = map;
+
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
