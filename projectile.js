@@ -37,16 +37,16 @@ Projectile.prototype.draw = function() {
 }
 
 Projectile.prototype.calculateSpeed = function() {
-    this.xDif = Math.abs(this.x - this.enemy.x);
-    this.yDif = Math.abs(this.y - this.enemy.y);
+    this.xDif = Math.abs(this.x - this.enemy.trueX);
+    this.yDif = Math.abs(this.y - this.enemy.trueY);
 
     this.xSpeed = this.speed * (this.xDif / this.yDif) * 100;
-    if (this.x > this.enemy.x) {
+    if (this.x > this.enemy.trueX) {
         this.xSpeed *= -1;
     }
 
     this.ySpeed = this.speed * 100;
-    if (this.y > this.enemy.y) {
+    if (this.y > this.enemy.trueY) {
         this.ySpeed *= -1;
     }
 }
