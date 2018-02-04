@@ -45,23 +45,11 @@ SCV.prototype.update = function () {
 }
 
 SCV.prototype.atBase = function () {
-
-    if (this.x >= (this.map.baseX + (this.map.tileSize / 2))) {
-        this.isAtBase = true;
-    } else {
-        this.isAtBase = false;
-    }
-    return this.isAtBase;
+    return this.x >= (this.map.baseX + (this.map.tileSize / 2));
 }
 
 SCV.prototype.atMineral = function () {
-
-    if (this.x <= (this.map.mineralX + (2* this.map.tileSize))) {
-        this.isAtMineral = true;
-    } else {
-        this.isAtMineral = false;
-    }
-    return this.isAtMineral;
+    return this.x <= (this.map.mineralX + (2 * this.map.tileSize));
 }
 
 SCV.prototype.getMinerals = function () {
