@@ -1,8 +1,9 @@
-function Generator(engine, map, assetManager) {
+function Generator(engine, map, assetManager, ui) {
     this.doc = document.getElementById("gameWorld");
     this.gameEngine = engine;
     this.map = map;
     this.AM = assetManager;
+    this.UI = ui;
 }
 
 //Creates enemy of specified type at beginning of given map
@@ -21,5 +22,5 @@ Generator.prototype.createDefender = function(defenderName, x, y) {
 
 //Creates an SCV at the base location.
 Generator.prototype.createSCV = function () {
-    this.gameEngine.addSCV(new SCV(this.gameEngine, this.map, this.AM));
+    this.gameEngine.addSCV(new SCV(this.gameEngine, this.map, this.AM, this.UI));
 }

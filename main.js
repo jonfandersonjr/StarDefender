@@ -40,7 +40,7 @@ AM.queueDownload("./tiles/mineral.png");
 AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-    var map = new Map(map_6);
+    var map = new Map(testMovementMap);
     var myMouse = new Mouse(map, ctx);
 
     //UI Load
@@ -54,7 +54,7 @@ AM.downloadAll(function() {
     myMouse.init(gameEngine);
 
     //This generator will allow us to easily create enemies or towers and not just in main when the code first loads
-    this.generator = new Generator(gameEngine, map, AM);
+    this.generator = new Generator(gameEngine, map, AM, ui);
     myMouse.setGenerator(this.generator);
 
 
