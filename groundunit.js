@@ -39,14 +39,17 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             break;
     }
     // AIR UNIT
+
     this.isAir = this.unit.isAir;
     this.entrance = entrance;
     this.map = map;
+
     if (this.isAir) {
         this.direction = this.map.airDirection;
     } else {
         this.direction = findDirection(map, entrance.row, entrance.column);
     }
+
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
