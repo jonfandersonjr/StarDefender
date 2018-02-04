@@ -20,6 +20,22 @@ function UI(mouse, startHealth, maxHealth,
     makeUnselectable(this.textBox);
     this.mouse = mouse;
 
+    //Music
+    var audio = new Audio(),
+        i = 0;
+    var playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3');
+    audio.addEventListener('ended', function() {
+        i = ++i < playlist.length ? i : 0;
+        console.log(i)
+        audio.src = playlist[i];
+        audio.play();
+    }, true);
+    audio.volume = 0.3;
+    audio.loop = false;
+    audio.src = playlist[0];
+    audio.play();
+
+
     //Game info text panel
     generateGameInfo();
     drawImages(this.ctx);
