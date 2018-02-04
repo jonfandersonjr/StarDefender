@@ -36,6 +36,8 @@ function GroundUnit(game, unitName, entrance, map, assetManager, speedSetting, t
             this.unit = defiler;
             break;
         default:
+            console.log("Illegal Input");
+            break;
     }
     // AIR UNIT
     this.air = this.unit.isAir;
