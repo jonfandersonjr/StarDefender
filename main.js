@@ -24,6 +24,11 @@ AM.queueDownload("./img/scv/scv_east.png");
 AM.queueDownload("./img/scv/scv_west.png");
 AM.queueDownload("./img/scv/scv_west_mine.png");
 
+for (let i = 1; i <= 6; i++) {
+    AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
+    AM.queueDownload(`./tiles/grass/grass_bot${i}.png`);
+}
+
 //load tiles
 AM.queueDownload("./tiles/dirt.png");
 AM.queueDownload("./tiles/grass/grass.png");
