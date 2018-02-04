@@ -28,6 +28,8 @@ AM.queueDownload("./img/scv/scv_mine.png");
 for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
     AM.queueDownload(`./tiles/grass/grass_bot${i}.png`);
+    AM.queueDownload(`./tiles/blue/blue_top${i}.png`);
+    AM.queueDownload(`./tiles/blue/blue_bot${i}.png`);
     AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
 }
 
@@ -38,7 +40,7 @@ AM.queueDownload("./tiles/mineral.png");
 AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-    var map = new Map(map_5);
+    var map = new Map(map_6);
     var myMouse = new Mouse(map, ctx);
 
     //UI Load
