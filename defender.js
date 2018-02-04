@@ -126,7 +126,7 @@ Defender.prototype.shoot = function(enemy) {
         
         if (this.canTargetFlying === true && enemy.isAir === true) {
             var audio = new Audio("./music/Pew_Pew-DKnight556-1379997159.mp3");
-            //audio.play();
+            audio.play();
             this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, 2));
             this.isBusy = true;
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
