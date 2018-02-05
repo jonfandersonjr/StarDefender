@@ -62,7 +62,7 @@ var antiair = {
     targetFlying: true,
 };
 
-function Defender(game, unitName, row, col, map, assetManager) {
+function Defender(game, unitName, row, column, map, assetManager) {
     this.AM = assetManager;
     this.gameEngine = game;
     //Switch case for units.
@@ -88,10 +88,11 @@ function Defender(game, unitName, row, col, map, assetManager) {
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = this.gameEngine.ctx;
-    this.location = location;
-    this.x = col * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
+    this.row = row;
+    this.column = column;
+    this.x = column * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
     this.y = row * this.map.tileSize - (this.unit.frameHeight * this.unit.scale - this.map.tileSize)/2;
-    this.trueX = (col + 0.5) * this.map.tileSize;
+    this.trueX = (column + 0.5) * this.map.tileSize;
     this.trueY = (row + 0.5) * this.map.tileSize;
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;

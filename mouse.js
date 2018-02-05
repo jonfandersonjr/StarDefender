@@ -31,7 +31,8 @@ function Mouse(map, ctx) {
     this.attachListeners();
     this.isBusy = false;
     this.canAddLevel = true;
-
+    this.isMoving = false;
+    this.pickedUpDefender = false;
     //Layer 2 canvas for drawing mouse move
     this.canvas2 = document.getElementById("gameWorld2");
     this.ctx2 = this.canvas2.getContext("2d");
@@ -90,12 +91,11 @@ Mouse.prototype.dropTower = function(e) {
 
     //Drop only if enough resources
     var costOfDrop = 0;
-    var okToDrop = false;
     let defenderKey = null;
     switch (this.defenderName) {
         case "marine":
             costOfDrop = 50;
-            defenderKey = 'm';
+            defenderKey = 'a';
             break;
         case "ghost":
             costOfDrop = 100;
@@ -112,16 +112,11 @@ Mouse.prototype.dropTower = function(e) {
         default:
             break;
     }
-    if (this.ui.resourcesTotal >= costOfDrop) {
-        okToDrop = true;
-    } else {
-        alert("Not enough resources!");
-    }
 
-    if (this.isBusy && okToDrop) {
+    if (this.isBusy && (this.ui.resourcesTotal >= costOfDrop || this.isMoving)) {
         //drop tower on location
         console.log("Dropping tower");
-        var mouseLoc = getMousePos(this.canvas, event);
+        let mouseLoc = getMousePos(this.canvas, event);
         let tileLoc = getTile(mouseLoc, this.map);
         if (isValid(this.map, tileLoc.row, tileLoc.col)) {
             this.generator.createDefender(this.defenderName, tileLoc.row, tileLoc.col);
@@ -129,7 +124,8 @@ Mouse.prototype.dropTower = function(e) {
             this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
             this.tileBox.isBusy = this.isBusy;
             //Update Resources in UI
-            switch (this.defenderName) {
+            if (!this.isMoving) {
+                switch (this.defenderName) {
                 case "marine":
                     that.ui.resourceAdjust(that.resources.marine);
                     PlaySound("./soundfx/marine.wav");
@@ -148,10 +144,14 @@ Mouse.prototype.dropTower = function(e) {
                     break;
                 default:
                     break;
+                }
             }
+            
+            this.isMoving = false;
+            
         }
     } else {
-        return;
+        alert("Not enough resources!");
     }
 };
 
@@ -176,7 +176,17 @@ Mouse.prototype.attachListeners = function() {
             that.dropTower(e);
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
         } else {
-            return;
+            //move unit
+            let mouseLoc = getMousePos(this.canvas, event);
+            let tileLoc = getTile(mouseLoc, this.map);
+            if (isDefender(that.map.map[tileLoc.row][tileLoc.col])) {
+                that.isMoving = true;
+                that.isBusy = true;
+                that.tileBox.isBusy = true;
+                that.pickedUpDefender = that.gameEngine.findDefender(tileLoc.row, tileLoc.col);
+                that.defenderName = that.pickedUpDefender.unit.name;
+                that.map.map[tileLoc.row][tileLoc.col] = '+';
+            }
         }
     }, false);
 
@@ -283,6 +293,16 @@ TileBox.prototype.draw = function() {
 
         this.ctx.strokeRect(this.x, this.y, this.map.tileSize, this.map.tileSize);
     }
+}
+
+function isDefender(mapKey) {
+    return mapKey === 'a' || mapKey === 's' || mapKey === 'd' || mapKey === 'w';
+}
+
+
+//Incomplete function. Will be expanded later.
+function copyDefender(defender) {
+    
 }
 
 function getTile(mouseLoc, map) {
