@@ -130,7 +130,6 @@ GameEngine.prototype.runLevel = function () {
 }
 
 GameEngine.prototype.update = function () {
-
     //If mouse selects a level, run it.
     if (this.addNewLevel) {
         this.runLevel();
