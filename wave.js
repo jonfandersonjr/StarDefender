@@ -79,5 +79,3 @@ Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealth
 Wave.prototype.setLevel = function (theLevel) {
     this.level = theLevel;
 }
-
-

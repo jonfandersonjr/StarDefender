@@ -139,10 +139,7 @@ Defender.prototype.calculateTrueXY = function() {
 }
 
 Defender.prototype.shoot = function(enemy) {
-    console.log(this.isBusy);
     if (!this.isBusy && !this.isDummy) {
-        var audio = new Audio("./music/Pew_Pew-DKnight556-1379997159.mp3");
-        //audio.play();
         this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff));
         this.isBusy = true;
         this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));

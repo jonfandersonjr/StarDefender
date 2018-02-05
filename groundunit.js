@@ -12,8 +12,9 @@ var hydralisk = {name : "hydralisk", frameWidth : 42, frameHeight : 55, sheetWid
 var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.6, speed : 30, health : 100, isAir : false,
                 deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
 
-function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff) {
+function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
+    this.gameUI = ui;
     //Switch case for units.
     switch (unitName) {
         case "mutalisk":
@@ -38,8 +39,8 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             console.log("Illegal Input");
             break;
     }
-    // AIR UNIT
 
+    // AIR UNIT
     this.isAir = this.unit.isAir;
     this.entrance = entrance;
     this.map = map;
@@ -76,11 +77,20 @@ GroundUnit.prototype.constructor = GroundUnit;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 GroundUnit.prototype.update = function () {
+    var that = this;
     if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
         this.hitBase();
     } else if (this.currentHealth <= 0 && !this.isDead) {
         this.isDead = true;
         this.setDeathAnimation();
+
+        //Update UI text for enemies killed
+        that.gameUI.enemiesKilledAdjust(1);
+
+        //Update resources for each kill
+        //Gives 10 resources per kill for now
+        that.gameUI.resourceAdjust(10);
+
     } else if (this.isDead) {
         if (this.deadAnimationTimme > 0) {
             this.deadAnimationTimme -= this.game.clockTick;
@@ -95,7 +105,7 @@ GroundUnit.prototype.update = function () {
         let c = this.map.map[this.row][this.column];
         let tempY = this.y - this.game.clockTick * this.speed;
         let tempRow = Math.floor(tempY / this.map.tileSize);
-        
+
         let tempX = this.x - this.game.clockTick * this.speed;
         let tempColumn = Math.floor(tempX / this.map.tileSize);
         switch (c) {
@@ -126,7 +136,7 @@ GroundUnit.prototype.update = function () {
                     }
                     this.changeDirection('west');
                 }
-                
+
                 break;
             case '^' :
                 if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][tempColumn])) {

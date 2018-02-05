@@ -75,11 +75,11 @@ GameEngine.prototype.draw = function() {
     for (let i = 0; i < this.tileEntities.length; i++) {
         this.tileEntities[i].draw(this.ctx);
     }
-    
+
     if (this.addNewLevel) {
         this.wave.drawWave();
     }
-    
+
     for (let i = 0; i < this.unitEntities.length; i++) {
         this.unitEntities[i].draw(this.ctx);
     }
@@ -91,13 +91,13 @@ GameEngine.prototype.draw = function() {
     for (let i = 0; i < this.scvEntities.length; i++) {
         this.scvEntities[i].draw(this.ctx);
     }
-    
+
     this.tileBox.draw();
-    
+
     for (let i = 0; i < this.projectileEntities.length; i++) {
         this.projectileEntities[i].draw(this.ctx);
     }
-    
+
     this.ctx.restore();
 }
 
@@ -122,6 +122,7 @@ GameEngine.prototype.runLevel = function () {
 
     //Level us finished so allow user to play more levels
     if (this.level.isDone) {
+        this.gameUI.adjustLevel(1); //Updates game text info
         this.addNewLevel = false;
         this.isBootingLevel = true;
         this.waveDelay = .25;
@@ -153,9 +154,9 @@ GameEngine.prototype.update = function () {
                 let distance = Math.sqrt(Math.pow(defender.trueX - enemy.trueX, 2) + Math.pow(defender.trueY - enemy.trueY, 2));
                 if (!defender.removeFromWorld) {
                     if (distance <= defender.unit.range && enemy.currentHealth > 0) {
-                       
+
                         defender.shoot(enemy);
-                        
+
                     }
                 } else {
                     this.defenderEntities.splice(i, 1);
