@@ -122,7 +122,7 @@ GameEngine.prototype.runLevel = function () {
 
     //Level us finished so allow user to play more levels
     if (this.level.isDone) {
-        this.gameUI.levelAdjust(1); //Updates game text info
+        this.gameUI.adjustLevel(1); //Updates game text info
         this.addNewLevel = false;
         this.isBootingLevel = true;
         this.waveDelay = .25;
