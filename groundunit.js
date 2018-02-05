@@ -43,12 +43,12 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             console.log("Illegal Input");
             break;
     }
+    
+    this.entrance = entrance;
+    this.map = map;
     // AIR UNIT
 
     this.isAir = this.unit.isAir;
-    this.entrance = entrance;
-    this.map = map;
-
     if (this.isAir) {
         this.direction = this.map.airDirection;
     } else {
@@ -68,6 +68,7 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
+    this.Flying = this.unit.isAir;
     this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
     this.maxHealth = this.unit.health * theHealthBuff;
