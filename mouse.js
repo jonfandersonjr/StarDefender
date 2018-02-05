@@ -91,18 +91,23 @@ Mouse.prototype.dropTower = function(e) {
     //Drop only if enough resources
     var costOfDrop = 0;
     var okToDrop = false;
+    let defenderKey = null;
     switch (this.defenderName) {
         case "marine":
             costOfDrop = 50;
+            defenderKey = 'm';
             break;
         case "ghost":
             costOfDrop = 100;
+            defenderKey = 's';
             break;
         case "battlecruiser":
             costOfDrop = 150;
+            defenderKey = 'd';
             break;
         case "antiair":
             costOfDrop = 100;
+            defenderKey = 'w';
             break;
         default:
             break;
@@ -120,6 +125,7 @@ Mouse.prototype.dropTower = function(e) {
         let tileLoc = getTile(mouseLoc, this.map);
         if (isValid(this.map, tileLoc.row, tileLoc.col)) {
             this.generator.createDefender(this.defenderName, tileLoc.row, tileLoc.col);
+            this.map.map[tileLoc.row][tileLoc.col] = defenderKey;
             this.isBusy = false; //set isBusy to false so that they can press a button and place another tower
             this.tileBox.isBusy = this.isBusy;
             //Update Resources in UI
@@ -144,13 +150,6 @@ Mouse.prototype.dropTower = function(e) {
                     break;
             }
         }
-
-        //Draw radius of fire - NOT WORKING
-        that.ctx.beginPath();
-        that.ctx.arc(mouseLoc.x, mouseLoc.y, that.radiusOfFire.radius, 0, 2 * Math.PI, false);
-        that.ctx.lineWidth = that.radiusOfFire.thick;
-        that.ctx.strokeStyle = that.radiusOfFire.color;
-        that.ctx.stroke();
     } else {
         return;
     }
@@ -243,12 +242,8 @@ Mouse.prototype.attachListeners = function() {
 
 }
 
-function isValid(map, row, col) {
-    if (map.map[row][col] === '+') {
-        return true;
-    } else {
-        return false;
-    }
+function isValid(map, row, column) {
+    return map.map[row][column] === '+';
 }
 
 //Plays fx sounds
