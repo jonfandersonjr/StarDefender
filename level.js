@@ -9,11 +9,11 @@ var firstLevelHealthBuff = [1, 2, .75, 1, 3, 2, 2.5, 3];
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1, 1];
 */
 
-var firstLevelEnemies = ["zergling", "queen", "zergling", "mutalisk", "ultralisk", "hydralisk", "defiler","sarahkerrigan"];
-var firstLevelWaveSize = [0, 0, 0, 0, 0, 0, 0, 1];
-var firstLevelSpeedBuff = [1, 2, 2, 1.5, 2, 2, 2, 3];
-var firstLevelHealthBuff = [1, 2, .75, 1, 3, 2, 2.5, 3];
-var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1, 1];
+var firstLevelEnemies = ["sarahkerrigan"];
+var firstLevelWaveSize = [5];
+var firstLevelSpeedBuff = [1];
+var firstLevelHealthBuff = [1];
+var firstLevelEntranceNum = [1];
 
 var secondLevelEnemies = ["zergling", "mutalisk", "zergling", "mutalisk", "defiler", "zergling"];
 var secondLevelWaveSize = [5, 3, 7, 4, 10, 10, 8];
