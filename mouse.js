@@ -8,6 +8,7 @@ var costs = {
 };
 
 function Mouse(map, ctx) {
+    this.musicOn = true;
     this.radiusOfFire = {
         radius: 30,
         color: 'rgba(0,0,0, .9)', //white 30%
@@ -16,7 +17,9 @@ function Mouse(map, ctx) {
     this.resources = {
         marine: -50,
         ghost: -100,
-        battlecruiser: -150
+        battlecruiser: -150,
+        scv: -25,
+        antiair: -100
     };
     this.canvas = document.getElementById("gameWorld");
     this.ctx = ctx;
@@ -67,6 +70,7 @@ Mouse.prototype.selectDefender = function(defenderName) {
         if (this.ui.resourcesTotal >= 25) {
             this.generator.createSCV();
             this.ui.resourceAdjust(-25);
+            PlaySound("./soundfx/scv.wav");
             console.log("Generating SCV");
         } else {
             alert("Not enough resources!");
@@ -122,12 +126,21 @@ Mouse.prototype.dropTower = function(e) {
             switch (this.defenderName) {
                 case "marine":
                     that.ui.resourceAdjust(that.resources.marine);
+                    PlaySound("./soundfx/marine.wav");
                     break;
                 case "ghost":
                     that.ui.resourceAdjust(that.resources.ghost);
+                    PlaySound("./soundfx/ghost.wav");
                     break;
                 case "battlecruiser":
                     that.ui.resourceAdjust(that.resources.battlecruiser);
+                    PlaySound("./soundfx/battlecruiser.wav");
+                    break;
+                case "antiair":
+                    that.ui.resourceAdjust(that.resources.antiair);
+                    PlaySound("./soundfx/antiair.wav");
+                    break;
+                default:
                     break;
             }
         }
@@ -195,6 +208,18 @@ Mouse.prototype.attachListeners = function() {
             if (that.canAddLevel) {
                 that.createLevel(1)
             }
+        } else if (e.keyCode === 77) {
+            if (that.musicOn) {
+                that.ui.pauseMusic(true);
+                that.musicOn = false;
+                console.log("Music Paused");
+            } else {
+                that.ui.pauseMusic(false);
+                that.musicOn = true;
+                console.log("Music Started");
+            }
+
+
         }
     }, false);
 
@@ -224,6 +249,13 @@ function isValid(map, row, col) {
     } else {
         return false;
     }
+}
+
+//Plays fx sounds
+function PlaySound(path) {
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', path);
+    audioElement.play();
 }
 
 function TileBox(gameEngine, canvas, ctx, map, isBusy) {

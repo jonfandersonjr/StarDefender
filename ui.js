@@ -21,19 +21,19 @@ function UI(mouse, startHealth, maxHealth,
     this.mouse = mouse;
 
     //Music
-    var audio = new Audio(),
+    this.audio = new Audio(),
         i = 0;
-    var playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3');
-    audio.addEventListener('ended', function() {
+    this.playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3');
+    this.audio.addEventListener('ended', function() {
         i = ++i < playlist.length ? i : 0;
         console.log(i)
-        audio.src = playlist[i];
-        audio.play();
+        this.audio.src = playlist[i];
+        this.audio.play();
     }, true);
-    audio.volume = 0.3;
-    audio.loop = false;
-    audio.src = playlist[0];
-    audio.play();
+    this.audio.volume = 0.3;
+    this.audio.loop = false;
+    this.audio.src = this.playlist[0];
+    this.audio.play();
 
 
     //Game info text panel
@@ -126,6 +126,15 @@ function UI(mouse, startHealth, maxHealth,
     console.log("Default stats text loaded!");
 };
 
+UI.prototype.pauseMusic = function(bool) {
+    var that = this;
+    if (bool) {
+        that.audio.pause();
+    } else {
+        that.audio.play();
+    }
+
+}
 UI.prototype.updateText = function() {
     var tempString = "Health: ";
     tempString += this.healthCur + " / " + this.healthMax + "\n";
@@ -228,8 +237,11 @@ function generateGameInfo() {
     this.gameInfoBox.value = "Star Defender\nA point-click tower defense game based on Starcraft" +
         " with a resource pool and multiple types of enemies that head down lanes" +
         " towards your main base.\nYou can place multiple types of defensive structures" +
-        "along the lane’s paths to defend your base. Waves of enemies will spawn on a timer," +
+        " along the lane’s paths to defend your base. Waves of enemies will spawn on a timer," +
         "but beware each wave gets more difficult, after all waves have been defeated you win the" +
         " round and move on to the next map. If your base’s health reaches zero you lose!" +
-        "\nBuild as if your life depends on it!";
+        "\nBuild as if your life depends on it!" +
+        "\n=========================" +
+        "\nKeybinds:\n(M) toggles music\n" +
+        "(A) Drop Marine\n(S) Drop Ghost\n(D) Drop Battlecruiser\n(W) Drop Anti Air Structure\n(F) Spawn SCV for resource generation";
 }
