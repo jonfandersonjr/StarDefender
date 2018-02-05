@@ -15,7 +15,6 @@ var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth :
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
     this.gameUI = ui;
-    console.log("UI ATTACHED TO GROUNDUNIT " + this.gameUI);
     //Switch case for units.
     switch (unitName) {
         case "mutalisk":
@@ -86,8 +85,11 @@ GroundUnit.prototype.update = function () {
         this.setDeathAnimation();
 
         //Update UI text for enemies killed
-        console.log("Enemy died " + that.gameUI);
         that.gameUI.enemiesKilledAdjust(1);
+
+        //Update resources for each kill
+        //Gives 10 resources per kill for now
+        that.gameUI.resourceAdjust(10);
 
     } else if (this.isDead) {
         if (this.deadAnimationTimme > 0) {
