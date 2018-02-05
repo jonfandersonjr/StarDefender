@@ -4,7 +4,7 @@ var zerglingWave = { name: "zergling", delay: .25, speedBuff: 1, healthBuff: 1};
 var ultraliskWave = { name: "ultralisk", delay: 1, speedBuff: 1, healthBuff: 1};
 var hydraliskWave = { name: "hydralisk", delay: .7, speedBuff: 1, healthBuff: 1};
 var defilerWave = { name: "defiler", delay: .75, speedBuff: 1, healthBuff: 1};
-var sarahkerriganwave = { name: "sarahkerriganwave", delay:.25, speedbuff: 1.5, healthBuff: 2};
+var sarahkerriganwave = { name: "sarahkerrigan", delay:.25, speedbuff: 1.5, healthBuff: 2};
 
 function Wave(generator, game) {
     this.generator = generator;

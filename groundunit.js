@@ -163,6 +163,7 @@ GroundUnit.prototype.update = function () {
                 console.log('go home');
                 break;
         }
+        
       this.getTrueCordinates();
     }
     Entity.prototype.update.call(this);
