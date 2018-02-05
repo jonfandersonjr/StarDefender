@@ -12,6 +12,7 @@ var marine = {
     range: 100,
     cooldown: 0.1,
     damage: 5,
+    mapKey: 'a',
     targetGround: true,
     targetFlying: true,
 };
@@ -27,6 +28,7 @@ var battlecruiser = {
     range: 500,
     cooldown: 5,
     damage: 100,
+    mapKey: 's',
     targetGround: true,
     targetFlying: false,
 };
@@ -42,6 +44,7 @@ var ghost = {
     range: 100,
     cooldown: 0.5,
     damage: 20,
+    mapKey: 'd',
     targetGround: true,
     targetFlying: false,
 };
@@ -58,11 +61,12 @@ var antiair = {
     range: 150,
     cooldown: 0.5,
     damage: 50,
+    mapKey: 'w',
     targetGround: false,
     targetFlying: true,
 };
 
-function Defender(game, unitName, row, column, map, assetManager) {
+function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.AM = assetManager;
     this.gameEngine = game;
     //Switch case for units.
@@ -90,14 +94,13 @@ function Defender(game, unitName, row, column, map, assetManager) {
     this.ctx = this.gameEngine.ctx;
     this.row = row;
     this.column = column;
-    this.x = column * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
-    this.y = row * this.map.tileSize - (this.unit.frameHeight * this.unit.scale - this.map.tileSize)/2;
-    this.trueX = (column + 0.5) * this.map.tileSize;
-    this.trueY = (row + 0.5) * this.map.tileSize;
+    this.calculateXY(this.row, this.column);
+    this.calculateTrueXY();
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;
     this.damage = this.unit.damage;
     this.frame = 0;
+    this.isDummy = isDummy;
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
 
@@ -107,9 +110,9 @@ Defender.prototype.constructor = Defender;
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 Defender.prototype.update = function() {
     if(this.cooldown <= 0) {
-        this.isBusy = false;
-        this.cooldown = this.unit.cooldown;
-        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`);
+    this.isBusy = false;
+    this.cooldown = this.unit.cooldown;
+    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`);
     } else if (this.isBusy) {
         this.cooldown -= this.game.clockTick;
     }
@@ -117,13 +120,27 @@ Defender.prototype.update = function() {
 }
 
 Defender.prototype.draw = function() {
-    this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
+    if(!this.isDummy) {
+        this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
+    } else {
+        this.animation.drawDummyDefender(this.ctx, this.x, this.y, this.frame);
+    }
     Entity.prototype.draw.call(this);
 }
 
+Defender.prototype.calculateXY = function (row, column) {
+    this.x = column * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
+    this.y = row * this.map.tileSize - (this.unit.frameHeight * this.unit.scale - this.map.tileSize)/2;
+}
+
+Defender.prototype.calculateTrueXY = function() {
+    this.trueX = (this.column + 0.5) * this.map.tileSize;
+    this.trueY = (this.row + 0.5) * this.map.tileSize;
+}
+
 Defender.prototype.shoot = function(enemy) {
-    
-    if (!this.isBusy) {
+    console.log(this.isBusy);
+    if (!this.isBusy && !this.isDummy) {
         var audio = new Audio("./music/Pew_Pew-DKnight556-1379997159.mp3");
         //audio.play();
         this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff));

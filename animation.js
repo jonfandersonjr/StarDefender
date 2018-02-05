@@ -83,6 +83,17 @@ Animation.prototype.drawDefender = function(ctx, x, y, frame) {
         this.frameHeight * this.scale);
 }
 
+Animation.prototype.drawDummyDefender = function(ctx, x, y, frame) {
+    ctx.drawImage(this.spriteSheet,
+        frame * this.frameWidth, 0, // source from sheet
+        this.frameWidth, this.frameHeight,
+        x, y,
+        this.frameWidth * this.scale,
+        this.frameHeight * this.scale);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+    ctx.fillRect(x, y, this.frameWidth * this.scale, this.frameHeight * this.scale);
+}
+
 Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTime) {
     this.elapsedTime += tick;
     if (this.isDone()) {

@@ -17,7 +17,13 @@ Generator.prototype.createEnemySecondEntry = function (enemyName, speedBuff, hea
 
 //Creates defender of given type at a location specified by the mouse
 Generator.prototype.createDefender = function(defenderName, row, column) {
-    this.gameEngine.addDefender(new Defender(this.gameEngine, defenderName, row, column, this.map, this.AM));
+    this.gameEngine.addDefender(new Defender(this.gameEngine, defenderName, row, column, this.map, this.AM, false));
+}
+
+Generator.prototype.createDummyDefender = function(defenderName, row, column) {
+    let defender = new Defender(this.gameEngine, defenderName, row, column, this.map, this.AM, true);
+    this.gameEngine.addDefender(defender);
+    return defender;
 }
 
 //Creates an SCV at the base location.

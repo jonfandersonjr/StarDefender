@@ -133,7 +133,6 @@ GameEngine.prototype.findDefender = function (row, column) {
     for (let i = 0; i < this.defenderEntities.length; i++) {
         let defender = this.defenderEntities[i];
         if (defender.row === row && defender.column === column) {
-            defender.removeFromWorld = true;
             return defender;
         }
     }
