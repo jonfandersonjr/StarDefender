@@ -11,7 +11,7 @@ var hydralisk = {name : "hydralisk", frameWidth : 42, frameHeight : 55, sheetWid
                 deathAnimation : {name : "hydralisk", frameWidth : 97, frameHeight : 71, sheetWidth : 12, frameDuration : 0.1, frames : 12, loop : false, scale : 0.4}};
 var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.6, speed : 30, health : 100, isAir : false,
                 deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
-var sarahkerrigan = {name : "sarahkerrigan", frameWidth : 34, frameHeight : 40, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : true, scale : 1, speed : 40, health : 100, isAir : false, Rage : 50,
+var sarahkerrigan = {name : "sarahkerrigan", frameWidth : 34, frameHeight : 40, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : true, scale : 1, speed : 40, health : 100, isAir : false,
                 deathAnimation : {name : "sarahkerrigan", frameWidth : 56, frameHeight : 41, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : false, scale : 1}};
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff) {
@@ -54,10 +54,7 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         this.direction = findDirection(map, entrance.row, entrance.column);
     }
 
-    // If Boss
-    if (this.unit = sarahkerrigan) {
-        this.Rage = this.unit.Rage;
-    }
+    
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
@@ -168,7 +165,6 @@ GroundUnit.prototype.update = function () {
                 console.log('go home');
                 break;
         }
-        
       this.getTrueCordinates();
     }
     Entity.prototype.update.call(this);
@@ -204,10 +200,10 @@ GroundUnit.prototype.hitBase = function () {
     this.removeFromWorld = true;
 }
 
-// boss mechanic for certain units 
+// boss mechanic for certain units, testing
 GroundUnit.prototype.rageMode = function() {
-    if (this.unit = sarahkerrigan && this.unit.currentHealth < 50) {
-        this.unit.speed = this.unit.speed * 2;
+    if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
+        this.speed = this.speed * 10;
     }
 }
 
