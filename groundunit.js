@@ -122,17 +122,22 @@ GroundUnit.prototype.update = function () {
                 }
                 break;
             case '<' :
-                this.x -= this.game.clockTick * this.speed;
-                this.column = Math.floor(this.x / this.map.tileSize);
-                this.row = Math.floor(this.y / this.map.tileSize);
-                c = this.map.map[this.row][this.column];
-                if (!isLegalMove(c)) {
-                    this.x = this.column * this.map.tileSize;
+                if (this.map.map[this.row + 1][this.column] === '^' && isLegalMove(this.map.map[this.row][tempRow])) {
+                    this.y -= this.game.clockTick * this.speed;
+                } else {
+                    this.x -= this.game.clockTick * this.speed;
+                    this.column = Math.floor(this.x / this.map.tileSize);
+                    this.row = Math.floor(this.y / this.map.tileSize);
+                    c = this.map.map[this.row][this.column];
+                    if (!isLegalMove(c)) {
+                        this.x = this.column * this.map.tileSize;
+                    }
+                    this.changeDirection('west');
                 }
-                this.changeDirection('west');
+                
                 break;
             case '^' :
-                if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][this.column])) {
+                if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][tempColumn])) {
                     this.x -= this.game.clockTick * this.speed;
                 } else {
                     this.y -= this.game.clockTick * this.speed;
