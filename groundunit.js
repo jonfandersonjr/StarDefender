@@ -163,8 +163,6 @@ GroundUnit.prototype.update = function () {
                 console.log('go home');
                 break;
         }
-        // boss mode
-        this.rageMode();
       this.getTrueCordinates();
     }
     Entity.prototype.update.call(this);
@@ -224,9 +222,6 @@ GroundUnit.prototype.getTrueCordinates = function() {
     this.trueY = this.y + (this.unit.frameHeight * this.unit.scale / 2);
 }
 
-GroundUnit.prototype.returnAir = function() {
-    return this.isAir;
-}
 
 function isLegalMove(c) {
     return c === '<' || c === '>' || c === '^' || c === 'v';
