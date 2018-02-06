@@ -80,13 +80,14 @@ GameEngine.prototype.draw = function() {
         this.wave.drawWave();
     }
     
+    for (let i = 0; i < this.defenderEntities.length; i++) {
+        this.defenderEntities[i].draw(this.ctx);
+    }
+
     for (let i = 0; i < this.unitEntities.length; i++) {
         this.unitEntities[i].draw(this.ctx);
     }
 
-    for (let i = 0; i < this.defenderEntities.length; i++) {
-        this.defenderEntities[i].draw(this.ctx);
-    }
 
     for (let i = 0; i < this.scvEntities.length; i++) {
         this.scvEntities[i].draw(this.ctx);

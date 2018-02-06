@@ -10,21 +10,21 @@ var firstLevelHealthBuff = [1, 2, .75, 1, 3, 2, 2.5];
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1];
 
 
-/*
+
 var secondLevelEnemies = ["zergling", "mutalisk", "zergling", "mutalisk", "defiler", "zergling"];
 var secondLevelWaveSize = [5, 3, 7, 4, 10, 10, 8];
 var secondLevelSpeedBuff = [1, 1, 2, 1.5, 1, 1.75];
 var secondLevelHealthBuff = [1, 1.5, 2, 3, 4, .5];
 var secondLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1];
-*/
 
 
+/*
 var secondLevelEnemies = ["sarahkerrigan","mutalisk"];
 var secondLevelWaveSize = [5, 3];
 var secondLevelSpeedBuff = [1, 1];
 var secondLevelHealthBuff = [1, 1.5];
 var secondLevelEntranceNum = [1, 2];
-
+*/
 
 function Level(levelNum, waveObject) {
     this.canvas = document.getElementById("gameWorld");
