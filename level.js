@@ -2,19 +2,21 @@
 *  Choose which enemy, quantity, and stat boosts to apply.
 */
 
+//NOTE: Every level must end with spawning a wave of 0 enemies. This is because reasons.
 
-var firstLevelEnemies = ["zergling", "queen", "zergling", "mutalisk", "ultralisk", "hydralisk", "defiler"];
-var firstLevelWaveSize = [5, 4, 6, 3, 4, 5, 10];
-var firstLevelSpeedBuff = [1, 2, 2, 1.5, 2, 2, 2];
-var firstLevelHealthBuff = [1, 2, .75, 1, 3, 2, 2.5];
-var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1];
+//entranceNum = which entry point on the map they enter from.
+var firstLevelEnemies = ["zergling", "queen", "zergling", "mutalisk", "ultralisk", "hydralisk", "defiler", "zergling"];
+var firstLevelWaveSize = [3, 3, 4, 2, 3, 4, 8, 0];
+var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1, 1];
+var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1, 1];
+var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1, 1];
 
 
 
 var secondLevelEnemies = ["zergling", "mutalisk", "zergling", "mutalisk", "defiler", "zergling"];
 var secondLevelWaveSize = [5, 3, 7, 4, 10, 10, 8];
-var secondLevelSpeedBuff = [1, 1, 2, 1.5, 1, 1.75];
-var secondLevelHealthBuff = [1, 1.5, 2, 3, 4, .5];
+var secondLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
+var secondLevelHealthBuff = [1, 1, 1, 1, 1, 1];
 var secondLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1];
 
 
@@ -65,7 +67,7 @@ Level.prototype.createWave = function () {
 
     //Once all the waves have run, end the level.
     //used ">" because update() happens before draw() in the gameEngine.
-    if (this.waveNumber > firstLevelEnemies.length) {
+    if (this.waveNumber >= firstLevelEnemies.length) {
         this.waveNumber = 0;
         this.isDone = true;
         console.log("Level " + this.levelNum + " is done.")

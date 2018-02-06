@@ -23,11 +23,11 @@ function GameEngine(mouse, ui) {
     this.mouse = mouse;
     this.tileBox = null;
     this.wave = null;
-    this.addNewLevel = false;
+    this.addNewLevel = true;
     this.level = null;
-    this.levelNum = 0;
+    this.levelNum = 1;
     this.isBootingLevel = true;
-    this.waveDelay = .25; //time between waves in seconds.
+    this.waveDelay = 5; //time between waves in seconds.
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -76,7 +76,7 @@ GameEngine.prototype.draw = function() {
         this.tileEntities[i].draw(this.ctx);
     }
 
-    if (this.addNewLevel) {
+    if (this.wave.canDraw) {
         this.wave.drawWave();
     }
     
@@ -116,17 +116,18 @@ GameEngine.prototype.runLevel = function () {
     //Sends next wave for this level
     if (this.waveDelay <= 0) {
         this.level.createWave();
-        this.waveDelay = 5;
+        this.waveDelay = 10;
         console.log("Sending wave")
     }
 
     //Level us finished so allow user to play more levels
     if (this.level.isDone) {
         this.gameUI.adjustLevel(1); //Updates game text info
-        this.addNewLevel = false;
+        //this.addNewLevel = false;
         this.isBootingLevel = true;
-        this.waveDelay = .25;
-        this.mouse.levelCompleted();
+        this.waveDelay = 10;
+        this.levelNum++;
+        //this.mouse.levelCompleted();
     };
 }
 
@@ -141,9 +142,8 @@ GameEngine.prototype.findDefender = function (row, column) {
 
 GameEngine.prototype.update = function () {
     //If mouse selects a level, run it.
-    if (this.addNewLevel) {
-        this.runLevel();
-    }
+
+    this.runLevel();
 
     for (let i = 0; i < this.unitEntities.length; i++) {
         let enemy = this.unitEntities[i];

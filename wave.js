@@ -1,6 +1,6 @@
 var mutaliskWave = {name : "mutalisk", delay : .5 , speedBuff: 1, healthBuff : 1};
 var queenWave = { name: "queen", delay: 1, speedBuff: 1, healthBuff: 1};
-var zerglingWave = { name: "zergling", delay: .25, speedBuff: 1, healthBuff: 1};
+var zerglingWave = { name: "zergling", delay: .75, speedBuff: 1, healthBuff: 1};
 var ultraliskWave = { name: "ultralisk", delay: 1, speedBuff: 1, healthBuff: 1};
 var hydraliskWave = { name: "hydralisk", delay: .7, speedBuff: 1, healthBuff: 1};
 var defilerWave = { name: "defiler", delay: .75, speedBuff: 1, healthBuff: 1};
@@ -11,6 +11,7 @@ function Wave(generator, game) {
     this.gameEngine = game;
     this.unitAmount = 0;
     this.delay = .25;
+    this.canDraw = false;
 }
 
 Wave.prototype.constructor = Wave;
@@ -76,6 +77,7 @@ Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealth
     this.unit.healthBuff = theHealthBuff;
     this.delay = this.unit.delay;
     this.unitAmount = unitAmount;
+    this.canDraw = true;
 
     console.log("set a wave of " + this.unit.name);
 }
@@ -83,3 +85,5 @@ Wave.prototype.setWave = function (unitName, unitAmount, theSpeedBuff, theHealth
 Wave.prototype.setLevel = function (theLevel) {
     this.level = theLevel;
 }
+
+
