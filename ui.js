@@ -144,6 +144,7 @@ UI.prototype.updateText = function() {
     tempString += "Wave: " + (this.wavesC+1) + "\n";
     tempString += "Enemies Killed: " + this.enemiesKilled + "\n";
     tempString += "Time: " + this.time + "\n";
+    tempString += "Next Wave: ";
     this.textBox.value = tempString;
 }
 

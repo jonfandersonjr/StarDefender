@@ -44,7 +44,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             console.log("Illegal Input");
             break;
     }
-
     this.entrance = entrance;
     this.map = map;
     // AIR UNIT
@@ -55,7 +54,7 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         this.direction = findDirection(map, entrance.row, entrance.column);
     }
 
-    
+
     this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
@@ -63,9 +62,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     this.deadAnimationTime = this.unit.deathAnimation.frameDuration * this.unit.deathAnimation.frames;
     this.x = entrance.column * this.map.tileSize;
     this.y = entrance.row * this.map.tileSize;
-    if(this.unit.name === 'mutalisk'){
-        console.log('x ' + this.x + ' y ' + this.y);
-    }
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
@@ -172,7 +168,6 @@ GroundUnit.prototype.update = function () {
                 }
                 break;
             default:
-                console.log('go home');
                 break;
         }
       this.getTrueCordinates();
