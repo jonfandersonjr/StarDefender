@@ -32,14 +32,14 @@ textarea {
 
 #uiText {
     position: absolute;
-    right: 30px;
+    left: 1070px;
     top: 0px;
 }
 
 #uiButtons {
     position: absolute;
-    right: 30px;
-    top: 310px;
+    left: 1070px;
+    top: 360px;
     z-index: 3;
 }
 

@@ -46,10 +46,8 @@ AM.downloadAll(function() {
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
-    var ui = new UI(myMouse, 100, 100, 1000, 1, 0, 0);
-    console.log("UI Loaded!");
+    var ui = new UI(myMouse, 100, 100, 400, 1, 0, 0);
     myMouse.attachUI(ui);
-    console.log("UI Attached to Mouse");
 
     var gameEngine = new GameEngine(myMouse, ui);
     myMouse.init(gameEngine);
@@ -69,8 +67,4 @@ AM.downloadAll(function() {
 
     //Map Load
     map.createMap(gameEngine, AM);
-    console.log("Map Loaded!");
-
-    console.log("Enemies Loaded!");
-
 });

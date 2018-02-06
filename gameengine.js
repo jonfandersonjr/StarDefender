@@ -79,7 +79,7 @@ GameEngine.prototype.draw = function() {
     if (this.wave.canDraw) {
         this.wave.drawWave();
     }
-    
+
     for (let i = 0; i < this.defenderEntities.length; i++) {
         this.defenderEntities[i].draw(this.ctx);
     }
@@ -87,7 +87,7 @@ GameEngine.prototype.draw = function() {
     for (let i = 0; i < this.unitEntities.length; i++) {
         this.unitEntities[i].draw(this.ctx);
     }
-    
+
     for (let i = 0; i < this.scvEntities.length; i++) {
         this.scvEntities[i].draw(this.ctx);
     }
@@ -120,7 +120,7 @@ GameEngine.prototype.runLevel = function () {
         console.log("Sending wave")
     }
 
-    //Level us finished so allow user to play more levels
+    //Level is finished so allow user to play more levels
     if (this.level.isDone) {
         this.gameUI.adjustLevel(1); //Updates game text info
         //this.addNewLevel = false;

@@ -73,7 +73,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
             this.generator.createSCV();
             this.ui.resourceAdjust(-25);
             PlaySound("./soundfx/scv.wav");
-            console.log("Generating SCV");
         } else {
             alert("Not enough resources!");
         }
@@ -81,7 +80,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
         this.isBusy = true; //makes mouse unable to select other defenders, one time drop
         this.tileBox.isBusy = this.isBusy;
         this.defenderName = defenderName;
-        console.log("Defender " + this.defenderName + " Selected!");
     }
 
 };
@@ -115,7 +113,6 @@ Mouse.prototype.dropTower = function(e) {
 
     if (this.isBusy && this.ui.resourcesTotal >= costOfDrop) {
         //drop tower on location
-        console.log("Dropping tower");
         let mouseLoc = getMousePos(this.canvas, event);
         let tileLoc = getTile(mouseLoc, this.map);
         if (isValid(this.map, tileLoc.row, tileLoc.column)) {
@@ -144,9 +141,9 @@ Mouse.prototype.dropTower = function(e) {
             default:
                 break;
             }
-            
+
             this.isMoving = false;
-            
+
         }
     } else {
         alert("Not enough resources!");
@@ -213,22 +210,16 @@ Mouse.prototype.attachListeners = function() {
     //Keypress binds
     this.canvas.addEventListener("keydown", function(e) {
         if (e.keyCode === 70) {
-            console.log("Pressed F for SCV");
             that.selectDefender("scv");
         } else if (e.keyCode === 65) {
-            console.log("Pressed A for Marine");
             that.selectDefender("marine");
         } else if (e.keyCode === 83) {
-            console.log("Pressed S for Ghost");
             that.selectDefender("ghost");
         } else if (e.keyCode === 68) {
-            console.log("Pressed D for Battlecruiser");
             that.selectDefender("battlecruiser");
         } else if (e.keyCode === 87) {
-            console.log("Pressed W for Anti-Air");
             that.selectDefender("antiair");
         } else if (e.keyCode === 32) {
-            console.log("Pressed Space");
             if (that.canAddLevel) {
                 that.createLevel(1)
             }
@@ -236,11 +227,9 @@ Mouse.prototype.attachListeners = function() {
             if (that.musicOn) {
                 that.ui.pauseMusic(true);
                 that.musicOn = false;
-                console.log("Music Paused");
             } else {
                 that.ui.pauseMusic(false);
                 that.musicOn = true;
-                console.log("Music Started");
             }
 
 
@@ -256,11 +245,9 @@ Mouse.prototype.attachListeners = function() {
         }
     }, false);
 
-    console.log('Input started');
 
     this.canvas.addEventListener("contextmenu", function(e) {
         e.preventDefault();
-        console.log("right clicked");
     }, false);
 
     // Optional events
@@ -317,7 +304,7 @@ function isDefender(mapKey) {
 
 //Incomplete function. Will be expanded later.
 function copyDefender(defender) {
-    
+
 }
 
 function getTile(mouseLoc, map) {
