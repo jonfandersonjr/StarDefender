@@ -46,7 +46,7 @@ AM.downloadAll(function() {
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
-    var ui = new UI(myMouse, 100, 100, 100, 1, 0, 0);
+    var ui = new UI(myMouse, 100, 100, 1000, 1, 0, 0);
     console.log("UI Loaded!");
     myMouse.attachUI(ui);
     console.log("UI Attached to Mouse");

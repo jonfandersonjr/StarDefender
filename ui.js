@@ -135,6 +135,7 @@ UI.prototype.pauseMusic = function(bool) {
     }
 
 }
+
 UI.prototype.updateText = function() {
     var tempString = "Health: ";
     tempString += this.healthCur + " / " + this.healthMax + "\n";
