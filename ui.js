@@ -26,7 +26,6 @@ function UI(mouse, startHealth, maxHealth,
     this.playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3');
     this.audio.addEventListener('ended', function() {
         i = ++i < playlist.length ? i : 0;
-        console.log(i)
         this.audio.src = playlist[i];
         this.audio.play();
     }, true);
@@ -41,7 +40,6 @@ function UI(mouse, startHealth, maxHealth,
     drawImages(this.ctx);
     this.canvas.addEventListener("click", function(e) {
         var mousePos = getMousePos(document.getElementById("uiButtons"), e);
-        console.log(mousePos);
         if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
             mouse.selectDefender("marine");
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
@@ -123,7 +121,6 @@ function UI(mouse, startHealth, maxHealth,
 
     //Load Default Text
     this.updateText();
-    console.log("Default stats text loaded!");
 };
 
 UI.prototype.pauseMusic = function(bool) {
