@@ -182,7 +182,7 @@ Mouse.prototype.attachListeners = function() {
                 that.pickedUpDefender.calculateTrueXY();
                 that.isBusy = false;
                 that.tileBox.isBusy = false;
-                that.map.map[tileLoc.row][tileLoc.column] = 'a';
+                that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.unit.mapKey;
                 console.dir(that.pickedUpDefender);
             }
         } else if (!that.isBusy && !that.isMoving){ //Pick up a defender.
@@ -196,7 +196,7 @@ Mouse.prototype.attachListeners = function() {
                 that.pickedUpDefender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
                 that.pickedUpDefender.isDummy = true;
                 that.defenderName = that.pickedUpDefender.unit.name;
-                that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.unit.mapKey;
+                that.map.map[tileLoc.row][tileLoc.column] = '+';
             }
         }
     }, false);
