@@ -42,12 +42,20 @@ function UI(mouse, startHealth, maxHealth,
         var mousePos = getMousePos(document.getElementById("uiButtons"), e);
         if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
             mouse.selectDefender("marine");
+            mouse.unitCost = 50;
+            mouse.tileBox.unitCost = 50;
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
             mouse.selectDefender("ghost");
+            mouse.unitCost = 100;
+            mouse.tileBox.unitCost = 100;
         } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
             mouse.selectDefender("battlecruiser");
+            mouse.unitCost = 150;
+            mouse.tileBox.unitCost = 150;
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 110 && mousePos.y <= 210) {
             mouse.selectDefender("antiair");
+            mouse.unitCost = 100;
+            mouse.tileBox.unitCost = 100;
         } else if (mousePos.x >= 58 && mousePos.x <= 162 && mousePos.y >= 210 && mousePos.y <= 320) {
             mouse.selectDefender("scv");
         }

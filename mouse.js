@@ -34,6 +34,7 @@ function Mouse(map, ctx) {
     this.canAddLevel = true;
     this.pickedUpDefender = {defender : null, row : 0, column : 0};
     this.defenderKey = null;
+    this.unitCost = null;
     //Layer 2 canvas for drawing mouse move
     this.canvas2 = document.getElementById("gameWorld2");
     this.ctx2 = this.canvas2.getContext("2d");
@@ -42,7 +43,7 @@ function Mouse(map, ctx) {
 
 Mouse.prototype.init = function(gameEngine) {
     this.gameEngine = gameEngine;
-    this.tileBox = new TileBox(this.gameEngine, this.canvas, this.ctx, this.map, this.isBusy);
+    this.tileBox = new TileBox(this.gameEngine, this.canvas, this.ctx, this.map, this.isBusy, this.ui);
     this.gameEngine.tileBox = this.tileBox;
 }
 
@@ -89,29 +90,28 @@ Mouse.prototype.dropTower = function(e) {
     //Drop tower if something was selected from buttons isBusy = true
 
     //Drop only if enough resources
-    var costOfDrop = 0;
     switch (this.defenderName) {
         case "marine":
-            costOfDrop = 50;
+            this.unitCost = 50;
             defenderKey = 'a';
             break;
         case "ghost":
-            costOfDrop = 100;
+            this.unitCost = 100;
             defenderKey = 's';
             break;
         case "battlecruiser":
-            costOfDrop = 150;
+            this.unitCost = 150;
             defenderKey = 'd';
             break;
         case "antiair":
-            costOfDrop = 100;
+            this.unitCost = 100;
             defenderKey = 'w';
             break;
         default:
             break;
     }
 
-    if (this.isBusy && this.ui.resourcesTotal >= costOfDrop) {
+    if (this.isBusy && this.ui.resourcesTotal >= this.unitCost) {
         //drop tower on location
         let mouseLoc = getMousePos(this.canvas, event);
         let tileLoc = getTile(mouseLoc, this.map);
@@ -145,8 +145,6 @@ Mouse.prototype.dropTower = function(e) {
             this.isMoving = false;
 
         }
-    } else {
-        alert("Not enough resources!");
     }
 };
 
@@ -273,12 +271,13 @@ function PlaySound(path) {
     audioElement.play();
 }
 
-function TileBox(gameEngine, canvas, ctx, map, isBusy) {
+function TileBox(gameEngine, canvas, ctx, map, isBusy, gameUI) {
     this.gameEngine = gameEngine;
     this.canvas = canvas;
     this.ctx = ctx;
     this.map = map;
     this.isBusy = isBusy;
+    this.gameUI = gameUI;
 }
 
 TileBox.prototype.update = function() {
@@ -295,10 +294,10 @@ TileBox.prototype.draw = function() {
         this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row &&
         this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col &&
         this.isBusy) {
-        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column)) {
-            this.ctx.strokeStyle = 'rgb(0, 255, 38)';
+        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.unitCost <= this.gameUI.resourcesTotal) {
+            this.ctx.strokeStyle = 'rgb(0, 255, 38)'; //Green box
         } else {
-            this.ctx.strokeStyle = 'rgb(255, 0, 12)';
+            this.ctx.strokeStyle = 'rgb(255, 0, 12)'; //Red box
         }
 
         this.ctx.strokeRect(this.x, this.y, this.map.tileSize, this.map.tileSize);
