@@ -84,15 +84,19 @@ Animation.prototype.drawDefender = function(ctx, x, y, frame) {
         this.frameHeight * this.scale);
 }
 
-Animation.prototype.drawDummyDefender = function(ctx, x, y, frame) {
+Animation.prototype.drawDummyDefender = function(ctx, x, y, frame, defenderName) {
     ctx.drawImage(this.spriteSheet,
         frame * this.frameWidth, 0, // source from sheet
         this.frameWidth, this.frameHeight,
         x, y,
         this.frameWidth * this.scale,
         this.frameHeight * this.scale);
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-    ctx.fillRect(x, y, this.frameWidth * this.scale, this.frameHeight * this.scale);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+    if (defenderName === 'marine') {
+        ctx.fillRect(x + this.frameWidth * this.scale / 4, y + this.frameWidth * this.scale / 4, this.frameWidth * this.scale / 2, this.frameHeight * this.scale / 2);
+    } else {
+        ctx.fillRect(x, y, this.frameWidth * this.scale, this.frameHeight * this.scale);
+    }
 }
 
 Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTime) {

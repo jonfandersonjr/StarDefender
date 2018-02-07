@@ -32,7 +32,7 @@ function Mouse(map, ctx) {
     this.isBusy = false;
     this.isMoving = false;
     this.canAddLevel = true;
-    this.pickedUpDefender = false;
+    this.pickedUpDefender = {defender : null, row : 0, column : 0};
     this.defenderKey = null;
     //Layer 2 canvas for drawing mouse move
     this.canvas2 = document.getElementById("gameWorld2");
@@ -173,14 +173,13 @@ Mouse.prototype.attachListeners = function() {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
             if (isValid(this.map, tileLoc.row, tileLoc.column)){
                 that.isMoving = false;
-                that.pickedUpDefender.isDummy = false;
-                that.pickedUpDefender.row = tileLoc.row;
-                that.pickedUpDefender.column = tileLoc.column;
-                that.pickedUpDefender.calculateTrueXY();
+                that.pickedUpDefender.defender.isDummy = false;
+                that.pickedUpDefender.defender.row = tileLoc.row;
+                that.pickedUpDefender.defender.column = tileLoc.column;
+                that.pickedUpDefender.defender.calculateTrueXY();
                 that.isBusy = false;
                 that.tileBox.isBusy = false;
-                that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.unit.mapKey;
-                console.dir(that.pickedUpDefender);
+                that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.defender.unit.mapKey;
             }
         } else if (!that.isBusy && !that.isMoving){ //Pick up a defender.
             //move unit
@@ -190,8 +189,10 @@ Mouse.prototype.attachListeners = function() {
                 that.isMoving = true;
                 that.isBusy = true;
                 that.tileBox.isBusy = true;
-                that.pickedUpDefender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
-                that.pickedUpDefender.isDummy = true;
+                that.pickedUpDefender.defender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
+                that.pickedUpDefender.row = tileLoc.row;
+                that.pickedUpDefender.column = tileLoc.column;
+                that.pickedUpDefender.defender.isDummy = true;
                 that.map.map[tileLoc.row][tileLoc.column] = '+';
             }
         }
@@ -202,7 +203,7 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
         if(that.isMoving) {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
-            that.pickedUpDefender.calculateXY(tileLoc.row, tileLoc.column);
+            that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
         }
     }, false);
 
@@ -247,7 +248,14 @@ Mouse.prototype.attachListeners = function() {
 
     this.canvas.addEventListener("contextmenu", function(e) {
         e.preventDefault();
-        that.iscance
+        if (that.isMoving) {
+            that.pickedUpDefender.defender.calculateXY(that.pickedUpDefender.row, that.pickedUpDefender.column);
+            that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = that.pickedUpDefender.defender.unit.mapKey;
+            that.pickedUpDefender.defender.isDummy = false;
+        }
+        that.isBusy = false;
+        that.tileBox.isBusy = false;
+        that.isMoving = false;
     }, false);
 
     // Optional events
