@@ -139,15 +139,16 @@ Defender.prototype.calculateTrueXY = function() {
 }
 
 Defender.prototype.shoot = function(enemy) {
-    if (!this.isBusy && !this.isDummy) {
-        
-        if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir ) {
-            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff));
-            this.isBusy = true;
-            this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
+    if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir ) {
+        if (!this.isDummy) {
+        this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
+            if (!this.isBusy) {
+                this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2));
+                this.isBusy = true;
+                
+                this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
+            }
         }
-        
     }
 }
 

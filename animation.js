@@ -54,24 +54,25 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
         x, y,
         this.frameWidth * this.scale,
         this.frameHeight * this.scale);
-    ctx.fillStyle = "green";
-    ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
-    if (currentHealth !== this.lastHealth) {
-        this.damageTime = 1;
+    if (currentHealth > 0) {
+        ctx.fillStyle = "green";
+        ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
+        if (currentHealth !== this.lastHealth) {
+            this.damageTime = 1;
+        }
+        if (this.damageTime > 0 ) {
+            ctx.fillStyle = "red";
+            ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2,this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
+            this.lastHealth = currentHealth;
+        }
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "black";
+        var amountOfBlocks = Math.floor(maxHealth / 20);
+        var blockWidth = this.frameWidth * this.scale / amountOfBlocks;
+        for (let i = 0; i < amountOfBlocks; i++) {
+            ctx.strokeRect(x + i * blockWidth, y - 2, blockWidth, 5);
+        }
     }
-    if (this.damageTime > 0) {
-        ctx.fillStyle = "red";
-        ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2,this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
-        this.lastHealth = currentHealth;
-    }
-    ctx.lineWidth = 0.5;
-    ctx.strokeStyle = "black";
-    var amountOfBlocks = Math.floor(maxHealth / 20);
-    var blockWidth = this.frameWidth * this.scale / amountOfBlocks;
-    for (let i = 0; i < amountOfBlocks; i++) {
-        ctx.strokeRect(x + i * blockWidth, y - 2, blockWidth, 5);
-    }
-    
 }
 
 Animation.prototype.drawDefender = function(ctx, x, y, frame) {

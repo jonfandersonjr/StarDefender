@@ -30,8 +30,8 @@ function Mouse(map, ctx) {
     this.defenderName = null;
     this.attachListeners();
     this.isBusy = false;
-    this.canAddLevel = true;
     this.isMoving = false;
+    this.canAddLevel = true;
     this.pickedUpDefender = false;
     this.defenderKey = null;
     //Layer 2 canvas for drawing mouse move
@@ -192,7 +192,6 @@ Mouse.prototype.attachListeners = function() {
                 that.tileBox.isBusy = true;
                 that.pickedUpDefender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
                 that.pickedUpDefender.isDummy = true;
-                that.defenderName = that.pickedUpDefender.unit.name;
                 that.map.map[tileLoc.row][tileLoc.column] = '+';
             }
         }
@@ -248,6 +247,7 @@ Mouse.prototype.attachListeners = function() {
 
     this.canvas.addEventListener("contextmenu", function(e) {
         e.preventDefault();
+        that.iscance
     }, false);
 
     // Optional events
