@@ -34,7 +34,7 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
 }
 
 Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHealth) {
-    if(this.damageTime > 0) {
+    if (this.damageTime > 0) {
         this.damageTime -= tick;
     }
     this.elapsedTime += tick;
@@ -60,9 +60,9 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
         if (currentHealth !== this.lastHealth) {
             this.damageTime = 1;
         }
-        if (this.damageTime > 0 ) {
+        if (this.damageTime > 0) {
             ctx.fillStyle = "red";
-            ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2,this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
+            ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2, this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
             this.lastHealth = currentHealth;
         }
         ctx.lineWidth = 0.5;
@@ -105,7 +105,7 @@ Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTim
         if (this.loop)
             this.elapsedTime = 0;
     }
-    if (deathAnimationTime >= 1){
+    if (deathAnimationTime >= 1) {
         var frame = 0;
     } else {
         var frame = this.currentFrame();

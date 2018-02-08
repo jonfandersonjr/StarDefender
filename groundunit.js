@@ -1,4 +1,5 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
+<<<<<<< HEAD
 var mutalisk = {name : "mutalisk", frameWidth : 64, frameHeight : 72, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 50, health : 100, isAir : true,
                 damage : 5 , deathAnimation : {name : "mutalisk", frameWidth : 68, frameHeight : 68, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : false, scale : 0.5}};
 var queen = {name : "queen", frameWidth : 75, frameHeight : 68, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.5, speed : 25, health : 100, isAir : false,
@@ -13,6 +14,169 @@ var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth :
                 damage: 5, deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
 var sarahkerrigan = {name : "sarahkerrigan", frameWidth : 34, frameHeight : 40, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : true, scale : 1, speed : 40, health : 100, isAir : false,
                     damage: 1000, deathAnimation : {name : "sarahkerrigan", frameWidth : 56, frameHeight : 41, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : false, scale : 1}};
+=======
+var mutalisk = {
+    name: "mutalisk",
+    frameWidth: 64,
+    frameHeight: 72,
+    sheetWidth: 5,
+    frameDuration: 0.1,
+    frames: 5,
+    loop: true,
+    scale: 0.5,
+    speed: 50,
+    health: 100,
+    isAir: true,
+    deathAnimation: {
+        name: "mutalisk",
+        frameWidth: 68,
+        frameHeight: 68,
+        sheetWidth: 9,
+        frameDuration: 0.1,
+        frames: 9,
+        loop: false,
+        scale: 0.5
+    }
+};
+var queen = {
+    name: "queen",
+    frameWidth: 75,
+    frameHeight: 68,
+    sheetWidth: 5,
+    frameDuration: 0.1,
+    frames: 5,
+    loop: true,
+    scale: 0.5,
+    speed: 25,
+    health: 100,
+    isAir: false,
+    deathAnimation: {
+        name: "queen",
+        frameWidth: 114,
+        frameHeight: 103,
+        sheetWidth: 9,
+        frameDuration: 0.15,
+        frames: 9,
+        loop: false,
+        scale: 0.5
+    }
+};
+var zergling = {
+    name: "zergling",
+    frameWidth: 40,
+    frameHeight: 39,
+    sheetWidth: 7,
+    frameDuration: 0.1,
+    frames: 7,
+    loop: true,
+    scale: 0.6,
+    speed: 75,
+    health: 100,
+    isAir: false,
+    deathAnimation: {
+        name: "zergling",
+        frameWidth: 65,
+        frameHeight: 53,
+        sheetWidth: 7,
+        frameDuration: 0.15,
+        frames: 7,
+        loop: false,
+        scale: 0.5
+    }
+};
+var ultralisk = {
+    name: "ultralisk",
+    frameWidth: 98,
+    frameHeight: 105,
+    sheetWidth: 7,
+    frameDuration: 0.1,
+    frames: 7,
+    loop: true,
+    scale: 0.35,
+    speed: 15,
+    health: 100,
+    isAir: false,
+    deathAnimation: {
+        name: "ultralisk",
+        frameWidth: 98,
+        frameHeight: 105,
+        sheetWidth: 10,
+        frameDuration: 0.1,
+        frames: 10,
+        loop: false,
+        scale: 0.35
+    }
+};
+var hydralisk = {
+    name: "hydralisk",
+    frameWidth: 42,
+    frameHeight: 55,
+    sheetWidth: 5,
+    frameDuration: 0.1,
+    frames: 5,
+    loop: true,
+    scale: 0.6,
+    speed: 50,
+    health: 100,
+    isAir: false,
+    deathAnimation: {
+        name: "hydralisk",
+        frameWidth: 97,
+        frameHeight: 71,
+        sheetWidth: 12,
+        frameDuration: 0.1,
+        frames: 12,
+        loop: false,
+        scale: 0.4
+    }
+};
+var defiler = {
+    name: "defiler",
+    frameWidth: 69,
+    frameHeight: 59,
+    sheetWidth: 5,
+    frameDuration: 0.1,
+    frames: 5,
+    loop: true,
+    scale: 0.6,
+    speed: 30,
+    health: 100,
+    isAir: false,
+    deathAnimation: {
+        name: "defiler",
+        frameWidth: 67,
+        frameHeight: 44,
+        sheetWidth: 10,
+        frameDuration: 0.1,
+        frames: 10,
+        loop: false,
+        scale: 0.5
+    }
+};
+var sarahkerrigan = {
+    name: "sarahkerrigan",
+    frameWidth: 34,
+    frameHeight: 40,
+    sheetWidth: 9,
+    frameDuration: 0.1,
+    frames: 9,
+    loop: true,
+    scale: 1,
+    speed: 40,
+    health: 100,
+    isAir: false,
+    deathAnimation: {
+        name: "sarahkerrigan",
+        frameWidth: 56,
+        frameHeight: 41,
+        sheetWidth: 9,
+        frameDuration: 0.1,
+        frames: 9,
+        loop: false,
+        scale: 1
+    }
+};
+>>>>>>> 6b67c756d213c700d701e37f41606c20444a6ace
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
@@ -21,24 +185,31 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     switch (unitName) {
         case "mutalisk":
             this.unit = mutalisk;
+            this.deathSound = './soundfx/deathMutalisk.wav';
             break;
         case "queen":
             this.unit = queen;
+            this.deathSound = './soundfx/deathQueen.wav';
             break;
         case "zergling":
             this.unit = zergling;
+            this.deathSound = './soundfx/deathZergling.wav';
             break;
         case "ultralisk":
             this.unit = ultralisk;
+            this.deathSound = './soundfx/deathUltralisk.wav';
             break;
         case "hydralisk":
             this.unit = hydralisk;
+            this.deathSound = './soundfx/deathHydralisk.wav';
             break;
         case "defiler":
             this.unit = defiler;
+            this.deathSound = './soundfx/deathDefiler.wav';
             break;
         case "sarahkerrigan":
             this.unit = sarahkerrigan;
+            this.deathSound = './soundfx/deathKerrigan.wav';
             break;
         default:
             console.log("Illegal Input");
@@ -76,8 +247,16 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
 GroundUnit.prototype = new Entity();
 GroundUnit.prototype.constructor = GroundUnit;
 
+//Function to play death sounds on death
+function PlayDeath(path) {
+    var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', path);
+    audioElement.volume = 0.2;
+    audioElement.play();
+}
+
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
-GroundUnit.prototype.update = function () {
+GroundUnit.prototype.update = function() {
     var that = this;
     if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
         this.hitBase();
@@ -92,6 +271,9 @@ GroundUnit.prototype.update = function () {
         //Gives 10 resources per kill for now
         that.gameUI.resourceAdjust(10);
 
+        //Play death sounds
+        PlayDeath(this.deathSound);
+
     } else if (this.isDead) {
         if (this.deadAnimationTimme > 0) {
             this.deadAnimationTimme -= this.game.clockTick;
@@ -99,7 +281,7 @@ GroundUnit.prototype.update = function () {
             this.removeFromWorld = true;
         }
     } else if (this.isAir) {
-            this.flyingMovement();
+        this.flyingMovement();
     } else {
         this.column = Math.floor(this.x / this.map.tileSize);
         this.row = Math.floor(this.y / this.map.tileSize);
@@ -110,7 +292,7 @@ GroundUnit.prototype.update = function () {
         let tempX = this.x - this.game.clockTick * this.speed;
         let tempColumn = Math.floor(tempX / this.map.tileSize);
         switch (c) {
-            case '>' :
+            case '>':
                 if (this.map.map[this.row + 1][this.column] === '^' && isLegalMove(this.map.map[tempRow][this.column])) {
                     this.y -= this.game.clockTick * this.speed;
                 } else {
@@ -124,7 +306,7 @@ GroundUnit.prototype.update = function () {
                     this.changeDirection('east');
                 }
                 break;
-            case '<' :
+            case '<':
                 if (this.map.map[this.row + 1][this.column] === '^' && isLegalMove(this.map.map[this.row][tempRow])) {
                     this.y -= this.game.clockTick * this.speed;
                 } else {
@@ -139,7 +321,7 @@ GroundUnit.prototype.update = function () {
                 }
 
                 break;
-            case '^' :
+            case '^':
                 if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][tempColumn])) {
                     this.x -= this.game.clockTick * this.speed;
                 } else {
@@ -153,8 +335,8 @@ GroundUnit.prototype.update = function () {
                     this.changeDirection('north');
                 }
                 break;
-            case 'v' :
-                if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][tempColumn])){
+            case 'v':
+                if (this.map.map[this.row][this.column + 1] === '<' && isLegalMove(this.map.map[this.row][tempColumn])) {
                     this.x -= this.game.clockTick * this.speed;
                 } else {
                     this.y += this.game.clockTick * this.speed;
@@ -170,13 +352,13 @@ GroundUnit.prototype.update = function () {
             default:
                 break;
         }
-      this.getTrueCordinates();
+        this.getTrueCordinates();
     }
     Entity.prototype.update.call(this);
 }
 
-GroundUnit.prototype.draw = function () {
-    if (!this.isDead){
+GroundUnit.prototype.draw = function() {
+    if (!this.isDead) {
         this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth);
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
@@ -189,7 +371,7 @@ GroundUnit.prototype.changeDirection = function(direction) {
     this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`);
 }
 
-GroundUnit.prototype.flyingMovement = function () {
+GroundUnit.prototype.flyingMovement = function() {
     let y = this.entrance.row * this.map.tileSize;
     let x = this.entrance.column * this.map.tileSize;
     let slope = (this.map.baseY - y) / (this.map.baseX - x);
@@ -198,7 +380,7 @@ GroundUnit.prototype.flyingMovement = function () {
     this.getTrueCordinates();
 }
 
-GroundUnit.prototype.hitBase = function () {
+GroundUnit.prototype.hitBase = function() {
     //**base loses health**
     //**image for base taking damage**
     this.gameUI.dmg(this.unit.damage);
@@ -238,16 +420,16 @@ function isLegalMove(c) {
 function findDirection(map, row, col) {
     let c = map.map[row][col];
     switch (c) {
-        case '<' :
+        case '<':
             return "west"
             break;
-        case '>' :
+        case '>':
             return "east"
             break;
-        case 'v' :
+        case 'v':
             return "south"
             break;
-        case '^' :
+        case '^':
             return 'north'
             break;
         default:
