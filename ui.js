@@ -229,20 +229,8 @@ UI.prototype.updateTime = function(value) {
 
 //Updates time before next wave using wave.js
 UI.prototype.waveTimeGet = function(theTime) {
-    var tempTime = theTime;
-    if (tempTime < 0 && tempTime >= -10) {
-        tempTime *= -1;
-    } else {
-        tempTime -= 99990;
-    }
-
-    if (tempTime >= 0 && tempTime < 10) {
-        this.waveTime = "00:0" + tempTime;
-    } else if (tempTime === 10) {
-        this.waveTime = "00:" + tempTime;
-    } else {
-        this.waveTime = "--:--";
-    }
+    var tempTime = Math.floor(theTime);
+    this.waveTime = "00:0" + tempTime;
     this.updateText();
 }
 
