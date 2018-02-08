@@ -131,6 +131,7 @@ function UI(mouse, startHealth, maxHealth,
     this.updateText();
 };
 
+//Pauses music or plays music based on boolean toggle
 UI.prototype.pauseMusic = function(bool) {
     var that = this;
     if (bool) {
@@ -141,12 +142,13 @@ UI.prototype.pauseMusic = function(bool) {
 
 }
 
+//Updates stats text box with most recent data
 UI.prototype.updateText = function() {
     var tempString = "Health: ";
     tempString += this.healthCur + " / " + this.healthMax + "\n";
     tempString += "Resources: " + this.resourcesTotal + "\n";
     tempString += "Level: " + this.curLevel + "\n";
-    tempString += "Wave: " + (this.wavesC+1) + "\n";
+    tempString += "Wave: " + (this.wavesC + 1) + "\n";
     tempString += "Enemies Killed: " + this.enemiesKilled + "\n";
     tempString += "Time: " + this.time + "\n";
     tempString += "Next Wave: ";
@@ -195,6 +197,7 @@ UI.prototype.reset = function() {
     this.updateText();
 }
 
+//Updates time using gameEngine and formats in a user friendly time
 UI.prototype.updateTime = function(value) {
     var that = this;
     var timeString = parseFloat(value).toFixed(2);
@@ -216,7 +219,6 @@ UI.prototype.updateTime = function(value) {
         }
         this.time = timeString;
     }
-
     this.updateText();
 }
 
@@ -241,14 +243,8 @@ function generateGameInfo() {
     this.gameInfoBox.addEventListener('mousedown', function(e) {
         e.preventDefault();
     }, false);
-    this.gameInfoBox.value = "Star Defender\nA point-click tower defense game based on Starcraft" +
-        " with a resource pool and multiple types of enemies that head down lanes" +
-        " towards your main base.\nYou can place multiple types of defensive structures" +
-        " along the lane’s paths to defend your base. Waves of enemies will spawn on a timer," +
-        "but beware each wave gets more difficult, after all waves have been defeated you win the" +
-        " round and move on to the next map. If your base’s health reaches zero you lose!" +
-        "\nBuild as if your life depends on it!" +
+    this.gameInfoBox.value = "Star Defender\n" +
         "\n=========================" +
-        "\nKeybinds:\n(M) toggles music\n" +
+        "\nKeybinds:\n(M) Toggles Music\n" +
         "(A) Drop Marine\n(S) Drop Ghost\n(D) Drop Battlecruiser\n(W) Drop Anti Air Structure\n(F) Spawn SCV for resource generation";
 }

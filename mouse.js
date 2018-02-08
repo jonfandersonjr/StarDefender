@@ -32,7 +32,11 @@ function Mouse(map, ctx) {
     this.isBusy = false;
     this.isMoving = false;
     this.canAddLevel = true;
-    this.pickedUpDefender = {defender : null, row : 0, column : 0};
+    this.pickedUpDefender = {
+        defender: null,
+        row: 0,
+        column: 0
+    };
     this.defenderKey = null;
     this.unitCost = null;
     //Layer 2 canvas for drawing mouse move
@@ -73,9 +77,9 @@ Mouse.prototype.selectDefender = function(defenderName) {
         if (this.ui.resourcesTotal >= 25) {
             this.generator.createSCV();
             this.ui.resourceAdjust(-25);
-            PlaySound("./soundfx/scv.wav");
+            this.PlaySound("./soundfx/scv.wav");
         } else {
-            alert("Not enough resources!");
+            this.PlaySound("./soundfx/minerals.wav");
         }
     } else {
         this.isBusy = true; //makes mouse unable to select other defenders, one time drop
@@ -122,28 +126,27 @@ Mouse.prototype.dropTower = function(e) {
             this.tileBox.isBusy = this.isBusy;
             //Update Resources in UI
             switch (this.defenderName) {
-            case "marine":
-                that.ui.resourceAdjust(that.resources.marine);
-                PlaySound("./soundfx/marine.wav");
-                break;
-            case "ghost":
-                that.ui.resourceAdjust(that.resources.ghost);
-                PlaySound("./soundfx/ghost.wav");
-                break;
-            case "battlecruiser":
-                that.ui.resourceAdjust(that.resources.battlecruiser);
-                PlaySound("./soundfx/battlecruiser.wav");
-                break;
-            case "antiair":
-                that.ui.resourceAdjust(that.resources.antiair);
-                PlaySound("./soundfx/antiair.wav");
-                break;
-            default:
-                break;
+                case "marine":
+                    that.ui.resourceAdjust(that.resources.marine);
+                    that.PlaySound("./soundfx/marine.wav");
+                    break;
+                case "ghost":
+                    that.ui.resourceAdjust(that.resources.ghost);
+                    that.PlaySound("./soundfx/ghost.wav");
+                    break;
+                case "battlecruiser":
+                    that.ui.resourceAdjust(that.resources.battlecruiser);
+                    that.PlaySound("./soundfx/battlecruiser.wav");
+                    break;
+                case "antiair":
+                    that.ui.resourceAdjust(that.resources.antiair);
+                    that.PlaySound("./soundfx/antiair.wav");
+                    break;
+                default:
+                    break;
             }
 
             this.isMoving = false;
-
         }
     }
 };
@@ -169,7 +172,7 @@ Mouse.prototype.attachListeners = function() {
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
         } else if (that.isBusy && that.isMoving) { //Put down a picked up defender.
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
-            if (isValid(this.map, tileLoc.row, tileLoc.column)){
+            if (isValid(this.map, tileLoc.row, tileLoc.column)) {
                 that.isMoving = false;
                 that.pickedUpDefender.defender.isDummy = false;
                 that.pickedUpDefender.defender.row = tileLoc.row;
@@ -179,7 +182,7 @@ Mouse.prototype.attachListeners = function() {
                 that.tileBox.isBusy = false;
                 that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.defender.unit.mapKey;
             }
-        } else if (!that.isBusy && !that.isMoving){ //Pick up a defender.
+        } else if (!that.isBusy && !that.isMoving) { //Pick up a defender.
             //move unit
             let mouseLoc = getMousePos(this.canvas, event);
             let tileLoc = getTile(mouseLoc, this.map);
@@ -199,7 +202,7 @@ Mouse.prototype.attachListeners = function() {
     //Mouseover square select
     that.canvas.addEventListener("mousemove", function(e) {
         that.tileBox.e = e;
-        if(that.isMoving) {
+        if (that.isMoving) {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
             that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
         }
@@ -265,7 +268,7 @@ function isValid(map, row, column) {
 }
 
 //Plays fx sounds
-function PlaySound(path) {
+Mouse.prototype.PlaySound = function(path) {
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', path);
     audioElement.play();
