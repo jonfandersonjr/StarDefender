@@ -1,6 +1,6 @@
 /*
-*  Choose which enemy, quantity, and stat boosts to apply.
-*/
+ *  Choose which enemy, quantity, and stat boosts to apply.
+ */
 
 //NOTE: Every level must end with spawning a wave of 0 enemies. This is because reasons.
 
@@ -40,10 +40,7 @@ function Level(levelNum, waveObject) {
 
 Level.prototype.constructor = Level;
 
-Level.prototype.createWave = function () {
-
-    console.log("Sending wave " + this.waveNumber + " on level " + this.levelNum);
-
+Level.prototype.createWave = function() {
     switch (this.levelNum) {
         case 1:
             this.playLevel1();
@@ -75,37 +72,37 @@ Level.prototype.createWave = function () {
 
 };
 
-Level.prototype.playLevel1 = function () {
+Level.prototype.playLevel1 = function() {
     this.wave.setWave(firstLevelEnemies[this.waveNumber],
-                      firstLevelWaveSize[this.waveNumber],
-                      firstLevelSpeedBuff[this.waveNumber],
-                      firstLevelHealthBuff[this.waveNumber],
-                      firstLevelEntranceNum[this.waveNumber]);
+        firstLevelWaveSize[this.waveNumber],
+        firstLevelSpeedBuff[this.waveNumber],
+        firstLevelHealthBuff[this.waveNumber],
+        firstLevelEntranceNum[this.waveNumber]);
     this.waveNumber++;
 }
 
-Level.prototype.playLevel2 = function () {
+Level.prototype.playLevel2 = function() {
     this.wave.setWave(secondLevelEnemies[this.waveNumber],
-                      secondLevelWaveSize[this.waveNumber],
-                      secondLevelSpeedBuff[this.waveNumber],
-                      secondLevelHealthBuff[this.waveNumber],
-                      secondLevelEntranceNum[this.waveNumber]);
+        secondLevelWaveSize[this.waveNumber],
+        secondLevelSpeedBuff[this.waveNumber],
+        secondLevelHealthBuff[this.waveNumber],
+        secondLevelEntranceNum[this.waveNumber]);
     this.waveNumber++;
 }
 
-Level.prototype.playLevel3 = function () {
+Level.prototype.playLevel3 = function() {
     this.wave.setWave(thirdLevelEnemies[this.waveNumber],
-                      thirdLevelWaveSize[this.waveNumber],
-                      thirdLevelSpeedBuff[this.waveNumber],
-                      thirdLevelHealthBuff[this.waveNumber],
-                      thirdLevelEntranceNum[this.waveNumber]);
+        thirdLevelWaveSize[this.waveNumber],
+        thirdLevelSpeedBuff[this.waveNumber],
+        thirdLevelHealthBuff[this.waveNumber],
+        thirdLevelEntranceNum[this.waveNumber]);
     this.waveNumber++;
 }
 
-Level.prototype.playLevel4 = function () {
+Level.prototype.playLevel4 = function() {
 
 }
 
-Level.prototype.playLevel5 = function () {
+Level.prototype.playLevel5 = function() {
 
 }
