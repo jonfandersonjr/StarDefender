@@ -171,8 +171,7 @@ var sarahkerrigan = {
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
     this.gameUI = ui;
-    this.lowHealthToggle = true;
-    this.baseAttackToggle = true;
+
     //Switch case for units.
     switch (unitName) {
         case "mutalisk":
@@ -373,21 +372,17 @@ GroundUnit.prototype.flyingMovement = function() {
 }
 
 GroundUnit.prototype.hitBase = function() {
-    var that = this;
     //**base loses health**
     //**image for base taking damage**
     this.gameUI.dmg(this.unit.damage);
     if (this.gameUI.healthCur > 50) {
-        if (that.baseAttackToggle) {
-            this.PlaySound('./soundfx/baseAttack.wav');
-            that.baseAttackToggle = false;
-        }
+        //Play taking damge sound
+        //'./soundfx/baseAttack.wav'
     } else {
-        if (that.lowHealthToggle) {
-            this.PlaySound('./soundfx/baseLow.wav');
-            that.lowHealthToggle = false;
-        }
+        //Play low health sound
+        //'./soundfx/baseLow.wav'
     }
+    this.curTime = new Date().getSeconds();
     this.isDead = true;
     this.removeFromWorld = true;
 }
