@@ -112,6 +112,7 @@ GameEngine.prototype.runLevel = function() {
 
     this.waveDelay -= this.clockTick;
     this.wave.update();
+    this.gameUI.waveTimeGet(this.waveDelay);
 
     //Sends next wave for this level
     if (this.waveDelay <= 0) {

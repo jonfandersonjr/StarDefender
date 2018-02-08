@@ -47,13 +47,12 @@ var sarahkerriganWave = {
     healthBuff: 2
 };
 
-function Wave(generator, game, ui) {
+function Wave(generator, game) {
     this.generator = generator;
     this.gameEngine = game;
     this.unitAmount = 0;
     this.delay = .25;
     this.canDraw = false;
-    this.gameUI = ui;
 }
 
 Wave.prototype.constructor = Wave;
@@ -83,7 +82,6 @@ Wave.prototype.update = function() {
     if (this.gameEngine.addNewLevel) {
         this.delay -= this.gameEngine.clockTick;
     }
-    this.gameUI.waveTimeGet(Math.floor(this.delay));
 }
 
 Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthBuff, theEntranceNum) {
