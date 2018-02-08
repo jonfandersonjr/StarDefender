@@ -36,9 +36,9 @@ var ghost = {
     name: "ghost",
     frameWidth: 40,
     frameHeight: 36,
-    sheetWidth: 32,
+    sheetWidth: 29,
     frameDuration: 0.1,
-    frames: 32,
+    frames: 29,
     loop: true,
     scale: 1,
     range: 100,
@@ -142,7 +142,7 @@ Defender.prototype.shoot = function(enemy) {
     if (!this.isDummy && !this.isBusy) {
         if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir ) {
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, "marine", this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2));
+            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2));
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
         }
