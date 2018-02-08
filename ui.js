@@ -157,6 +157,9 @@ UI.prototype.updateText = function() {
 UI.prototype.dmg = function(amount) {
     this.healthCur -= amount;
     this.updateText();
+    if (this.healthCur <= 0) {
+        //Game over screen
+    }
 }
 
 //Adjust resource + or -
