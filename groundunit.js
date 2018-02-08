@@ -407,9 +407,13 @@ GroundUnit.prototype.hitBase = function() {
     if (this.gameUI.healthCur > 50) {
         //Play taking damge sound
         //'./soundfx/baseAttack.wav'
+        var baseAttack = new Audio('./music/StarCraft_Sound_Pack/Terran/Units/Advisor/baseAttack.wav');
+        audio.play();
     } else {
         //Play low health sound
         //'./soundfx/baseLow.wav'
+        var baseLow = new Audio('./music/StarCraft_Sound_Pack/Terran/Structures/baselowfire.wav');
+        audio.play();
     }
     this.curTime = new Date().getSeconds();
     this.isDead = true;
