@@ -59,7 +59,7 @@ GameEngine.prototype.addDefender = function(defenderEntity) {
     this.defenderEntities.push(defenderEntity);
 }
 
-GameEngine.prototype.addSCV = function (scvEntity) {
+GameEngine.prototype.addSCV = function(scvEntity) {
     this.scvEntities.push(scvEntity);
 }
 
@@ -101,7 +101,7 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
-GameEngine.prototype.runLevel = function () {
+GameEngine.prototype.runLevel = function() {
     //If starting a level, need to make a level object.
     if (this.isBootingLevel) {
         this.level = new Level(this.levelNum, this.wave);
@@ -117,7 +117,6 @@ GameEngine.prototype.runLevel = function () {
     if (this.waveDelay <= 0) {
         this.level.createWave();
         this.waveDelay = 10;
-        console.log("Sending wave")
     }
 
     //Level is finished so allow user to play more levels
@@ -131,7 +130,7 @@ GameEngine.prototype.runLevel = function () {
     };
 }
 
-GameEngine.prototype.findDefender = function (row, column) {
+GameEngine.prototype.findDefender = function(row, column) {
     for (let i = 0; i < this.defenderEntities.length; i++) {
         let defender = this.defenderEntities[i];
         if (defender.row === row && defender.column === column) {
@@ -140,7 +139,7 @@ GameEngine.prototype.findDefender = function (row, column) {
     }
 }
 
-GameEngine.prototype.update = function () {
+GameEngine.prototype.update = function() {
     //If mouse selects a level, run it.
 
     this.runLevel();

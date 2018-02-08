@@ -58,7 +58,7 @@ AM.downloadAll(function() {
     myMouse.setGenerator(this.generator);
 
 
-    this.wave = new Wave(this.generator, gameEngine);
+    this.wave = new Wave(this.generator, gameEngine, ui);
     gameEngine.wave = this.wave;
 
     //Game Engine Start
