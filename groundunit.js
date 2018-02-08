@@ -11,7 +11,7 @@ var hydralisk = {name : "hydralisk", frameWidth : 42, frameHeight : 55, sheetWid
                 damage: 5, deathAnimation : {name : "hydralisk", frameWidth : 97, frameHeight : 71, sheetWidth : 12, frameDuration : 0.1, frames : 12, loop : false, scale : 0.4}};
 var defiler = {name : "defiler", frameWidth : 69, frameHeight : 59, sheetWidth : 5, frameDuration : 0.1, frames : 5, loop : true, scale : 0.6, speed : 30, health : 100, isAir : false,
                 damage: 5, deathAnimation : {name : "defiler", frameWidth : 67, frameHeight : 44, sheetWidth : 10, frameDuration : 0.1, frames : 10, loop : false, scale : 0.5}};
-var sarahkerrigan = {name : "sarahkerrigan", frameWidth : 34, frameHeight : 40, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : true, scale : 1, speed : 40, health : 100, isAir : false,
+var sarahkerrigan = {name : "sarahkerrigan", frameWidth : 34, frameHeight : 40, sheetWidth : 8, frameDuration : 0.1, frames : 8, loop : true, scale : 1, speed : 40, health : 100, isAir : false,
                     damage: 1000, deathAnimation : {name : "sarahkerrigan", frameWidth : 56, frameHeight : 41, sheetWidth : 9, frameDuration : 0.1, frames : 9, loop : false, scale : 1}};
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {

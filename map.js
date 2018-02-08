@@ -86,6 +86,13 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
                     this.mineralY = j * this.tileSize;
                     break;
 
+                case "/":
+                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_mount.png`), i * this.tileSize, j * this.tileSize));
+                    this.mountX = i * this.tileSize;
+                    this.mountY = j * this.tileSize;
+                    break;
+
+
                 default:
                     if (i % 2 == 0) {
                         gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
@@ -94,15 +101,18 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
                     }
                     break;
             }
+            gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_mount.png`), this.mountX,  this.mountY));
+
+
         }
     }
     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/mineral.png"), this.mineralX, this.mineralY));
     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/base.png"), this.baseX, this.baseY));
 }
 
-var map_6 =[['+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
-            ['>', '>', '>', 'v', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
-            ['+', '+', '+', 'v', '+', '+', '+', '+', '>', '>', '>', '>', '>', '>', '>', '>', 'v', '+', '+', '+', '+', '+'],
+var map_6 =[['+', '+', '+', '+', '+', '/', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
+            ['>', '>', '>', 'v', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
+            ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '>', '>', '>', '>', '>', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '+', '+', '+', '+', '+'],
             ['+', '+', '+', 'v', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', 'v', '<', '<', '+', '+', '+', '+', '+'],

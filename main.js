@@ -1,7 +1,5 @@
 var AM = new AssetManager();
 
-var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
-
 //load defender sprites
 var defenderAction = ["stand", "shoot", "projectile"]
 var defenderList = ["marine", "battlecruiser", "ghost", "antiair"];
@@ -12,6 +10,7 @@ for (let i = 0; i < defenderList.length; i++) {
 }
 
 //load enemy sprites
+var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
 var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "sarahkerrigan"];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
@@ -32,6 +31,8 @@ for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/blue/blue_bot${i}.png`);
     AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
 }
+
+AM.queueDownload(`./tiles/blue/blue_mount.png`);
 
 AM.queueDownload("./tiles/grass/grass.png");
 AM.queueDownload("./tiles/base.png")
