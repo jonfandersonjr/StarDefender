@@ -11,7 +11,7 @@ for (let i = 0; i < defenderList.length; i++) {
 
 //load enemy sprites
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
-var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "sarahkerrigan"];
+var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "scourge", "sarahkerrigan"];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
@@ -42,12 +42,12 @@ AM.downloadAll(function() {
     var canvas = document.getElementById("gameWorld");
     canvas.focus();
     var ctx = canvas.getContext("2d");
-    var map = new Map(map_6);
+    var map = new Map(map_1);
     var myMouse = new Mouse(map, ctx);
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
-    var ui = new UI(myMouse, 100, 100, 400, 1, 0, 0);
+    var ui = new UI(myMouse, 100, 100, 200, 1, 0, 0);
     myMouse.attachUI(ui);
 
     var gameEngine = new GameEngine(myMouse, ui);
@@ -59,7 +59,7 @@ AM.downloadAll(function() {
     myMouse.setGenerator(this.generator);
 
 
-    this.wave = new Wave(this.generator, gameEngine);
+    this.wave = new Wave(this.generator, gameEngine, ui);
     gameEngine.wave = this.wave;
 
     //Game Engine Start

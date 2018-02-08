@@ -115,6 +115,7 @@ function UI(mouse, startHealth, maxHealth,
     this.initcurLevel = startLevel;
     this.initwavesC = wavesCleared;
     this.initenemiesKilled = enemiesK;
+    this.initWaveTime = 0;
 
     this.healthCur = startHealth;
     this.healthMax = maxHealth;
@@ -122,6 +123,7 @@ function UI(mouse, startHealth, maxHealth,
     this.curLevel = startLevel;
     this.wavesC = wavesCleared;
     this.enemiesKilled = enemiesK;
+    this.waveTime = 0;
 
     this.time = "00:00";
     this.timeReal = 0;
@@ -151,7 +153,7 @@ UI.prototype.updateText = function() {
     tempString += "Wave: " + (this.wavesC + 1) + "\n";
     tempString += "Enemies Killed: " + this.enemiesKilled + "\n";
     tempString += "Time: " + this.time + "\n";
-    tempString += "Next Wave: ";
+    tempString += "Next Wave: " + this.waveTime + "\n";
     this.textBox.value = tempString;
 }
 
@@ -221,6 +223,25 @@ UI.prototype.updateTime = function(value) {
             timeString = minutes + ":" + seconds;
         }
         this.time = timeString;
+    }
+    this.updateText();
+}
+
+//Updates time before next wave using wave.js
+UI.prototype.waveTimeGet = function(theTime) {
+    var tempTime = theTime;
+    if (tempTime < 0 && tempTime >= -10) {
+        tempTime *= -1;
+    } else {
+        tempTime -= 99990;
+    }
+
+    if (tempTime >= 0 && tempTime < 10) {
+        this.waveTime = "00:0" + tempTime;
+    } else if (tempTime === 10) {
+        this.waveTime = "00:" + tempTime;
+    } else {
+        this.waveTime = "--:--";
     }
     this.updateText();
 }
