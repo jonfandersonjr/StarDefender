@@ -403,6 +403,7 @@ GroundUnit.prototype.flyingMovement = function() {
 GroundUnit.prototype.hitBase = function() {
     //**base loses health**
     //**image for base taking damage**
+    // find later
     this.gameUI.dmg(this.unit.damage);
     if (this.gameUI.healthCur > 50) {
         //Play taking damge sound
