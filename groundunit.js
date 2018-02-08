@@ -239,7 +239,7 @@ GroundUnit.prototype = new Entity();
 GroundUnit.prototype.constructor = GroundUnit;
 
 //Function to play death sounds on death
-GroundUnit.prototype.PlaySound = function(path) {
+GroundUnit.prototype.playSound = function(path) {
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', path);
     audioElement.volume = 0.2;
@@ -263,7 +263,7 @@ GroundUnit.prototype.update = function() {
         that.gameUI.resourceAdjust(10);
 
         //Play death sounds
-        PlaySound(this.deathSound);
+        this.playSound(this.deathSound);
 
     } else if (this.isDead) {
         if (this.deadAnimationTimme > 0) {
