@@ -234,6 +234,7 @@ GroundUnit.prototype.constructor = GroundUnit;
 function PlayDeath(path) {
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', path);
+    audioElement.volume = 0.2;
     audioElement.play();
 }
 

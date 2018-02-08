@@ -85,6 +85,9 @@ Mouse.prototype.selectDefender = function(defenderName) {
         this.isBusy = true; //makes mouse unable to select other defenders, one time drop
         this.tileBox.isBusy = this.isBusy;
         this.defenderName = defenderName;
+        if (this.ui.resourcesTotal < this.unitCost) {
+            this.PlaySound("./soundfx/minerals.wav");
+        }
     }
 
 };
@@ -271,6 +274,7 @@ function isValid(map, row, column) {
 Mouse.prototype.PlaySound = function(path) {
     var audioElement = document.createElement('audio');
     audioElement.setAttribute('src', path);
+    audioElement.volume = 0.2;
     audioElement.play();
 }
 
