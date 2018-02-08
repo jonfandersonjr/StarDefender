@@ -18,7 +18,7 @@ function Mouse(map, ctx) {
         marine: -50,
         ghost: -100,
         battlecruiser: -150,
-        scv: -25,
+        scv: -50,
         antiair: -100
     };
     this.canvas = document.getElementById("gameWorld");
@@ -74,10 +74,14 @@ Mouse.prototype.createLevel = function(levelNum) {
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     if (defenderName === "scv") {
-        if (this.ui.resourcesTotal >= 25) {
+        if (this.ui.resourcesTotal >= (this.resources.scv * -1)) {
             this.generator.createSCV();
-            this.ui.resourceAdjust(-25);
+            this.ui.resourceAdjust(this.resources.scv);
             this.PlaySound("./soundfx/scv.wav");
+            if (this.resources.scv > -300) {
+                this.resources.scv -= 50;
+                //Update SCV Image to reflect new cost here
+            }
         } else {
             this.PlaySound("./soundfx/minerals.wav");
         }
@@ -243,10 +247,7 @@ Mouse.prototype.attachListeners = function() {
     //Mouse Wheel
     this.canvas.addEventListener("mousewheel", function(e) {
         e.preventDefault();
-        if (that.canAddLevel) {
-            //creates level_2
-            that.createLevel(2)
-        }
+
     }, false);
 
 
