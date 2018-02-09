@@ -4,11 +4,11 @@ buttonCanvas - canvas that has defence structure uiButtons
 textCanvas - textArea that holds this
 */
 var images = [
-    "./img/marine/marine_portrait.png",
-    "./img/scv/scv_portrait50.png",
-    "./img/ghost/ghost_portrait.png",
-    "./img/battlecruiser/battlecruiser_portrait.png",
-    "./img/antiair/antiair_portrait.png"
+    "./img/buttons/marine_portrait.png",
+    "./img/buttons/scv_portrait50.png",
+    "./img/buttons/ghost_portrait.png",
+    "./img/buttons/battlecruiser_portrait.png",
+    "./img/buttons/antiair_portrait.png"
 ];
 
 function UI(mouse, startHealth, maxHealth,
@@ -152,7 +152,7 @@ UI.prototype.drawSCVImage = function(theInt) {
         that.ctx.drawImage(scv_img, 60, 220);
     };
     theInt *= -1;
-    scv_img.src = './img/scv/scv_portrait' + theInt + '.png';
+    scv_img.src = './img/buttons/scv_portrait' + theInt + '.png';
 }
 
 //Updates stats text box with most recent data
