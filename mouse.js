@@ -182,6 +182,7 @@ Mouse.prototype.attachListeners = function() {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
             if (isValid(this.map, tileLoc.row, tileLoc.column)) {
                 that.isMoving = false;
+                that.tileBox.isMoving = false;
                 that.pickedUpDefender.defender.isDummy = false;
                 that.pickedUpDefender.defender.row = tileLoc.row;
                 that.pickedUpDefender.defender.column = tileLoc.column;
@@ -196,6 +197,7 @@ Mouse.prototype.attachListeners = function() {
             let tileLoc = getTile(mouseLoc, this.map);
             if (isDefender(that.map.map[tileLoc.row][tileLoc.column])) {
                 that.isMoving = true;
+                that.tileBox.isMoving = true;
                 that.isBusy = true;
                 that.tileBox.isBusy = true;
                 that.pickedUpDefender.defender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
@@ -287,6 +289,7 @@ function TileBox(gameEngine, canvas, ctx, map, isBusy, gameUI) {
     this.map = map;
     this.isBusy = isBusy;
     this.gameUI = gameUI;
+    this.isMoving = false;
 }
 
 TileBox.prototype.update = function() {
@@ -303,7 +306,7 @@ TileBox.prototype.draw = function() {
         this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row &&
         this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col &&
         this.isBusy) {
-        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.unitCost <= this.gameUI.resourcesTotal) {
+        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.isMoving ^ this.unitCost <= this.gameUI.resourcesTotal) {
             this.ctx.strokeStyle = 'rgb(0, 255, 38)'; //Green box
         } else {
             this.ctx.strokeStyle = 'rgb(255, 0, 12)'; //Red box
