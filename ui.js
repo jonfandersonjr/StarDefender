@@ -143,14 +143,16 @@ UI.prototype.pauseMusic = function(bool) {
     }
 
 }
-/*
-UI.prototype.drawSCVImage(theInt) {
+
+UI.prototype.drawSCVImage = function(theInt) {
     var scv_img = new Image();
+    var that = this;
     scv_img.onload = function() {
-        ctx.drawImage(scv_img, 60, 220);
-    }
+        that.ctx.drawImage(scv_img, 60, 220);
+    };
+    theInt *= -1;
     scv_img.src = './img/scv/scv_portrait' + theInt + '.png';
-}*/
+}
 
 //Updates stats text box with most recent data
 UI.prototype.updateText = function() {
