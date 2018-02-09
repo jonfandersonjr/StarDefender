@@ -144,6 +144,7 @@ UI.prototype.pauseMusic = function(bool) {
 
 }
 
+//Draws the new scv portrait based on cost
 UI.prototype.drawSCVImage = function(theInt) {
     var scv_img = new Image();
     var that = this;
