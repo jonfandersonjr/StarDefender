@@ -59,18 +59,6 @@ Mouse.prototype.setMap = function(gameMap) {
     this.map = gameMap;
 }
 
-//Setter for cleanliness, handles if mouse can choose a new level.
-Mouse.prototype.levelCompleted = function() {
-    this.canAddLevel = true;
-}
-
-//Sets up game engine to start level_levelNum
-Mouse.prototype.createLevel = function(levelNum) {
-    this.gameEngine.addNewLevel = true;
-    this.gameEngine.levelNum = levelNum;
-    this.canAddLevel = false;
-}
-
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     if (defenderName === "scv") {

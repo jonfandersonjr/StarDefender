@@ -1,11 +1,7 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 var mutalisk = {
     name: "mutalisk",
-    frameWidth: 64,
-    frameHeight: 72,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 64, frameHeight: 72, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.5,
     speed: 50,
@@ -14,22 +10,14 @@ var mutalisk = {
     damage: 5,
     deathAnimation: {
         name: "mutalisk",
-        frameWidth: 68,
-        frameHeight: 68,
-        sheetWidth: 9,
-        frameDuration: 0.1,
-        frames: 9,
+        frameWidth: 68, frameHeight: 68, sheetWidth: 9, frameDuration: 0.1, frames: 9,
         loop: false,
         scale: 0.5
     }
 };
 var scourge = {
     name: "scourge",
-    frameWidth: 31,
-    frameHeight: 27,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 31, frameHeight: 27, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 1,
     speed: 65,
@@ -38,22 +26,14 @@ var scourge = {
     damage: 10,
     deathAnimation: {
         name: "mutalisk",
-        frameWidth: 68,
-        frameHeight: 68,
-        sheetWidth: 9,
-        frameDuration: 0.1,
-        frames: 9,
+        frameWidth: 68, frameHeight: 68, sheetWidth: 9, frameDuration: 0.1, frames: 9,
         loop: false,
         scale: 0.5
     }
 };
 var queen = {
     name: "queen",
-    frameWidth: 75,
-    frameHeight: 68,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 75, frameHeight: 68, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.5,
     speed: 25,
@@ -62,22 +42,14 @@ var queen = {
     damage: 5,
     deathAnimation: {
         name: "queen",
-        frameWidth: 114,
-        frameHeight: 103,
-        sheetWidth: 9,
-        frameDuration: 0.15,
-        frames: 9,
+        frameWidth: 114, frameHeight: 103, sheetWidth: 9, frameDuration: 0.15, frames: 9,
         loop: false,
         scale: 0.5
     }
 };
 var zergling = {
     name: "zergling",
-    frameWidth: 40,
-    frameHeight: 39,
-    sheetWidth: 7,
-    frameDuration: 0.1,
-    frames: 7,
+    frameWidth: 40, frameHeight: 39, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.6,
     speed: 75,
@@ -86,22 +58,14 @@ var zergling = {
     damage: 5,
     deathAnimation: {
         name: "zergling",
-        frameWidth: 65,
-        frameHeight: 53,
-        sheetWidth: 7,
-        frameDuration: 0.15,
-        frames: 7,
+        frameWidth: 65, frameHeight: 53, sheetWidth: 7, frameDuration: 0.15, frames: 7,
         loop: false,
         scale: 0.5
     }
 };
 var ultralisk = {
     name: "ultralisk",
-    frameWidth: 98,
-    frameHeight: 105,
-    sheetWidth: 7,
-    frameDuration: 0.1,
-    frames: 7,
+    frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.35,
     speed: 15,
@@ -110,22 +74,14 @@ var ultralisk = {
     damage: 5,
     deathAnimation: {
         name: "ultralisk",
-        frameWidth: 98,
-        frameHeight: 105,
-        sheetWidth: 10,
-        frameDuration: 0.1,
-        frames: 10,
+        frameWidth: 98, frameHeight: 105, sheetWidth: 10, frameDuration: 0.1, frames: 10,
         loop: false,
         scale: 0.35
     }
 };
 var hydralisk = {
     name: "hydralisk",
-    frameWidth: 42,
-    frameHeight: 55,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 42, frameHeight: 55, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.6,
     speed: 50,
@@ -134,22 +90,14 @@ var hydralisk = {
     damage: 5,
     deathAnimation: {
         name: "hydralisk",
-        frameWidth: 97,
-        frameHeight: 71,
-        sheetWidth: 12,
-        frameDuration: 0.1,
-        frames: 12,
+        frameWidth: 97, frameHeight: 71, sheetWidth: 12, frameDuration: 0.1, frames: 12,
         loop: false,
         scale: 0.4
     }
 };
 var defiler = {
     name: "defiler",
-    frameWidth: 69,
-    frameHeight: 59,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 69, frameHeight: 59, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.6,
     speed: 30,
@@ -158,10 +106,7 @@ var defiler = {
     damage: 5,
     deathAnimation: {
         name: "defiler",
-        frameWidth: 67,
-        frameHeight: 44,
-        sheetWidth: 10,
-        frameDuration: 0.1,
+        frameWidth: 67, frameHeight: 44, sheetWidth: 10, frameDuration: 0.1,
         frames: 10,
         loop: false,
         scale: 0.5
@@ -169,11 +114,7 @@ var defiler = {
 };
 var sarahkerrigan = {
     name: "sarahkerrigan",
-    frameWidth: 34,
-    frameHeight: 40,
-    sheetWidth: 8,
-    frameDuration: 0.1,
-    frames: 8,
+    frameWidth: 34, frameHeight: 40, sheetWidth: 8, frameDuration: 0.1, frames: 8,
     loop: true,
     scale: 1,
     speed: 40,
@@ -182,11 +123,7 @@ var sarahkerrigan = {
     damage: 1000,
     deathAnimation: {
         name: "sarahkerrigan",
-        frameWidth: 56,
-        frameHeight: 41,
-        sheetWidth: 9,
-        frameDuration: 0.1,
-        frames: 9,
+        frameWidth: 56, frameHeight: 41, sheetWidth: 9, frameDuration: 0.1, frames: 9,
         loop: false,
         scale: 1
     }
