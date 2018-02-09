@@ -267,7 +267,13 @@ function generateGameInfo() {
         e.preventDefault();
     }, false);
     this.gameInfoBox.value = "Star Defender\n" +
-        "\n=========================" +
-        "\nKeybinds:\n(M) Toggles Music\n" +
-        "(A) Drop Marine\n(S) Drop Ghost\n(D) Drop Battlecruiser\n(W) Drop Anti Air Structure\n(F) Spawn SCV for resource generation";
+        "*************************\n" +
+        "Keybinds:\n" +
+        "-----\n" +
+        "(M) Music (On/Off)\n" +
+        "(A) Marine\n    (Low DMG)\n    (Fast RoF)\n" +
+        "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
+        "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
+        "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
+        "(F) Spawn SCV\n    (Generates Resources)\n";
 }
