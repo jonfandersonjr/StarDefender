@@ -68,7 +68,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
             this.PlaySound("./soundfx/scv.wav");
             if (this.resources.scv > -300) {
                 this.resources.scv -= 50;
-                //Update SCV Image to reflect new cost here
                 this.ui.drawSCVImage(this.resources.scv);
             }
         } else {
