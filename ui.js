@@ -5,7 +5,7 @@ textCanvas - textArea that holds this
 */
 var images = [
     "./img/marine/marine_portrait.png",
-    "./img/scv/scv_portrait.png",
+    "./img/scv/scv_portrait50.png",
     "./img/ghost/ghost_portrait.png",
     "./img/battlecruiser/battlecruiser_portrait.png",
     "./img/antiair/antiair_portrait.png"
@@ -143,6 +143,14 @@ UI.prototype.pauseMusic = function(bool) {
     }
 
 }
+/*
+UI.prototype.drawSCVImage(theInt) {
+    var scv_img = new Image();
+    scv_img.onload = function() {
+        ctx.drawImage(scv_img, 60, 220);
+    }
+    scv_img.src = './img/scv/scv_portrait' + theInt + '.png';
+}*/
 
 //Updates stats text box with most recent data
 UI.prototype.updateText = function() {
