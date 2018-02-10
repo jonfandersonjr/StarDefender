@@ -407,12 +407,12 @@ GroundUnit.prototype.hitBase = function() {
     if (this.gameUI.healthCur > 50) {
         //Play taking damge sound
         //'./soundfx/baseAttack.wav'
-        var baseAttack = new Audio('./music/baseAttack.wav');
+        var baseAttack = new Audio('./soundfx/baseAttack.wav');
         audio.play();
     } else {
         //Play low health sound
         //'./soundfx/baseLow.wav'
-        var baseLow = new Audio('./music/baselowfire.wav');
+        var baseLow = new Audio('./soundfx/baselowfire.wav');
         audio.play();
     }
     this.curTime = new Date().getSeconds();
