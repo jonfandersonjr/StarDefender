@@ -32,13 +32,14 @@ textarea {
 
 #uiText {
     position: absolute;
-    left: 1070px;
+    left: 1160px;
     top: 0px;
+    color: #8300fe;
 }
 
 #uiButtons {
     position: absolute;
-    left: 1070px;
+    left: 1160px;
     top: 360px;
     z-index: 3;
 }
@@ -48,24 +49,33 @@ textarea {
     left: 0px;
     top: 0px;
     height: 770px;
-    color: #8400d6;
+    color: #8300fe;
 }
 
 #gameWorld {
     background: transparent;
     position: absolute;
-    left: 360px;
-    top: 0px;
+    left: 375px;
+    top: 76px;
     z-index: 1;
+    outline: none;
 }
 
 #gameWorld2 {
     background: transparent;
     position: absolute;
-    left: 360px;
-    top: 0px;
+    left: 375px;
+    top: 76px;
     z-index: 2;
     pointer-events: none;
+    outline: none;
+}
+
+#gameBorder {
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    z-index: -1;
 }
 
 .gameInfo {
@@ -75,7 +85,6 @@ textarea {
     font-size: 20px;
     font: Georgia;
     background-color: black;
-    color: red;
     border: none;
     overflow: visible;
     box-shadow: none;
