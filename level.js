@@ -110,7 +110,8 @@ Level.prototype.playLevel3 = function() {
     }
 }
 
-Level.prototype.playLevel4 = function () {
+
+Level.prototype.playLevel4 = function() {
 
 }
 
