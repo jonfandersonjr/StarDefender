@@ -90,6 +90,7 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
         default:
             break;
     }
+    this.soundPlaying = false;
     this.canTargetGround = this.unit.targetGround;
     this.canTargetFlying = this.unit.targetFlying;
     this.map = map;
@@ -107,6 +108,8 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.isDummy = isDummy;
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
+
+
 
 Defender.prototype = new Entity();
 Defender.prototype.constructor = Defender;
@@ -142,12 +145,30 @@ Defender.prototype.calculateTrueXY = function() {
     this.trueY = (this.row + 0.5) * this.map.tileSize;
 }
 
+
+
 Defender.prototype.shoot = function(enemy) {
     if (!this.isDummy && !this.isBusy) {
         if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir ) {
-            // why not
-            var shootAudio = new Audio(Defender.shootSound);
-            shootAudio.play();
+            
+            var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', this.shootSound);
+            audioElement.volume = 0.05;
+
+            audioElement.onplaying = function() {
+                this.soundPlaying = true;
+            }
+
+            audioElement.onended = function() {
+                this.soundPlaying = false;
+            }
+            audioElement.onplaying();
+            audioElement.onended();
+            if (this.soundPlaying === false) {
+                audioElement.play();
+            }
+            
+
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
             this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2));
             this.isBusy = true;
@@ -155,6 +176,7 @@ Defender.prototype.shoot = function(enemy) {
         }
     }
 }
+
 
 function angle(cx, cy, ex, ey) {
     var dy = ey - cy;
