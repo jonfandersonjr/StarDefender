@@ -408,12 +408,12 @@ GroundUnit.prototype.hitBase = function() {
         //Play taking damge sound
         //'./soundfx/baseAttack.wav'
         var baseAttack = new Audio('./soundfx/baseAttack.wav');
-        audio.play();
+        baseAttack.play();
     } else {
         //Play low health sound
         //'./soundfx/baseLow.wav'
         var baseLow = new Audio('./soundfx/baselowfire.wav');
-        audio.play();
+        baseLow.play();
     }
     this.curTime = new Date().getSeconds();
     this.isDead = true;

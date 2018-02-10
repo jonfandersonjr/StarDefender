@@ -73,15 +73,19 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     switch (unitName) {
         case "marine":
             this.unit = marine;
+            this.shootSound = './soundfx/marine_sound.wav';
             break;
         case "battlecruiser":
             this.unit = battlecruiser;
+            this.shootSound = './soundfx/battlecruiser_sound.wav';
             break;
         case "ghost":
             this.unit = ghost;
+            this.shootSound = './soundfx/ghost_sound.wav';
             break;
         case "antiair":
             this.unit = antiair;
+            this.shootSound = './soundfx/antiair_sound.wav';
             break;
         default:
             break;
@@ -141,6 +145,9 @@ Defender.prototype.calculateTrueXY = function() {
 Defender.prototype.shoot = function(enemy) {
     if (!this.isDummy && !this.isBusy) {
         if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir ) {
+            // why not
+            var shootAudio = new Audio(Defender.shootSound);
+            shootAudio.play();
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
             this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2));
             this.isBusy = true;
