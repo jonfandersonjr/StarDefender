@@ -8,8 +8,8 @@ var mutalisk = {
     frames: 5,
     loop: true,
     scale: 0.5,
-    speed: 50,
-    health: 100,
+    speed: 60,
+    health: 90,
     isAir: true,
     damage: 5,
     deathAnimation: {
@@ -56,7 +56,7 @@ var queen = {
     frames: 5,
     loop: true,
     scale: 0.5,
-    speed: 25,
+    speed: 55,
     health: 100,
     isAir: false,
     damage: 5,
@@ -80,8 +80,8 @@ var zergling = {
     frames: 7,
     loop: true,
     scale: 0.6,
-    speed: 75,
-    health: 100,
+    speed: 85,
+    health: 50,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -105,7 +105,7 @@ var ultralisk = {
     loop: true,
     scale: 0.35,
     speed: 15,
-    health: 100,
+    health: 150,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -128,8 +128,8 @@ var hydralisk = {
     frames: 5,
     loop: true,
     scale: 0.6,
-    speed: 50,
-    health: 100,
+    speed: 65,
+    health: 75,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -152,8 +152,8 @@ var defiler = {
     frames: 5,
     loop: true,
     scale: 0.6,
-    speed: 30,
-    health: 100,
+    speed: 40,
+    health: 120,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -167,6 +167,7 @@ var defiler = {
         scale: 0.5
     }
 };
+/*
 var sarahkerrigan = {
     name: "sarahkerrigan",
     frameWidth: 34,
@@ -191,6 +192,7 @@ var sarahkerrigan = {
         scale: 1
     }
 };
+*/
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
@@ -226,10 +228,12 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             this.unit = defiler;
             this.deathSound = './soundfx/deathDefiler.wav';
             break;
+            /*
         case "sarahkerrigan":
             this.unit = sarahkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
             break;
+            */
         default:
             console.log("Problem creating ground unit");
             break;

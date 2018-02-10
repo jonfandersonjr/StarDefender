@@ -6,11 +6,11 @@
 //entranceNum = which entry point on the map they enter from. 1 = first entrance, 2 = second entrance, 3 = both
 
 //Level One
-var firstLevelEnemies = ["zergling", "scourge", "sarahkerrigan", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
-var firstLevelWaveSize = [3, 3, 1, 2, 3, 4, 8, 0];
-var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
-var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
-var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 1];
+var firstLevelEnemies = ["zergling", "scourge", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
+var firstLevelWaveSize = [3, 3, 2, 3, 4, 8, 0];
+var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
+var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1];
+var firstLevelEntranceNum = [1, 2, 3, 2, 3, 1];
 
 //Level Two
 var secondLevelEnemies = ["zergling", "mutalisk", "queen", "mutalisk", "defiler", "zergling"];
@@ -20,11 +20,11 @@ var secondLevelHealthBuff = [1, 1, 1, 1, 1, 1];
 var secondLevelEntranceNum = [1, 2, 1, 3, 2, 3];
 
 //Level Three
-var thirdLevelEnemies = ["zergling", "mutalisk", "sarahkerrigan", "mutalisk", "sarahkerrigan", "zergling"];
-var thirdLevelWaveSize = [5, 3, 1, 4, 10, 10, 0];
-var thirdLevelSpeedBuff = [1, 1, 1, 1, 1.2, 1];
-var thirdLevelHealthBuff = [1, 1, 1, 1, 1, 1];
-var thirdLevelEntranceNum = [1, 2, 3, 3, 2, 3];
+var thirdLevelEnemies = ["zergling", "mutalisk", "mutalisk", "zergling"];
+var thirdLevelWaveSize = [5, 3, 4, 10, 0];
+var thirdLevelSpeedBuff = [1, 1, 1, 1];
+var thirdLevelHealthBuff = [1, 1, 1, 1];
+var thirdLevelEntranceNum = [1, 2, 3, 3];
 
 function Level(levelNum, waveObject) {
     this.canvas = document.getElementById("gameWorld");

@@ -40,13 +40,15 @@ var defilerWave = {
     speedBuff: 1,
     healthBuff: 1
 };
+
+/*
 var sarahkerriganWave = {
     name: "sarahkerrigan",
     delay: .25,
     speedbuff: 1.5,
     healthBuff: 2
 };
-
+*/
 function Wave(generator, game) {
     this.generator = generator;
     this.gameEngine = game;
@@ -107,9 +109,11 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
         case "defiler":
             this.unit = defilerWave;
             break;
+            /*
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
             break;
+            */
         default:
             console.log("Illegal input");
             break;
