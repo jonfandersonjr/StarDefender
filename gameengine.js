@@ -47,6 +47,19 @@ GameEngine.prototype.start = function() {
     })();
 }
 
+GameEngine.prototype.pause = function(boolean) {
+    var that = this;
+    that.oldClockTick = that.clockTick;
+    if (boolean === true) {
+        that.clockTick = 0;
+        console.log("Game Paused");
+        console.log("Game Tick: " + that.oldClockTick);
+    } else {
+        that.clockTick = that.oldClockTick;
+        console.log("Game Resumed");
+    }
+}
+
 GameEngine.prototype.addTile = function(tileEntity) {
     this.tileEntities.push(tileEntity);
 }

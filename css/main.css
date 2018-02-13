@@ -71,6 +71,16 @@ textarea {
     outline: none;
 }
 
+#gameOverlayScreen {
+    background: transparent;
+    position: absolute;
+    left: 300px;
+    top: 0px;
+    z-index: 3;
+    pointer-events: none;
+    outline: none;
+}
+
 #gameBorder {
     position: absolute;
     left: 300px;

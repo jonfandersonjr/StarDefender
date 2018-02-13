@@ -18,6 +18,7 @@ function UI(mouse, startHealth, maxHealth,
     //Text box - prevents highlighting
     this.textBox = document.getElementById("uiText");
     makeUnselectable(this.textBox);
+    makeUnselectable(document.getElementById("gameOverlayScreen"));
     this.mouse = mouse;
 
     //Music
@@ -133,6 +134,10 @@ function UI(mouse, startHealth, maxHealth,
     this.updateText();
 };
 
+UI.prototype.attachEngine = function(engine) {
+    this.gameEngine = engine;
+}
+
 //Pauses music or plays music based on boolean toggle
 UI.prototype.pauseMusic = function(bool) {
     var that = this;
@@ -171,10 +176,25 @@ UI.prototype.updateText = function() {
 //Takes health away from current health pool
 UI.prototype.dmg = function(amount) {
     this.healthCur -= amount;
-    this.updateText();
     if (this.healthCur <= 0) {
         //Game over screen
+        this.healthCur = 0;
+        this.updateText;
+        this.gameOverScreen();
     }
+    this.updateText();
+}
+
+UI.prototype.gameOverScreen = function() {
+    this.canvas = document.getElementById("gameOverlayScreen");
+    this.ctx = this.canvas.getContext("2d");
+    var gameOverImg = new Image();
+    var that = this;
+    gameOverImg.onload = function() {
+        that.ctx.drawImage(gameOverImg, 40, 50);
+    };
+    gameOverImg.src = './img/ui/gameOver.png';
+    this.gameEngine.pause(true);
 }
 
 //Adjust resource + or -
