@@ -51,7 +51,7 @@ GameEngine.prototype.pause = function(boolean) {
     var that = this;
     that.oldClockTick = that.clockTick;
     if (boolean === true) {
-        that.clockTick = 0;
+        that.clockTick = Math.floor(0);
         console.log("Game Paused");
         console.log("Game Tick: " + that.oldClockTick);
     } else {
