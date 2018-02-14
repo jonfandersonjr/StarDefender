@@ -4,11 +4,11 @@ buttonCanvas - canvas that has defence structure uiButtons
 textCanvas - textArea that holds this
 */
 var images = [
-    "./img/marine/marine_portrait.png",
-    "./img/scv/scv_portrait.png",
-    "./img/ghost/ghost_portrait.png",
-    "./img/battlecruiser/battlecruiser_portrait.png",
-    "./img/antiair/antiair_portrait.png"
+    "./img/buttons/marine_portrait.png",
+    "./img/buttons/scv_portrait50.png",
+    "./img/buttons/ghost_portrait.png",
+    "./img/buttons/battlecruiser_portrait.png",
+    "./img/buttons/antiair_portrait.png"
 ];
 
 function UI(mouse, startHealth, maxHealth,
@@ -18,6 +18,7 @@ function UI(mouse, startHealth, maxHealth,
     //Text box - prevents highlighting
     this.textBox = document.getElementById("uiText");
     makeUnselectable(this.textBox);
+    makeUnselectable(document.getElementById("gameOverlayScreen"));
     this.mouse = mouse;
 
     //Music
@@ -133,6 +134,10 @@ function UI(mouse, startHealth, maxHealth,
     this.updateText();
 };
 
+UI.prototype.attachEngine = function(engine) {
+    this.gameEngine = engine;
+}
+
 //Pauses music or plays music based on boolean toggle
 UI.prototype.pauseMusic = function(bool) {
     var that = this;
@@ -142,6 +147,17 @@ UI.prototype.pauseMusic = function(bool) {
         that.audio.play();
     }
 
+}
+
+//Draws the new scv portrait based on cost
+UI.prototype.drawSCVImage = function(theInt) {
+    var scv_img = new Image();
+    var that = this;
+    scv_img.onload = function() {
+        that.ctx.drawImage(scv_img, 60, 220);
+    };
+    theInt *= -1;
+    scv_img.src = './img/buttons/scv_portrait' + theInt + '.png';
 }
 
 //Updates stats text box with most recent data
@@ -160,10 +176,25 @@ UI.prototype.updateText = function() {
 //Takes health away from current health pool
 UI.prototype.dmg = function(amount) {
     this.healthCur -= amount;
-    this.updateText();
     if (this.healthCur <= 0) {
         //Game over screen
+        this.healthCur = 0;
+        this.updateText;
+        this.gameOverScreen();
     }
+    this.updateText();
+}
+
+UI.prototype.gameOverScreen = function() {
+    this.canvas = document.getElementById("gameOverlayScreen");
+    this.ctx = this.canvas.getContext("2d");
+    var gameOverImg = new Image();
+    var that = this;
+    gameOverImg.onload = function() {
+        that.ctx.drawImage(gameOverImg, 40, 50);
+    };
+    gameOverImg.src = './img/ui/gameOver.png';
+    this.gameEngine.pause(true);
 }
 
 //Adjust resource + or -
@@ -256,7 +287,13 @@ function generateGameInfo() {
         e.preventDefault();
     }, false);
     this.gameInfoBox.value = "Star Defender\n" +
-        "\n=========================" +
-        "\nKeybinds:\n(M) Toggles Music\n" +
-        "(A) Drop Marine\n(S) Drop Ghost\n(D) Drop Battlecruiser\n(W) Drop Anti Air Structure\n(F) Spawn SCV for resource generation";
+        "*************************\n" +
+        "Keybinds:\n" +
+        "-----\n" +
+        "(M) Music (On/Off)\n" +
+        "(A) Marine\n    (Low DMG)\n    (Fast RoF)\n" +
+        "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
+        "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
+        "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
+        "(F) Spawn SCV\n    (Generates Resources)\n";
 }
