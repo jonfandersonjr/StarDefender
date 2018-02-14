@@ -264,6 +264,7 @@ Mouse.prototype.attachListeners = function() {
         that.isBusy = false;
         that.tileBox.isBusy = false;
         that.isMoving = false;
+        that.tileBox.unitCost = 0;
     }, false);
 
     // Optional events
@@ -306,12 +307,11 @@ TileBox.prototype.draw = function() {
         this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row &&
         this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col &&
         this.isBusy) {
-        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.isMoving ^ this.unitCost <= this.gameUI.resourcesTotal) {
+        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.isMoving || (this.unitCost <= this.gameUI.resourcesTotal)) {
             this.ctx.strokeStyle = 'rgb(0, 255, 38)'; //Green box
         } else {
             this.ctx.strokeStyle = 'rgb(255, 0, 12)'; //Red box
         }
-
         this.ctx.strokeRect(this.x, this.y, this.map.tileSize, this.map.tileSize);
     }
 }
