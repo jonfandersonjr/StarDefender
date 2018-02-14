@@ -183,28 +183,42 @@ Mouse.prototype.attachListeners = function() {
             if (isValid(this.map, tileLoc.row, tileLoc.column)) {
                 that.isMoving = false;
                 that.tileBox.isMoving = false;
-                that.pickedUpDefender.defender.isDummy = false;
-                that.pickedUpDefender.defender.row = tileLoc.row;
-                that.pickedUpDefender.defender.column = tileLoc.column;
-                that.pickedUpDefender.defender.calculateTrueXY();
                 that.isBusy = false;
                 that.tileBox.isBusy = false;
                 that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.defender.unit.mapKey;
+                if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {
+                    that.pickedUpDefender.defender.isDummy = false;
+                    that.pickedUpDefender.defender.row = tileLoc.row;
+                    that.pickedUpDefender.defender.column = tileLoc.column;
+                    that.pickedUpDefender.defender.calculateTrueXY();
+                } else {
+                    that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = '+';
+                    that.pickedUpDefender.defender.lineToRow = tileLoc.row;
+                    that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
+                    that.pickedUpDefender.defender.isDummy = true;
+                }
             }
         } else if (!that.isBusy && !that.isMoving) { //Pick up a defender.
             //move unit
             let mouseLoc = getMousePos(this.canvas, event);
             let tileLoc = getTile(mouseLoc, this.map);
             if (isDefender(that.map.map[tileLoc.row][tileLoc.column])) {
-                that.isMoving = true;
-                that.tileBox.isMoving = true;
-                that.isBusy = true;
-                that.tileBox.isBusy = true;
                 that.pickedUpDefender.defender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
-                that.pickedUpDefender.row = tileLoc.row;
-                that.pickedUpDefender.column = tileLoc.column;
-                that.pickedUpDefender.defender.isDummy = true;
-                that.map.map[tileLoc.row][tileLoc.column] = '+';
+                if (!that.pickedUpDefender.defender.isDummy) {
+                    that.isMoving = true;
+                    that.tileBox.isMoving = true;
+                    that.isBusy = true;
+                    that.tileBox.isBusy = true;
+                    that.pickedUpDefender.row = tileLoc.row;
+                    that.pickedUpDefender.column = tileLoc.column;
+                    if (that.map.map[tileLoc.row][tileLoc.column] !== 'd') {//Pick up everything but battlecruiser
+                        console.log(that.map.map[tileLoc.row][tileLoc.column])
+                        that.pickedUpDefender.defender.isDummy = true;
+                        that.map.map[tileLoc.row][tileLoc.column] = '+';
+                    } else {//If battlecruiser, draw a line to where it should move to
+                        that.pickedUpDefender.defender.isLineVisible = true;
+                    }
+                }
             }
         }
     }, false);
@@ -214,7 +228,12 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
         if (that.isMoving) {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
-            that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
+            if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {//Move everything but battlecruiser
+                that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
+            } else {//row and column to draw a line to
+                that.pickedUpDefender.defender.lineToRow = tileLoc.row;
+                that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
+            }
         }
     }, false);
 
@@ -260,6 +279,7 @@ Mouse.prototype.attachListeners = function() {
             that.pickedUpDefender.defender.calculateXY(that.pickedUpDefender.row, that.pickedUpDefender.column);
             that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = that.pickedUpDefender.defender.unit.mapKey;
             that.pickedUpDefender.defender.isDummy = false;
+            that.pickedUpDefender.defender.isLineVisible = false;
         }
         that.isBusy = false;
         that.tileBox.isBusy = false;
@@ -307,7 +327,7 @@ TileBox.prototype.draw = function() {
         this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row &&
         this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col &&
         this.isBusy) {
-        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.isMoving || (this.unitCost <= this.gameUI.resourcesTotal)) {
+        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && (this.isMoving || this.unitCost <= this.gameUI.resourcesTotal)) {
             this.ctx.strokeStyle = 'rgb(0, 255, 38)'; //Green box
         } else {
             this.ctx.strokeStyle = 'rgb(255, 0, 12)'; //Red box
