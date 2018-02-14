@@ -66,6 +66,9 @@ AM.downloadAll(function() {
     gameEngine.init(ctx);
     gameEngine.start();
 
+    //Attach gameengine to ui
+    ui.attachEngine(gameEngine);
+
     //Map Load
     map.createMap(gameEngine, AM);
 });
