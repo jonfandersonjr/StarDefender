@@ -92,10 +92,10 @@ Dropship.prototype.move = function (destinationX, destinationY) {
 
 
     this.calculateFlyAnimation(destinationX, destinationY);
-    this.xDif -= Math.abs(this.gameEngine.clockTick * this.xSpeed);
-    if (this.xDif > 0) {
-        this.x += this.gameEngine.clockTick * this.xSpeed;
-        this.y += this.gameEngine.clockTick * this.ySpeed;
+    this.dist -= this.gameEngine.clockTick * this.speed;
+    if (this.dist > 0) {
+        this.x -= this.gameEngine.clockTick * this.xSpeed;
+        this.y -= this.gameEngine.clockTick * this.ySpeed;
     } else {
         return true;
     }
@@ -114,18 +114,11 @@ Dropship.prototype.draw = function () {
 }
 
 Dropship.prototype.calculateFlyAnimation = function (destinationX, destinationY) {
-    this.xDif = Math.abs(this.x - destinationX);
-    this.yDif = Math.abs(this.y - destinationY);
-
-    this.xSpeed = this.speed * (this.xDif / this.yDif);
-    if (this.x > destinationX) {
-        this.xSpeed *= -1;
-    }
-
-    this.ySpeed = this.speed;
-    if (this.y > destinationY) {
-        this.ySpeed *= -1;
-    }
+    this.xDif = this.x - destinationX;
+    this.yDif = this.y - destinationY;
+    this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
+    this.xSpeed = this.speed * (this.xDif / this.dist);
+    this.ySpeed = this.speed * (this.yDif / this.dist);
 }
 
 function angle(cx, cy, ex, ey) {

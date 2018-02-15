@@ -106,7 +106,7 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.damage = this.unit.damage;
     this.frame = 0;
     this.isDummy = isDummy;
-    this.speed = 10;
+    this.speed = 100;
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
 
@@ -127,11 +127,11 @@ Defender.prototype.update = function() {
     if (this.unit.name === 'battlecruiser' && this.isDummy) {
         this.row = this.lineToRow;
         this.column = this.lineToColumn;
-        this.calculateFlyAnimation();
-        this.xDif -= Math.abs(this.gameEngine.clockTick * this.xSpeed);
-        if (this.xDif > 0) {
-            this.x += this.gameEngine.clockTick * this.xSpeed;
-            this.y += this.gameEngine.clockTick * this.ySpeed;
+        this.calculateFlyAnimation(this.lineToRow, this.lineToColumn);
+        this.dist -= this.gameEngine.clockTick * this.speed;
+        if (this.dist > 0) {
+            this.x -= this.gameEngine.clockTick * this.xSpeed;
+            this.y -= this.gameEngine.clockTick * this.ySpeed;
             this.trueX = this.x + (this.unit.frameWidth/2) * this.unit.scale;
             this.trueY = this.y + (this.unit.frameHeight/2) * this.unit.scale;
         } else {
@@ -202,19 +202,12 @@ Defender.prototype.shoot = function(enemy) {
     }
 }
 
-Defender.prototype.calculateFlyAnimation = function() {
-    this.xDif = Math.abs(this.x - this.lineToColumn * this.map.tileSize);
-    this.yDif = Math.abs(this.y - this.lineToRow * this.map.tileSize);
-
-    this.xSpeed = this.speed * (this.xDif / this.yDif);
-    if (this.x > this.lineToColumn * this.map.tileSize) {
-        this.xSpeed *= -1;
-    }
-
-    this.ySpeed = this.speed;
-    if (this.y > this.lineToRow * this.map.tileSize) {
-        this.ySpeed *= -1;
-    }
+Defender.prototype.calculateFlyAnimation = function (row, column) {
+    this.xDif = this.x - column * this.map.tileSize;
+    this.yDif = this.y - row * this.map.tileSize;
+    this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
+    this.xSpeed = this.speed * (this.xDif / this.dist);
+    this.ySpeed = this.speed * (this.yDif / this.dist);
 }
 
 function angle(cx, cy, ex, ey) {
