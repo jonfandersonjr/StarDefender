@@ -163,10 +163,10 @@ Mouse.prototype.attachListeners = function() {
 
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
     that.canvas.addEventListener("click", (e) => {
-        if (that.isBusy && !that.isMoving) {
+        if (that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) {
             that.dropTower(e);
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
-        } else if (that.isBusy && that.isMoving) { //Put down a picked up defender.
+        } else if (that.isBusy && that.isMoving && !(that.gameEngine.getPauseBool())) { //Put down a picked up defender.
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
             if (isValid(this.map, tileLoc.row, tileLoc.column)) {
                 that.isMoving = false;
@@ -186,14 +186,15 @@ Mouse.prototype.attachListeners = function() {
                         tileLoc.row, that.pickedUpDefender.defender);
 
 
-                } else if (this.pickedUpDefender.defender.unit.name === 'battlecruiser') {
+                } else if (this.pickedUpDefender.defender.unit.name === 'battlecruiser' &&
+                    !(that.gameEngine.getPauseBool())) {
                     that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = '+';
                     that.pickedUpDefender.defender.lineToRow = tileLoc.row;
                     that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
                     that.pickedUpDefender.defender.isDummy = true;
                 }
             }
-        } else if (!that.isBusy && !that.isMoving) { //Pick up a defender.
+        } else if (!that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) { //Pick up a defender.
             //move unit
             let mouseLoc = getMousePos(this.canvas, event);
             let tileLoc = getTile(mouseLoc, this.map);
@@ -236,31 +237,31 @@ Mouse.prototype.attachListeners = function() {
     //Keypress binds
     this.canvas.addEventListener("keydown", function(e) {
         if (e.keyCode === 70) {
-            if (!that.gameEngine.pauseBool) {
+            if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("scv");
             }
         } else if (e.keyCode === 65) {
             that.unitCost = 50;
             that.tileBox.unitCost = 50;
-            if (!that.gameEngine.pauseBool) {
+            if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("marine");
             }
         } else if (e.keyCode === 83) {
             that.unitCost = 100;
             that.tileBox.unitCost = 100;
-            if (!that.gameEngine.pauseBool) {
+            if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("ghost");
             }
         } else if (e.keyCode === 68) {
             that.unitCost = 150;
             that.tileBox.unitCost = 150;
-            if (!that.gameEngine.pauseBool) {
+            if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("battlecruiser");
             }
         } else if (e.keyCode === 87) {
             that.unitCost = 100;
             that.tileBox.unitCost = 100;
-            if (!that.gameEngine.pauseBool) {
+            if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("antiair");
             }
         } else if (e.keyCode === 77) {
@@ -272,7 +273,7 @@ Mouse.prototype.attachListeners = function() {
                 that.musicOn = true;
             }
         } else if (e.keyCode === 80) {
-            if (that.gameEngine.pauseBool) {
+            if (that.gameEngine.getPauseBool()) {
                 that.gameEngine.pause(false);
             } else {
                 that.gameEngine.pause(true);
