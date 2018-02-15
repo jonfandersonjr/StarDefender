@@ -1,4 +1,4 @@
-var dropship = { name: "dropship", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1.1, speed: 100};
+var dropship = { name: "dropship", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1.1, speed: 120};
 
 function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEndColumn, unitEndRow, theDefender) {
     this.AM = assetManager;
