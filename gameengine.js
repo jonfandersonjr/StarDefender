@@ -51,14 +51,24 @@ GameEngine.prototype.start = function() {
 GameEngine.prototype.pause = function(boolean) {
     var that = this;
     that.oldClockTick = that.clockTick;
+    var canvasThree = document.getElementById("gameOverlayScreen");
+    var ctxThree = canvasThree.getContext("2d");
+    var pause_img = new Image();
     if (boolean === true) {
         that.pauseBool = true;
         that.clockTick = 0;
+        //Draw paused image
+        pause_img.onload = function() {
+            ctxThree.drawImage(pause_img, 170, 50);
+        }
+        pause_img.src = './img/ui/paused.png';
         console.log("Game Paused");
         console.log("Game Tick: " + that.oldClockTick);
     } else {
         that.pauseBool = false;
         that.clockTick = that.oldClockTick;
+        //Undraw pause image
+        ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
         console.log("Game Resumed");
     }
 }
