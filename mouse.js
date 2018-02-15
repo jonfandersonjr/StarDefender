@@ -83,7 +83,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
             console.log("Unit Cost: " + this.unitCost);
         }
     }
-
 };
 
 Mouse.prototype.dropTower = function(e) {
@@ -231,18 +230,22 @@ Mouse.prototype.attachListeners = function() {
         if (e.keyCode === 70) {
             that.selectDefender("scv");
         } else if (e.keyCode === 65) {
+            that.unitCost = 50;
+            that.tileBox.unitCost = 50;
             that.selectDefender("marine");
         } else if (e.keyCode === 83) {
+            that.unitCost = 100;
+            that.tileBox.unitCost = 100;
             that.selectDefender("ghost");
         } else if (e.keyCode === 68) {
+            that.unitCost = 150;
+            that.tileBox.unitCost = 150;
             that.selectDefender("battlecruiser");
         } else if (e.keyCode === 87) {
+            that.unitCost = 100;
+            that.tileBox.unitCost = 100;
             that.selectDefender("antiair");
-        } else if (e.keyCode === 32) {
-            if (that.canAddLevel) {
-                that.createLevel(1)
-            }
-        } else if (e.keyCode === 77) {
+        }  else if (e.keyCode === 77) {
             if (that.musicOn) {
                 that.ui.pauseMusic(true);
                 that.musicOn = false;
@@ -250,8 +253,12 @@ Mouse.prototype.attachListeners = function() {
                 that.ui.pauseMusic(false);
                 that.musicOn = true;
             }
-
-
+        } else if(e.keyCode === 80) {
+            if(that.gameEngine.pauseBool) {
+                that.gameEngine.pause(false);
+            } else {
+                that.gameEngine.pause(true);
+            }
         }
     }, false);
 

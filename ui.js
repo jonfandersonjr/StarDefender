@@ -289,11 +289,13 @@ function generateGameInfo() {
     this.gameInfoBox.value = "Star Defender\n" +
         "*************************\n" +
         "Keybinds:\n" +
-        "-----\n" +
-        "(M) Music (On/Off)\n" +
+        "----\n" +
         "(A) Marine\n    (Low DMG)\n    (Fast RoF)\n" +
         "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
         "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
         "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
-        "(F) Spawn SCV\n    (Generates Resources)\n";
+        "(F) Spawn SCV\n    (Generates Resources)\n" +
+        "----\n" +
+        "(M) Music (On/Off)\n" +
+        "(P) Pause/Resume Game\n";
 }
