@@ -28,7 +28,7 @@ Generator.prototype.createDummyDefender = function(defenderName, row, column) {
 
 //Creates an SCV at the base location.
 Generator.prototype.createSCV = function () {
-    this.gameEngine.addSCV(new Dropship(this.gameEngine, this.map, this.AM, this.UI));
+    this.gameEngine.addSCV(new SCV(this.gameEngine, this.map, this.AM, this.UI));
 }
 
 //Creates a dropship to move units. Comes from base and goes back to base.

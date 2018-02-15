@@ -62,7 +62,6 @@ function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSe
             console.log("Problem creating projectile");
             break;
     }
-    console.log(this.defenderName);
     this.frameWidth = this.unit.frameWidth;
     this.frameHeight = this.unit.frameHeight;
     this.sheetWidth = this.unit.sheetWidth;

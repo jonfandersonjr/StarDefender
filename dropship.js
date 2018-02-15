@@ -68,7 +68,6 @@ Dropship.prototype.dropOffUnit = function () {
         this.defender.x = this.unitEndX;
         this.defender.y = this.unitEndY;
         this.defender.calculateXY(this.endRow, this.endColumn);
-        console.log('END ' + this.unitEndX);
         this.defender.calculateTrueXY();
         this.map.map[this.defender.row][this.defender.column] = this.defender.unit.mapKey;
         this.defender.isDummy = false;

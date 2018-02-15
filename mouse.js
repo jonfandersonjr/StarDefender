@@ -176,11 +176,7 @@ Mouse.prototype.attachListeners = function() {
                 that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.defender.unit.mapKey;
                 if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {
                     that.pickedUpDefender.defender.isDummy = false;
-                    //that.pickedUpDefender.defender.row = tileLoc.row;
-                    //that.pickedUpDefender.defender.column = tileLoc.column;
 
-                    //console.log('START ' + endX)
-                    //that.pickedUpDefender.defender.calculateTrueXY();
                     //create dropship
                     that.generator.createDropship(that.pickedUpDefender.column, that.pickedUpDefender.row, tileLoc.column,
                         tileLoc.row, that.pickedUpDefender.defender);
