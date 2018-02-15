@@ -175,10 +175,17 @@ Mouse.prototype.attachListeners = function() {
                 that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.defender.unit.mapKey;
                 if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {
                     that.pickedUpDefender.defender.isDummy = false;
-                    that.pickedUpDefender.defender.row = tileLoc.row;
-                    that.pickedUpDefender.defender.column = tileLoc.column;
-                    that.pickedUpDefender.defender.calculateTrueXY();
-                } else {
+                    //that.pickedUpDefender.defender.row = tileLoc.row;
+                    //that.pickedUpDefender.defender.column = tileLoc.column;
+
+                    //console.log('START ' + endX)
+                    //that.pickedUpDefender.defender.calculateTrueXY();
+                    //create dropship
+                    that.generator.createDropship(that.pickedUpDefender.column, that.pickedUpDefender.row, tileLoc.column,
+                                                  tileLoc.row, that.pickedUpDefender.defender);
+
+
+                } else if (this.pickedUpDefender.defender.unit.name === 'battlecruiser') {
                     that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = '+';
                     that.pickedUpDefender.defender.lineToRow = tileLoc.row;
                     that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
@@ -199,9 +206,10 @@ Mouse.prototype.attachListeners = function() {
                     that.pickedUpDefender.row = tileLoc.row;
                     that.pickedUpDefender.column = tileLoc.column;
                     if (that.map.map[tileLoc.row][tileLoc.column] !== 'd') {//Pick up everything but battlecruiser
-                        console.log(that.map.map[tileLoc.row][tileLoc.column])
-                        that.pickedUpDefender.defender.isDummy = true;
-                        that.map.map[tileLoc.row][tileLoc.column] = '+';
+                        //var startY = tileLoc.row * that.map.tileSize;
+                        //var startX = tileLoc.column * that.map.tileSize;
+                        //that.pickedUpDefender.defender.isDummy = true;
+                        //that.map.map[tileLoc.row][tileLoc.column] = '+';
                     } else {//If battlecruiser, draw a line to where it should move to
                         that.pickedUpDefender.defender.isLineVisible = true;
                     }
@@ -216,7 +224,7 @@ Mouse.prototype.attachListeners = function() {
         if (that.isMoving) {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
             if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {//Move everything but battlecruiser
-                that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
+                //that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
             } else {//row and column to draw a line to
                 that.pickedUpDefender.defender.lineToRow = tileLoc.row;
                 that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
@@ -324,7 +332,7 @@ TileBox.prototype.draw = function() {
 }
 
 function isDefender(mapKey) {
-    return mapKey === 'a' || mapKey === 's' || mapKey === 'd' || mapKey === 'w';
+    return mapKey === 'a' || mapKey === 's' || mapKey === 'd';
 }
 
 

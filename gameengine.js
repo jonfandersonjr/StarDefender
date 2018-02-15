@@ -187,6 +187,11 @@ GameEngine.prototype.update = function() {
 
     for (let i = 0; i < this.scvEntities.length; i++) {
         this.scvEntities[i].update();
+        if (!this.scvEntities[i].removeFromWorld) {
+            this.scvEntities[i].update();
+        } else {
+            this.scvEntities.splice(i, 1);
+        }
     }
 
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {

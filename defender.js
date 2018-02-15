@@ -149,7 +149,7 @@ Defender.prototype.draw = function() {
         this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     } else {
         if(this.unit.name !== 'battlecruiser') {
-            this.animation.drawDummyDefender(this.ctx, this.x, this.y, this.frame, this.unit.name);
+            //this.animation.drawDummyDefender(this.ctx, this.x, this.y, this.frame, this.unit.name);
         } else {
             this.frame = Math.floor(angle(this.trueX, this.trueY, (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize) / (360 / this.unit.frames));
             this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
