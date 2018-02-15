@@ -110,8 +110,8 @@ Level.prototype.playLevel3 = function() {
     }
 }
 
+
 Level.prototype.playLevel4 = function() {
-    //window.alert("This is all for the game so far, apparently every 10 seconds.");
 
 }
 
