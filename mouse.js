@@ -9,11 +9,6 @@ var costs = {
 
 function Mouse(map, ctx) {
     this.musicOn = true;
-    this.radiusOfFire = {
-        radius: 30,
-        color: 'rgba(0,0,0, .9)', //white 30%
-        thick: 2
-    };
     this.resources = {
         marine: -50,
         ghost: -100,
