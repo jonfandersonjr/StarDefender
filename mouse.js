@@ -183,7 +183,7 @@ Mouse.prototype.attachListeners = function() {
                     //that.pickedUpDefender.defender.calculateTrueXY();
                     //create dropship
                     that.generator.createDropship(that.pickedUpDefender.column, that.pickedUpDefender.row, tileLoc.column,
-                                                  tileLoc.row, that.pickedUpDefender.defender);
+                        tileLoc.row, that.pickedUpDefender.defender);
 
 
                 } else if (this.pickedUpDefender.defender.unit.name === 'battlecruiser') {
@@ -206,12 +206,12 @@ Mouse.prototype.attachListeners = function() {
                     that.tileBox.isBusy = true;
                     that.pickedUpDefender.row = tileLoc.row;
                     that.pickedUpDefender.column = tileLoc.column;
-                    if (that.map.map[tileLoc.row][tileLoc.column] !== 'd') {//Pick up everything but battlecruiser
+                    if (that.map.map[tileLoc.row][tileLoc.column] !== 'd') { //Pick up everything but battlecruiser
                         //var startY = tileLoc.row * that.map.tileSize;
                         //var startX = tileLoc.column * that.map.tileSize;
                         //that.pickedUpDefender.defender.isDummy = true;
                         //that.map.map[tileLoc.row][tileLoc.column] = '+';
-                    } else {//If battlecruiser, draw a line to where it should move to
+                    } else { //If battlecruiser, draw a line to where it should move to
                         that.pickedUpDefender.defender.isLineVisible = true;
                     }
                 }
@@ -224,9 +224,9 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
         if (that.isMoving) {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
-            if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {//Move everything but battlecruiser
+            if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') { //Move everything but battlecruiser
                 //that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
-            } else {//row and column to draw a line to
+            } else { //row and column to draw a line to
                 that.pickedUpDefender.defender.lineToRow = tileLoc.row;
                 that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
             }
@@ -236,24 +236,34 @@ Mouse.prototype.attachListeners = function() {
     //Keypress binds
     this.canvas.addEventListener("keydown", function(e) {
         if (e.keyCode === 70) {
-            that.selectDefender("scv");
+            if (!that.gameEngine.pauseBool) {
+                that.selectDefender("scv");
+            }
         } else if (e.keyCode === 65) {
             that.unitCost = 50;
             that.tileBox.unitCost = 50;
-            that.selectDefender("marine");
+            if (!that.gameEngine.pauseBool) {
+                that.selectDefender("marine");
+            }
         } else if (e.keyCode === 83) {
             that.unitCost = 100;
             that.tileBox.unitCost = 100;
-            that.selectDefender("ghost");
+            if (!that.gameEngine.pauseBool) {
+                that.selectDefender("ghost");
+            }
         } else if (e.keyCode === 68) {
             that.unitCost = 150;
             that.tileBox.unitCost = 150;
-            that.selectDefender("battlecruiser");
+            if (!that.gameEngine.pauseBool) {
+                that.selectDefender("battlecruiser");
+            }
         } else if (e.keyCode === 87) {
             that.unitCost = 100;
             that.tileBox.unitCost = 100;
-            that.selectDefender("antiair");
-        }  else if (e.keyCode === 77) {
+            if (!that.gameEngine.pauseBool) {
+                that.selectDefender("antiair");
+            }
+        } else if (e.keyCode === 77) {
             if (that.musicOn) {
                 that.ui.pauseMusic(true);
                 that.musicOn = false;
@@ -261,8 +271,8 @@ Mouse.prototype.attachListeners = function() {
                 that.ui.pauseMusic(false);
                 that.musicOn = true;
             }
-        } else if(e.keyCode === 80) {
-            if(that.gameEngine.pauseBool) {
+        } else if (e.keyCode === 80) {
+            if (that.gameEngine.pauseBool) {
                 that.gameEngine.pause(false);
             } else {
                 that.gameEngine.pause(true);

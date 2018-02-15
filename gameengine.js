@@ -210,8 +210,13 @@ GameEngine.prototype.update = function() {
     resize();
 }
 
+GameEngine.prototype.getPauseBool = function() {
+    var that = this;
+    return that.pauseBool;
+}
+
 GameEngine.prototype.loop = function() {
-    if(this.pauseBool) {
+    if (this.pauseBool) {
         this.clockTick = 0;
     } else {
         this.clockTick = this.timer.tick();

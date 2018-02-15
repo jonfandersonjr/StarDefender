@@ -34,33 +34,11 @@ function UI(mouse, startHealth, maxHealth,
     this.audio.loop = false;
     this.audio.src = this.playlist[0];
     this.audio.play();
-
+    this.attachKeybinds();
 
     //Game info text panel
     generateGameInfo();
     drawImages(this.ctx);
-    this.canvas.addEventListener("click", function(e) {
-        var mousePos = getMousePos(document.getElementById("uiButtons"), e);
-        if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
-            mouse.unitCost = 50;
-            mouse.tileBox.unitCost = 50;
-            mouse.selectDefender("marine");
-        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
-            mouse.unitCost = 100;
-            mouse.tileBox.unitCost = 100;
-            mouse.selectDefender("ghost");
-        } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
-            mouse.unitCost = 150;
-            mouse.tileBox.unitCost = 150;
-            mouse.selectDefender("battlecruiser");
-        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 110 && mousePos.y <= 210) {
-            mouse.unitCost = 100;
-            mouse.tileBox.unitCost = 100;
-            mouse.selectDefender("antiair");
-        } else if (mousePos.x >= 58 && mousePos.x <= 162 && mousePos.y >= 210 && mousePos.y <= 320) {
-            mouse.selectDefender("scv");
-        }
-    }, false);
 
     //gets relative mouse position based on canvas
     function getMousePos(canvas, e) {
@@ -134,6 +112,41 @@ function UI(mouse, startHealth, maxHealth,
     this.updateText();
 };
 
+UI.prototype.attachKeybinds = function() {
+    var that = this;
+    this.canvas.addEventListener("click", function(e) {
+        var mousePos = getMousePos(document.getElementById("uiButtons"), e);
+        if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
+            that.mouse.unitCost = 50;
+            that.mouse.tileBox.unitCost = 50;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.mouse.selectDefender("marine");
+            }
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
+            that.mouse.unitCost = 100;
+            that.mouse.tileBox.unitCost = 100;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.mouse.selectDefender("ghost");
+            }
+        } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
+            that.mouse.unitCost = 150;
+            that.mouse.tileBox.unitCost = 150;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.mouse.selectDefender("battlecruiser");
+            }
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 110 && mousePos.y <= 210) {
+            that.mouse.unitCost = 100;
+            that.mouse.tileBox.unitCost = 100;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.mouse.selectDefender("antiair");
+            }
+        } else if (mousePos.x >= 58 && mousePos.x <= 162 && mousePos.y >= 210 && mousePos.y <= 320) {
+            if (!(that.gameEngine.getPauseBool())) {
+                that.mouse.selectDefender("scv");
+            }
+        }
+    }, false);
+}
 UI.prototype.attachEngine = function(engine) {
     this.gameEngine = engine;
 }
