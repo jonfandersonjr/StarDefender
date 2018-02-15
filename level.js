@@ -6,15 +6,15 @@
 //entranceNum = which entry point on the map they enter from. 1 = first entrance, 2 = second entrance, 3 = both
 
 //Level One
-var firstLevelEnemies = ["zergling", "queen", "defiler", "ultralisk", "scourge", "hydralisk", "mutalisk"];
-var firstLevelWaveSize = [3, 3, 3, 2, 3, 4, 4, 0];
+var firstLevelEnemies = ["zergling", "queen", "defiler", "ultralisk", "scourge", "hydralisk", "devourer"];
+var firstLevelWaveSize = [3, 3, 3, 2, 3, 4, 1, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3];
 
 //Level Two
-var secondLevelEnemies = ["queen", "scourge", "ultralisk", "zergling", "defiler", "hydralisk"];
-var secondLevelWaveSize = [5, 5, 7, 8, 10, 10, 0];
+var secondLevelEnemies = ["queen", "scourge", "ultralisk", "zergling", "defiler", "overlord"];
+var secondLevelWaveSize = [5, 5, 7, 8, 10, 1, 0];
 var secondLevelSpeedBuff = [1.2, 1, 1, 1, 1, 1];
 var secondLevelHealthBuff = [2, 1, 2, 1, 1, 1];
 var secondLevelEntranceNum = [3, 2, 1, 3, 2, 3];

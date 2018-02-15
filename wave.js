@@ -40,11 +40,23 @@ var defilerWave = {
     speedBuff: 1,
     healthBuff: 1
 };
+var devourerWave = {
+    name: "devourer",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1
+};
+var overlordWave = {
+    name: "overlord",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1
+};
 var sarahkerriganWave = {
     name: "sarahkerrigan",
     delay: .25,
-    speedbuff: 1.5,
-    healthBuff: 2
+    speedbuff: 1,
+    healthBuff: 1
 };
 
 function Wave(generator, game) {
@@ -106,6 +118,12 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "defiler":
             this.unit = defilerWave;
+            break;
+        case "devourer":
+            this.unit = devourerWave;
+            break;
+        case "overlord":
+            this.unit = overlordWave;
             break;
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
