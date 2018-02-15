@@ -92,6 +92,8 @@ Mouse.prototype.selectDefender = function(defenderName) {
         this.defenderName = defenderName;
         if (this.ui.resourcesTotal < this.unitCost) {
             this.PlaySound("./soundfx/minerals.wav");
+            console.log("Resources: " + this.ui.resourcesTotal);
+            console.log("Unit Cost: " + this.unitCost);
         }
     }
 
