@@ -18,7 +18,7 @@ var queenWave = {
 };
 var zerglingWave = {
     name: "zergling",
-    delay: .75,
+    delay: .65,
     speedBuff: 1,
     healthBuff: 1
 };
