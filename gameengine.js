@@ -28,6 +28,7 @@ function GameEngine(mouse, ui) {
     this.levelNum = 1;
     this.isBootingLevel = true;
     this.waveDelay = 10; //time between waves in seconds.
+    this.pauseBool = false;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -51,10 +52,12 @@ GameEngine.prototype.pause = function(boolean) {
     var that = this;
     that.oldClockTick = that.clockTick;
     if (boolean === true) {
-        that.clockTick = Math.floor(0);
+        that.pauseBool = true;
+        that.clockTick = 0;
         console.log("Game Paused");
         console.log("Game Tick: " + that.oldClockTick);
     } else {
+        that.pauseBool = false;
         that.clockTick = that.oldClockTick;
         console.log("Game Resumed");
     }
@@ -208,7 +211,11 @@ GameEngine.prototype.update = function() {
 }
 
 GameEngine.prototype.loop = function() {
-    this.clockTick = this.timer.tick();
+    if(this.pauseBool) {
+        this.clockTick = 0;
+    } else {
+        this.clockTick = this.timer.tick();
+    }
     this.update();
     this.draw();
 }

@@ -42,21 +42,21 @@ function UI(mouse, startHealth, maxHealth,
     this.canvas.addEventListener("click", function(e) {
         var mousePos = getMousePos(document.getElementById("uiButtons"), e);
         if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
-            mouse.selectDefender("marine");
             mouse.unitCost = 50;
             mouse.tileBox.unitCost = 50;
+            mouse.selectDefender("marine");
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
-            mouse.selectDefender("ghost");
             mouse.unitCost = 100;
             mouse.tileBox.unitCost = 100;
+            mouse.selectDefender("ghost");
         } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
-            mouse.selectDefender("battlecruiser");
             mouse.unitCost = 150;
             mouse.tileBox.unitCost = 150;
+            mouse.selectDefender("battlecruiser");
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 110 && mousePos.y <= 210) {
-            mouse.selectDefender("antiair");
             mouse.unitCost = 100;
             mouse.tileBox.unitCost = 100;
+            mouse.selectDefender("antiair");
         } else if (mousePos.x >= 58 && mousePos.x <= 162 && mousePos.y >= 210 && mousePos.y <= 320) {
             mouse.selectDefender("scv");
         }
@@ -289,11 +289,13 @@ function generateGameInfo() {
     this.gameInfoBox.value = "Star Defender\n" +
         "*************************\n" +
         "Keybinds:\n" +
-        "-----\n" +
-        "(M) Music (On/Off)\n" +
+        "----\n" +
         "(A) Marine\n    (Low DMG)\n    (Fast RoF)\n" +
         "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
         "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
         "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
-        "(F) Spawn SCV\n    (Generates Resources)\n";
+        "(F) Spawn SCV\n    (Generates Resources)\n" +
+        "----\n" +
+        "(M) Music (On/Off)\n" +
+        "(P) Pause/Resume Game\n";
 }
