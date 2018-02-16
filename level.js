@@ -7,19 +7,20 @@
 
 
 //Level One
-<<<<<<< HEAD
 var firstLevelEnemies = ["zergling", "scourge", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
 var firstLevelWaveSize = [3, 3, 2, 3, 4, 8, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 2, 3, 2, 3, 1];
-=======
+
+/*
 var firstLevelEnemies = ["sarahkerrigan", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
 var firstLevelWaveSize = [1, 2, 3, 4, 8, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 3, 2, 3, 1];
 >>>>>>> 152a49dd25fce84a6c823fdb02a2f4ffc5626dd4
+*/
 
 //Level Two
 var secondLevelEnemies = ["queen", "scourge", "ultralisk", "zergling", "defiler", "overlord"];
