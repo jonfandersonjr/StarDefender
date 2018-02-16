@@ -12,7 +12,8 @@ for (let i = 0; i < defenderList.length; i++) {
 //load enemy sprites
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
 var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "scourge", "dropship",
-                "sarahkerrigan", "devourer", "overlord"];
+    "sarahkerrigan", "devourer", "overlord"
+];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
@@ -48,7 +49,7 @@ AM.downloadAll(function() {
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
-    var ui = new UI(myMouse, 100, 100, 200, 1, 0, 0);
+    var ui = new UI(myMouse, 100, 100, 20000, 1, 0, 0);
     myMouse.attachUI(ui);
 
     var gameEngine = new GameEngine(myMouse, ui);
