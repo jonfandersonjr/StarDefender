@@ -48,8 +48,9 @@ GameEngine.prototype.start = function() {
     })();
 }
 
-GameEngine.prototype.pause = function(boolean) {
+GameEngine.prototype.pause = function(boolean, gameover) {
     var that = this;
+    that.gameOverBool = gameover;
     that.oldClockTick = that.clockTick;
     var canvasThree = document.getElementById("gameOverlayScreen");
     var ctxThree = canvasThree.getContext("2d");
@@ -58,10 +59,12 @@ GameEngine.prototype.pause = function(boolean) {
         that.pauseBool = true;
         that.clockTick = 0;
         //Draw paused image
-        pause_img.onload = function() {
-            ctxThree.drawImage(pause_img, 170, 50);
+        if (!gameover) {
+            pause_img.onload = function() {
+                ctxThree.drawImage(pause_img, 170, 50);
+            }
+            pause_img.src = './img/ui/paused.png';
         }
-        pause_img.src = './img/ui/paused.png';
         console.log("Game Paused");
         console.log("Game Tick: " + that.oldClockTick);
     } else {
