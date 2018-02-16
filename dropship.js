@@ -30,7 +30,6 @@ function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEn
     this.unitStartY = unitStartRow * this.map.tileSize;
     this.unitEndX = unitEndColumn * this.map.tileSize;
     this.unitEndY = unitEndRow * this.map.tileSize;
-
     this.endRow = unitEndRow;
     this.endColumn = unitEndColumn;
 
@@ -48,13 +47,10 @@ Dropship.prototype.constructor = Dropship;
 Dropship.prototype.update = function() {
 
     if (this.isPickingUp) {
-        //find and change direction
         this.moveToUnit()
     } else if (this.isDroppingOff) {
-        //find and change direction
         this.dropOffUnit();
     } else {
-        //find and change direction
         this.headToBase();
     }
     Entity.prototype.update.call(this);
@@ -67,12 +63,10 @@ Dropship.prototype.moveToUnit = function() {
         this.isDroppingOff = true;
         this.defender.isDummy = true;
     }
-
-
 }
 
 Dropship.prototype.dropOffUnit = function() {
-    if (this.move(this.unitEndX, this.unitEndY)) { //dropped it off
+    if (this.move(this.unitEndX, this.unitEndY)) { //reached dropoff spot
         this.defender.row = this.unitEndY / this.map.tileSize;
         this.defender.column = this.unitEndX / this.map.tileSize;
         this.defender.x = this.unitEndX;
@@ -87,8 +81,7 @@ Dropship.prototype.dropOffUnit = function() {
 
 Dropship.prototype.headToBase = function() {
 
-    if (this.move(this.map.baseX, this.map.baseY)) {
-        //remove from world
+    if (this.move(this.map.baseX, this.map.baseY)) { //reached base
         this.removeFromWorld = true;
     }
 }
@@ -96,10 +89,6 @@ Dropship.prototype.headToBase = function() {
 // Helper function to move to next destination
 Dropship.prototype.move = function(destinationX, destinationY) {
     this.frame = Math.floor(angle(this.x, this.y, destinationX, destinationY) / (360 / this.unit.frames));
-    // let slope = (destinationY - this.y) / (destinationX - this.x);
-    // this.x += this.game.clockTick * this.speed;
-    // this.y = slope * this.x + this.yIntercept;
-
 
     this.calculateFlyAnimation(destinationX, destinationY);
     this.dist -= this.gameEngine.clockTick * this.speed;
