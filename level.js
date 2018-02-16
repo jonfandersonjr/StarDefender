@@ -13,11 +13,11 @@ var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 2, 3, 2, 3, 1];
 
 //Level Two
-var secondLevelEnemies = ["zergling", "mutalisk", "queen", "mutalisk", "defiler", "zergling"];
-var secondLevelWaveSize = [5, 3, 7, 4, 10, 10, 0];
-var secondLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
-var secondLevelHealthBuff = [1, 1, 1, 1, 1, 1];
-var secondLevelEntranceNum = [1, 2, 1, 3, 2, 3];
+var secondLevelEnemies = ["queen", "scourge", "ultralisk", "zergling", "defiler", "overlord"];
+var secondLevelWaveSize = [5, 5, 7, 8, 10, 1, 0];
+var secondLevelSpeedBuff = [1.2, 1, 1, 1, 1, 1];
+var secondLevelHealthBuff = [2, 1, 2, 1, 1, 1];
+var secondLevelEntranceNum = [3, 2, 1, 3, 2, 3];
 
 //Level Three
 var thirdLevelEnemies = ["zergling", "mutalisk", "mutalisk", "zergling"];
@@ -110,8 +110,8 @@ Level.prototype.playLevel3 = function() {
     }
 }
 
+
 Level.prototype.playLevel4 = function() {
-    //window.alert("This is all for the game so far, apparently every 10 seconds.");
 
 }
 

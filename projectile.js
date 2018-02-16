@@ -62,7 +62,6 @@ function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSe
             console.log("Problem creating projectile");
             break;
     }
-    console.log(this.defenderName);
     this.frameWidth = this.unit.frameWidth;
     this.frameHeight = this.unit.frameHeight;
     this.sheetWidth = this.unit.sheetWidth;
@@ -77,7 +76,7 @@ function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSe
     this.ctx = this.gameEngine.ctx;
     this.x = x0;
     this.y = y0;
-    this.speed = speedSetting;
+    this.speed = speedSetting * 100;
     this.animation = new Animation(this.AM.getAsset(`./img/${this.defenderName}/${this.defenderName}_projectile.png`), this.frameWidth, this.frameHeight, this.sheetWidth , this.frameDuration, this.frames, this.loop, this.scale);
     this.calculateSpeed();
     Entity.call(this, gameEngine, this.x, this.y);
@@ -87,12 +86,11 @@ Projectile.prototype = new Entity();
 Projectile.prototype.constructor = Projectile;
 
 Projectile.prototype.update = function() {
-    this.xDif -= Math.abs(this.gameEngine.clockTick * this.xSpeed);
-
-    if (this.xDif > 0 && this.enemy.currentHealth > 0) {
-        this.x += this.gameEngine.clockTick * this.xSpeed;
-        this.y += this.gameEngine.clockTick * this.ySpeed;
-        this.calculateSpeed();
+    this.calculateSpeed();
+    this.dist -= this.gameEngine.clockTick * this.speed;
+    if (this.dist > 0 && this.enemy.currentHealth > 0) {
+        this.x -= this.gameEngine.clockTick * this.xSpeed;
+        this.y -= this.gameEngine.clockTick * this.ySpeed;
     } else {
         this.enemy.currentHealth -= this.damage;
         this.removeFromWorld = true;
@@ -106,16 +104,9 @@ Projectile.prototype.draw = function() {
 }
 
 Projectile.prototype.calculateSpeed = function() {
-    this.xDif = Math.abs(this.x - this.enemy.trueX);
-    this.yDif = Math.abs(this.y - this.enemy.trueY);
-
-    this.xSpeed = this.speed * (this.xDif / this.yDif) * 100;
-    if (this.x > this.enemy.trueX) {
-        this.xSpeed *= -1;
-    }
-
-    this.ySpeed = this.speed * 100;
-    if (this.y > this.enemy.trueY) {
-        this.ySpeed *= -1;
-    }
+    this.xDif = this.x - this.enemy.trueX;
+    this.yDif = this.y - this.enemy.trueY;
+    this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
+    this.xSpeed = this.speed * (this.xDif / this.dist);
+    this.ySpeed = this.speed * (this.yDif / this.dist);
 }

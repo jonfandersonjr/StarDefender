@@ -18,7 +18,7 @@ var queenWave = {
 };
 var zerglingWave = {
     name: "zergling",
-    delay: .75,
+    delay: .65,
     speedBuff: 1,
     healthBuff: 1
 };
@@ -40,13 +40,28 @@ var defilerWave = {
     speedBuff: 1,
     healthBuff: 1
 };
+<<<<<<< HEAD
 
 /*
+=======
+var devourerWave = {
+    name: "devourer",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1
+};
+var overlordWave = {
+    name: "overlord",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1
+};
+>>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
 var sarahkerriganWave = {
     name: "sarahkerrigan",
     delay: .25,
-    speedbuff: 1.5,
-    healthBuff: 2
+    speedbuff: 1,
+    healthBuff: 1
 };
 */
 function Wave(generator, game) {
@@ -109,11 +124,15 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
         case "defiler":
             this.unit = defilerWave;
             break;
-            /*
+        case "devourer":
+            this.unit = devourerWave;
+            break;
+        case "overlord":
+            this.unit = overlordWave;
+            break;
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
             break;
-            */
         default:
             console.log("Illegal input");
             break;
