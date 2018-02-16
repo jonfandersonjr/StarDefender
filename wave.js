@@ -47,36 +47,8 @@ var defilerWave = {
     healthBuff: 1,
     isBoss: false
 };
-<<<<<<< HEAD
 
-/*
-=======
-var devourerWave = {
-    name: "devourer",
-    delay: .25,
-    speedbuff: 1,
-    healthBuff: 1
-};
-var overlordWave = {
-    name: "overlord",
-    delay: .25,
-    speedbuff: 1,
-    healthBuff: 1
-};
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
-var sarahkerriganWave = {
-    name: "sarahkerrigan",
-    delay: .25,
-<<<<<<< HEAD
-    speedbuff: 1,
-    healthBuff: 1
-=======
-    speedbuff: 1.5,
-    healthBuff: 2,
-    isBoss: true
->>>>>>> 152a49dd25fce84a6c823fdb02a2f4ffc5626dd4
-};
-*/
+
 function Wave(generator, game) {
     this.generator = generator;
     this.gameEngine = game;
