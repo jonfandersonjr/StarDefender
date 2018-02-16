@@ -7,36 +7,21 @@
 
 
 //Level One
-var firstLevelEnemies = ["zergling", "scourge", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
-var firstLevelWaveSize = [3, 3, 2, 3, 4, 8, 0];
-var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
-var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1];
-var firstLevelEntranceNum = [1, 2, 3, 2, 3, 1];
-
 /*
-var firstLevelEnemies = ["sarahkerrigan", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
-var firstLevelWaveSize = [1, 2, 3, 4, 8, 0];
-var firstLevelSpeedBuff = [1, 1, 1, 1, 1];
-var firstLevelHealthBuff = [1, 1, 1, 1, 1];
-var firstLevelEntranceNum = [1, 3, 2, 3, 1];
->>>>>>> 152a49dd25fce84a6c823fdb02a2f4ffc5626dd4
-=======
-
 var firstLevelEnemies = ["zergling", "queen", "defiler", "ultralisk", "scourge", "hydralisk", "devourer"];
 var firstLevelWaveSize = [3, 3, 3, 2, 3, 4, 1, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3];
+*/
 
-/*
 // test for bosses
 var firstLevelEnemies = ["sarahkerrigan", "devourer", "overlord", "ultralisk", "scourge", "hydralisk", "devourer"];
 var firstLevelWaveSize = [1, 1, 1, 2, 3, 4, 1, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 1, 1, 3, 1, 3, 3];
->>>>>>> DesktoLaptop
-*/
+
 
 //Level Two
 var secondLevelEnemies = ["queen", "scourge", "ultralisk", "zergling", "defiler", "overlord"];
@@ -46,11 +31,11 @@ var secondLevelHealthBuff = [2, 1, 2, 1, 1, 1];
 var secondLevelEntranceNum = [3, 2, 1, 3, 2, 3];
 
 //Level Three
-var thirdLevelEnemies = ["zergling", "mutalisk", "mutalisk", "zergling"];
-var thirdLevelWaveSize = [5, 3, 4, 10, 0];
-var thirdLevelSpeedBuff = [1, 1, 1, 1];
-var thirdLevelHealthBuff = [1, 1, 1, 1];
-var thirdLevelEntranceNum = [1, 2, 3, 3];
+var thirdLevelEnemies = ["ultralisk", "defiler", "zergling", "mutalisk", "queen", "sarahkerrigan"];
+var thirdLevelWaveSize = [8, 5, 12, 4, 10, 1, 0];
+var thirdLevelSpeedBuff = [1, 1.5, 1.2, 1.2, 1.3, 1];
+var thirdLevelHealthBuff = [1.5, 2, 1, 2, 2, 1];
+var thirdLevelEntranceNum = [3, 3, 3, 3, 3, 3];
 
 
 function Level(levelNum, waveObject) {

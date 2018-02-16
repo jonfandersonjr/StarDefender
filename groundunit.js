@@ -114,8 +114,6 @@ var defiler = {
 };
 
 
-=======
->>>>>>> DesktoLaptop
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
     this.gameUI = ui;
