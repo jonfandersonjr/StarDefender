@@ -107,9 +107,9 @@ Animation.prototype.drawBoss = function(tick, ctx, x, y, currentHealth, maxHealt
             ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2, this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
             this.lastHealth = currentHealth;
         }
-        ctx.lineWidth = 0.5;
+        ctx.lineWidth = 0.1;
         ctx.strokeStyle = "black";
-        var amountOfBlocks = 20
+        var amountOfBlocks = Math.floor(maxHealth / 200);
         var blockWidth = this.frameWidth * this.scale / amountOfBlocks;
         for (let i = 0; i < amountOfBlocks; i++) {
             ctx.strokeRect(x + i * blockWidth, y - 2, blockWidth, 5);
