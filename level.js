@@ -7,6 +7,7 @@
 
 
 //Level One
+
 var firstLevelEnemies = ["zergling", "queen", "defiler", "ultralisk", "scourge", "hydralisk", "devourer"];
 var firstLevelWaveSize = [3, 3, 3, 2, 3, 4, 1, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];

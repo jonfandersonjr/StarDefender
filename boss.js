@@ -24,6 +24,31 @@ var sarahkerrigan = {
     }
 };
 
+var infestedkerrigan = {
+    name: "infestedkerrigan",
+    frameWidth: 34,
+    frameHeight: 40,
+    sheetWidth: 8,
+    frameDuration: 0.1,
+    frames: 8,
+    loop: true,
+    scale: 1,
+    speed: 60,
+    health: 1000,
+    isAir: false,
+    damage: 1000,
+    deathAnimation: {
+        name: "infestedkerrigan",
+        frameWidth: 56,
+        frameHeight: 41,
+        sheetWidth: 9,
+        frameDuration: 1,
+        frames: 9,
+        loop: false,
+        scale: 1
+    }
+};
+
 var devourer = {
     name: "devourer",
     frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
@@ -65,6 +90,10 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
     switch (unitName) {
         case "sarahkerrigan":
             this.unit = sarahkerrigan;
+            this.deathSound = './soundfx/deathKerrigan.wav';
+            break;
+        case "infestedkerrigan":
+            this.unit = infestedkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
             break;
         case "devourer":
@@ -257,9 +286,10 @@ Boss.prototype.hitBase = function() {
 }
 
 // boss mechanic for certain units, testing
+// add the rest of the pictrure files for kerrigan
 Boss.prototype.rageMode = function() {
     if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
-        this.speed = this.speed * 10;
+        this.unit === infestedkerrigan;
     }
 }
 
