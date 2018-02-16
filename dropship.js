@@ -1,4 +1,14 @@
-var dropship = { name: "dropship", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1.1, speed: 120};
+var dropship = {
+    name: "dropship",
+    frameWidth: 40,
+    frameHeight: 41,
+    sheetWidth: 1,
+    frameDuration: 0.1,
+    frames: 1,
+    loop: true,
+    scale: 1.1,
+    speed: 120
+};
 
 function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEndColumn, unitEndRow, theDefender) {
     this.AM = assetManager;
@@ -9,7 +19,7 @@ function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEn
     this.name = this.unit.name;
     this.defender = theDefender;
 
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
+    this.animation = new Animation(this.AM.getAsset(`http://jacobrreed.github.io/StarDefender/img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
 
@@ -35,7 +45,7 @@ function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEn
 Dropship.prototype = new Entity();
 Dropship.prototype.constructor = Dropship;
 
-Dropship.prototype.update = function () {
+Dropship.prototype.update = function() {
 
     if (this.isPickingUp) {
         //find and change direction
@@ -50,7 +60,7 @@ Dropship.prototype.update = function () {
     Entity.prototype.update.call(this);
 }
 
-Dropship.prototype.moveToUnit = function () {
+Dropship.prototype.moveToUnit = function() {
     if (this.move(this.unitStartX, this.unitStartY)) { //reached the unit
         this.map.map[this.defender.row][this.defender.column] = '+';
         this.isPickingUp = false;
@@ -58,10 +68,10 @@ Dropship.prototype.moveToUnit = function () {
         this.defender.isDummy = true;
     }
 
-   
+
 }
 
-Dropship.prototype.dropOffUnit = function () {
+Dropship.prototype.dropOffUnit = function() {
     if (this.move(this.unitEndX, this.unitEndY)) { //dropped it off
         this.defender.row = this.unitEndY / this.map.tileSize;
         this.defender.column = this.unitEndX / this.map.tileSize;
@@ -75,8 +85,8 @@ Dropship.prototype.dropOffUnit = function () {
     }
 }
 
-Dropship.prototype.headToBase = function () {
-    
+Dropship.prototype.headToBase = function() {
+
     if (this.move(this.map.baseX, this.map.baseY)) {
         //remove from world
         this.removeFromWorld = true;
@@ -84,11 +94,11 @@ Dropship.prototype.headToBase = function () {
 }
 
 // Helper function to move to next destination
-Dropship.prototype.move = function (destinationX, destinationY) {
+Dropship.prototype.move = function(destinationX, destinationY) {
     this.frame = Math.floor(angle(this.x, this.y, destinationX, destinationY) / (360 / this.unit.frames));
-   // let slope = (destinationY - this.y) / (destinationX - this.x);
-   // this.x += this.game.clockTick * this.speed;
-   // this.y = slope * this.x + this.yIntercept;
+    // let slope = (destinationY - this.y) / (destinationX - this.x);
+    // this.x += this.game.clockTick * this.speed;
+    // this.y = slope * this.x + this.yIntercept;
 
 
     this.calculateFlyAnimation(destinationX, destinationY);
@@ -102,18 +112,18 @@ Dropship.prototype.move = function (destinationX, destinationY) {
 }
 
 
-Dropship.prototype.changeDirection = function (direction) {
+Dropship.prototype.changeDirection = function(direction) {
     this.direction = direction;
     temp1 = `./img/${this.name}/${this.name}_${this.direction}.png`;
-    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.name}/${this.name}_${this.direction}.png`);
+    this.animation.spriteSheet = this.AM.getAsset(`http://jacobrreed.github.io/StarDefender//img/${this.name}/${this.name}_${this.direction}.png`);
 }
 
-Dropship.prototype.draw = function () {
+Dropship.prototype.draw = function() {
     this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     Entity.prototype.draw.call(this);
 }
 
-Dropship.prototype.calculateFlyAnimation = function (destinationX, destinationY) {
+Dropship.prototype.calculateFlyAnimation = function(destinationX, destinationY) {
     this.xDif = this.x - destinationX;
     this.yDif = this.y - destinationY;
     this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
