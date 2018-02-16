@@ -65,14 +65,11 @@ GameEngine.prototype.pause = function(boolean, gameover) {
             }
             pause_img.src = './img/ui/paused.png';
         }
-        console.log("Game Paused");
-        console.log("Game Tick: " + that.oldClockTick);
     } else {
         that.pauseBool = false;
         that.clockTick = that.oldClockTick;
         //Undraw pause image
         ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
-        console.log("Game Resumed");
     }
 }
 
@@ -219,6 +216,18 @@ GameEngine.prototype.update = function() {
         }
     }
     this.tileBox.update();
+
+    //Map Won Screen?
+    if (this.levelNum > 3 && this.unitEntities.length === 0) {
+        var canvasThree = document.getElementById("gameOverlayScreen");
+        var ctxThree = canvasThree.getContext("2d");
+        won_img = new Image();
+        won_img.onload = function() {
+            ctxThree.drawImage(won_img, 100, 0);
+        }
+        won_img.src = './img/ui/levelComplete.png';
+        this.pause(true, true);
+    }
 
     resize();
 }
