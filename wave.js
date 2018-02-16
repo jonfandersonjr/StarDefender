@@ -21,7 +21,7 @@ var queenWave = {
 };
 var zerglingWave = {
     name: "zergling",
-    delay: .75,
+    delay: .65,
     speedBuff: 1,
     healthBuff: 1,
     isBoss: false
@@ -47,11 +47,25 @@ var defilerWave = {
     healthBuff: 1,
     isBoss: false
 };
+var devourerWave = {
+    name: "devourer",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1,
+    isBoss: true
+};
+var overlordWave = {
+    name: "overlord",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1,
+    isBoss: true
+};
 var sarahkerriganWave = {
     name: "sarahkerrigan",
     delay: .25,
-    speedbuff: 1.5,
-    healthBuff: 2,
+    speedbuff: 1,
+    healthBuff: 1,
     isBoss: true
 };
 
@@ -128,6 +142,12 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "defiler":
             this.unit = defilerWave;
+            break;
+        case "devourer":
+            this.unit = devourerWave;
+            break;
+        case "overlord":
+            this.unit = overlordWave;
             break;
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;

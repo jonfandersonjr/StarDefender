@@ -9,11 +9,6 @@ var costs = {
 
 function Mouse(map, ctx) {
     this.musicOn = true;
-    this.radiusOfFire = {
-        radius: 30,
-        color: 'rgba(0,0,0, .9)', //white 30%
-        thick: 2
-    };
     this.resources = {
         marine: -50,
         ghost: -100,
@@ -59,18 +54,6 @@ Mouse.prototype.setMap = function(gameMap) {
     this.map = gameMap;
 }
 
-//Setter for cleanliness, handles if mouse can choose a new level.
-Mouse.prototype.levelCompleted = function() {
-    this.canAddLevel = true;
-}
-
-//Sets up game engine to start level_levelNum
-Mouse.prototype.createLevel = function(levelNum) {
-    this.gameEngine.addNewLevel = true;
-    this.gameEngine.levelNum = levelNum;
-    this.canAddLevel = false;
-}
-
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     if (defenderName === "scv") {
@@ -80,7 +63,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
             this.PlaySound("./soundfx/scv.wav");
             if (this.resources.scv > -300) {
                 this.resources.scv -= 50;
-                //Update SCV Image to reflect new cost here
                 this.ui.drawSCVImage(this.resources.scv);
             }
         } else {
@@ -92,9 +74,10 @@ Mouse.prototype.selectDefender = function(defenderName) {
         this.defenderName = defenderName;
         if (this.ui.resourcesTotal < this.unitCost) {
             this.PlaySound("./soundfx/minerals.wav");
+            console.log("Resources: " + this.ui.resourcesTotal);
+            console.log("Unit Cost: " + this.unitCost);
         }
     }
-
 };
 
 Mouse.prototype.dropTower = function(e) {
@@ -175,36 +158,55 @@ Mouse.prototype.attachListeners = function() {
 
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
     that.canvas.addEventListener("click", (e) => {
-        if (that.isBusy && !that.isMoving) {
+        if (that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) {
             that.dropTower(e);
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
-        } else if (that.isBusy && that.isMoving) { //Put down a picked up defender.
+        } else if (that.isBusy && that.isMoving && !(that.gameEngine.getPauseBool())) { //Put down a picked up defender.
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
             if (isValid(this.map, tileLoc.row, tileLoc.column)) {
                 that.isMoving = false;
                 that.tileBox.isMoving = false;
-                that.pickedUpDefender.defender.isDummy = false;
-                that.pickedUpDefender.defender.row = tileLoc.row;
-                that.pickedUpDefender.defender.column = tileLoc.column;
-                that.pickedUpDefender.defender.calculateTrueXY();
                 that.isBusy = false;
                 that.tileBox.isBusy = false;
                 that.map.map[tileLoc.row][tileLoc.column] = that.pickedUpDefender.defender.unit.mapKey;
+                if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') {
+                    that.pickedUpDefender.defender.isDummy = false;
+
+                    //create dropship
+                    that.generator.createDropship(that.pickedUpDefender.column, that.pickedUpDefender.row, tileLoc.column,
+                        tileLoc.row, that.pickedUpDefender.defender);
+
+
+                } else if (this.pickedUpDefender.defender.unit.name === 'battlecruiser' &&
+                    !(that.gameEngine.getPauseBool())) {
+                    that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = '+';
+                    that.pickedUpDefender.defender.lineToRow = tileLoc.row;
+                    that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
+                    that.pickedUpDefender.defender.isDummy = true;
+                }
             }
-        } else if (!that.isBusy && !that.isMoving) { //Pick up a defender.
+        } else if (!that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) { //Pick up a defender.
             //move unit
             let mouseLoc = getMousePos(this.canvas, event);
             let tileLoc = getTile(mouseLoc, this.map);
             if (isDefender(that.map.map[tileLoc.row][tileLoc.column])) {
-                that.isMoving = true;
-                that.tileBox.isMoving = true;
-                that.isBusy = true;
-                that.tileBox.isBusy = true;
                 that.pickedUpDefender.defender = that.gameEngine.findDefender(tileLoc.row, tileLoc.column);
-                that.pickedUpDefender.row = tileLoc.row;
-                that.pickedUpDefender.column = tileLoc.column;
-                that.pickedUpDefender.defender.isDummy = true;
-                that.map.map[tileLoc.row][tileLoc.column] = '+';
+                if (!that.pickedUpDefender.defender.isDummy) {
+                    that.isMoving = true;
+                    that.tileBox.isMoving = true;
+                    that.isBusy = true;
+                    that.tileBox.isBusy = true;
+                    that.pickedUpDefender.row = tileLoc.row;
+                    that.pickedUpDefender.column = tileLoc.column;
+                    if (that.map.map[tileLoc.row][tileLoc.column] !== 'd') { //Pick up everything but battlecruiser
+                        //var startY = tileLoc.row * that.map.tileSize;
+                        //var startX = tileLoc.column * that.map.tileSize;
+                        //that.pickedUpDefender.defender.isDummy = true;
+                        //that.map.map[tileLoc.row][tileLoc.column] = '+';
+                    } else { //If battlecruiser, draw a line to where it should move to
+                        that.pickedUpDefender.defender.isLineVisible = true;
+                    }
+                }
             }
         }
     }, false);
@@ -214,25 +216,44 @@ Mouse.prototype.attachListeners = function() {
         that.tileBox.e = e;
         if (that.isMoving) {
             let tileLoc = getTile(getMousePos(that.canvas, event), that.map);
-            that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
+            if (that.pickedUpDefender.defender.unit.name !== 'battlecruiser') { //Move everything but battlecruiser
+                //that.pickedUpDefender.defender.calculateXY(tileLoc.row, tileLoc.column);
+            } else { //row and column to draw a line to
+                that.pickedUpDefender.defender.lineToRow = tileLoc.row;
+                that.pickedUpDefender.defender.lineToColumn = tileLoc.column;
+            }
         }
     }, false);
 
     //Keypress binds
     this.canvas.addEventListener("keydown", function(e) {
         if (e.keyCode === 70) {
-            that.selectDefender("scv");
+            if (!(that.gameEngine.getPauseBool())) {
+                that.selectDefender("scv");
+            }
         } else if (e.keyCode === 65) {
-            that.selectDefender("marine");
+            that.unitCost = 50;
+            that.tileBox.unitCost = 50;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.selectDefender("marine");
+            }
         } else if (e.keyCode === 83) {
-            that.selectDefender("ghost");
+            that.unitCost = 100;
+            that.tileBox.unitCost = 100;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.selectDefender("ghost");
+            }
         } else if (e.keyCode === 68) {
-            that.selectDefender("battlecruiser");
+            that.unitCost = 150;
+            that.tileBox.unitCost = 150;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.selectDefender("battlecruiser");
+            }
         } else if (e.keyCode === 87) {
-            that.selectDefender("antiair");
-        } else if (e.keyCode === 32) {
-            if (that.canAddLevel) {
-                that.createLevel(1)
+            that.unitCost = 100;
+            that.tileBox.unitCost = 100;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.selectDefender("antiair");
             }
         } else if (e.keyCode === 77) {
             if (that.musicOn) {
@@ -242,8 +263,14 @@ Mouse.prototype.attachListeners = function() {
                 that.ui.pauseMusic(false);
                 that.musicOn = true;
             }
-
-
+        } else if (e.keyCode === 80) {
+            if (that.gameEngine.getPauseBool() && !that.gameEngine.gameOverBool) {
+                that.gameEngine.pause(false, false);
+            } else {
+                if (!that.gameEngine.gameOverBool) {
+                    that.gameEngine.pause(true, false);
+                }
+            }
         }
     }, false);
 
@@ -260,10 +287,12 @@ Mouse.prototype.attachListeners = function() {
             that.pickedUpDefender.defender.calculateXY(that.pickedUpDefender.row, that.pickedUpDefender.column);
             that.map.map[that.pickedUpDefender.row][that.pickedUpDefender.column] = that.pickedUpDefender.defender.unit.mapKey;
             that.pickedUpDefender.defender.isDummy = false;
+            that.pickedUpDefender.defender.isLineVisible = false;
         }
         that.isBusy = false;
         that.tileBox.isBusy = false;
         that.isMoving = false;
+        that.tileBox.unitCost = 0;
     }, false);
 
     // Optional events
@@ -306,18 +335,17 @@ TileBox.prototype.draw = function() {
         this.mouseLoc.x < this.map.tileSize * this.map.mapDim.row &&
         this.mouseLoc.y < this.map.tileSize * this.map.mapDim.col &&
         this.isBusy) {
-        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && this.isMoving ^ this.unitCost <= this.gameUI.resourcesTotal) {
+        if (isValid(this.map, this.tileLoc.row, this.tileLoc.column) && (this.isMoving || this.unitCost <= this.gameUI.resourcesTotal)) {
             this.ctx.strokeStyle = 'rgb(0, 255, 38)'; //Green box
         } else {
             this.ctx.strokeStyle = 'rgb(255, 0, 12)'; //Red box
         }
-
         this.ctx.strokeRect(this.x, this.y, this.map.tileSize, this.map.tileSize);
     }
 }
 
 function isDefender(mapKey) {
-    return mapKey === 'a' || mapKey === 's' || mapKey === 'd' || mapKey === 'w';
+    return mapKey === 'a' || mapKey === 's' || mapKey === 'd';
 }
 
 

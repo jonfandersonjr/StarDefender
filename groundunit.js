@@ -1,35 +1,23 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 var mutalisk = {
     name: "mutalisk",
-    frameWidth: 64,
-    frameHeight: 72,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 64, frameHeight: 72, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.5,
     speed: 50,
-    health: 100,
+    health: 90,
     isAir: true,
     damage: 5,
     deathAnimation: {
         name: "mutalisk",
-        frameWidth: 68,
-        frameHeight: 68,
-        sheetWidth: 9,
-        frameDuration: 0.1,
-        frames: 9,
+        frameWidth: 68, frameHeight: 68, sheetWidth: 9, frameDuration: 0.1, frames: 9,
         loop: false,
         scale: 0.5
     }
 };
 var scourge = {
     name: "scourge",
-    frameWidth: 31,
-    frameHeight: 27,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 31, frameHeight: 27, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 1,
     speed: 65,
@@ -38,136 +26,143 @@ var scourge = {
     damage: 10,
     deathAnimation: {
         name: "mutalisk",
-        frameWidth: 68,
-        frameHeight: 68,
-        sheetWidth: 9,
-        frameDuration: 0.1,
-        frames: 9,
+        frameWidth: 68, frameHeight: 68, sheetWidth: 9, frameDuration: 0.1, frames: 9,
         loop: false,
         scale: 0.5
     }
 };
 var queen = {
     name: "queen",
-    frameWidth: 75,
-    frameHeight: 68,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 75, frameHeight: 68, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
-    scale: 0.5,
-    speed: 25,
-    health: 100,
+    scale: 0.6,
+    speed: 45,
+    health: 200,
     isAir: false,
-    damage: 5,
+    damage: 8,
     deathAnimation: {
         name: "queen",
-        frameWidth: 114,
-        frameHeight: 103,
-        sheetWidth: 9,
-        frameDuration: 0.15,
-        frames: 9,
+        frameWidth: 114, frameHeight: 103, sheetWidth: 9, frameDuration: 0.15, frames: 9,
         loop: false,
         scale: 0.5
     }
 };
 var zergling = {
     name: "zergling",
-    frameWidth: 40,
-    frameHeight: 39,
-    sheetWidth: 7,
-    frameDuration: 0.1,
-    frames: 7,
+    frameWidth: 40, frameHeight: 39, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.6,
-    speed: 75,
-    health: 100,
+    speed: 80,
+    health: 80,
     isAir: false,
     damage: 5,
     deathAnimation: {
         name: "zergling",
-        frameWidth: 65,
-        frameHeight: 53,
-        sheetWidth: 7,
-        frameDuration: 0.15,
-        frames: 7,
+        frameWidth: 65, frameHeight: 53, sheetWidth: 7, frameDuration: 0.15, frames: 7,
         loop: false,
         scale: 0.5
     }
 };
 var ultralisk = {
     name: "ultralisk",
-    frameWidth: 98,
-    frameHeight: 105,
-    sheetWidth: 7,
-    frameDuration: 0.1,
-    frames: 7,
+    frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
-    scale: 0.35,
-    speed: 15,
-    health: 100,
+    scale: 0.45,
+    speed: 35,
+    health: 300,
     isAir: false,
-    damage: 5,
+    damage: 10,
     deathAnimation: {
         name: "ultralisk",
-        frameWidth: 98,
-        frameHeight: 105,
-        sheetWidth: 10,
-        frameDuration: 0.1,
-        frames: 10,
+        frameWidth: 98, frameHeight: 105, sheetWidth: 10, frameDuration: 0.1, frames: 10,
         loop: false,
         scale: 0.35
     }
 };
 var hydralisk = {
     name: "hydralisk",
-    frameWidth: 42,
-    frameHeight: 55,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 42, frameHeight: 55, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
-    scale: 0.6,
-    speed: 50,
-    health: 100,
+    scale: 0.7,
+    speed: 60,
+    health: 200,
     isAir: false,
     damage: 5,
     deathAnimation: {
         name: "hydralisk",
-        frameWidth: 97,
-        frameHeight: 71,
-        sheetWidth: 12,
-        frameDuration: 0.1,
-        frames: 12,
+        frameWidth: 97, frameHeight: 71, sheetWidth: 12, frameDuration: 0.1, frames: 12,
         loop: false,
         scale: 0.4
     }
 };
 var defiler = {
     name: "defiler",
-    frameWidth: 69,
-    frameHeight: 59,
-    sheetWidth: 5,
-    frameDuration: 0.1,
-    frames: 5,
+    frameWidth: 69, frameHeight: 59, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
-    scale: 0.6,
-    speed: 30,
-    health: 100,
+    scale: 0.7,
+    speed: 45,
+    health: 200,
     isAir: false,
     damage: 5,
     deathAnimation: {
         name: "defiler",
-        frameWidth: 67,
-        frameHeight: 44,
-        sheetWidth: 10,
-        frameDuration: 0.1,
+        frameWidth: 67, frameHeight: 44, sheetWidth: 10, frameDuration: 0.1,
         frames: 10,
         loop: false,
         scale: 0.5
     }
 };
 
+// BOSSES BELOW - should be moved to boss.js where they can have special features
+
+var devourer = {
+    name: "devourer",
+    frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
+    loop: true,
+    scale: .6,
+    speed: 40,
+    health: 2000,
+    isAir: false,
+    damage: 800,
+    deathAnimation: {
+        name: "devourer",
+        frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
+        loop: false,
+        scale: 1
+    }
+};
+var overlord = {
+    name: "overlord",
+    frameWidth: 60, frameHeight: 75, sheetWidth: 4, frameDuration: 0.1, frames: 4,
+    loop: true,
+    scale: .6,
+    speed: 40,
+    health: 2500,
+    isAir: false,
+    damage: 1000,
+    deathAnimation: {
+        name: "overlord",
+        frameWidth: 60, frameHeight: 75, sheetWidth: 1, frameDuration: 0.5, frames: 1,
+        loop: false,
+        scale: 1
+    }
+};
+var sarahkerrigan = {
+    name: "sarahkerrigan",
+    frameWidth: 34, frameHeight: 40, sheetWidth: 8, frameDuration: 0.1, frames: 8,
+    loop: true,
+    scale: 1,
+    speed: 50,
+    health: 4000,
+    isAir: false,
+    damage: 1000,
+    deathAnimation: {
+        name: "sarahkerrigan",
+        frameWidth: 56, frameHeight: 41, sheetWidth: 9, frameDuration: 0.1, frames: 9,
+        loop: false,
+        scale: 1
+    }
+};
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
@@ -202,6 +197,18 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         case "defiler":
             this.unit = defiler;
             this.deathSound = './soundfx/deathDefiler.wav';
+            break;
+        case "devourer":
+            this.unit = devourer;
+            this.deathSound = './soundfx/deathKerrigan.wav';
+            break;
+        case "overlord":
+            this.unit = overlord;
+            this.deathSound = './soundfx/deathKerrigan.wav';
+            break;
+        case "sarahkerrigan":
+            this.unit = sarahkerrigan;
+            this.deathSound = './soundfx/deathKerrigan.wav';
             break;
         default:
             console.log("Problem creating ground unit");

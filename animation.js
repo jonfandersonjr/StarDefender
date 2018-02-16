@@ -165,6 +165,14 @@ Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTim
         this.frameHeight * this.scale);
 }
 
+Animation.prototype.drawLine = function(ctx, x0, y0, x1, y1) {
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
+    ctx.strokeStyle = 'white';
+    ctx.stroke();
+}
+
 Animation.prototype.currentFrame = function() {
     return Math.floor(this.elapsedTime / this.frameDuration);
 }

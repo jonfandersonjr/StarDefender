@@ -10,8 +10,8 @@ var marine = {
     loop: true,
     scale: 1,
     range: 100,
-    cooldown: 0.1,
-    damage: 5,
+    cooldown: 0.2,
+    damage: 10,
     mapKey: 'a',
     targetGround: true,
     targetFlying: true,
@@ -25,10 +25,10 @@ var battlecruiser = {
     frames: 32,
     loop: true,
     scale: .5,
-    range: 500,
-    cooldown: 5,
-    damage: 100,
-    mapKey: 's',
+    range: 250,
+    cooldown: 2,
+    damage: 200,
+    mapKey: 'd',
     targetGround: true,
     targetFlying: false,
 };
@@ -42,9 +42,9 @@ var ghost = {
     loop: true,
     scale: 1,
     range: 100,
-    cooldown: 0.5,
-    damage: 20,
-    mapKey: 'd',
+    cooldown: 0.4,
+    damage: 30,
+    mapKey: 's',
     targetGround: true,
     targetFlying: false,
 };
@@ -106,6 +106,7 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.damage = this.unit.damage;
     this.frame = 0;
     this.isDummy = isDummy;
+    this.speed = 100;
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
 
@@ -123,6 +124,23 @@ Defender.prototype.update = function() {
     } else if (this.isBusy) {
         this.cooldown -= this.game.clockTick;
     }
+    if (this.unit.name === 'battlecruiser' && this.isDummy) {
+        this.row = this.lineToRow;
+        this.column = this.lineToColumn;
+        this.calculateFlyAnimation(this.lineToRow, this.lineToColumn);
+        this.dist -= this.gameEngine.clockTick * this.speed;
+        if (this.dist > 0) {
+            this.x -= this.gameEngine.clockTick * this.xSpeed;
+            this.y -= this.gameEngine.clockTick * this.ySpeed;
+            this.trueX = this.x + (this.unit.frameWidth/2) * this.unit.scale;
+            this.trueY = this.y + (this.unit.frameHeight/2) * this.unit.scale;
+        } else {
+            this.isDummy = false;
+            this.isLineVisible = false;
+            this.calculateXY(this.row, this.column);
+            this.calculateTrueXY();
+        }
+    }
     Entity.prototype.update.call(this);
 }
 
@@ -130,7 +148,16 @@ Defender.prototype.draw = function() {
     if(!this.isDummy) {
         this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     } else {
-        this.animation.drawDummyDefender(this.ctx, this.x, this.y, this.frame, this.unit.name);
+        if(this.unit.name !== 'battlecruiser') {
+            //this.animation.drawDummyDefender(this.ctx, this.x, this.y, this.frame, this.unit.name);
+        } else {
+            this.frame = Math.floor(angle(this.trueX, this.trueY, (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize) / (360 / this.unit.frames));
+            this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
+        }
+    }
+    if(this.isLineVisible)  {
+        this.animation.drawLine(this.ctx, this.trueX, this.trueY, 
+            (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize);
     }
     Entity.prototype.draw.call(this);
 }
@@ -144,8 +171,6 @@ Defender.prototype.calculateTrueXY = function() {
     this.trueX = (this.column + 0.5) * this.map.tileSize;
     this.trueY = (this.row + 0.5) * this.map.tileSize;
 }
-
-
 
 Defender.prototype.shoot = function(enemy) {
     if (!this.isDummy && !this.isBusy) {
@@ -177,6 +202,13 @@ Defender.prototype.shoot = function(enemy) {
     }
 }
 
+Defender.prototype.calculateFlyAnimation = function (row, column) {
+    this.xDif = this.x - column * this.map.tileSize;
+    this.yDif = this.y - row * this.map.tileSize;
+    this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
+    this.xSpeed = this.speed * (this.xDif / this.dist);
+    this.ySpeed = this.speed * (this.yDif / this.dist);
+}
 
 function angle(cx, cy, ex, ey) {
     var dy = ey - cy;

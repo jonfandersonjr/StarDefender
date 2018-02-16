@@ -28,6 +28,7 @@ function GameEngine(mouse, ui) {
     this.levelNum = 1;
     this.isBootingLevel = true;
     this.waveDelay = 10; //time between waves in seconds.
+    this.pauseBool = false;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -47,15 +48,30 @@ GameEngine.prototype.start = function() {
     })();
 }
 
-GameEngine.prototype.pause = function(boolean) {
+GameEngine.prototype.pause = function(boolean, gameover) {
     var that = this;
+    that.gameOverBool = gameover;
     that.oldClockTick = that.clockTick;
+    var canvasThree = document.getElementById("gameOverlayScreen");
+    var ctxThree = canvasThree.getContext("2d");
+    var pause_img = new Image();
     if (boolean === true) {
-        that.clockTick = Math.floor(0);
+        that.pauseBool = true;
+        that.clockTick = 0;
+        //Draw paused image
+        if (!gameover) {
+            pause_img.onload = function() {
+                ctxThree.drawImage(pause_img, 170, 50);
+            }
+            pause_img.src = './img/ui/paused.png';
+        }
         console.log("Game Paused");
         console.log("Game Tick: " + that.oldClockTick);
     } else {
+        that.pauseBool = false;
         that.clockTick = that.oldClockTick;
+        //Undraw pause image
+        ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
         console.log("Game Resumed");
     }
 }
@@ -188,6 +204,11 @@ GameEngine.prototype.update = function() {
 
     for (let i = 0; i < this.scvEntities.length; i++) {
         this.scvEntities[i].update();
+        if (!this.scvEntities[i].removeFromWorld) {
+            this.scvEntities[i].update();
+        } else {
+            this.scvEntities.splice(i, 1);
+        }
     }
 
     for (let i = this.projectileEntities.length - 1; i >= 0; --i) {
@@ -203,8 +224,17 @@ GameEngine.prototype.update = function() {
     resize();
 }
 
+GameEngine.prototype.getPauseBool = function() {
+    var that = this;
+    return that.pauseBool;
+}
+
 GameEngine.prototype.loop = function() {
-    this.clockTick = this.timer.tick();
+    if (this.pauseBool) {
+        this.clockTick = 0;
+    } else {
+        this.clockTick = this.timer.tick();
+    }
     this.update();
     this.draw();
 }
