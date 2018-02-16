@@ -75,6 +75,48 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
     }
 }
 
+Animation.prototype.drawBoss = function(tick, ctx, x, y, currentHealth, maxHealth) {
+    if (this.damageTime > 0) {
+        this.damageTime -= tick;
+    }
+    this.elapsedTime += tick;
+    if (this.isDone()) {
+        if (this.loop)
+            this.elapsedTime = 0;
+    }
+    var frame = this.currentFrame();
+    var xindex = 0;
+    var yindex = 0;
+    xindex = frame % this.sheetWidth;
+    yindex = Math.floor(frame / this.sheetWidth);
+
+    ctx.drawImage(this.spriteSheet,
+        xindex * this.frameWidth, yindex * this.frameHeight, // source from sheet
+        this.frameWidth, this.frameHeight,
+        x, y,
+        this.frameWidth * this.scale,
+        this.frameHeight * this.scale);
+    if (currentHealth > 0) {
+        ctx.fillStyle = "green";
+        ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
+        if (currentHealth !== this.lastHealth) {
+            this.damageTime = 1;
+        }
+        if (this.damageTime > 0) {
+            ctx.fillStyle = "red";
+            ctx.fillRect(x + this.frameWidth * this.scale * (currentHealth / maxHealth), y - 2, this.frameWidth * this.scale * ((this.lastHealth - currentHealth) / maxHealth), 5);
+            this.lastHealth = currentHealth;
+        }
+        ctx.lineWidth = 0.5;
+        ctx.strokeStyle = "black";
+        var amountOfBlocks = Math.floor(maxHealth / 20);
+        var blockWidth = this.frameWidth * this.scale / amountOfBlocks;
+        for (let i = 0; i < amountOfBlocks; i++) {
+            ctx.strokeRect(x + i * blockWidth, y - 2, blockWidth, 5);
+        }
+    }
+}
+
 Animation.prototype.drawDefender = function(ctx, x, y, frame) {
     ctx.drawImage(this.spriteSheet,
         frame * this.frameWidth, 0, // source from sheet

@@ -167,30 +167,7 @@ var defiler = {
         scale: 0.5
     }
 };
-var sarahkerrigan = {
-    name: "sarahkerrigan",
-    frameWidth: 34,
-    frameHeight: 40,
-    sheetWidth: 8,
-    frameDuration: 0.1,
-    frames: 8,
-    loop: true,
-    scale: 1,
-    speed: 40,
-    health: 2000,
-    isAir: false,
-    damage: 1000,
-    deathAnimation: {
-        name: "sarahkerrigan",
-        frameWidth: 56,
-        frameHeight: 41,
-        sheetWidth: 9,
-        frameDuration: 0.1,
-        frames: 9,
-        loop: false,
-        scale: 1
-    }
-};
+
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
@@ -225,10 +202,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         case "defiler":
             this.unit = defiler;
             this.deathSound = './soundfx/deathDefiler.wav';
-            break;
-        case "sarahkerrigan":
-            this.unit = sarahkerrigan;
-            this.deathSound = './soundfx/deathKerrigan.wav';
             break;
         default:
             console.log("Problem creating ground unit");
