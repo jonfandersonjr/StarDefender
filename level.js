@@ -7,12 +7,20 @@
 
 
 //Level One
-
 var firstLevelEnemies = ["zergling", "queen", "defiler", "ultralisk", "scourge", "hydralisk", "devourer"];
 var firstLevelWaveSize = [3, 3, 3, 2, 3, 4, 1, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3];
+
+/*
+// test for bosses
+var firstLevelEnemies = ["sarahkerrigan", "devourer", "overlord", "ultralisk", "scourge", "hydralisk", "devourer"];
+var firstLevelWaveSize = [1, 1, 1, 2, 3, 4, 1, 0];
+var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
+var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
+var firstLevelEntranceNum = [1, 1, 1, 3, 1, 3, 3];
+*/
 
 //Level Two
 var secondLevelEnemies = ["queen", "scourge", "ultralisk", "zergling", "defiler", "overlord"];
