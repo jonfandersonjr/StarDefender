@@ -115,7 +115,7 @@ Dropship.prototype.move = function(destinationX, destinationY) {
 Dropship.prototype.changeDirection = function(direction) {
     this.direction = direction;
     temp1 = `./img/${this.name}/${this.name}_${this.direction}.png`;
-    this.animation.spriteSheet = this.AM.getAsset(`http://jacobrreed.github.io/StarDefender//img/${this.name}/${this.name}_${this.direction}.png`);
+    this.animation.spriteSheet = this.AM.getAsset(`http://jacobrreed.github.io/StarDefender/img/${this.name}/${this.name}_${this.direction}.png`);
 }
 
 Dropship.prototype.draw = function() {
