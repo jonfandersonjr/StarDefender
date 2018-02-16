@@ -17,8 +17,66 @@ var sarahkerrigan = {
         frameWidth: 56,
         frameHeight: 41,
         sheetWidth: 9,
-        frameDuration: 0.1,
+        frameDuration: 1,
         frames: 9,
+        loop: false,
+        scale: 1
+    }
+};
+
+var infestedkerrigan = {
+    name: "infestedkerrigan",
+    frameWidth: 34,
+    frameHeight: 40,
+    sheetWidth: 8,
+    frameDuration: 0.1,
+    frames: 8,
+    loop: true,
+    scale: 1,
+    speed: 60,
+    health: 1000,
+    isAir: false,
+    damage: 1000,
+    deathAnimation: {
+        name: "infestedkerrigan",
+        frameWidth: 56,
+        frameHeight: 41,
+        sheetWidth: 9,
+        frameDuration: 1,
+        frames: 9,
+        loop: false,
+        scale: 1
+    }
+};
+
+var devourer = {
+    name: "devourer",
+    frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
+    loop: true,
+    scale: .6,
+    speed: 40,
+    health: 2000,
+    isAir: false,
+    damage: 800,
+    deathAnimation: {
+        name: "devourer",
+        frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 1, frames: 6,
+        loop: false,
+        scale: 1
+    }
+};
+var overlord = {
+    name: "overlord",
+    frameWidth: 60, frameHeight: 75, sheetWidth: 4, frameDuration: 0.1, frames: 4,
+    loop: true,
+    scale: .6,
+    speed: 40,
+    health: 2500,
+    isAir: false,
+    damage: 1000,
+    deathAnimation: {
+        name: "overlord",
+        frameWidth: 60, frameHeight: 75, sheetWidth: 1, frameDuration: 1, frames: 1,
         loop: false,
         scale: 1
     }
@@ -33,6 +91,18 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "sarahkerrigan":
             this.unit = sarahkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
+            break;
+        case "infestedkerrigan":
+            this.unit = infestedkerrigan;
+            this.deathSound = './soundfx/deathKerrigan.wav';
+            break;
+        case "devourer":
+            this.unit = devourer;
+            this.deathSound = './soundfx/deathDevourer.wav';
+            break;
+        case "overlord":
+            this.unit = overlord;
+            this.deathSound = './soundfx/deathOverlord.wav';
             break;
         default:
             console.log("Problem creating Boss");
@@ -183,7 +253,6 @@ Boss.prototype.update = function() {
 Boss.prototype.draw = function() {
     if (!this.isDead) {
         this.animation.drawBoss(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth);
-        // change drawEnemy to drawBoss
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
     }
@@ -217,9 +286,10 @@ Boss.prototype.hitBase = function() {
 }
 
 // boss mechanic for certain units, testing
+// add the rest of the pictrure files for kerrigan
 Boss.prototype.rageMode = function() {
     if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
-        this.unit = 
+        this.unit === infestedkerrigan;
     }
 }
 

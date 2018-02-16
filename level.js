@@ -20,6 +20,22 @@ var firstLevelSpeedBuff = [1, 1, 1, 1, 1];
 var firstLevelHealthBuff = [1, 1, 1, 1, 1];
 var firstLevelEntranceNum = [1, 3, 2, 3, 1];
 >>>>>>> 152a49dd25fce84a6c823fdb02a2f4ffc5626dd4
+=======
+
+var firstLevelEnemies = ["zergling", "queen", "defiler", "ultralisk", "scourge", "hydralisk", "devourer"];
+var firstLevelWaveSize = [3, 3, 3, 2, 3, 4, 1, 0];
+var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
+var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
+var firstLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3];
+
+/*
+// test for bosses
+var firstLevelEnemies = ["sarahkerrigan", "devourer", "overlord", "ultralisk", "scourge", "hydralisk", "devourer"];
+var firstLevelWaveSize = [1, 1, 1, 2, 3, 4, 1, 0];
+var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1];
+var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1];
+var firstLevelEntranceNum = [1, 1, 1, 3, 1, 3, 3];
+>>>>>>> DesktoLaptop
 */
 
 //Level Two
@@ -36,28 +52,6 @@ var thirdLevelSpeedBuff = [1, 1, 1, 1];
 var thirdLevelHealthBuff = [1, 1, 1, 1];
 var thirdLevelEntranceNum = [1, 2, 3, 3];
 
-/*
-//Level One
-var firstLevelEnemies = ["zergling", "scourge", "mutalisk", "ultralisk", "hydralisk", "mutalisk"];
-var firstLevelWaveSize = [3, 3, 2, 3, 4, 8, 0];
-var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
-var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1];
-var firstLevelEntranceNum = [1, 2, 3, 2, 3, 1];
-
-//Level Two
-var secondLevelEnemies = ["zergling", "mutalisk", "queen", "mutalisk", "defiler", "zergling"];
-var secondLevelWaveSize = [5, 3, 7, 4, 10, 10, 0];
-var secondLevelSpeedBuff = [1, 1, 1, 1, 1, 1];
-var secondLevelHealthBuff = [1, 1, 1, 1, 1, 1];
-var secondLevelEntranceNum = [1, 2, 1, 3, 2, 3];
-
-//Level Three
-var thirdLevelEnemies = ["zergling", "mutalisk", "mutalisk", "zergling"];
-var thirdLevelWaveSize = [5, 3, 4, 10, 0];
-var thirdLevelSpeedBuff = [1, 1, 1, 1];
-var thirdLevelHealthBuff = [1, 1, 1, 1];
-var thirdLevelEntranceNum = [1, 2, 3, 3];
-*/
 
 function Level(levelNum, waveObject) {
     this.canvas = document.getElementById("gameWorld");
