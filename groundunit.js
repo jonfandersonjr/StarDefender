@@ -4,11 +4,7 @@ var mutalisk = {
     frameWidth: 64, frameHeight: 72, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.5,
-<<<<<<< HEAD
-    speed: 60,
-=======
     speed: 50,
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
     health: 90,
     isAir: true,
     damage: 5,
@@ -39,15 +35,9 @@ var queen = {
     name: "queen",
     frameWidth: 75, frameHeight: 68, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
-<<<<<<< HEAD
-    scale: 0.5,
-    speed: 55,
-    health: 100,
-=======
     scale: 0.6,
     speed: 45,
     health: 200,
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
     isAir: false,
     damage: 8,
     deathAnimation: {
@@ -62,13 +52,8 @@ var zergling = {
     frameWidth: 40, frameHeight: 39, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.6,
-<<<<<<< HEAD
-    speed: 85,
-    health: 50,
-=======
     speed: 80,
     health: 80,
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -82,15 +67,9 @@ var ultralisk = {
     name: "ultralisk",
     frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
-<<<<<<< HEAD
-    scale: 0.35,
-    speed: 15,
-    health: 150,
-=======
     scale: 0.45,
     speed: 35,
     health: 300,
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
     isAir: false,
     damage: 10,
     deathAnimation: {
@@ -104,15 +83,9 @@ var hydralisk = {
     name: "hydralisk",
     frameWidth: 42, frameHeight: 55, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
-<<<<<<< HEAD
-    scale: 0.6,
-    speed: 65,
-    health: 75,
-=======
     scale: 0.7,
     speed: 60,
     health: 200,
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -126,15 +99,9 @@ var defiler = {
     name: "defiler",
     frameWidth: 69, frameHeight: 59, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
-<<<<<<< HEAD
-    scale: 0.6,
-    speed: 40,
-    health: 120,
-=======
     scale: 0.7,
     speed: 45,
     health: 200,
->>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -145,7 +112,7 @@ var defiler = {
         scale: 0.5
     }
 };
-<<<<<<< HEAD
+
 /*
 =======
 
@@ -236,12 +203,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             this.unit = defiler;
             this.deathSound = './soundfx/deathDefiler.wav';
             break;
-            /*
-        case "sarahkerrigan":
-            this.unit = sarahkerrigan;
-            this.deathSound = './soundfx/deathKerrigan.wav';
-            break;
-            */
         default:
             console.log("Problem creating ground unit");
             break;
@@ -415,6 +376,7 @@ GroundUnit.prototype.flyingMovement = function() {
 GroundUnit.prototype.hitBase = function() {
     //**base loses health**
     //**image for base taking damage**
+    // find later
     this.gameUI.dmg(this.unit.damage);
     if (this.gameUI.healthCur > 50) {
         //Play taking damge sound
