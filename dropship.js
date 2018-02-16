@@ -1,10 +1,10 @@
 var dropship = {
     name: "dropship",
-    frameWidth: 40,
-    frameHeight: 41,
+    frameWidth: 59,
+    frameHeight: 57,
     sheetWidth: 1,
     frameDuration: 0.1,
-    frames: 1,
+    frames: 32,
     loop: true,
     scale: 1.1,
     speed: 120
@@ -19,7 +19,7 @@ function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEn
     this.name = this.unit.name;
     this.defender = theDefender;
 
-    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
+    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`),
         this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     this.ctx = game.ctx;
 
@@ -98,13 +98,6 @@ Dropship.prototype.move = function(destinationX, destinationY) {
     } else {
         return true;
     }
-}
-
-
-Dropship.prototype.changeDirection = function(direction) {
-    this.direction = direction;
-    temp1 = `./img/${this.name}/${this.name}_${this.direction}.png`;
-    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.name}/${this.name}_${this.direction}.png`);
 }
 
 Dropship.prototype.draw = function() {

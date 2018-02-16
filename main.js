@@ -11,7 +11,7 @@ for (let i = 0; i < defenderList.length; i++) {
 
 //load enemy sprites
 var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
-var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "scourge", "dropship",
+var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "scourge",
     "sarahkerrigan", "devourer", "overlord", "infestedkerrigan"
 ];
 for (let i = 0; i < unitList.length; i++) {
