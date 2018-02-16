@@ -47,7 +47,27 @@ var defilerWave = {
     healthBuff: 1,
     isBoss: false
 };
-
+var devourerWave = {
+    name: "devourer",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1,
+    isBoss: true
+};
+var overlordWave = {
+    name: "overlord",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1,
+    isBoss: true
+};
+var sarahkerriganWave = {
+    name: "sarahkerrigan",
+    delay: .25,
+    speedbuff: 1,
+    healthBuff: 1,
+    isBoss: true
+};
 
 function Wave(generator, game) {
     this.generator = generator;
@@ -131,6 +151,12 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
+            break;
+        case "devourer":
+            this.unit = devourerWave;
+            break;
+        case "overlord":
+            this.unit = overlordWave;
             break;
         default:
             console.log("Illegal input");
