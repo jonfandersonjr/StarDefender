@@ -2,44 +2,55 @@ var mutaliskWave = {
     name: "mutalisk",
     delay: .5,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
 var scourgeWave = {
     name: "scourge",
     delay: .5,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
 var queenWave = {
     name: "queen",
     delay: 1,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
 var zerglingWave = {
     name: "zergling",
     delay: .65,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
 var ultraliskWave = {
     name: "ultralisk",
     delay: 1,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
 var hydraliskWave = {
     name: "hydralisk",
     delay: .7,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
 var defilerWave = {
     name: "defiler",
     delay: .75,
     speedBuff: 1,
-    healthBuff: 1
+    healthBuff: 1,
+    isBoss: false
 };
+<<<<<<< HEAD
+
+/*
+=======
 var devourerWave = {
     name: "devourer",
     delay: .25,
@@ -52,13 +63,20 @@ var overlordWave = {
     speedbuff: 1,
     healthBuff: 1
 };
+>>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
 var sarahkerriganWave = {
     name: "sarahkerrigan",
     delay: .25,
+<<<<<<< HEAD
     speedbuff: 1,
     healthBuff: 1
+=======
+    speedbuff: 1.5,
+    healthBuff: 2,
+    isBoss: true
+>>>>>>> 152a49dd25fce84a6c823fdb02a2f4ffc5626dd4
 };
-
+*/
 function Wave(generator, game) {
     this.generator = generator;
     this.gameEngine = game;
@@ -72,15 +90,29 @@ Wave.prototype.constructor = Wave;
 Wave.prototype.drawWave = function() {
 
     if (this.delay <= 0) {
-        if (this.entranceNum === 1) {
-            this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
-        } else if (this.entranceNum === 2) {
-            this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+        if (this.unit.isBoss === false) {
+            if (this.entranceNum === 1) {
+                this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            } else if (this.entranceNum === 2) {
+                this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            } else {
+                this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            }
+    
+        // For bosses
         } else {
-            this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
-            this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            if (this.entranceNum === 1) {
+                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            } else if (this.entranceNum === 2) {
+                this.generator.createEnemySecondEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            } else {
+                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemySecondEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+            }
+    
+            
         }
-
         this.delay = this.unit.delay;
         this.unitAmount--;
         if (this.unitAmount <= 0) {

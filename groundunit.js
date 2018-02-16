@@ -113,6 +113,9 @@ var defiler = {
     }
 };
 
+/*
+=======
+
 // BOSSES BELOW - should be moved to boss.js where they can have special features
 
 var devourer = {
@@ -147,6 +150,7 @@ var overlord = {
         scale: 1
     }
 };
+>>>>>>> b2ff208a014ae002315b550fab177d2b7fb2575e
 var sarahkerrigan = {
     name: "sarahkerrigan",
     frameWidth: 34, frameHeight: 40, sheetWidth: 8, frameDuration: 0.1, frames: 8,
@@ -163,6 +167,7 @@ var sarahkerrigan = {
         scale: 1
     }
 };
+*/
 
 function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
@@ -197,18 +202,6 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         case "defiler":
             this.unit = defiler;
             this.deathSound = './soundfx/deathDefiler.wav';
-            break;
-        case "devourer":
-            this.unit = devourer;
-            this.deathSound = './soundfx/deathKerrigan.wav';
-            break;
-        case "overlord":
-            this.unit = overlord;
-            this.deathSound = './soundfx/deathKerrigan.wav';
-            break;
-        case "sarahkerrigan":
-            this.unit = sarahkerrigan;
-            this.deathSound = './soundfx/deathKerrigan.wav';
             break;
         default:
             console.log("Problem creating ground unit");
@@ -383,6 +376,7 @@ GroundUnit.prototype.flyingMovement = function() {
 GroundUnit.prototype.hitBase = function() {
     //**base loses health**
     //**image for base taking damage**
+    // find later
     this.gameUI.dmg(this.unit.damage);
     if (this.gameUI.healthCur > 50) {
         //Play taking damge sound
