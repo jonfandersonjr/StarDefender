@@ -219,7 +219,7 @@ Boss.prototype.hitBase = function() {
 // boss mechanic for certain units, testing
 Boss.prototype.rageMode = function() {
     if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
-        this.speed = this.speed * 10;
+        this.unit = 
     }
 }
 
