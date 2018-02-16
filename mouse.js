@@ -264,10 +264,12 @@ Mouse.prototype.attachListeners = function() {
                 that.musicOn = true;
             }
         } else if (e.keyCode === 80) {
-            if (that.gameEngine.getPauseBool()) {
-                that.gameEngine.pause(false);
+            if (that.gameEngine.getPauseBool() && !that.gameEngine.gameOverBool) {
+                that.gameEngine.pause(false, false);
             } else {
-                that.gameEngine.pause(true);
+                if (!that.gameEngine.gameOverBool) {
+                    that.gameEngine.pause(true, false);
+                }
             }
         }
     }, false);
