@@ -9,7 +9,7 @@ var sarahkerrigan = {
     loop: true,
     scale: 1,
     speed: 40,
-    health: 2000,
+    health: 5000,
     isAir: false,
     damage: 1000,
     deathAnimation: {
@@ -55,7 +55,7 @@ var devourer = {
     loop: true,
     scale: .6,
     speed: 40,
-    health: 2000,
+    health: 1000,
     isAir: false,
     damage: 40,
     deathAnimation: {

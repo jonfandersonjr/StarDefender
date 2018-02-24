@@ -308,12 +308,21 @@ GroundUnit.prototype.changeDirection = function(direction) {
     this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`);
 }
 
-GroundUnit.prototype.flyingMovement = function() {
+GroundUnit.prototype.flyingMovement = function () {
     let y = this.entrance.row * this.map.tileSize;
     let x = this.entrance.column * this.map.tileSize;
-    let slope = (this.map.baseY - y) / (this.map.baseX - x);
-    this.x += this.game.clockTick * this.speed; //Next position
-    this.y += this.game.clockTick * this.speed * slope;
+    let slope;
+    if (x < this.map.baseX) { //enemy spawns west of base
+        slope = (this.map.baseY - y) / (this.map.baseX - x);
+        this.x += this.game.clockTick * this.speed;
+        this.y += this.game.clockTick * this.speed * slope;
+    } else { //enemy spawns east of base
+        slope = (this.map.baseY - y) / (this.map.baseX - x + this.map.tileSize);
+        this.x -= this.game.clockTick * this.speed;
+        this.y -= this.game.clockTick * this.speed * slope;
+    }
+
+
     this.getTrueCordinates();
 }
 
