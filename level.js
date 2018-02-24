@@ -25,6 +25,20 @@ var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
+//Level Two *incomplete/temporary*
+var secondLevelEnemies     = [m, s, m, s, q, d, u, d, q, z, d, D, u, d, z, m, q, S];
+var secondLevelWaveSize    = [3, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
+var secondLevelSpeedBuff   = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var secondLevelHealthBuff  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var secondLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+
+//Level Three *incomplete/temporary*
+var thirdLevelEnemies     = [z, z, z, D, D, D, O, O, O, z, q, d, u, m, s, m, q, S];
+var thirdLevelWaveSize    = [3, 3, 7, 2, 3, 1, 3, 2, 2, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
+var thirdLevelSpeedBuff   = [1, 1, 1, 1, 1, 1, 0,.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var thirdLevelHealthBuff  = [1, 2, 3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var thirdLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+
 /*
 // test for bosses
 var firstLevelEnemies = ["sarahkerrigan", "devourer", "overlord", "ultralisk", "scourge", "hydralisk", "devourer"];
@@ -90,7 +104,7 @@ Level.prototype.playLevel1 = function() {
 }
 
 Level.prototype.playLevel2 = function () {
-    /*
+    
     this.wave.setWave(secondLevelEnemies[this.waveNumber],
         secondLevelWaveSize[this.waveNumber],
         secondLevelSpeedBuff[this.waveNumber],
@@ -104,11 +118,11 @@ Level.prototype.playLevel2 = function () {
         this.isDone = true;
         console.log("Level " + this.levelNum + " is done.")
     }
-    */
+    
 }
 
 Level.prototype.playLevel3 = function () {
-    /*
+    
     this.wave.setWave(thirdLevelEnemies[this.waveNumber],
         thirdLevelWaveSize[this.waveNumber],
         thirdLevelSpeedBuff[this.waveNumber],
@@ -122,7 +136,7 @@ Level.prototype.playLevel3 = function () {
         this.isDone = true;
         console.log("Level " + this.levelNum + " is done.")
     }
-    */
+    
 }
 
 
