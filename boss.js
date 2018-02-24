@@ -57,7 +57,7 @@ var devourer = {
     speed: 40,
     health: 2000,
     isAir: false,
-    damage: 800,
+    damage: 40,
     deathAnimation: {
         name: "devourer",
         frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 1, frames: 6,
@@ -73,7 +73,7 @@ var overlord = {
     speed: 40,
     health: 2500,
     isAir: false,
-    damage: 1000,
+    damage: 70,
     deathAnimation: {
         name: "overlord",
         frameWidth: 60, frameHeight: 75, sheetWidth: 1, frameDuration: 1, frames: 1,
@@ -160,8 +160,8 @@ Boss.prototype.update = function() {
         that.gameUI.enemiesKilledAdjust(1);
 
         //Update resources for each kill
-        //Gives 500 resources per kill for now since boss
-        that.gameUI.resourceAdjust(500);
+        //Gives 50 resources per kill for now since boss
+        that.gameUI.resourceAdjust(50);
 
         //Play death sounds
         this.playSound(this.deathSound);

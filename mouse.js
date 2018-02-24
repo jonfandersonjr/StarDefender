@@ -74,7 +74,6 @@ Mouse.prototype.selectDefender = function(defenderName) {
         this.defenderName = defenderName;
         if (this.ui.resourcesTotal < this.unitCost) {
             this.PlaySound("./soundfx/minerals.wav");
-            a
         }
     }
 };

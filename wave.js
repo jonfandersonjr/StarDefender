@@ -1,71 +1,51 @@
 var mutaliskWave = {
     name: "mutalisk",
     delay: .5,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var scourgeWave = {
     name: "scourge",
     delay: .5,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var queenWave = {
     name: "queen",
     delay: 1,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var zerglingWave = {
     name: "zergling",
     delay: .65,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var ultraliskWave = {
     name: "ultralisk",
     delay: 1,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var hydraliskWave = {
     name: "hydralisk",
     delay: .7,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var defilerWave = {
     name: "defiler",
     delay: .75,
-    speedBuff: 1,
-    healthBuff: 1,
     isBoss: false
 };
 var devourerWave = {
     name: "devourer",
     delay: .25,
-    speedbuff: 1,
-    healthBuff: 1,
     isBoss: true
 };
 var overlordWave = {
     name: "overlord",
     delay: .25,
-    speedbuff: 1,
-    healthBuff: 1,
     isBoss: true
 };
 var sarahkerriganWave = {
     name: "sarahkerrigan",
     delay: .25,
-    speedbuff: 1,
-    healthBuff: 1,
     isBoss: true
 };
 
@@ -84,23 +64,23 @@ Wave.prototype.drawWave = function() {
     if (this.delay <= 0) {
         if (this.unit.isBoss === false) {
             if (this.entranceNum === 1) {
-                this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemyFirstEntry(this.unit.name, this.speedBuff, this.healthBuff);
             } else if (this.entranceNum === 2) {
-                this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemySecondEntry(this.unit.name, this.speedBuff, this.healthBuff);
             } else {
-                this.generator.createEnemyFirstEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
-                this.generator.createEnemySecondEntry(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemyFirstEntry(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemySecondEntry(this.unit.name, this.speedBuff, this.healthBuff);
             }
     
         // For bosses
         } else {
             if (this.entranceNum === 1) {
-                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
             } else if (this.entranceNum === 2) {
-                this.generator.createEnemySecondEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemySecondEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
             } else {
-                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
-                this.generator.createEnemySecondEntryBoss(this.unit.name, this.unit.speedBuff, this.unit.healthBuff);
+                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemySecondEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
             }
     
             
@@ -152,20 +132,14 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
             break;
-        case "devourer":
-            this.unit = devourerWave;
-            break;
-        case "overlord":
-            this.unit = overlordWave;
-            break;
         default:
-            console.log("Illegal input");
+            console.log("Illegal wave");
             break;
     }
 
     this.entranceNum = theEntranceNum;
-    this.unit.speedBuff = theSpeedBuff;
-    this.unit.healthBuff = theHealthBuff;
+    this.speedBuff = 1 + theSpeedBuff;
+    this.healthBuff = 1 + theHealthBuff;
     this.delay = this.unit.delay;
     this.unitAmount = unitAmount;
     this.canDraw = true;

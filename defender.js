@@ -163,8 +163,8 @@ Defender.prototype.draw = function() {
 }
 
 Defender.prototype.calculateXY = function (row, column) {
-    this.x = column * this.map.tileSize - 1.7*(this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
-    this.y = row * this.map.tileSize - 1.7*(this.unit.frameHeight * this.unit.scale - this.map.tileSize) / 2;
+    this.x = column * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
+    this.y = row * this.map.tileSize - (this.unit.frameHeight * this.unit.scale - this.map.tileSize) / 2;
 
 }
 

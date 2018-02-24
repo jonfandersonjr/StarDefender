@@ -205,7 +205,7 @@ GroundUnit.prototype.update = function() {
 
         //Update resources for each kill
         //Gives 10 resources per kill for now
-        that.gameUI.resourceAdjust(10);
+        that.gameUI.resourceAdjust(5);
 
         //Play death sounds
         this.playSound(this.deathSound);

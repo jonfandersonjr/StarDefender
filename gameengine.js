@@ -219,7 +219,7 @@ GameEngine.prototype.update = function() {
     this.tileBox.update();
 
     //Map Won Screen?
-    if (this.levelNum > 3 && this.unitEntities.length === 0) {
+    if (this.levelNum > 1 && this.unitEntities.length === 0) {
         var canvasThree = document.getElementById("gameOverlayScreen");
         var ctxThree = canvasThree.getContext("2d");
         won_img = new Image();
