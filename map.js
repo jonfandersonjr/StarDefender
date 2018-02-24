@@ -1,4 +1,4 @@
-var tileSize = 40;
+var tileSize = 31;
 
 function Map(map) {
     this.map = map;
@@ -6,6 +6,7 @@ function Map(map) {
     this.mapDim = {row : this.map.length, col : this.map[0].length};
     this.canvas = document.getElementById("gameWorld");
     this.tileSize = tileSize;
+    console.log(this.tileSize);
 
     if (this.map === map_1) {
         this.firstEntry = { column: 0, row: 1 };
@@ -45,6 +46,8 @@ Background.prototype.update = function () { };
 //Creates a map based on the selection.
 Map.prototype.createMap = function (gameEngine, assetManager) {
     for (let i = 0; i < this.mapDim.col; i++) {
+
+        console.log("second: " + this.tileSize);
         
         for (let j = 0; j < this.mapDim.row; j++) {
             let cycle = Math.ceil(Math.random() * 6)

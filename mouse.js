@@ -1,5 +1,5 @@
 var defenderList = ["marine", "battlecruiser", "ghost", "antiair"];
-var tileSize = 31;
+
 var costs = {
     marine: 50,
     battlecruiser: 150,
