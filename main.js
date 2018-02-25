@@ -10,9 +10,10 @@ for (let i = 0; i < defenderList.length; i++) {
 }
 
 //load enemy sprites
-var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
+// var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"]; dont use ne, nw, se, sw
+var directions = ["east", "west", "north", "south", "death"];
 var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "scourge",
-    "sarahkerrigan", "devourer", "overlord", "infestedkerrigan"
+    "sarahkerrigan", "devourer", "overlord", "infestedkerrigan", "drone", "guardian"
 ];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {

@@ -6,6 +6,8 @@
 //entranceNum = which entry point on the map they enter from. 1 = first entrance, 2 = second entrance, 3 = both
 
 //generic enemies
+var g = "guardian";
+var dr = "drone";
 var z = "zergling";
 var q = "queen"; //yaas
 var d = "defiler";
@@ -19,21 +21,22 @@ var O = "overlord";
 var S = "sarahkerrigan";
 var I = "infestedkerrigan";
 
-/* Test for Bosses
-var firstLevelEnemies     = [S, O, I, D, h, D, q, s, u, z, d, O, u, d, z, m, q, S];
+// test case
+var firstLevelEnemies     = [g, O, I, D, h, D, q, s, u, z, d, O, u, d, z, m, q, S];
 var firstLevelWaveSize    = [1, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1];
-*/
 
+
+/*
 //Level One
-var firstLevelEnemies     = [z, q, s, u, h, D, q, s, u, z, d, O, u, d, z, m, q, S];
+var firstLevelEnemies     = [z, q, s, u, h, D, q, dr, u, z, d, O, u, d, z, m, q, S];
 var firstLevelWaveSize    = [3, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
-
+*/
 
 //Level Two *incomplete/temporary*
 var secondLevelEnemies     = [m, s, m, s, q, d, u, d, q, z, d, D, u, d, z, m, q, S];

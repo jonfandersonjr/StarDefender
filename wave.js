@@ -13,6 +13,16 @@ var queenWave = {
     delay: 1,
     isBoss: false
 };
+var droneWave = {
+    name: "drone",
+    delay: .65,
+    isBoss: false
+};
+var guardianWave = {
+    name: "guardian",
+    delay: .65,
+    isBoss: false
+};
 var zerglingWave = {
     name: "zergling",
     delay: .65,
@@ -118,6 +128,12 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "zergling":
             this.unit = zerglingWave;
+            break;
+        case "guardian":
+            this.unit = guardianWave;
+            break;
+        case "drone":
+            this.unit = droneWave;
             break;
         case "ultralisk":
             this.unit = ultraliskWave;

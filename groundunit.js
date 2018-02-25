@@ -50,6 +50,23 @@ var queen = {
         scale: 0.5
     }
 };
+var drone = {
+    name: "drone",
+    frameWidth: 51.4, frameHeight: 32, sheetWidth: 6, frameDuration: 0.1, frames: 6,
+    loop: true,
+    scale: 0.7,
+    speed: 40,
+    health: 20,
+    armor: 0,
+    isAir: false,
+    damage: 5,
+    deathAnimation: {
+        name: "drone",
+        frameWidth: 75.5, frameHeight: 39, sheetWidth: 8, frameDuration: 0.15, frames: 8,
+        loop: false,
+        scale: 0.5
+    }
+};
 var zergling = {
     name: "zergling",
     frameWidth: 40, frameHeight: 39, sheetWidth: 7, frameDuration: 0.1, frames: 7,
@@ -63,6 +80,23 @@ var zergling = {
     deathAnimation: {
         name: "zergling",
         frameWidth: 65, frameHeight: 53, sheetWidth: 7, frameDuration: 0.15, frames: 7,
+        loop: false,
+        scale: 0.5
+    }
+};
+var guardian = {
+    name: "guardian",
+    frameWidth: 78, frameHeight: 71, sheetWidth: 7, frameDuration: 0.1, frames: 7,
+    loop: true,
+    scale: 0.6,
+    speed: 40,
+    health: 120,
+    armor: 3,
+    isAir: false,
+    damage: 5,
+    deathAnimation: {
+        name: "guardian",
+        frameWidth: 114, frameHeight: 110, sheetWidth: 9, frameDuration: 0.15, frames: 9,
         loop: false,
         scale: 0.5
     }
@@ -138,6 +172,10 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             this.unit = queen;
             this.deathSound = './soundfx/deathQueen.wav';
             break;
+        case "guardian":
+            this.unit = guardian;
+            this.deathSound = './soundfx/deathGuardian.wav';
+            break;
         case "zergling":
             this.unit = zergling;
             this.deathSound = './soundfx/deathZergling.wav';
@@ -153,6 +191,10 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         case "defiler":
             this.unit = defiler;
             this.deathSound = './soundfx/deathDefiler.wav';
+            break;
+        case "drone":
+            this.unit = drone;
+            this.deathSound = './soundfx/deathDrone.wav';
             break;
         default:
             console.log("Problem creating ground unit");
