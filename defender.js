@@ -12,6 +12,7 @@ var marine = {
     range: 100,
     cooldown: 0.2,
     damage: 10,
+    armorPiercing: 5,
     mapKey: 'a',
     targetGround: true,
     targetFlying: true,
@@ -28,6 +29,7 @@ var battlecruiser = {
     range: 250,
     cooldown: 2,
     damage: 200,
+    armorPiercing: 10,
     mapKey: 'd',
     targetGround: true,
     targetFlying: false,
@@ -44,6 +46,7 @@ var ghost = {
     range: 100,
     cooldown: 0.4,
     damage: 30,
+    armorPiercing: 10,
     mapKey: 's',
     targetGround: true,
     targetFlying: false,
@@ -61,6 +64,7 @@ var antiair = {
     range: 150,
     cooldown: 0.5,
     damage: 50,
+    armorPiercing: 10,
     mapKey: 'w',
     targetGround: false,
     targetFlying: true,
@@ -104,6 +108,7 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.cooldown = this.unit.cooldown;
     this.isBusy = false;
     this.damage = this.unit.damage;
+    this.armorPiercing = this.unit.armorPiercing;
     this.frame = 0;
     this.isDummy = isDummy;
     this.speed = 100;
@@ -196,7 +201,7 @@ Defender.prototype.shoot = function(enemy) {
             
 
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2));
+            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2, this.armorPiercing));
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
         }

@@ -6,6 +6,7 @@ var mutalisk = {
     scale: 0.5,
     speed: 50,
     health: 90,
+    armor: 5,
     isAir: true,
     damage: 5,
     deathAnimation: {
@@ -22,6 +23,7 @@ var scourge = {
     scale: 1,
     speed: 65,
     health: 30,
+    armor: 0,
     isAir: true,
     damage: 10,
     deathAnimation: {
@@ -38,6 +40,7 @@ var queen = {
     scale: 0.6,
     speed: 45,
     health: 200,
+    armor: 5,
     isAir: false,
     damage: 8,
     deathAnimation: {
@@ -54,6 +57,7 @@ var zergling = {
     scale: 0.6,
     speed: 80,
     health: 80,
+    armor: 0,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -70,6 +74,7 @@ var ultralisk = {
     scale: 0.45,
     speed: 35,
     health: 300,
+    armor: 10,
     isAir: false,
     damage: 10,
     deathAnimation: {
@@ -86,6 +91,7 @@ var hydralisk = {
     scale: 0.7,
     speed: 60,
     health: 200,
+    armor: 5,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -102,6 +108,7 @@ var defiler = {
     scale: 0.7,
     speed: 45,
     health: 200,
+    armor: 5,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -176,6 +183,7 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     this.speed = this.unit.speed * theSpeedBuff;
     this.maxHealth = this.unit.health * theHealthBuff;
     this.currentHealth = this.maxHealth;
+    this.armor = this.unit.armor;
     this.animation.lastHealth = this.currentHealth;
     Entity.call(this, game, this.x, this.y);
 }
@@ -345,13 +353,6 @@ GroundUnit.prototype.hitBase = function() {
     this.curTime = new Date().getSeconds();
     this.isDead = true;
     this.removeFromWorld = true;
-}
-
-// boss mechanic for certain units, testing
-GroundUnit.prototype.rageMode = function() {
-    if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
-        this.speed = this.speed * 10;
-    }
 }
 
 GroundUnit.prototype.setDeathAnimation = function() {

@@ -42,7 +42,7 @@ var antiair_projectile = {
 };
 
 //Game engine, Asset Manager, Defender name, Initial x, Initial y, Enemy, Speed
-function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSetting) {
+function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSetting, armorPiercing) {
     this.gameEngine = gameEngine;
     //Switch case for units.
     switch (defenderName) {
@@ -72,6 +72,7 @@ function Projectile(gameEngine, AM, defenderName, x0, y0, enemy, damage, speedSe
     this.defenderName = defenderName;
     this.enemy = enemy;
     this.damage = damage;
+    this.armorPiercing = armorPiercing;
     this.AM = AM;
     this.ctx = this.gameEngine.ctx;
     this.x = x0;
@@ -92,8 +93,14 @@ Projectile.prototype.update = function() {
         this.x -= this.gameEngine.clockTick * this.xSpeed;
         this.y -= this.gameEngine.clockTick * this.ySpeed;
     } else {
-        this.enemy.currentHealth -= this.damage;
-        this.removeFromWorld = true;
+        if (this.damage + this.armorPiercing - this.enemy.armor < this.damage) {
+            var damage = this.damage + this.armorPiercing - this.enemy.armor;
+            this.enemy.currentHealth -= damage;
+            this.removeFromWorld = true;
+        } else {
+            this.enemy.currentHealth -= this.damage;
+            this.removeFromWorld = true;
+        }
     }
     Entity.prototype.update.call(this);
 }

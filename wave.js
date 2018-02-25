@@ -48,6 +48,11 @@ var sarahkerriganWave = {
     delay: .25,
     isBoss: true
 };
+var infestedkerriganWave = {
+    name: "infestedkerrigan",
+    delay: .25,
+    isBoss: true
+}
 
 function Wave(generator, game) {
     this.generator = generator;
@@ -131,6 +136,9 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
+            break;
+        case "infestedkerrigan":
+            this.unit = infestedkerriganWave;
             break;
         default:
             console.log("Illegal wave");

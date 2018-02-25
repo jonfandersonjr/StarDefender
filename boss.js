@@ -9,7 +9,8 @@ var sarahkerrigan = {
     loop: true,
     scale: 1,
     speed: 40,
-    health: 5000,
+    health: 1000,
+    armor: 10,
     isAir: false,
     damage: 1000,
     deathAnimation: {
@@ -34,7 +35,8 @@ var infestedkerrigan = {
     loop: true,
     scale: 1,
     speed: 60,
-    health: 1000,
+    health: 500,
+    armor: 15,
     isAir: false,
     damage: 1000,
     deathAnimation: {
@@ -56,6 +58,7 @@ var devourer = {
     scale: .6,
     speed: 40,
     health: 1000,
+    armor: 10,
     isAir: false,
     damage: 40,
     deathAnimation: {
@@ -71,7 +74,8 @@ var overlord = {
     loop: true,
     scale: .6,
     speed: 40,
-    health: 2500,
+    health: 1000,
+    armor: 10,
     isAir: false,
     damage: 70,
     deathAnimation: {
@@ -91,18 +95,23 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "sarahkerrigan":
             this.unit = sarahkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
+            this.hurtSound = './soundfx/sarahkerrigandontlikethis.wav'; 
+            this.soundTrigger = false;
             break;
         case "infestedkerrigan":
             this.unit = infestedkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
+            this.healthTrigger = false;
             break;
         case "devourer":
             this.unit = devourer;
             this.deathSound = './soundfx/deathDevourer.wav';
+            this.speedTrigger = false;
             break;
         case "overlord":
             this.unit = overlord;
             this.deathSound = './soundfx/deathOverlord.wav';
+            this.armorTrigger = false;
             break;
         default:
             console.log("Problem creating Boss");
@@ -133,6 +142,7 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
     this.speed = this.unit.speed * theSpeedBuff;
     this.maxHealth = this.unit.health * theHealthBuff;
     this.currentHealth = this.maxHealth;
+    this.armor = this.unit.armor;
     this.animation.lastHealth = this.currentHealth;
     Entity.call(this, game, this.x, this.y);
 }
@@ -151,7 +161,22 @@ Boss.prototype.playSound = function(path) {
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 Boss.prototype.update = function() {
     var that = this;
-    if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
+    if (this.unit === sarahkerrigan && this.currentHealth < 500 && this.soundTrigger === false) {
+        this.soundTrigger = true;
+        this.playSound(this.hurtSound);
+    }
+    if (this.unit === overlord && this.currentHealth < 500 && this.armorTrigger === false) {
+        this.armorTrigger = true;
+        this.armor = 20;
+    }
+    if (this.unit === devourer && this.currentHealth < 500 && this.speedTrigger === false) {
+        this.speed = 80;
+        this.speedTrigger === false;
+    } 
+    if (this.unit === infestedkerrigan && this.currentHealth < 200 && this.healthTrigger === false) {
+        this.currentHealth = 600;
+        this.healthTrigger = true;
+    } else if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
         this.hitBase();
     } else if (this.currentHealth <= 0 && !this.isDead) {
         this.isDead = true;
@@ -286,7 +311,6 @@ Boss.prototype.hitBase = function() {
 }
 
 // boss mechanic for certain units, testing
-// add the rest of the pictrure files for kerrigan
 Boss.prototype.rageMode = function() {
     if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
         this.unit === infestedkerrigan;
