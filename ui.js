@@ -278,6 +278,50 @@ UI.prototype.waveTimeGet = function(theTime) {
     this.updateText();
 }
 
+UI.prototype.displayTutorial = function() {
+    var that = this;
+    var tutorialImages = [
+        ["./img/tutorial/keybinds.png", 0, 0],
+        ["./img/tutorial/information.png", 400, 0],
+        ["./img/tutorial/health.png", 400, 0],
+        ["./img/tutorial/resources.png", 400, 0],
+        ["./img/tutorial/base.png", 250, 600],
+        ["./img/tutorial/lane.png", 300, 300],
+        ["./img/tutorial/defenders.png", 385, 300],
+        ["./img/tutorial/marine.png", 385, 300],
+        ["./img/tutorial/ghost.png", 385, 300],
+        ["./img/tutorial/battlecruiser.png", 385, 350],
+        ["./img/tutorial/antiair.png", 385, 350],
+        ["./img/tutorial/scv.png", 385, 590]
+    ];
+
+    that.gameEngine.tutorialPause(true);
+
+    //Draw tutorial
+    var canvasThree = document.getElementById("gameOverlayScreen");
+    var ctxThree = canvasThree.getContext("2d");
+
+    for (i = 0; i < tutorialImages.length; i++) {
+
+        var tempSrc = tutorialImages[i][0];
+        var tempX = tutorialImages[i][1];
+        var tempY = tutorialImages[i][2];
+        var tempImg = new Image();
+        tempImg.onload = function() {
+            ctxThree.drawImage(tempImg, tempX, tempY, 400, 100);
+        }
+        tempImg.src = tempSrc;
+
+        setTimeout(function() {
+            console.log("Delaying to display next tutorial image");
+        }, 5000);
+
+        ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+    }
+
+    that.gameEngine.tutorialPause(false);
+}
+
 //Makes any element unselectable - disables highlighting
 function makeUnselectable(elem) {
     if (typeof(elem) == 'string')

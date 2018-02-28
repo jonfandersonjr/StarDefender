@@ -73,6 +73,17 @@ GameEngine.prototype.pause = function(boolean, gameover) {
     }
 }
 
+GameEngine.prototype.tutorialPause = function(bool) {
+    var that = this;
+    if (bool) {
+        that.oldClockTick = that.clockTick;
+        that.clockTick = 0;
+    } else {
+        that.clockTick = that.oldClockTick;
+    }
+
+}
+
 GameEngine.prototype.addTile = function(tileEntity) {
     this.tileEntities.push(tileEntity);
 }
