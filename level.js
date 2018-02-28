@@ -30,7 +30,6 @@ var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1];
 */
 
-
 //Level One
 var firstLevelEnemies     = [z, q, s, u, h, D, q,dr, u, z, d, O, u, d, z, m, q, S];
 var firstLevelWaveSize    = [3, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];

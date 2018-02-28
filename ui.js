@@ -278,6 +278,103 @@ UI.prototype.waveTimeGet = function(theTime) {
     this.updateText();
 }
 
+UI.prototype.displayTutorial = function() {
+    var that = this;
+    var tutorialImages = [
+        ["./img/tutorial/keybinds.png", 60, 0],
+        ["./img/tutorial/information.png", 285, 0],
+        ["./img/tutorial/health.png", 285, 0],
+        ["./img/tutorial/resources.png", 285, 0],
+        ["./img/tutorial/base.png", 150, 500],
+        ["./img/tutorial/lane.png", 125, 300],
+        ["./img/tutorial/defenders.png", 285, 250],
+        ["./img/tutorial/marine.png", 285, 250],
+        ["./img/tutorial/ghost.png", 285, 250],
+        ["./img/tutorial/battlecruiser.png", 285, 350],
+        ["./img/tutorial/antiair.png", 285, 350],
+        ["./img/tutorial/scv.png", 285, 450],
+        ["./img/tutorial/start.png", 200, 150]
+    ];
+
+    //Draw tutorial
+    var canvasThree = document.getElementById("gameOverlayScreen");
+    var ctxThree = canvasThree.getContext("2d");
+    that.gameEngine.tutorialPause(true);
+    ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+
+    var i = 0;
+
+    function drawTutorialImages() {
+        setTimeout(function() {
+            ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+            var tempSrc = tutorialImages[i][0];
+            var tempX = tutorialImages[i][1];
+            var tempY = tutorialImages[i][2];
+            var tempImg = new Image();
+            tempImg.onload = function() {
+                ctxThree.drawImage(tempImg, tempX, tempY, 500, 200);
+                that.buttonHighlight(i);
+            }
+            tempImg.src = tempSrc;
+            i++;
+            if (i < tutorialImages.length) {
+                drawTutorialImages();
+                ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+                that.gameReady = false;
+            } else {
+                that.gameEngine.pause(true);
+            }
+        }, 5000);
+    }
+    drawTutorialImages();
+}
+
+UI.prototype.buttonHighlight = function(i) {
+    var that = this;
+    var tempX;
+    var tempY;
+    //Coordinated based on i 7-11 defenders
+    switch (i) {
+        case 8:
+            tempX = 0;
+            tempY = 0;
+            break;
+        case 9:
+            tempX = 110;
+            tempY = 0;
+            break;
+        case 10:
+            tempX = 0;
+            tempY = 110;
+            break;
+        case 11:
+            tempX = 110;
+            tempY = 110;
+            break;
+        case 12:
+            tempX = 60;
+            tempY = 220;
+            break;
+        default:
+            break;
+    }
+
+    that.ctx.beginPath();
+    that.ctx.lineWidth = "2";
+    that.ctx.strokeStyle = "red";
+    that.ctx.rect(tempX, tempY, 100, 100);
+    that.ctx.stroke();
+    setTimeout(function() {
+        that.ctx.beginPath();
+        that.ctx.lineWidth = "2";
+        that.ctx.strokeStyle = "black";
+        that.ctx.rect(tempX, tempY, 100, 100);
+        that.ctx.stroke();
+    }, 5000);
+}
+
+
+
 //Makes any element unselectable - disables highlighting
 function makeUnselectable(elem) {
     if (typeof(elem) == 'string')
