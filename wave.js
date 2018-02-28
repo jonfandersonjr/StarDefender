@@ -79,23 +79,23 @@ Wave.prototype.drawWave = function() {
     if (this.delay <= 0) {
         if (this.unit.isBoss === false) {
             if (this.entranceNum === 1) {
-                this.generator.createEnemyFirstEntry(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemyFirstEntry(this.name, this.speedBuff, this.healthBuff);
             } else if (this.entranceNum === 2) {
-                this.generator.createEnemySecondEntry(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemySecondEntry(this.name, this.speedBuff, this.healthBuff);
             } else {
-                this.generator.createEnemyFirstEntry(this.unit.name, this.speedBuff, this.healthBuff);
-                this.generator.createEnemySecondEntry(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemyFirstEntry(this.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemySecondEntry(this.name, this.speedBuff, this.healthBuff);
             }
     
         // For bosses
         } else {
             if (this.entranceNum === 1) {
-                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemyFirstEntryBoss(this.name, this.speedBuff, this.healthBuff);
             } else if (this.entranceNum === 2) {
-                this.generator.createEnemySecondEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemySecondEntryBoss(this.name, this.speedBuff, this.healthBuff);
             } else {
-                this.generator.createEnemyFirstEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
-                this.generator.createEnemySecondEntryBoss(this.unit.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemyFirstEntryBoss(this.name, this.speedBuff, this.healthBuff);
+                this.generator.createEnemySecondEntryBoss(this.name, this.speedBuff, this.healthBuff);
             }
     
             
@@ -161,6 +161,7 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
     }
 
+    this.name = this.unit.name;
     this.entranceNum = theEntranceNum;
     this.speedBuff = 1 + theSpeedBuff;
     this.healthBuff = 1 + theHealthBuff;
