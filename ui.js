@@ -282,45 +282,98 @@ UI.prototype.displayTutorial = function() {
     var that = this;
     var tutorialImages = [
         ["./img/tutorial/keybinds.png", 0, 0],
-        ["./img/tutorial/information.png", 400, 0],
-        ["./img/tutorial/health.png", 400, 0],
-        ["./img/tutorial/resources.png", 400, 0],
+        ["./img/tutorial/information.png", 385, 0],
+        ["./img/tutorial/health.png", 385, 0],
+        ["./img/tutorial/resources.png", 385, 0],
         ["./img/tutorial/base.png", 250, 600],
-        ["./img/tutorial/lane.png", 300, 300],
+        ["./img/tutorial/lane.png", 200, 300],
         ["./img/tutorial/defenders.png", 385, 300],
         ["./img/tutorial/marine.png", 385, 300],
         ["./img/tutorial/ghost.png", 385, 300],
-        ["./img/tutorial/battlecruiser.png", 385, 350],
-        ["./img/tutorial/antiair.png", 385, 350],
-        ["./img/tutorial/scv.png", 385, 590]
+        ["./img/tutorial/battlecruiser.png", 385, 450],
+        ["./img/tutorial/antiair.png", 385, 450],
+        ["./img/tutorial/scv.png", 385, 590],
+        ["./img/tutorial/start.png", 250, 150]
     ];
-
-    that.gameEngine.tutorialPause(true);
 
     //Draw tutorial
     var canvasThree = document.getElementById("gameOverlayScreen");
     var ctxThree = canvasThree.getContext("2d");
+    that.gameEngine.tutorialPause(true);
+    ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
 
-    for (i = 0; i < tutorialImages.length; i++) {
+    var i = 0;
 
-        var tempSrc = tutorialImages[i][0];
-        var tempX = tutorialImages[i][1];
-        var tempY = tutorialImages[i][2];
-        var tempImg = new Image();
-        tempImg.onload = function() {
-            ctxThree.drawImage(tempImg, tempX, tempY, 400, 100);
-        }
-        tempImg.src = tempSrc;
-
+    function drawTutorialImages() {
         setTimeout(function() {
-            console.log("Delaying to display next tutorial image");
+            ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+            var tempSrc = tutorialImages[i][0];
+            var tempX = tutorialImages[i][1];
+            var tempY = tutorialImages[i][2];
+            var tempImg = new Image();
+            tempImg.onload = function() {
+                ctxThree.drawImage(tempImg, tempX, tempY, 400, 100);
+                that.buttonHighlight(i);
+            }
+            tempImg.src = tempSrc;
+            i++;
+            if (i < tutorialImages.length) {
+                drawTutorialImages();
+                ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+                that.gameReady = false;
+            } else {
+                that.gameEngine.pause(true);
+            }
         }, 5000);
+    }
+    drawTutorialImages();
+}
 
-        ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+UI.prototype.buttonHighlight = function(i) {
+    var that = this;
+    var tempX;
+    var tempY;
+    //Coordinated based on i 7-11 defenders
+    switch (i) {
+        case 8:
+            tempX = 0;
+            tempY = 0;
+            break;
+        case 9:
+            tempX = 110;
+            tempY = 0;
+            break;
+        case 10:
+            tempX = 0;
+            tempY = 110;
+            break;
+        case 11:
+            tempX = 110;
+            tempY = 110;
+            break;
+        case 12:
+            tempX = 60;
+            tempY = 220;
+            break;
+        default:
+            break;
     }
 
-    that.gameEngine.tutorialPause(false);
+    that.ctx.beginPath();
+    that.ctx.lineWidth = "2";
+    that.ctx.strokeStyle = "red";
+    that.ctx.rect(tempX, tempY, 100, 100);
+    that.ctx.stroke();
+    setTimeout(function() {
+        that.ctx.beginPath();
+        that.ctx.lineWidth = "2";
+        that.ctx.strokeStyle = "black";
+        that.ctx.rect(tempX, tempY, 100, 100);
+        that.ctx.stroke();
+    }, 5000);
 }
+
+
 
 //Makes any element unselectable - disables highlighting
 function makeUnselectable(elem) {

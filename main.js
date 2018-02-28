@@ -77,4 +77,5 @@ AM.downloadAll(function() {
 
     //Display tutorial
     ui.displayTutorial();
+
 });

@@ -68,20 +68,22 @@ GameEngine.prototype.pause = function(boolean, gameover) {
     } else {
         that.pauseBool = false;
         that.clockTick = that.oldClockTick;
-        //Undraw pause image
+        //clear pause image
         ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
     }
 }
 
-GameEngine.prototype.tutorialPause = function(bool) {
+GameEngine.prototype.tutorialPause = function(boolean) {
     var that = this;
-    if (bool) {
-        that.oldClockTick = that.clockTick;
+    if (boolean === true) {
+        that.pauseBool = true;
         that.clockTick = 0;
     } else {
+        that.pauseBool = false;
         that.clockTick = that.oldClockTick;
+        //clear pause image
+        ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
     }
-
 }
 
 GameEngine.prototype.addTile = function(tileEntity) {
