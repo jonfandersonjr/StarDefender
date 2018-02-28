@@ -281,19 +281,19 @@ UI.prototype.waveTimeGet = function(theTime) {
 UI.prototype.displayTutorial = function() {
     var that = this;
     var tutorialImages = [
-        ["./img/tutorial/keybinds.png", 0, 0],
-        ["./img/tutorial/information.png", 385, 0],
-        ["./img/tutorial/health.png", 385, 0],
-        ["./img/tutorial/resources.png", 385, 0],
-        ["./img/tutorial/base.png", 250, 600],
-        ["./img/tutorial/lane.png", 200, 300],
-        ["./img/tutorial/defenders.png", 385, 300],
-        ["./img/tutorial/marine.png", 385, 300],
-        ["./img/tutorial/ghost.png", 385, 300],
-        ["./img/tutorial/battlecruiser.png", 385, 450],
-        ["./img/tutorial/antiair.png", 385, 450],
-        ["./img/tutorial/scv.png", 385, 590],
-        ["./img/tutorial/start.png", 250, 150]
+        ["./img/tutorial/keybinds.png", 60, 0],
+        ["./img/tutorial/information.png", 285, 0],
+        ["./img/tutorial/health.png", 285, 0],
+        ["./img/tutorial/resources.png", 285, 0],
+        ["./img/tutorial/base.png", 150, 500],
+        ["./img/tutorial/lane.png", 125, 300],
+        ["./img/tutorial/defenders.png", 285, 250],
+        ["./img/tutorial/marine.png", 285, 250],
+        ["./img/tutorial/ghost.png", 285, 250],
+        ["./img/tutorial/battlecruiser.png", 285, 350],
+        ["./img/tutorial/antiair.png", 285, 350],
+        ["./img/tutorial/scv.png", 285, 450],
+        ["./img/tutorial/start.png", 200, 150]
     ];
 
     //Draw tutorial
@@ -312,7 +312,7 @@ UI.prototype.displayTutorial = function() {
             var tempY = tutorialImages[i][2];
             var tempImg = new Image();
             tempImg.onload = function() {
-                ctxThree.drawImage(tempImg, tempX, tempY, 400, 100);
+                ctxThree.drawImage(tempImg, tempX, tempY, 500, 200);
                 that.buttonHighlight(i);
             }
             tempImg.src = tempSrc;
