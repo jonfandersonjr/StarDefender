@@ -26,6 +26,8 @@ AM.queueDownload("./img/scv/scv_east.png");
 AM.queueDownload("./img/scv/scv_west.png");
 AM.queueDownload("./img/scv/scv_mine.png");
 
+AM.queueDownload("./map/blue_map.png");
+
 //load tiles
 for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
@@ -76,6 +78,6 @@ AM.downloadAll(function() {
     map.createMap(gameEngine, AM);
 
     //Display tutorial
-    ui.displayTutorial();
+    //ui.displayTutorial();
 
 });

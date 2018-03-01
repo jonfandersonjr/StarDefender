@@ -13,6 +13,7 @@ function Map(map) {
         this.airDirection = 'se';
         this.trailChoice = "dirt";
         this.tileChoice = "blue";
+        this.mapChoice = "blue";
     }
     if (this.map === map_2) {
         this.firstEntry = { column: 0, row: 17 };
@@ -20,6 +21,7 @@ function Map(map) {
         this.airDirection = 'se';
         this.trailChoice = "dirt";
         this.tileChoice = "blue";
+        this.mapChoice = "blue";
     }
 
 
@@ -44,6 +46,7 @@ Background.prototype.update = function () { };
 
 //Creates a map based on the selection.
 Map.prototype.createMap = function (gameEngine, assetManager) {
+    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./map/${this.mapChoice}_map.png`), 0, 0));
     for (let i = 0; i < this.mapDim.col; i++) {
 
         for (let j = 0; j < this.mapDim.row; j++) {
@@ -78,20 +81,16 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
                     this.mineralY = j * this.tileSize;
                     break;
 
-                case "/":
-                    gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_mount.png`), i * this.tileSize, j * this.tileSize));
-                    this.mountX = i * this.tileSize;
-                    this.mountY = j * this.tileSize;
-                    break;
-
-
                 default:
+                    break;
+                    /*
                     if (i % 2 == 0) {
                         gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     } else {
                         gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_bot${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     }
                     break;
+                    */
             }
             gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_mount.png`), this.mountX,  this.mountY));
 
