@@ -222,8 +222,9 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     this.getTrueCordinates();
 
     //perform statbuffs depending on wave
-    this.speedBuff = theSpeedBuff;
+    //this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
+    if (this.isAir) this.speed -= (theSpeedBuff * this.entrance.column * 2);
     this.maxHealth = this.unit.health * theHealthBuff;
     this.currentHealth = this.maxHealth;
     this.armor = this.unit.armor;
