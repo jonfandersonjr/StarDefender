@@ -20,6 +20,7 @@ for (let i = 0; i < unitList.length; i++) {
     }
     if (i < 8) {
         AM.queueDownload(`./img/firebat/firebat_projectile_${directions[i]}.png`);
+        AM.queueDownload(`./img/battlecruiser/battlecruiser_projectile_${directions[i]}.png`);
     }
 }
 
