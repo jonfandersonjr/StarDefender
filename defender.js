@@ -70,6 +70,24 @@ var antiair = {
     targetFlying: true,
 };
 
+var firebat = {
+    name: "firebat",
+    frameWidth: 31,
+    frameHeight: 31,
+    sheetWidth: 16,
+    frameDuration: 0.1,
+    frames: 16,
+    loop: true,
+    scale: 1,
+    range: 2 * tileSize,
+    cooldown: 1,
+    damage: 50,
+    armorPiercing: 10,
+    mapKey: 'f',
+    targetGround: true,
+    targetFlying: false,
+};
+
 function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.AM = assetManager;
     this.gameEngine = game;
@@ -91,6 +109,9 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
             this.unit = antiair;
             this.shootSound = './soundfx/antiair_sound.wav';
             break;
+        case "firebat":
+            this.unit = firebat;
+            //needs sound
         default:
             break;
     }
@@ -201,7 +222,9 @@ Defender.prototype.shoot = function(enemy) {
             
 
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, this.trueX, this.trueY, enemy, this.damage, enemy.speedBuff * 2, this.armorPiercing));
+            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, 
+                                                        this.trueX, this.trueY, enemy, 
+                                                        this.damage, enemy.speedBuff * 2, this.armorPiercing));
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
         }
