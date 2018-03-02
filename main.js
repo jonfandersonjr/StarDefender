@@ -1,8 +1,8 @@
 var AM = new AssetManager();
 
 //load defender sprites
+var defenderList = ["marine", "battlecruiser", "ghost", "antiair", "dropship", "firebat"];
 var defenderAction = ["stand", "shoot", "projectile"]
-var defenderList = ["marine", "battlecruiser", "ghost", "antiair", "dropship"];
 for (let i = 0; i < defenderList.length; i++) {
     for (let j = 0; j < defenderAction.length; j++) {
         AM.queueDownload(`./img/${defenderList[i]}/${defenderList[i]}_${defenderAction[j]}.png`);
@@ -10,15 +10,27 @@ for (let i = 0; i < defenderList.length; i++) {
 }
 
 //load enemy sprites
-var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
-//var directions = ["east", "west", "north", "south", "death"];
 var unitList = ["mutalisk", "queen", "zergling", "ultralisk", "hydralisk", "defiler", "scourge",
     "sarahkerrigan", "devourer", "overlord", "infestedkerrigan", "drone", "guardian"
 ];
+var directions = ["east", "west", "north", "south", "ne", "nw", "se", "sw", "death"];
 for (let i = 0; i < unitList.length; i++) {
     for (let j = 0; j < directions.length; j++) {
         AM.queueDownload(`./img/${unitList[i]}/${unitList[i]}_${directions[j]}.png`);
     }
+    if (i < 8) {
+        AM.queueDownload(`./img/firebat/firebat_projectile_${directions[i]}.png`);
+    }
+}
+
+//load tiles
+for (let i = 1; i <= 6; i++) {
+    AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
+}
+
+//load maps
+for (let i = 1; i <= 5; i++) {
+    AM.queueDownload(`./map/map_${i}.png`);
 }
 
 //load scv sprites
@@ -26,22 +38,7 @@ AM.queueDownload("./img/scv/scv_east.png");
 AM.queueDownload("./img/scv/scv_west.png");
 AM.queueDownload("./img/scv/scv_mine.png");
 
-AM.queueDownload("./map/blue_map.png");
-
-//load tiles
-for (let i = 1; i <= 6; i++) {
-    AM.queueDownload(`./tiles/grass/grass_top${i}.png`);
-    AM.queueDownload(`./tiles/grass/grass_bot${i}.png`);
-    AM.queueDownload(`./tiles/blue/blue_top${i}.png`);
-    AM.queueDownload(`./tiles/blue/blue_bot${i}.png`);
-    AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
-}
-
-for (let i = 1; i <= 5; i++) {
-    AM.queueDownload(`./map/map_${i}.png`);
-}
-
-AM.queueDownload("./tiles/grass/grass.png");
+//load misc
 AM.queueDownload("./tiles/base.png")
 AM.queueDownload("./tiles/mineral.png");
 

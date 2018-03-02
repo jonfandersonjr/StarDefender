@@ -56,7 +56,6 @@ function Background(game, spritesheet, x, y) {
 };
 
 Background.prototype.draw = function () {
-    console.log("In drawing map image?");
     this.ctx.drawImage(this.spritesheet,
         this.x, this.y);
 };

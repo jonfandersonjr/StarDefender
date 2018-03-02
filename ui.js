@@ -8,7 +8,8 @@ var images = [
     "./img/buttons/scv_portrait50.png",
     "./img/buttons/ghost_portrait.png",
     "./img/buttons/battlecruiser_portrait.png",
-    "./img/buttons/antiair_portrait.png"
+    "./img/buttons/antiair_portrait.png",
+    "./img/buttons/firebat_portrait.png"
 ];
 
 function UI(mouse, startHealth, maxHealth,
@@ -54,21 +55,21 @@ function UI(mouse, startHealth, maxHealth,
         //Marine
         var marine_img = new Image();
         marine_img.onload = function() {
-            ctx.drawImage(marine_img, 0, 0);
+            ctx.drawImage(marine_img, 0, 220);
         }
         marine_img.src = images[0];
 
         //Ghost
         var ghost_img = new Image();
         ghost_img.onload = function() {
-            ctx.drawImage(ghost_img, 110, 0);
+            ctx.drawImage(ghost_img, 0, 0);
         }
         ghost_img.src = images[2];
 
         //Battlecruiser
         var battle_img = new Image();
         battle_img.onload = function() {
-            ctx.drawImage(battle_img, 0, 110);
+            ctx.drawImage(battle_img, 110, 0);
         }
         battle_img.src = images[3];
 
@@ -79,10 +80,17 @@ function UI(mouse, startHealth, maxHealth,
         }
         antiair_img.src = images[4];
 
+        //Firebat
+        var firebat_img = new Image();
+        firebat_img.onload = function () {
+            ctx.drawImage(firebat_img, 0, 110);
+        }
+        firebat_img.src = images[5];
+
         //SCV
         var scv_img = new Image();
         scv_img.onload = function() {
-            ctx.drawImage(scv_img, 60, 220);
+            ctx.drawImage(scv_img, 110, 220);
         }
         scv_img.src = images[1];
     };
@@ -167,7 +175,7 @@ UI.prototype.drawSCVImage = function(theInt) {
     var scv_img = new Image();
     var that = this;
     scv_img.onload = function() {
-        that.ctx.drawImage(scv_img, 60, 220);
+        that.ctx.drawImage(scv_img, 110, 220);
     };
     theInt *= -1;
     scv_img.src = './img/buttons/scv_portrait' + theInt + '.png';
