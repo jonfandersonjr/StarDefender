@@ -88,7 +88,7 @@ Level.prototype.createWave = function() {
 
 };
 
-Level.prototype.playLevel1 = function() {
+Level.prototype.playLevel1 = function () {
     this.wave.setWave(firstLevelEnemies[this.waveNumber],
         firstLevelWaveSize[this.waveNumber],
         firstLevelSpeedBuff[this.waveNumber],

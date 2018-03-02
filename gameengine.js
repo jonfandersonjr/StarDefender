@@ -90,7 +90,6 @@ GameEngine.prototype.addTile = function(tileEntity) {
     this.tileEntities.push(tileEntity);
 }
 
-
 GameEngine.prototype.addUnit = function(unitEntity) {
     this.unitEntities.push(unitEntity);
 }

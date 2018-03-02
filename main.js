@@ -37,7 +37,9 @@ for (let i = 1; i <= 6; i++) {
     AM.queueDownload(`./tiles/dirt/dirt_${i}.png`);
 }
 
-AM.queueDownload(`./tiles/blue/blue_mount.png`);
+for (let i = 1; i <= 5; i++) {
+    AM.queueDownload(`./map/map_${i}.png`);
+}
 
 AM.queueDownload("./tiles/grass/grass.png");
 AM.queueDownload("./tiles/base.png")

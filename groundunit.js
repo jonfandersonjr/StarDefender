@@ -205,7 +205,8 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     // AIR UNIT
     this.isAir = this.unit.isAir;
     if (this.isAir) {
-        this.direction = this.map.airDirection;
+        //this.direction = this.map.airDirection;
+        this.direction = "se";
     } else {
         this.direction = findDirection(map, entrance.row, entrance.column);
     }
