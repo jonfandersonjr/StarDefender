@@ -28,10 +28,20 @@ var zerglingWave = {
     delay: .65,
     isBoss: false
 };
+var lurkerWave = {
+    name: "lurker",
+    delay: .65,
+    isBoss: false
+};
+var infestedterranWave = {
+    name: "infestedterran",
+    delay: .65,
+    isBoss: false
+};
 var ultraliskWave = {
     name: "ultralisk",
     delay: 1,
-    isBoss: false
+    isBoss: true
 };
 var hydraliskWave = {
     name: "hydralisk",
@@ -128,6 +138,12 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "zergling":
             this.unit = zerglingWave;
+            break;
+        case "lurker":
+            this.unit = lurkerWave;
+            break;
+        case "infestedterran":
+            this.unit = infestedterranWave;
             break;
         case "guardian":
             this.unit = guardianWave;

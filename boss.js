@@ -50,7 +50,23 @@ var infestedkerrigan = {
         scale: 1
     }
 };
-
+var ultralisk = {
+    name: "ultralisk",
+    frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
+    loop: true,
+    scale: 0.45,
+    speed: 35,
+    health: 300,
+    armor: 10,
+    isAir: false,
+    damage: 10,
+    deathAnimation: {
+        name: "ultralisk",
+        frameWidth: 98, frameHeight: 105, sheetWidth: 10, frameDuration: 0.1, frames: 10,
+        loop: false,
+        scale: 0.35
+    }
+};
 var devourer = {
     name: "devourer",
     frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
@@ -97,6 +113,10 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
             this.deathSound = './soundfx/deathKerrigan.wav';
             this.hurtSound = './soundfx/sarahkerrigandontlikethis.wav'; 
             this.soundTrigger = false;
+            break;
+        case "ultralisk":
+            this.unit = ultralisk;
+            this.deathSound = './soundfx/deathUltralisk.wav';
             break;
         case "infestedkerrigan":
             this.unit = infestedkerrigan;
@@ -308,13 +328,6 @@ Boss.prototype.hitBase = function() {
     this.curTime = new Date().getSeconds();
     this.isDead = true;
     this.removeFromWorld = true;
-}
-
-// boss mechanic for certain units, testing
-Boss.prototype.rageMode = function() {
-    if (this.unit === sarahkerrigan && this.unit.currentHealth < 50) {
-        this.unit === infestedkerrigan;
-    }
 }
 
 Boss.prototype.setDeathAnimation = function() {
