@@ -106,7 +106,7 @@ Projectile.prototype.update = function() {
 }
 
 Projectile.prototype.draw = function() {
-    this.animation.drawFrame(this.gameEngine.clockTick, this.ctx, this.x, this.y);
+    //this.animation.drawFrame(this.gameEngine.clockTick, this.ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }
 
