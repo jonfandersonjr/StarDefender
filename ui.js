@@ -82,7 +82,7 @@ function UI(mouse, startHealth, maxHealth,
 
         //Firebat
         var firebat_img = new Image();
-        firebat_img.onload = function () {
+        firebat_img.onload = function() {
             ctx.drawImage(firebat_img, 0, 110);
         }
         firebat_img.src = images[5];
@@ -122,7 +122,7 @@ function UI(mouse, startHealth, maxHealth,
 
 UI.prototype.attachKeybinds = function() {
     var that = this;
-    this.canvas.addEventListener("click", function (e) {
+    this.canvas.addEventListener("click", function(e) {
         var mousePos = getMousePos(document.getElementById("uiButtons"), e);
         if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
             that.mouse.unitCost = 50;
@@ -152,14 +152,13 @@ UI.prototype.attachKeybinds = function() {
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("marine");
             }
-        }
-        else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 210 && mousePos.y <= 320) {
+        } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 210 && mousePos.y <= 320) {
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("scv");
             }
         }
     }, false);
-        
+
 }
 UI.prototype.attachEngine = function(engine) {
     this.gameEngine = engine;
@@ -301,11 +300,13 @@ UI.prototype.displayTutorial = function() {
         ["./img/tutorial/resources.png", 285, 0],
         ["./img/tutorial/base.png", 150, 500],
         ["./img/tutorial/lane.png", 125, 300],
+        ["./img/tutorial/pickup.png", 125, 300],
         ["./img/tutorial/defenders.png", 285, 250],
-        ["./img/tutorial/marine.png", 285, 250],
         ["./img/tutorial/ghost.png", 285, 250],
-        ["./img/tutorial/battlecruiser.png", 285, 350],
+        ["./img/tutorial/battlecruiser.png", 285, 250],
+        ["./img/tutorial/firebat.png", 285, 350],
         ["./img/tutorial/antiair.png", 285, 350],
+        ["./img/tutorial/marine.png", 285, 450],
         ["./img/tutorial/scv.png", 285, 450],
         ["./img/tutorial/start.png", 200, 150]
     ];
@@ -347,28 +348,31 @@ UI.prototype.buttonHighlight = function(i) {
     var that = this;
     var tempX;
     var tempY;
-    //Coordinated based on i 7-11 defenders
+    //Coordinated based on i 9-14 defenders
     switch (i) {
-        case 8:
-            tempX = 0;
-            tempY = 0;
-            break;
         case 9:
-            tempX = 110;
+            tempX = 0;
             tempY = 0;
             break;
         case 10:
+            tempX = 110;
+            tempY = 0;
+            break;
+        case 11:
             tempX = 0;
             tempY = 110;
             break;
-        case 11:
+        case 12:
             tempX = 110;
             tempY = 110;
             break;
-        case 12:
-            tempX = 60;
+        case 13:
+            tempX = 0;
             tempY = 220;
             break;
+        case 14:
+            tempX = 110;
+            tempY = 220;
         default:
             break;
     }
@@ -418,6 +422,7 @@ function generateGameInfo() {
         "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
         "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
         "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
+        "(R) Firebat\n      (High DMG)\n      (AOE Low RoF)\n" +
         "(F) Spawn SCV\n    (Generates Resources)\n" +
         "----\n" +
         "(M) Music (On/Off)\n" +

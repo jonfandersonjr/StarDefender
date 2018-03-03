@@ -16,6 +16,23 @@ var mutalisk = {
         scale: 0.5
     }
 };
+var lurker = {
+    name: "lurker",
+    frameWidth: 69, frameHeight: 64, sheetWidth: 7, frameDuration: 0.1, frames: 7,
+    loop: true,
+    scale: 0.5,
+    speed: 50,
+    health: 90,
+    armor: 2,
+    isAir: false,
+    damage: 5,
+    deathAnimation: {
+        name: "lurker",
+        frameWidth: 82, frameHeight: 61, sheetWidth: 10, frameDuration: 0.1, frames: 10,
+        loop: false,
+        scale: 0.5
+    }
+};
 var scourge = {
     name: "scourge",
     frameWidth: 31, frameHeight: 27, sheetWidth: 5, frameDuration: 0.1, frames: 5,
@@ -46,6 +63,23 @@ var queen = {
     deathAnimation: {
         name: "queen",
         frameWidth: 114, frameHeight: 103, sheetWidth: 9, frameDuration: 0.15, frames: 9,
+        loop: false,
+        scale: 0.5
+    }
+};
+var infestedterran = {
+    name: "infestedterran",
+    frameWidth: 64, frameHeight: 64, sheetWidth: 8, frameDuration: 0.1, frames: 8,
+    loop: true,
+    scale: 0.6,
+    speed: 60,
+    health: 30,
+    armor: 1,
+    isAir: false,
+    damage: 15,
+    deathAnimation: {
+        name: "infestedterran",
+        frameWidth: 64, frameHeight: 64, sheetWidth: 8, frameDuration: 0.15, frames: 8,
         loop: false,
         scale: 0.5
     }
@@ -92,30 +126,13 @@ var guardian = {
     speed: 40,
     health: 120,
     armor: 3,
-    isAir: false,
+    isAir: true,
     damage: 5,
     deathAnimation: {
         name: "guardian",
         frameWidth: 114, frameHeight: 110, sheetWidth: 9, frameDuration: 0.15, frames: 9,
         loop: false,
         scale: 0.5
-    }
-};
-var ultralisk = {
-    name: "ultralisk",
-    frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
-    loop: true,
-    scale: 0.45,
-    speed: 35,
-    health: 300,
-    armor: 10,
-    isAir: false,
-    damage: 10,
-    deathAnimation: {
-        name: "ultralisk",
-        frameWidth: 98, frameHeight: 105, sheetWidth: 10, frameDuration: 0.1, frames: 10,
-        loop: false,
-        scale: 0.35
     }
 };
 var hydralisk = {
@@ -180,9 +197,13 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
             this.unit = zergling;
             this.deathSound = './soundfx/deathZergling.wav';
             break;
-        case "ultralisk":
-            this.unit = ultralisk;
-            this.deathSound = './soundfx/deathUltralisk.wav';
+        case "lurker":
+            this.unit = lurker;
+            this.deathSound = './soundfx/deathLurker.wav';
+            break;
+        case "infestedterran":
+            this.unit = infestedterran;
+            this.deathSound = './soundfx/deathInfestedTerran.wav';
             break;
         case "hydralisk":
             this.unit = hydralisk;

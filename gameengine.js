@@ -27,7 +27,7 @@ function GameEngine(mouse, ui) {
     this.level = null;
     this.levelNum = 1;
     this.isBootingLevel = true;
-    this.waveDelay = 10; //time between waves in seconds.
+    this.waveDelay = 2; //time between waves in seconds.
     this.pauseBool = false;
 }
 

@@ -111,7 +111,7 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
             break;
         case "firebat":
             this.unit = firebat;
-            //needs sound
+            this.shootSound = './soundfx/firebat_sound.wav';
         default:
             break;
     }
@@ -143,10 +143,10 @@ Defender.prototype.constructor = Defender;
 
 //Calculates new coordinate based on current direction. If the next tile is not path, call changeDirection to find new direction.
 Defender.prototype.update = function() {
-    if(this.cooldown <= 0) {
-    this.isBusy = false;
-    this.cooldown = this.unit.cooldown;
-    this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`);
+    if (this.cooldown <= 0) {
+        this.isBusy = false;
+        this.cooldown = this.unit.cooldown;
+        this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_stand.png`);
     } else if (this.isBusy) {
         this.cooldown -= this.game.clockTick;
     }
@@ -158,8 +158,8 @@ Defender.prototype.update = function() {
         if (this.dist > 0) {
             this.x -= this.gameEngine.clockTick * this.xSpeed;
             this.y -= this.gameEngine.clockTick * this.ySpeed;
-            this.trueX = this.x + (this.unit.frameWidth/2) * this.unit.scale;
-            this.trueY = this.y + (this.unit.frameHeight/2) * this.unit.scale;
+            this.trueX = this.x + (this.unit.frameWidth / 2) * this.unit.scale;
+            this.trueY = this.y + (this.unit.frameHeight / 2) * this.unit.scale;
         } else {
             this.isDummy = false;
             this.isLineVisible = false;
@@ -171,25 +171,25 @@ Defender.prototype.update = function() {
 }
 
 Defender.prototype.draw = function() {
-    if(!this.isDummy) {
+    if (!this.isDummy) {
         this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     } else {
-        if(this.unit.name !== 'battlecruiser') {
+        if (this.unit.name !== 'battlecruiser') {
             //this.animation.drawDummyDefender(this.ctx, this.x, this.y, this.frame, this.unit.name);
         } else {
             this.frame = Math.floor(angle(this.trueX, this.trueY, (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize) / (360 / this.unit.frames));
             this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
         }
     }
-    if(this.isLineVisible)  {
-        this.animation.drawLine(this.ctx, this.trueX, this.trueY, 
+    if (this.isLineVisible) {
+        this.animation.drawLine(this.ctx, this.trueX, this.trueY,
             (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize);
     }
     Entity.prototype.draw.call(this);
 }
 
-Defender.prototype.calculateXY = function (row, column) {
-    this.x = column * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize)/2;
+Defender.prototype.calculateXY = function(row, column) {
+    this.x = column * this.map.tileSize - (this.unit.frameWidth * this.unit.scale - this.map.tileSize) / 2;
     this.y = row * this.map.tileSize - (this.unit.frameHeight * this.unit.scale - this.map.tileSize) / 2;
 
 }
@@ -201,8 +201,8 @@ Defender.prototype.calculateTrueXY = function() {
 
 Defender.prototype.shoot = function(enemy) {
     if (!this.isDummy && !this.isBusy) {
-        if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir ) {
-            
+        if (this.canTargetFlying && enemy.isAir || this.canTargetGround && !enemy.isAir) {
+
             var audioElement = document.createElement('audio');
             audioElement.setAttribute('src', this.shootSound);
             audioElement.volume = 0.05;
@@ -219,19 +219,19 @@ Defender.prototype.shoot = function(enemy) {
             if (this.soundPlaying === false) {
                 audioElement.play();
             }
-            
+
 
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name, 
-                                                        this.trueX, this.trueY, enemy, 
-                                                        this.damage, enemy.speedBuff * 2, this.armorPiercing));
+            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name,
+                this.trueX, this.trueY, enemy,
+                this.damage, enemy.speedBuff * 2, this.armorPiercing));
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
         }
     }
 }
 
-Defender.prototype.calculateFlyAnimation = function (row, column) {
+Defender.prototype.calculateFlyAnimation = function(row, column) {
     this.xDif = this.x - column * this.map.tileSize;
     this.yDif = this.y - row * this.map.tileSize;
     this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));

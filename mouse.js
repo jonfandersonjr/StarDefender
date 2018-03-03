@@ -1,10 +1,11 @@
-var defenderList = ["marine", "battlecruiser", "ghost", "antiair"];
+var defenderList = ["marine", "battlecruiser", "ghost", "antiair", "firebat"];
 
 var costs = {
     marine: 50,
     battlecruiser: 150,
     ghost: 150,
-    antiair: 100
+    antiair: 100,
+    firebat: 150
 };
 
 function Mouse(map, ctx) {
@@ -100,6 +101,10 @@ Mouse.prototype.dropTower = function(e) {
             this.unitCost = 100;
             defenderKey = 'w';
             break;
+        case "firebat":
+            this.unitCost = 150;
+            defenderKey = 'r';
+            break;
         default:
             break;
     }
@@ -130,6 +135,10 @@ Mouse.prototype.dropTower = function(e) {
                 case "antiair":
                     that.ui.resourceAdjust(that.resources.antiair);
                     that.PlaySound("./soundfx/antiair.wav");
+                    break;
+                case "firebat":
+                    that.ui.resourceAdjust(that.resources.firebat);
+                    that.PlaySound("./soundfx/firebat.wav");
                     break;
                 default:
                     break;
@@ -247,6 +256,12 @@ Mouse.prototype.attachListeners = function() {
             if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("battlecruiser");
             }
+        } else if (e.keyCode === 82) {
+            that.unitCost = 150;
+            that.tileBox.unitCost = 150;
+            if (!(that.gameEngine.getPauseBool())) {
+                that.selectDefender("firebat");
+            }
         } else if (e.keyCode === 87) {
             that.unitCost = 100;
             that.tileBox.unitCost = 100;
@@ -343,7 +358,7 @@ TileBox.prototype.draw = function() {
 }
 
 function isDefender(mapKey) {
-    return mapKey === 'a' || mapKey === 's' || mapKey === 'd';
+    return mapKey === 'a' || mapKey === 's' || mapKey === 'd' || mapKey === 'r';
 }
 
 
