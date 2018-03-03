@@ -15,13 +15,13 @@ var sarahkerrigan = {
     damage: 1000,
     deathAnimation: {
         name: "sarahkerrigan",
-        frameWidth: 56,
-        frameHeight: 41,
-        sheetWidth: 9,
-        frameDuration: 1,
-        frames: 9,
+        frameWidth: 78,
+        frameHeight: 65,
+        sheetWidth: 4,
+        frameDuration: .23,
+        frames: 4,
         loop: false,
-        scale: 1
+        scale: .5
     }
 };
 
@@ -35,7 +35,7 @@ var infestedkerrigan = {
     loop: true,
     scale: 1,
     speed: 60,
-    health: 500,
+    health: 1000,
     armor: 15,
     isAir: false,
     damage: 1000,
@@ -102,6 +102,8 @@ var overlord = {
     }
 };
 
+var frameCount = 1;
+
 function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHealthBuff, ui) {
     this.AM = assetManager;
     this.gameUI = ui;
@@ -112,6 +114,9 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
             this.unit = sarahkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
             this.hurtSound = './soundfx/sarahkerrigandontlikethis.wav'; 
+            this.annoySound = './soundfx/youbegintoannoyme.wav';
+            this.killSound = './soundfx/illkillyoumyself.wav';
+            this.playSound(this.killSound);
             this.soundTrigger = false;
             break;
         case "ultralisk":
@@ -121,6 +126,7 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "infestedkerrigan":
             this.unit = infestedkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
+            
             this.healthTrigger = false;
             break;
         case "devourer":
@@ -195,22 +201,47 @@ Boss.prototype.update = function() {
     } 
     if (this.unit === infestedkerrigan && this.currentHealth < 200 && this.healthTrigger === false) {
         this.currentHealth = 600;
+        // audio for revival
         this.healthTrigger = true;
     } else if (this.x >= this.map.baseX && this.y >= this.map.baseY) {
         this.hitBase();
     } else if (this.currentHealth <= 0 && !this.isDead) {
-        this.isDead = true;
-        this.setDeathAnimation();
-        //Update UI text for enemies killed
-        that.gameUI.enemiesKilledAdjust(1);
+        if (this.unit === sarahkerrigan) { 
+            if (frameCount > 0) {
+                if (frameCount === 1) {
+                    this.playSound(this.annoySound);
+                    this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_death.png`),
+                    this.unit.deathAnimation.frameWidth, this.unit.deathAnimation.frameHeight, this.unit.deathAnimation.sheetWidth, this.unit.deathAnimation.frameDuration,
+                    this.unit.deathAnimation.frames, this.unit.deathAnimation.loop, this.unit.deathAnimation.scale * this.map.tileSize / 31);
+                }
+                frameCount-= this.game.clockTick;
+                
+                
+            } else {
 
-        //Update resources for each kill
-        //Gives 50 resources per kill for now since boss
-        that.gameUI.resourceAdjust(50);
+                this.unit = infestedkerrigan;
+                
+                this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
+                this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
+                this.currentHealth = infestedkerrigan.health;
+                frameCount = 1;
+            }
+            
+        } else {
+            this.isDead = true;
+            this.setDeathAnimation();
+            //Update UI text for enemies killed
+            that.gameUI.enemiesKilledAdjust(1);
 
-        //Play death sounds
-        this.playSound(this.deathSound);
+            //Update resources for each kill
+            //Gives 50 resources per kill for now since boss
+            that.gameUI.resourceAdjust(50);
 
+            //Play death sounds
+            this.playSound(this.deathSound);
+
+        }
+        
     } else if (this.isDead) {
         if (this.deadAnimationTimme > 0) {
             this.deadAnimationTimme -= this.game.clockTick;
