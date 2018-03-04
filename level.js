@@ -17,7 +17,7 @@ var h = "hydralisk";      // HP:250  Speed:60  Armor:8
 
 //Flying Enemies
 var s = "scourge";        // HP:40   Speed:65  Armor:0
-var m = "mutalisk";       // HP:100  Speed:50  Armor:8
+var m = "mutalisk";       // HP:110  Speed:50  Armor:6
 var g = "guardian";       // HP:200  Speed:45  Armor:10
 
 //Special Enemies            //**NOTE: Need one more boss!**//

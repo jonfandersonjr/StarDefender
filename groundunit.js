@@ -5,8 +5,8 @@ var mutalisk = {
     loop: true,
     scale: 0.5,
     speed: 50,
-    health: 100,
-    armor: 8,
+    health: 110,
+    armor: 6,
     isAir: true,
     damage: 5,
     deathAnimation: {
