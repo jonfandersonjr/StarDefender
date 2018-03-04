@@ -144,7 +144,8 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
-GameEngine.prototype.runLevel = function() {
+GameEngine.prototype.runLevel = function () {
+
     //If starting a level, need to make a level object.
     if (this.isNewLevel) {
         //some stuff with UI here
@@ -169,28 +170,34 @@ GameEngine.prototype.runLevel = function() {
         this.generator.setMap(this.map);
         this.isNewLevel = false;
         this.map.createMap(this, this.AM);
-        console.dir(this.map);
         console.log("Instantiating level " + this.levelNum);
-    }
-    //Sends waves for this level at specified interval.
-
-    this.waveDelay -= this.clockTick;
-    this.wave.update();
-    this.gameUI.waveTimeGet(this.waveDelay);
-
-    //Sends next wave for this level
-    if (this.waveDelay <= 0) {
-        this.level.createWave();
-        this.waveDelay = WAVE_DELAY;
     }
 
     //Level is finished so allow user to play more levels
     if (this.level.isDone) {
-        this.gameUI.adjustLevel(1); //Updates game text info
-        this.isNewLevel = true;
-        this.waveDelay = WAVE_DELAY;
-        this.levelNum++;
-    };
+        if (this.unitEntities.length === 0) {
+            this.gameUI.adjustLevel(1); //Updates game text info
+            this.isNewLevel = true;
+            this.waveDelay = WAVE_DELAY;
+            this.levelNum++;
+        }
+
+    } else {
+        //Sends waves for this level at specified interval.
+        this.waveDelay -= this.clockTick;
+        this.wave.update();
+        this.gameUI.waveTimeGet(this.waveDelay);
+
+        //Sends next wave for this level
+        if (this.waveDelay <= 0) {
+            this.level.createWave();
+            this.waveDelay = WAVE_DELAY;
+        }
+    }
+
+
+
+
 }
 
 GameEngine.prototype.findDefender = function(row, column) {

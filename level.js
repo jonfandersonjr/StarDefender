@@ -33,15 +33,15 @@ var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 
 */
 /*
 //Level Map transition test
-var firstLevelEnemies = [l, i, s];
+var firstLevelEnemies = [l, i, s];a
 var firstLevelWaveSize = [3, 3, 1, 0];
 var firstLevelSpeedBuff = [0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff = [0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
 */
 //Level One
-var firstLevelEnemies     = [l, i, s, U, h, D, q,dr, U, z, d, O, U, d, z, m, q, S];
-var firstLevelWaveSize    = [3, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
+var firstLevelEnemies     = [i, z, s, q, h, D, q,dr, d, z, d, O, m, d, z, m, U, S];
+var firstLevelWaveSize    = [3, 5, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
