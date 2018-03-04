@@ -36,11 +36,11 @@ var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->>
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 3, 1, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Two (Medium) - Blue
-var secondLevelEnemies     = [dr,z, s, q, h, D, q, g, d, z, d, O, m, d, z, m, g, S];
-var secondLevelWaveSize    = [3, 5, 1, 2, 3, 1, 5, 2, 6, 7, 9, 1, 8, 5, 9, 4, 8, 1, 0];
-var secondLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var secondLevelEnemies     = [dr,z, s, q, d,  q, D, g, d, z, d, O, m, d, z, m, g, S];
+var secondLevelWaveSize    = [3, 5, 1, 2, 2,  3, 2, 1, 6, 7, 7, 1, 3, 5, 9, 4, 5, 1, 0];
+var secondLevelSpeedBuff   = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var secondLevelHealthBuff  = [0, 0, 0, 0, 0,-.2, 0, 0, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var secondLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+var secondLevelEntranceNum = [1, 2, 3, 3, 1,  3, 2, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Three (???) - Metal
 var thirdLevelEnemies     = [m, s, m, s, q, d, U, d, q, z, d, D, U, d, z, m, q, S];
