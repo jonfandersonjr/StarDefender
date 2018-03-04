@@ -45,3 +45,7 @@ Generator.prototype.createDropship = function (unitStartColumn, unitStartRow, un
     this.gameEngine.addSCV(new Dropship(this.gameEngine, this.map, this.AM, unitStartColumn, unitStartRow, unitEndColumn, unitEndRow, theDefender));
 }
 
+Generator.prototype.setMap = function(map) {
+    this.map = map;
+}
+
