@@ -376,12 +376,12 @@ GroundUnit.prototype.update = function() {
 
 GroundUnit.prototype.draw = function() {
     if (!this.isDead) {
-        this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth);
+        this.animation.drawEnemy(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth, this.armor);
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
     }
-    this.frame = Math.floor(angle(this.trueX, this.trueY, (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize) / (360 / this.unit.frames));
-    this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
+    //this.frame = Math.floor(angle(this.trueX, this.trueY, (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize) / (360 / this.unit.frames));
+    //this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     Entity.prototype.draw.call(this);
 }
 

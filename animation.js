@@ -33,7 +33,7 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
         this.frameHeight * this.scale);
 }
 
-Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHealth) {
+Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHealth, armor) {
     if (this.damageTime > 0) {
         this.damageTime -= tick;
     }
@@ -55,7 +55,10 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
         this.frameWidth * this.scale,
         this.frameHeight * this.scale);
     if (currentHealth > 0) {
-        ctx.fillStyle = "green";
+        var r = 53 - 3 * armor;
+        var g = 255 - 3 * armor;
+        var b = 90 - 3 * armor;
+        ctx.fillStyle = `rgb(${r},${g},${b})`;
         ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
         if (currentHealth !== this.lastHealth) {
             this.damageTime = 1;
