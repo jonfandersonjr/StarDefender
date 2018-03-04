@@ -118,8 +118,6 @@ Mouse.prototype.dropTower = function(e) {
             break;
     }
 
-    console.log("Resource Total: " + this.ui.resourcesTotal + "\nUnit Cost: " + this.unitCost);
-
     if (this.isBusy && this.ui.resourcesTotal >= this.unitCost) {
 
         //drop tower on location
