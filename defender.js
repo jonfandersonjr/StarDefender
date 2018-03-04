@@ -225,7 +225,7 @@ Defender.prototype.shoot = function(enemy) {
             if(this.unit.name === "marine" || this.unit.name === "ghost") {
                 this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name,
                     this.trueX, this.trueY, enemy,
-                    this.damage, enemy.speedBuff * 2, this.armorPiercing));
+                    this.damage, 1000, this.armorPiercing));
             } else {
                 this.gameEngine.addProjectile(new DirectionalProjectile(this.gameEngine, this.unit.name, {trueX: this.trueX, trueY: this.trueY}, enemy, 1000, this.ctx, this.armorPiercing, this.damage));
             }
