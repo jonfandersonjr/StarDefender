@@ -1,7 +1,7 @@
 var tileSize = 31;
 
 function Map(map) {
-    this.map = map;
+    this.map = this.clone(map);
     this.mapSize = Math.sqrt(this.map.length);
     this.mapDim = {row : this.map.length, col : this.map[0].length};
     this.canvas = document.getElementById("gameWorld");
@@ -105,6 +105,18 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/mineral.png"), this.mineralX, this.mineralY));
     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset("./tiles/base.png"), this.baseX, this.baseY));
 
+}
+
+Map.prototype.clone = function (map) {
+    var copy = [];
+    for (let i = 0; i < map.length; i++) {
+        var row = map[i];
+        copy.push([]);
+        for (let j = 0; j < row.length; j++) {
+            copy[i][j] = map[i][j];
+        }
+    }
+    return copy;
 }
 
 var map_1 = [['+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+', '+'],
