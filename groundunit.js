@@ -323,7 +323,7 @@ GroundUnit.prototype.update = function() {
                 }
                 break;
             case '<':
-                if (this.map.map[this.row + 1][this.column] === '^' && isLegalMove(this.map.map[this.row][tempRow])) {
+                if (this.map.map[this.row + 1][this.column] === '^' && isLegalMove(this.map.map[tempRow][this.column])) {
                     this.y -= this.game.clockTick * this.speed;
                 } else {
                     this.x -= this.game.clockTick * this.speed;

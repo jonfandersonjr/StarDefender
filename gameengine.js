@@ -153,24 +153,41 @@ GameEngine.prototype.runLevel = function () {
         //some stuff with UI here
         switch (this.levelNum) {
             case 2:
+                this.tileEntities = [];
                 this.map = new Map(map_2);
                 this.wave = new Wave(this.generator, this);
                 this.level = new Level(this.levelNum, this.wave);
+                /*
+                this.mouse = new Mouse(this.map, this.ctx);
+                this.mouse.init(this.map);
+                this.mouse.attachUI(this.gameUI);
+                */
+                this.mouse.newLevel(this.map);
+                this.gameUI.newLevel();
                 break;
             case 3:
+                this.tileEntities = [];
                 this.map = new Map(map_3);
                 this.wave = new Wave(this.generator, this);
                 this.level = new Level(this.levelNum, this.wave);
+                this.mouse.newLevel(this.map);
+                this.gameUI.newLevel();
                 break;
             case 4:
+                this.tileEntities = [];
                 this.map = new Map(map_4);
                 this.wave = new Wave(this.generator, this);
                 this.level = new Level(this.levelNum, this.wave);
+                this.mouse.newLevel(this.map);
+                this.gameUI.newLevel();
                 break;
             case 5:
+                this.tileEntities = [];
                 this.map = new Map(map_5);
                 this.wave = new Wave(this.generator, this);
                 this.level = new Level(this.levelNum, this.wave);
+                this.mouse.newLevel(this.map);
+                this.gameUI.newLevel();
                 break;
             default:
                 console.log("Either first map or error in level");
@@ -195,8 +212,6 @@ GameEngine.prototype.runLevel = function () {
                 this.waveDelay = levelWaveDelay[this.levelNum - 1];
                 this.defenderEntities = [];
                 this.scvEntities = [];
-                this.mouse.newLevel(this.map);
-                this.gameUI.newLevel();
             }
             
         }

@@ -5,7 +5,7 @@ var costs = {
     battlecruiser: 150,
     ghost: 150,
     antiair: 100,
-    firebat: 150
+    firebat: 100
 };
 
 function Mouse(map, ctx) {
@@ -61,6 +61,7 @@ Mouse.prototype.newLevel = function (map) {
     this.ui.drawSCVImage(this.resources.scv);
     this.map = map;
     this.tileBox = new TileBox(this.gameEngine, this.canvas, this.ctx, this.map, this.isBusy, this.ui);
+    this.gameEngine.tileBox = this.tileBox;
 }
 
 //Function that is called via button in ui.js
@@ -95,15 +96,15 @@ Mouse.prototype.dropTower = function(e) {
     switch (this.defenderName) {
         case "marine":
             this.unitCost = 50;
-            defenderKey = 's';
+            defenderKey = 'a';
             break;
         case "firebat":
             this.unitCost = 100;
-            defenderKey = 'a';
+            defenderKey = 'r';
             break;
         case "ghost":
             this.unitCost = 150;
-            defenderKey = 'q';
+            defenderKey = 's';
             break;
         case "battlecruiser":
             this.unitCost = 250;
@@ -117,7 +118,10 @@ Mouse.prototype.dropTower = function(e) {
             break;
     }
 
+    console.log("Resource Total: " + this.ui.resourcesTotal + "\nUnit Cost: " + this.unitCost);
+
     if (this.isBusy && this.ui.resourcesTotal >= this.unitCost) {
+
         //drop tower on location
         let mouseLoc = getMousePos(this.canvas, event);
         let tileLoc = getTile(mouseLoc, this.map);
@@ -172,7 +176,8 @@ Mouse.prototype.attachListeners = function() {
     // Mouse events
 
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
-    that.canvas.addEventListener("mousedown", (e) => {
+    that.canvas.addEventListener("click", (e) => {
+        
         if (that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) {
             that.dropTower(e);
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);

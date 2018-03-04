@@ -9,11 +9,25 @@ var battlecruiser_projectile = {
     scale: 0.2,
 };
 
+var antiair_projectile = {
+    name: "antiair",
+    frameWidth: 128,
+    frameHeight: 128,
+    sheetWidth: 16,
+    frameDuration: 0.1,
+    frames: 16,
+    loop: true,
+    scale: 0.2,
+};
+
 class DirectionalProjectile {
     constructor(gameEngine, unitName, defenderCoordinates, enemy, speed, ctx, armorPiercing, damage) {
         switch (unitName) {
             case "battlecruiser":
                 this.properties = battlecruiser_projectile;
+                break;
+            case "antiair":
+                this.properties = antiair_projectile;
                 break;
             default:
                 console.log("Problem creating projectile");

@@ -59,7 +59,7 @@ var ultralisk = {
     health: 2000,
     armor: 10,
     isAir: false,
-    damage: 10,
+    damage: 50,
     deathAnimation: {
         name: "ultralisk",
         frameWidth: 98, frameHeight: 105, sheetWidth: 10, frameDuration: 0.1, frames: 10,
@@ -76,7 +76,7 @@ var devourer = {
     health: 1000,
     armor: 6,
     isAir: false,
-    damage: 40,
+    damage: 50,
     deathAnimation: {
         name: "devourer",
         frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 1, frames: 6,
