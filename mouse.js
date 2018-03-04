@@ -15,7 +15,8 @@ function Mouse(map, ctx) {
         ghost: -100,
         battlecruiser: -150,
         scv: -50,
-        antiair: -100
+        antiair: -100,
+        firebat: -100
     };
     this.canvas = document.getElementById("gameWorld");
     this.ctx = ctx;

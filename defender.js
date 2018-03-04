@@ -80,7 +80,7 @@ var firebat = {
     loop: true,
     scale: 1.2,
     range: 2 * tileSize,
-    cooldown: 1,
+    cooldown: 0,
     damage: 50,
     armorPiercing: 10,
     mapKey: 'f',
@@ -222,9 +222,13 @@ Defender.prototype.shoot = function(enemy) {
 
 
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name,
-                this.trueX, this.trueY, enemy,
-                this.damage, enemy.speedBuff * 2, this.armorPiercing));
+            if(this.unit.name === "marine" || this.unit.name === "ghost") {
+                this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name,
+                    this.trueX, this.trueY, enemy,
+                    this.damage, enemy.speedBuff * 2, this.armorPiercing));
+            } else {
+                this.gameEngine.addProjectile(new DirectionalProjectile(this.gameEngine, this.unit.name, {trueX: this.trueX, trueY: this.trueY}, enemy, 1000, this.ctx, this.armorPiercing, this.damage));
+            }
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
         }
