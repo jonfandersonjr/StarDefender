@@ -45,7 +45,7 @@ var ghost = {
     scale: 1.2,
     range: 100,
     cooldown: 0.4,
-    damage: 30,
+    damage: 40,
     armorPiercing: true,
     mapKey: 's',
     targetGround: true,
