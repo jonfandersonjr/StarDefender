@@ -11,13 +11,13 @@ var battlecruiser_projectile = {
 
 var antiair_projectile = {
     name: "antiair",
-    frameWidth: 128,
-    frameHeight: 128,
+    frameWidth: 48,
+    frameHeight: 48,
     sheetWidth: 16,
     frameDuration: 0.1,
     frames: 16,
     loop: true,
-    scale: 0.2,
+    scale: 0.6,
 };
 
 class DirectionalProjectile {

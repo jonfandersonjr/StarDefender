@@ -125,20 +125,20 @@ UI.prototype.attachKeybinds = function() {
     this.canvas.addEventListener("click", function(e) {
         var mousePos = getMousePos(document.getElementById("uiButtons"), e);
         if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 0 && mousePos.y <= 100) {
-            that.mouse.unitCost = 50;
-            that.mouse.tileBox.unitCost = 50;
+            that.mouse.unitCost = 150;
+            that.mouse.tileBox.unitCost = 150;
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("ghost");
             }
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
-            that.mouse.unitCost = 100;
-            that.mouse.tileBox.unitCost = 100;
+            that.mouse.unitCost = 250;
+            that.mouse.tileBox.unitCost = 250;
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("battlecruiser");
             }
         } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 110 && mousePos.y <= 210) {
-            that.mouse.unitCost = 150;
-            that.mouse.tileBox.unitCost = 150;
+            that.mouse.unitCost = 100;
+            that.mouse.tileBox.unitCost = 100;
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("firebat");
             }
