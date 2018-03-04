@@ -222,7 +222,7 @@ Defender.prototype.shoot = function(enemy) {
 
 
             this.frame = Math.floor(angle(this.trueX, this.trueY, enemy.trueX, enemy.trueY) / (360 / this.unit.frames));
-            if (this.unit.name === "marine" || this.unit.name === "ghost" || this.unit.name === "antiair") {
+            if (this.unit.name === "marine" || this.unit.name === "ghost") {
                 this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name,
                     this.trueX, this.trueY, enemy,
                     this.damage, 1000, this.armorPiercing));
