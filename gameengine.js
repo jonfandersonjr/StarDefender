@@ -9,7 +9,9 @@ window.requestAnimFrame = (function() {
         };
 })();
 
-function GameEngine(mouse, ui) {
+var WAVE_DELAY = 10;
+
+function GameEngine(mouse, ui, theMap, AM) {
     this.canvas = document.getElementById("gameWorld");
     this.gameUI = ui;
     this.tileEntities = [];
@@ -26,9 +28,11 @@ function GameEngine(mouse, ui) {
     this.addNewLevel = true;
     this.level = null;
     this.levelNum = 1;
-    this.isBootingLevel = true;
-    this.waveDelay = 2; //time between waves in seconds.
+    this.isNewLevel = true;
+    this.waveDelay = WAVE_DELAY; //time between waves in seconds.
     this.pauseBool = false;
+    this.map = theMap;
+    this.AM = AM;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -142,9 +146,30 @@ GameEngine.prototype.draw = function() {
 
 GameEngine.prototype.runLevel = function() {
     //If starting a level, need to make a level object.
-    if (this.isBootingLevel) {
+    if (this.isNewLevel) {
+        //some stuff with UI here
         this.level = new Level(this.levelNum, this.wave);
-        this.isBootingLevel = false;
+        switch (this.levelNum) {
+            case 2:
+                this.map = new Map(map_2);
+                break;
+            case 3:
+                this.map = new Map(map_3);
+                break;
+            case 4:
+                this.map = new Map(map_4);
+                break;
+            case 5:
+                this.map = new Map(map_5);
+                break;
+            default:
+                console.log("Either first map or error in level");
+                break;
+        }
+        this.generator.setMap(this.map);
+        this.isNewLevel = false;
+        this.map.createMap(this, this.AM);
+        console.dir(this.map);
         console.log("Instantiating level " + this.levelNum);
     }
     //Sends waves for this level at specified interval.
@@ -156,14 +181,14 @@ GameEngine.prototype.runLevel = function() {
     //Sends next wave for this level
     if (this.waveDelay <= 0) {
         this.level.createWave();
-        this.waveDelay = 10;
+        this.waveDelay = WAVE_DELAY;
     }
 
     //Level is finished so allow user to play more levels
     if (this.level.isDone) {
         this.gameUI.adjustLevel(1); //Updates game text info
-        this.isBootingLevel = true;
-        this.waveDelay = 10;
+        this.isNewLevel = true;
+        this.waveDelay = WAVE_DELAY;
         this.levelNum++;
     };
 }
@@ -320,3 +345,9 @@ Entity.prototype.rotateAndCache = function(image, angle) {
     //offscreenCtx.strokeRect(0,0,size,size);
     return offscreenCanvas;
 }
+
+GameEngine.prototype.setGenerator = function (generator) {
+    this.generator = generator;
+}
+
+

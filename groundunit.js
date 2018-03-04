@@ -226,8 +226,13 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     // AIR UNIT
     this.isAir = this.unit.isAir;
     if (this.isAir) {
-        //this.direction = this.map.airDirection;
-        this.direction = "se";
+        if (this.entrance.column * this.map.tileSize < this.map.baseX - this.map.tileSize) {
+            this.direction = "se";
+        } else if (this.entrance.column * this.map.tileSize > this.map.baseX + this.map.tileSize) {
+            this.direction = "sw";
+        } else {
+            this.direction = "south";
+        }
     } else {
         this.direction = findDirection(map, entrance.row, entrance.column);
     }
@@ -373,6 +378,8 @@ GroundUnit.prototype.draw = function() {
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
     }
+    this.frame = Math.floor(angle(this.trueX, this.trueY, (this.lineToColumn + 0.5) * this.map.tileSize, (this.lineToRow + 0.5) * this.map.tileSize) / (360 / this.unit.frames));
+    this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
     Entity.prototype.draw.call(this);
 }
 
@@ -462,4 +469,22 @@ function findDirection(map, row, col) {
             console.log("You're going down!");
             break;
     }
+}
+
+
+GroundUnit.prototype.calculateFlyAnimation = function (row, column) {
+    this.xDif = this.x - column * this.map.tileSize;
+    this.yDif = this.y - row * this.map.tileSize;
+    this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
+    this.xSpeed = this.speed * (this.xDif / this.dist);
+    this.ySpeed = this.speed * (this.yDif / this.dist);
+}
+
+function angle(cx, cy, ex, ey) {
+    var dy = ey - cy;
+    var dx = ex - cx;
+    var theta = Math.atan2(dy, dx); // range (-PI, PI]
+    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+    //if (theta < 0) theta = 360 + theta; // range [0, 360)
+    return theta + 180;
 }

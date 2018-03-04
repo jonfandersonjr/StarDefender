@@ -55,7 +55,7 @@ AM.downloadAll(function() {
     var ui = new UI(myMouse, 100, 100, 200, 1, 0, 0);
     myMouse.attachUI(ui);
 
-    var gameEngine = new GameEngine(myMouse, ui);
+    var gameEngine = new GameEngine(myMouse, ui, map, AM);
     myMouse.init(gameEngine);
 
 
@@ -63,6 +63,7 @@ AM.downloadAll(function() {
     this.generator = new Generator(gameEngine, map, AM, ui);
     myMouse.setGenerator(this.generator);
 
+    gameEngine.setGenerator(this.generator);
 
     this.wave = new Wave(this.generator, gameEngine, ui);
     gameEngine.wave = this.wave;
@@ -74,7 +75,7 @@ AM.downloadAll(function() {
     //Attach gameengine to ui
     ui.attachEngine(gameEngine);
 
-    //Map Load
+    //Map Load 
     map.createMap(gameEngine, AM);
 
     //Display tutorial

@@ -12,6 +12,7 @@ function Map(map) {
             this.firstEntry = { column: 0, row: 4 };
             this.secondEntry = { column: 13, row: 0 };
             this.trailChoice = "dirt";
+            this.airDirection = "se";
             this.mapNum = 1;
             break;
         case map_2:
@@ -88,7 +89,6 @@ Map.prototype.createMap = function (gameEngine, assetManager) {
                     gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.trailChoice}/${this.trailChoice}_${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     break;
                 case '=':
-                    //gameEngine.addTile(new Background(gameEngine, assetManager.getAsset(`./tiles/${this.tileChoice}/${this.tileChoice}_top${cycle}.png`), i * this.tileSize, j * this.tileSize));
                     this.baseX = i * this.tileSize;
                     this.baseY = j * this.tileSize;
                     break;

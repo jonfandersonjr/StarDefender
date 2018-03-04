@@ -31,13 +31,22 @@ var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1];
 */
-
+/*
+//Level Map transition test
+var firstLevelEnemies = [l, i, s];
+var firstLevelWaveSize = [3, 3, 1, 0];
+var firstLevelSpeedBuff = [0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var firstLevelHealthBuff = [0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var firstLevelEntranceNum = [1, 2, 3, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
+*/
 //Level One
 var firstLevelEnemies     = [l, i, s, U, h, D, q,dr, U, z, d, O, U, d, z, m, q, S];
 var firstLevelWaveSize    = [3, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.5,.2,.2,.3,.5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0,.5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+
+
 
 //Level Two *incomplete/temporary*
 var secondLevelEnemies     = [m, s, m, s, q, d, U, d, q, z, d, D, U, d, z, m, q, S];
@@ -58,9 +67,10 @@ function Level(levelNum, waveObject) {
     this.levelNum = levelNum;
     this.wave = waveObject;
     this.wave.setLevel(this);
+    //this.map = map;
     this.isDone = false;
     this.waveNumber = 0;
-    //this.map = map or no?
+   
 }
 
 Level.prototype.constructor = Level;
