@@ -5,8 +5,8 @@ var mutalisk = {
     loop: true,
     scale: 0.5,
     speed: 50,
-    health: 90,
-    armor: 10,
+    health: 100,
+    armor: 8,
     isAir: true,
     damage: 5,
     deathAnimation: {
@@ -39,7 +39,7 @@ var scourge = {
     loop: true,
     scale: 1,
     speed: 65,
-    health: 30,
+    health: 40,
     armor: 0,
     isAir: true,
     damage: 10,
@@ -55,8 +55,8 @@ var queen = {
     frameWidth: 75, frameHeight: 68, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.6,
-    speed: 45,
-    health: 200,
+    speed: 50,
+    health: 225,
     armor: 5,
     isAir: false,
     damage: 8,
@@ -73,7 +73,7 @@ var infestedterran = {
     loop: true,
     scale: 0.6,
     speed: 60,
-    health: 30,
+    health: 40,
     armor: 1,
     isAir: false,
     damage: 15,
@@ -106,7 +106,7 @@ var zergling = {
     frameWidth: 40, frameHeight: 39, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.6,
-    speed: 80,
+    speed: 60,
     health: 80,
     armor: 0,
     isAir: false,
@@ -123,9 +123,9 @@ var guardian = {
     frameWidth: 78, frameHeight: 71, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.6,
-    speed: 40,
-    health: 120,
-    armor: 3,
+    speed: 45,
+    health: 250,
+    armor: 10,
     isAir: true,
     damage: 5,
     deathAnimation: {
@@ -141,8 +141,8 @@ var hydralisk = {
     loop: true,
     scale: 0.7,
     speed: 60,
-    health: 200,
-    armor: 5,
+    health: 250,
+    armor: 8,
     isAir: false,
     damage: 5,
     deathAnimation: {
@@ -157,8 +157,8 @@ var defiler = {
     frameWidth: 69, frameHeight: 59, sheetWidth: 5, frameDuration: 0.1, frames: 5,
     loop: true,
     scale: 0.7,
-    speed: 45,
-    health: 200,
+    speed: 60,
+    health: 180,
     armor: 5,
     isAir: false,
     damage: 5,
@@ -250,7 +250,9 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
     //perform statbuffs depending on wave
     //this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
-    if (this.isAir) this.speed -= (theSpeedBuff * this.entrance.column * 2);
+    if (this.isAir) {
+        this.speed *= Math.abs((2 * (this.x - this.map.baseX)) / 770);
+    }
     this.maxHealth = this.unit.health * theHealthBuff;
     this.currentHealth = this.maxHealth;
     this.armor = this.unit.armor;
@@ -469,6 +471,10 @@ function findDirection(map, row, col) {
             console.log("You're going down!");
             break;
     }
+}
+
+GroundUnit.prototype.newLevel = function (map) {
+    this.map = map;
 }
 
 

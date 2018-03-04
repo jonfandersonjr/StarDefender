@@ -65,7 +65,7 @@ AM.downloadAll(function() {
 
     gameEngine.setGenerator(this.generator);
 
-    this.wave = new Wave(this.generator, gameEngine, ui);
+    this.wave = new Wave(this.generator, gameEngine);
     gameEngine.wave = this.wave;
 
     //Game Engine Start

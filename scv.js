@@ -84,3 +84,7 @@ SCV.prototype.draw = function () {
     Entity.prototype.draw.call(this);
 }
 
+SCV.prototype.updateMap = function(newMap) {
+    this.map = newMap;
+}
+

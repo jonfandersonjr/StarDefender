@@ -56,6 +56,13 @@ Mouse.prototype.setMap = function(gameMap) {
     this.map = gameMap;
 }
 
+Mouse.prototype.newLevel = function (map) {
+    this.resources.scv = -50;
+    this.ui.drawSCVImage(this.resources.scv);
+    this.map = map;
+    this.tileBox = new TileBox(this.gameEngine, this.canvas, this.ctx, this.map, this.isBusy, this.ui);
+}
+
 //Function that is called via button in ui.js
 Mouse.prototype.selectDefender = function(defenderName) {
     if (defenderName === "scv") {
@@ -88,23 +95,23 @@ Mouse.prototype.dropTower = function(e) {
     switch (this.defenderName) {
         case "marine":
             this.unitCost = 50;
+            defenderKey = 's';
+            break;
+        case "firebat":
+            this.unitCost = 100;
             defenderKey = 'a';
             break;
         case "ghost":
-            this.unitCost = 100;
-            defenderKey = 's';
+            this.unitCost = 150;
+            defenderKey = 'q';
             break;
         case "battlecruiser":
-            this.unitCost = 150;
+            this.unitCost = 250;
             defenderKey = 'd';
             break;
         case "antiair":
             this.unitCost = 100;
             defenderKey = 'w';
-            break;
-        case "firebat":
-            this.unitCost = 150;
-            defenderKey = 'r';
             break;
         default:
             break;
@@ -165,7 +172,7 @@ Mouse.prototype.attachListeners = function() {
     // Mouse events
 
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
-    that.canvas.addEventListener("click", (e) => {
+    that.canvas.addEventListener("mousedown", (e) => {
         if (that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) {
             that.dropTower(e);
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);

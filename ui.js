@@ -261,6 +261,17 @@ UI.prototype.reset = function() {
     this.updateText();
 }
 
+//Reset this to init values from initial new Stat() call
+UI.prototype.newLevel = function () {
+    this.healthCur = this.inithealthCur;
+    this.healthMax = this.inithealthMax;
+    this.resourcesTotal = this.initresourcesTotal;
+    this.wavesC = this.initwavesC;
+    this.enemiesKilled = this.initenemiesKilled;
+    this.time = this.inittime;
+    this.updateText();
+}
+
 //Updates time using gameEngine and formats in a user friendly time
 UI.prototype.updateTime = function(value) {
     var that = this;

@@ -35,7 +35,7 @@ Generator.prototype.createDummyDefender = function(defenderName, row, column) {
     return defender;
 }
 
-//Creates an SCV at the base location.
+//Creates an SCV at the base location
 Generator.prototype.createSCV = function () {
     this.gameEngine.addSCV(new SCV(this.gameEngine, this.map, this.AM, this.UI));
 }
@@ -48,4 +48,5 @@ Generator.prototype.createDropship = function (unitStartColumn, unitStartRow, un
 Generator.prototype.setMap = function(map) {
     this.map = map;
 }
+
 

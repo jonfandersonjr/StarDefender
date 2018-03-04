@@ -9,7 +9,7 @@ var sarahkerrigan = {
     loop: true,
     scale: 1.2,
     speed: 40,
-    health: 1000,
+    health: 3000,
     armor: 10,
     isAir: false,
     damage: 1000,
@@ -34,8 +34,8 @@ var infestedkerrigan = {
     frames: 8,
     loop: true,
     scale: 1.2,
-    speed: 60,
-    health: 1000,
+    speed: 50,
+    health: 3000,
     armor: 15,
     isAir: false,
     damage: 1000,
@@ -54,9 +54,9 @@ var ultralisk = {
     name: "ultralisk",
     frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
-    scale: 0.45,
+    scale: 0.5,
     speed: 35,
-    health: 300,
+    health: 2000,
     armor: 10,
     isAir: false,
     damage: 10,
@@ -74,7 +74,7 @@ var devourer = {
     scale: .6,
     speed: 40,
     health: 1000,
-    armor: 10,
+    armor: 6,
     isAir: false,
     damage: 40,
     deathAnimation: {
@@ -90,7 +90,7 @@ var overlord = {
     loop: true,
     scale: .6,
     speed: 40,
-    health: 1000,
+    health: 1500,
     armor: 10,
     isAir: false,
     damage: 70,
@@ -215,15 +215,12 @@ Boss.prototype.update = function() {
                     this.unit.deathAnimation.frames, this.unit.deathAnimation.loop, this.unit.deathAnimation.scale * this.map.tileSize / 31);
                 }
                 frameCount-= this.game.clockTick;
-                
-                
             } else {
-
                 this.unit = infestedkerrigan;
-                
                 this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
                 this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
                 this.currentHealth = infestedkerrigan.health;
+                this.speed += 10;
                 frameCount = 1;
             }
             
