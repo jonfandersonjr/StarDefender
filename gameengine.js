@@ -157,11 +157,6 @@ GameEngine.prototype.runLevel = function () {
                 this.map = new Map(map_2);
                 this.wave = new Wave(this.generator, this);
                 this.level = new Level(this.levelNum, this.wave);
-                /*
-                this.mouse = new Mouse(this.map, this.ctx);
-                this.mouse.init(this.map);
-                this.mouse.attachUI(this.gameUI);
-                */
                 this.mouse.newLevel(this.map);
                 this.gameUI.newLevel();
                 break;
