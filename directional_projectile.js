@@ -20,7 +20,11 @@ class DirectionalProjectile {
                 break;
         }
         this.animation = new Animation(AM.getAsset(`./img/${this.properties.name}/${this.properties.name}_projectile.png`),
-        this.properties.frameWidth, this.properties.frameHeight, this.properties.sheetWidth, this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
+                                                    this.properties.frameWidth, this.properties.frameHeight, this.properties.sheetWidth, 
+                                                    this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
+        this.animation1 = new Animation(AM.getAsset(`./img/${this.properties.name}/${this.properties.name}_projectile.png`),
+                                                    this.properties.frameWidth, this.properties.frameHeight, this.properties.sheetWidth, 
+                                                    this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
         this.gameEngine = gameEngine;
         this.enemy = enemy;
         this.coordinates = defenderCoordinates; //trueX, trueY
@@ -37,6 +41,7 @@ class DirectionalProjectile {
 
     draw() {
         this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
+        this.animation1.drawDefender(this.ctx, this.x, this.y + 20, this.frame);
     }
 
     updateFrame() {
@@ -52,12 +57,11 @@ class DirectionalProjectile {
             this.x -= this.gameEngine.clockTick * this.xSpeed;
             this.y -= this.gameEngine.clockTick * this.ySpeed;
         } else {
-            if (this.damage + this.armorPiercing - this.enemy.armor < this.damage) {
-                var damage = this.damage + this.armorPiercing - this.enemy.armor;
-                this.enemy.currentHealth -= damage;
+            if (this.armorPiercing) {
+                this.enemy.currentHealth -= this.damage;
                 this.removeFromWorld = true;
             } else {
-                this.enemy.currentHealth -= this.damage;
+                this.enemy.currentHealth -= (this.damage - this.enemy.armor);
                 this.removeFromWorld = true;
             }
         }

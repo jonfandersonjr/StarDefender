@@ -149,6 +149,8 @@ UI.prototype.attachKeybinds = function() {
                 that.mouse.selectDefender("antiair");
             }
         } else if (mousePos.x >= 0 && mousePos.x <= 100 && mousePos.y >= 210 && mousePos.y <= 320) {
+            that.mouse.unitCost = 50;
+            that.mouse.tileBox.unitCost = 50;
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("marine");
             }

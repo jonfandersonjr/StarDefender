@@ -93,12 +93,11 @@ Projectile.prototype.update = function() {
         this.x -= this.gameEngine.clockTick * this.xSpeed;
         this.y -= this.gameEngine.clockTick * this.ySpeed;
     } else {
-        if (this.damage + this.armorPiercing - this.enemy.armor < this.damage) {
-            var damage = this.damage + this.armorPiercing - this.enemy.armor;
-            this.enemy.currentHealth -= damage;
+        if (this.armorPiercing) {
+            this.enemy.currentHealth -= this.damage;
             this.removeFromWorld = true;
         } else {
-            this.enemy.currentHealth -= this.damage;
+            this.enemy.currentHealth -= (this.damage - this.enemy.armor);
             this.removeFromWorld = true;
         }
     }
