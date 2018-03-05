@@ -8,7 +8,7 @@ var mutalisk = {
     health: 110,
     armor: 6,
     isAir: true,
-    damage: 5,
+    damage: 7,
     deathAnimation: {
         name: "mutalisk",
         frameWidth: 68, frameHeight: 68, sheetWidth: 9, frameDuration: 0.1, frames: 9,
@@ -42,7 +42,7 @@ var scourge = {
     health: 40,
     armor: 0,
     isAir: true,
-    damage: 10,
+    damage: 3,
     deathAnimation: {
         name: "mutalisk",
         frameWidth: 68, frameHeight: 68, sheetWidth: 9, frameDuration: 0.1, frames: 9,
@@ -127,7 +127,7 @@ var guardian = {
     health: 250,
     armor: 10,
     isAir: true,
-    damage: 5,
+    damage: 8,
     deathAnimation: {
         name: "guardian",
         frameWidth: 114, frameHeight: 110, sheetWidth: 9, frameDuration: 0.15, frames: 9,
@@ -144,7 +144,7 @@ var hydralisk = {
     health: 250,
     armor: 8,
     isAir: false,
-    damage: 5,
+    damage: 7,
     deathAnimation: {
         name: "hydralisk",
         frameWidth: 97, frameHeight: 71, sheetWidth: 12, frameDuration: 0.1, frames: 12,
@@ -285,7 +285,7 @@ GroundUnit.prototype.update = function() {
 
         //Update resources for each kill
         //Gives n resources per kill
-        that.gameUI.resourceAdjust(5);
+        that.gameUI.resourceAdjust(3);
 
         //Play death sounds
         this.playSound(this.deathSound);

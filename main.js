@@ -50,6 +50,8 @@ AM.downloadAll(function() {
     var map = new Map(map_1);
     var myMouse = new Mouse(map, ctx);
 
+    window.alert("Please wait until the game is finished by Wednesday 6PM to play test and grade. \nThis is a work in progress with only 2/5 'good' levels :)");
+
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
     var ui = new UI(myMouse, 100, 100, 200, 1, 0, 0);

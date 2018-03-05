@@ -1,5 +1,7 @@
 //Create new object with settings as specified below. Add new switch case after adding a new variable.
 //frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, speed, range (in pixel)
+
+//DPS = 65
 var marine = {
     name: "marine",
     frameWidth: 64,
@@ -11,12 +13,14 @@ var marine = {
     scale: 1.2,
     range: 100,
     cooldown: 0.2,
-    damage: 15,
+    damage: 13,
     armorPiercing: false,
     mapKey: 'a',
     targetGround: true,
     targetFlying: true,
 };
+
+//DPS = 83.3
 var battlecruiser = {
     name: "battlecruiser",
     frameWidth: 111,
@@ -27,13 +31,15 @@ var battlecruiser = {
     loop: true,
     scale: .5,
     range: 250,
-    cooldown: 4,
-    damage: 200,
+    cooldown: 3,
+    damage: 250,
     armorPiercing: true,
     mapKey: 'd',
     targetGround: true,
     targetFlying: false,
 };
+
+//DPS = 68
 var ghost = {
     name: "ghost",
     frameWidth: 40,
@@ -52,6 +58,7 @@ var ghost = {
     targetFlying: false,
 };
 
+//DPS = 100
 var antiair = {
     name: "antiair",
     frameWidth: 43,
@@ -70,6 +77,7 @@ var antiair = {
     targetFlying: true,
 };
 
+//DPS = ???
 var firebat = {
     name: "firebat",
     frameWidth: 31,

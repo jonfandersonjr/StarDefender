@@ -1,4 +1,4 @@
-var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 60, direction : "west", gatherTime: 3 };
+var scv = { name: "scv", frameWidth: 40, frameHeight: 41, sheetWidth: 1, frameDuration: 0.1, frames: 1, loop: true, scale: 1, speed: 65, direction : "west", gatherTime: 2.8 };
 
 function SCV(game, map, assetManager, theUI) {
     this.AM = assetManager;
