@@ -77,7 +77,7 @@ AM.downloadAll(function() {
     //Attach gameengine to ui
     ui.attachEngine(gameEngine);
 
-    //Map Load 
+    //Map Load
     map.createMap(gameEngine, AM);
 
     //Display tutorial
