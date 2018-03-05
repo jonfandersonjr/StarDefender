@@ -42,7 +42,7 @@ SCV.prototype.update = function() {
 
     if (this.atBase()) {
         this.changeDirection("west");
-        this.UI.resourceAdjust(40);
+        this.UI.resourceAdjust(25);
         //adds 50 minerals to resources
         this.moveWest();
     } else if (this.atMineral()) {
