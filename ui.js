@@ -131,8 +131,8 @@ UI.prototype.attachKeybinds = function() {
                 that.mouse.selectDefender("ghost");
             }
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
-            that.mouse.unitCost = 250;
-            that.mouse.tileBox.unitCost = 250;
+            that.mouse.unitCost = 200;
+            that.mouse.tileBox.unitCost = 200;
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("battlecruiser");
             }
