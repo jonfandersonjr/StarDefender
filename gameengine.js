@@ -30,7 +30,7 @@ function GameEngine(mouse, ui, theMap, AM) {
     this.levelNum = 1;
     this.isNewLevel = true;
     this.count = 0;
-    this.waveDelay = levelWaveDelay[this.levelNum-1]; //time between waves for first level
+    this.waveDelay = levelWaveDelay[this.levelNum - 1]; //time between waves for first level
     this.pauseBool = false;
     this.map = theMap;
     this.AM = AM;
@@ -145,7 +145,7 @@ GameEngine.prototype.draw = function() {
     this.ctx.restore();
 }
 
-GameEngine.prototype.runLevel = function () {
+GameEngine.prototype.runLevel = function() {
 
     //If starting a level, need to make a level object.
     if (this.isNewLevel) {
@@ -208,7 +208,7 @@ GameEngine.prototype.runLevel = function () {
                 this.defenderEntities = [];
                 this.scvEntities = [];
             }
-            
+
         }
 
     } else {
@@ -220,6 +220,7 @@ GameEngine.prototype.runLevel = function () {
         //Sends next wave for this level
         if (this.waveDelay <= 0) {
             this.level.createWave();
+            this.gameUI.wavesAdjust(1);
             this.waveDelay = levelWaveDelay[this.levelNum - 1];
         }
     }
@@ -382,8 +383,6 @@ Entity.prototype.rotateAndCache = function(image, angle) {
     return offscreenCanvas;
 }
 
-GameEngine.prototype.setGenerator = function (generator) {
+GameEngine.prototype.setGenerator = function(generator) {
     this.generator = generator;
 }
-
-
