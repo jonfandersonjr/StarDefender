@@ -262,7 +262,7 @@ UI.prototype.reset = function() {
 }
 
 //Reset this to init values from initial new Stat() call
-UI.prototype.newLevel = function () {
+UI.prototype.newLevel = function() {
     this.healthCur = this.inithealthCur;
     this.healthMax = this.inithealthMax;
     this.resourcesTotal = this.initresourcesTotal;
