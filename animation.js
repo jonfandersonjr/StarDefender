@@ -58,9 +58,9 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
         var r = 0;
         var g = 255 - 25 * armor;
         var b = 33 + 2 * armor;
-        
+
         ctx.fillStyle = `rgb(${r},${g},${b})`;
-        console.dir(ctx.fillStyle);
+        //console.dir(ctx.fillStyle);
         ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
         if (currentHealth !== this.lastHealth) {
             this.damageTime = 1;
