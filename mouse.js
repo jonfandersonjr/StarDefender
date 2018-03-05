@@ -267,7 +267,7 @@ Mouse.prototype.attachListeners = function() {
             if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("battlecruiser");
             }
-        } else if (e.keyCode === 82) {
+        } else if (e.keyCode === 81) {
             that.unitCost = 150;
             that.tileBox.unitCost = 150;
             if (!(that.gameEngine.getPauseBool())) {
@@ -295,6 +295,9 @@ Mouse.prototype.attachListeners = function() {
                     that.gameEngine.pause(true, false);
                 }
             }
+        } else if (e.keyCode === 82) {
+            //Restart level
+
         }
     }, false);
 

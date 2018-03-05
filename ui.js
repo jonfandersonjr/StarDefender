@@ -435,9 +435,10 @@ function generateGameInfo() {
         "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
         "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
         "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
-        "(R) Firebat\n      (High DMG)\n      (AOE Low RoF)\n" +
+        "(Q) Firebat\n      (High DMG)\n      (AOE Low RoF)\n" +
         "(F) Spawn SCV\n    (Generates Resources)\n" +
         "----\n" +
         "(M) Music (On/Off)\n" +
+        "(R) Restart Current Level\n" +
         "(P) Pause/Resume Game\n";
 }
