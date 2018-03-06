@@ -118,6 +118,23 @@ var zergling = {
         scale: 0.5
     }
 };
+var broodling = {
+    name: "broodling",
+    frameWidth: 48, frameHeight: 48, sheetWidth: 7, frameDuration: 0.1, frames: 7,
+    loop: true,
+    scale: 0.6,
+    speed: 60,
+    health: 80,
+    armor: 0,
+    isAir: false,
+    damage: 5,
+    deathAnimation: {
+        name: "broodling",
+        frameWidth: 65, frameHeight: 53, sheetWidth: 7, frameDuration: 0.15, frames: 7,
+        loop: false,
+        scale: 0.5
+    }
+};
 var guardian = {
     name: "guardian",
     frameWidth: 78, frameHeight: 71, sheetWidth: 7, frameDuration: 0.1, frames: 7,
@@ -196,6 +213,10 @@ function GroundUnit(game, unitName, entrance, map, assetManager, theSpeedBuff, t
         case "zergling":
             this.unit = zergling;
             this.deathSound = './soundfx/deathZergling.wav';
+            break;
+        case "broodling":
+            this.unit = broodling;
+            this.deathSound = './soundfx/deathBroodling.wav';
             break;
         case "lurker":
             this.unit = lurker;
