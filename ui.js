@@ -21,7 +21,7 @@ function UI(mouse, startHealth, maxHealth,
     makeUnselectable(this.textBox);
     makeUnselectable(document.getElementById("gameOverlayScreen"));
     this.mouse = mouse;
-
+    this.tutorialBool = false;
     //Music
     this.audio = new Audio(),
         i = 0;
@@ -306,6 +306,8 @@ UI.prototype.waveTimeGet = function(theTime) {
 
 UI.prototype.displayTutorial = function() {
     var that = this;
+    that.tutorialBool = true;
+    that.tutorialSkip = false;
     var tutorialImages = [
         ["./img/tutorial/keybinds.png", 60, 0],
         ["./img/tutorial/information.png", 285, 0],
@@ -345,6 +347,9 @@ UI.prototype.displayTutorial = function() {
             }
             tempImg.src = tempSrc;
             i++;
+            if (that.tutorialSkip) {
+                i = tutorialImages.length - 1;
+            }
             if (i < tutorialImages.length) {
                 drawTutorialImages();
                 ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
@@ -352,7 +357,8 @@ UI.prototype.displayTutorial = function() {
             } else {
                 that.gameEngine.pause(true);
             }
-        }, 5000);
+
+        }, 3000);
     }
     drawTutorialImages();
 }
@@ -401,7 +407,7 @@ UI.prototype.buttonHighlight = function(i) {
         that.ctx.strokeStyle = "black";
         that.ctx.rect(tempX, tempY, 100, 100);
         that.ctx.stroke();
-    }, 5000);
+    }, 3000);
 }
 
 
@@ -439,6 +445,7 @@ function generateGameInfo() {
         "(F) Spawn SCV\n    (Generates Resources)\n" +
         "----\n" +
         "(M) Music (On/Off)\n" +
+        "(T) Skip Tutorial\n" +
         "(R) Restart Current Level\n" +
         "(P) Pause/Resume Game\n";
 }
