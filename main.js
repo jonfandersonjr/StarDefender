@@ -82,6 +82,6 @@ AM.downloadAll(function() {
     map.createMap(gameEngine, AM);
 
     //Display tutorial
-    ui.displayTutorial();
+    //ui.displayTutorial();
 
 });

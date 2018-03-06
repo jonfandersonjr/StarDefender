@@ -34,6 +34,7 @@ function GameEngine(mouse, ui, theMap, AM) {
     this.pauseBool = false;
     this.map = theMap;
     this.AM = AM;
+    this.isPlaying = true;
 }
 
 GameEngine.prototype.init = function(ctx) {
@@ -184,6 +185,15 @@ GameEngine.prototype.runLevel = function() {
                 this.mouse.newLevel(this.map);
                 this.gameUI.newLevel();
                 break;
+            case 8:
+                this.tileEntities = [];
+                this.levelNum = 1;
+                this.map = new Map(map_1);
+                this.wave = new Wave(this.generator, this);
+                this.level = new Level(this.levelNum, this.wave);
+                this.mouse.newLevel(this.map);
+                this.gameUI.newLevel();
+                break;
             default:
                 console.log("Either first map or error in level");
                 break;
@@ -253,9 +263,14 @@ GameEngine.prototype.runLevel = function() {
         }
     }
 
+}
 
-
-
+GameEngine.prototype.resetLevel = function (newLevel) {
+    this.isNewLevel = true;
+    this.waveDelay = levelWaveDelay[newLevel - 1];
+    this.defenderEntities = [];
+    this.scvEntities = [];
+    this.unitEntities = [];
 }
 
 GameEngine.prototype.findDefender = function(row, column) {
@@ -267,8 +282,11 @@ GameEngine.prototype.findDefender = function(row, column) {
     }
 }
 
-GameEngine.prototype.update = function() {
-    this.runLevel();
+GameEngine.prototype.update = function () {
+
+    if (this.isPlaying) {
+        this.runLevel();
+    }
 
     for (let i = 0; i < this.unitEntities.length; i++) {
         let enemy = this.unitEntities[i];

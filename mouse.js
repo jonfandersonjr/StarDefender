@@ -300,6 +300,13 @@ Mouse.prototype.attachListeners = function() {
             }
         } else if (e.keyCode === 82) {
             //Restart level
+            that.gameEngine.resetLevel(that.gameEngine.levelNum);
+            if (!that.gameEngine.isPlaying) {
+                that.gameEngine.isPlaying = true;
+            }
+            if (that.gameEngine.levelNum === 1) {
+                that.gameEngine.levelNum = 8;
+            }
 
         }
     }, false);
