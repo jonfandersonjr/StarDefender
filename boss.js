@@ -127,7 +127,6 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "infestedkerrigan":
             this.unit = infestedkerrigan;
             this.deathSound = './soundfx/deathKerrigan.wav';
-            
             this.healthTrigger = false;
             break;
         case "devourer":
