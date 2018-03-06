@@ -86,7 +86,7 @@ var infestedterran = {
 };
 var drone = {
     name: "drone",
-    frameWidth: 51.4, frameHeight: 32, sheetWidth: 6, frameDuration: 0.1, frames: 6,
+    frameWidth: 44, frameHeight: 32, sheetWidth: 6, frameDuration: 0.1, frames: 6,
     loop: true,
     scale: 0.7,
     speed: 50,
