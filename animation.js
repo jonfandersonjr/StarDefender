@@ -13,7 +13,7 @@ function Animation(spriteSheet, frameWidth, frameHeight, sheetWidth, frameDurati
     this.damageTime = 0;
 }
 
-Animation.prototype.drawFrame = function(tick, ctx, x, y) {
+Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     this.elapsedTime += tick;
     if (this.isDone()) {
         if (this.loop)
@@ -33,7 +33,7 @@ Animation.prototype.drawFrame = function(tick, ctx, x, y) {
         this.frameHeight * this.scale);
 }
 
-Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHealth, armor) {
+Animation.prototype.drawEnemy = function (tick, ctx, x, y, currentHealth, maxHealth, armor) {
     if (this.damageTime > 0) {
         this.damageTime -= tick;
     }
@@ -80,7 +80,7 @@ Animation.prototype.drawEnemy = function(tick, ctx, x, y, currentHealth, maxHeal
     }
 }
 
-Animation.prototype.drawBoss = function(tick, ctx, x, y, currentHealth, maxHealth) {
+Animation.prototype.drawBoss = function (tick, ctx, x, y, currentHealth, maxHealth) {
     if (this.damageTime > 0) {
         this.damageTime -= tick;
     }
@@ -122,7 +122,7 @@ Animation.prototype.drawBoss = function(tick, ctx, x, y, currentHealth, maxHealt
     }
 }
 
-Animation.prototype.drawDefender = function(ctx, x, y, frame) {
+Animation.prototype.drawDefender = function (ctx, x, y, frame) {
     ctx.drawImage(this.spriteSheet,
         frame * this.frameWidth, 0, // source from sheet
         this.frameWidth, this.frameHeight,
@@ -131,7 +131,7 @@ Animation.prototype.drawDefender = function(ctx, x, y, frame) {
         this.frameHeight * this.scale);
 }
 
-Animation.prototype.drawDummyDefender = function(ctx, x, y, frame, defenderName) {
+Animation.prototype.drawDummyDefender = function (ctx, x, y, frame, defenderName) {
     ctx.drawImage(this.spriteSheet,
         frame * this.frameWidth, 0, // source from sheet
         this.frameWidth, this.frameHeight,
@@ -146,7 +146,7 @@ Animation.prototype.drawDummyDefender = function(ctx, x, y, frame, defenderName)
     }
 }
 
-Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTime) {
+Animation.prototype.drawDeathFrame = function (tick, ctx, x, y, deathAnimationTime) {
     this.elapsedTime += tick;
     if (this.isDone()) {
         if (this.loop)
@@ -170,7 +170,55 @@ Animation.prototype.drawDeathFrame = function(tick, ctx, x, y, deathAnimationTim
         this.frameHeight * this.scale);
 }
 
-Animation.prototype.drawLine = function(ctx, x0, y0, x1, y1) {
+Animation.prototype.drawDirectional = function (tick, ctx, xCenter, yCenter, offset, radianAngle, isMultipleSprites) {
+    this.elapsedTime += tick;
+    if (this.isDone()) {
+        if (this.loop)
+            this.elapsedTime = 0;
+    }
+    var frameAngle = (2 * Math.PI) / this.sheetWidth;
+    var spriteRadianAngle = Math.floor(radianAngle / frameAngle) * frameAngle;
+    var x = 0;
+    var y = 0;
+    var xindex =  Math.floor(spriteRadianAngle / (2 * Math.PI / this.frames));
+    var yindex = 0
+    if (isMultipleSprites) {
+        yindex = this.currentFrame();
+    }
+    if (spriteRadianAngle < Math.PI / 2) {
+        let xOffset = Math.cos(spriteRadianAngle) / (offset + this.frameWidth / 2);
+        x = xCenter - xOffset;
+        let yOffset = Math.sin(spriteRadianAngle) / (offset + this.frameHeight / 2);
+        y = yCenter - yOffset;
+    } else if (spriteRadianAngle < Math.PI) {
+        let angle = spriteRadianAngle - Math.PI / 2;
+        let xOffset = Math.sin(angle) / (offset + this.frameWidth / 2);
+        x = xCenter + xOffset;
+        let yOffset = Math.cos(spriteRadianAngle) / (offset + this.frameHeight / 2);
+        y = yCenter - yOffset;
+    } else if (spriteRadianAngle < (3 / 2) * Math.PI) {
+        let angle = spriteRadianAngle - Math.PI;
+        let xOffset = Math.cos(angle) / (offset + this.frameWidth / 2);
+        x = xCenter + xOffset;
+        let yOffset = Math.sin(spriteRadianAngle) / (offset + this.frameHeight / 2);
+        y = yCenter + yOffset;
+    } else {
+        let angle = spriteRadianAngle - (3 / 2) * Math.PI;
+        let xOffset = Math.sin(angle) / (offset + this.frameWidth / 2);
+        x = xCenter - xOffset;
+        let yOffset = Math.cos(spriteRadianAngle) / (offset + this.frameHeight / 2);
+        y = yCenter + yOffset;
+    }
+    ctx.drawImage(this.spriteSheet,
+        xindex * this.frameWidth, yindex * this.frameHeight, // source from sheet
+        this.frameWidth, this.frameHeight,
+        x, y,
+        this.frameWidth * this.scale,
+        this.frameHeight * this.scale);
+    console.log('x : ' + x + ', y : ' + y);
+}
+
+Animation.prototype.drawLine = function (ctx, x0, y0, x1, y1) {
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
@@ -178,10 +226,10 @@ Animation.prototype.drawLine = function(ctx, x0, y0, x1, y1) {
     ctx.stroke();
 }
 
-Animation.prototype.currentFrame = function() {
+Animation.prototype.currentFrame = function () {
     return Math.floor(this.elapsedTime / this.frameDuration);
 }
 
-Animation.prototype.isDone = function() {
+Animation.prototype.isDone = function () {
     return (this.elapsedTime >= this.totalTime);
 }

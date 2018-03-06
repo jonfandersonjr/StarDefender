@@ -7,6 +7,7 @@ var battlecruiser_projectile = {
     frames: 16,
     loop: true,
     scale: 0.2,
+    isMultipleSprites: false
 };
 
 var antiair_projectile = {
@@ -17,11 +18,12 @@ var antiair_projectile = {
     frameDuration: 0.1,
     frames: 16,
     loop: true,
-    scale: 0.6,
+    scale: 0.2,
+    isMultipleSprites: false
 };
 
 class DirectionalProjectile {
-    constructor(gameEngine, unitName, defenderCoordinates, enemy, speed, ctx, armorPiercing, damage) {
+    constructor(gameEngine, unitName, defenderCoordinates, enemy, speed, ctx, armorPiercing, damage, offset) {
         switch (unitName) {
             case "battlecruiser":
                 this.properties = battlecruiser_projectile;
@@ -41,36 +43,17 @@ class DirectionalProjectile {
                                                     this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
         this.gameEngine = gameEngine;
         this.enemy = enemy;
-        this.coordinates = defenderCoordinates; //trueX, trueY
+        this.defenderCoordinates = defenderCoordinates; //trueX, trueY
         this.speed = speed;
         this.armorPiercing = armorPiercing;
         this.ctx = ctx;
         this.damage = damage;
+        this.offset = offset;
         this.updateXY();
     }
 
     update() {
-        this.move(this.enemy.trueX, this.enemy.trueY);
-    }
-
-    draw() {
-        this.animation.drawDefender(this.ctx, this.x, this.y, this.frame);
-        this.animation1.drawDefender(this.ctx, this.x, this.y + 20, this.frame);
-    }
-
-    updateFrame() {
-        this.frame = Math.floor(angle(this.coordinates.trueX, this.coordinates.trueY, this.enemy.trueX, this.enemy.trueY) / (360 / this.properties.frames));
-    }
-
-    move(destinationX, destinationY) {
-        this.updateFrame();
-    
-        this.calculateFlyAnimation(destinationX, destinationY);
-        this.dist -= this.gameEngine.clockTick * this.speed;
-        if (this.dist > 20 && this.enemy.currentHealth > 0) {
-            this.x -= this.gameEngine.clockTick * this.xSpeed;
-            this.y -= this.gameEngine.clockTick * this.ySpeed;
-        } else {
+        if(!this.move(this.enemy.trueX, this.enemy.trueY)) {
             if (this.armorPiercing) {
                 this.enemy.currentHealth -= this.damage;
                 this.removeFromWorld = true;
@@ -79,6 +62,28 @@ class DirectionalProjectile {
                 this.removeFromWorld = true;
             }
         }
+    }
+
+    draw() {
+        this.animation.drawDirectional(this.gameEngine.clockTick, this.ctx,
+                                        this.x, this.y, this.offset,
+                                        radianAngle, this.properties.isMultipleSprites);
+    }
+
+    calculateRadianAngle() {
+        return angleRadian(this.x, this.y, this.enemy.trueX, this.enemy.trueY);;
+    }
+
+    move(destinationX, destinationY) {
+        this.calculateFlyAnimation(destinationX, destinationY);
+        this.dist -= this.gameEngine.clockTick * this.speed;
+        if (this.dist > 20 && this.enemy.currentHealth > 0) {
+            this.x -= this.gameEngine.clockTick * this.xSpeed;
+            this.y -= this.gameEngine.clockTick * this.ySpeed;
+            return true;
+        }
+        this.calculateRadianAngle();
+        return false;
     }
 
     calculateFlyAnimation(destinationX, destinationY) {
@@ -90,16 +95,16 @@ class DirectionalProjectile {
     }
     
     updateXY() {
-        this.x = this.coordinates.trueX;
-        this.y = this.coordinates.trueY - 31;
+        this.x = this.defenderCoordinates.trueX;
+        this.y = this.defenderCoordinates.trueY;
     }
 }
 
-function angle(cx, cy, ex, ey) {
+function angleRadian(cx, cy, ex, ey) {
     var dy = ey - cy;
     var dx = ex - cx;
     var theta = Math.atan2(dy, dx); // range (-PI, PI]
-    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+    //theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
     //if (theta < 0) theta = 360 + theta; // range [0, 360)
-    return theta + 180;
+    return theta + Math.PI;
 }
