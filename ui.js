@@ -333,9 +333,10 @@ UI.prototype.displayTutorial = function() {
     ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
 
     var i = 0;
+    that.t;
 
     function drawTutorialImages() {
-        setTimeout(function() {
+        that.t = setTimeout(function() {
             ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
             var tempSrc = tutorialImages[i][0];
             var tempX = tutorialImages[i][1];
@@ -347,9 +348,6 @@ UI.prototype.displayTutorial = function() {
             }
             tempImg.src = tempSrc;
             i++;
-            if (that.tutorialSkip) {
-                i = tutorialImages.length - 1;
-            }
             if (i < tutorialImages.length) {
                 drawTutorialImages();
                 ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
@@ -358,9 +356,19 @@ UI.prototype.displayTutorial = function() {
                 that.gameEngine.pause(true);
             }
 
-        }, 3000);
+        }, 5000);
     }
     drawTutorialImages();
+}
+
+UI.prototype.cancelTutorial = function() {
+    var that = this;
+    that.tutorialBool = false;
+    clearTimeout(that.t);
+    var canvasThree = document.getElementById("gameOverlayScreen");
+    var ctxThree = canvasThree.getContext("2d");
+    ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+    that.gameEngine.pause(false, false);
 }
 
 UI.prototype.buttonHighlight = function(i) {
@@ -407,7 +415,7 @@ UI.prototype.buttonHighlight = function(i) {
         that.ctx.strokeStyle = "black";
         that.ctx.rect(tempX, tempY, 100, 100);
         that.ctx.stroke();
-    }, 3000);
+    }, 5000);
 }
 
 

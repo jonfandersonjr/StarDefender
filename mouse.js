@@ -288,7 +288,7 @@ Mouse.prototype.attachListeners = function() {
                 that.musicOn = true;
             }
         } else if (e.keyCode === 84 && that.ui.tutorialBool) {
-            that.ui.tutorialSkip = true;
+            that.ui.cancelTutorial();
             console.log("Skipping tutorial");
         } else if (e.keyCode === 80) {
             if (that.gameEngine.getPauseBool() && !that.gameEngine.gameOverBool) {
