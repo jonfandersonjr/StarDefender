@@ -43,13 +43,13 @@ class DirectionalProjectile {
                                                     this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
         this.gameEngine = gameEngine;
         this.enemy = enemy;
-        this.defenderCoordinates = defenderCoordinates; //trueX, trueY
         this.speed = speed;
         this.armorPiercing = armorPiercing;
         this.ctx = ctx;
         this.damage = damage;
         this.offset = offset;
-        this.updateXY();
+        this.x = defenderCoordinates.trueX;
+        this.y = defenderCoordinates.trueY;
     }
 
     update() {
@@ -67,7 +67,7 @@ class DirectionalProjectile {
     draw() {
         this.animation.drawDirectional(this.gameEngine.clockTick, this.ctx,
                                         this.x, this.y, this.offset,
-                                        radianAngle, this.properties.isMultipleSprites);
+                                        this.radianAngle, this.properties.isMultipleSprites);
     }
 
     calculateRadianAngle() {
@@ -82,7 +82,7 @@ class DirectionalProjectile {
             this.y -= this.gameEngine.clockTick * this.ySpeed;
             return true;
         }
-        this.calculateRadianAngle();
+        this.radianAngle = this.calculateRadianAngle();
         return false;
     }
 
@@ -92,11 +92,6 @@ class DirectionalProjectile {
         this.dist = Math.sqrt(Math.pow(this.xDif, 2) + Math.pow(this.yDif, 2));
         this.xSpeed = this.speed * (this.xDif / this.dist);
         this.ySpeed = this.speed * (this.yDif / this.dist);
-    }
-    
-    updateXY() {
-        this.x = this.defenderCoordinates.trueX;
-        this.y = this.defenderCoordinates.trueY;
     }
 }
 
