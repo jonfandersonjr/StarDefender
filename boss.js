@@ -1,28 +1,12 @@
 //Create new Boss with settings as specified below. Add new switch case after adding a new variable.
-var devourer = {
-    name: "devourer",
-    frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
-    loop: true,
-    scale: .6,
-    speed: 40,
-    health: 1000,
-    armor: 6,
-    isAir: false,
-    damage: 50,
-    deathAnimation: {
-        name: "devourer",
-        frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 1, frames: 6,
-        loop: false,
-        scale: 1
-    }
-};
+
 var overlord = {
     name: "overlord",
     frameWidth: 60, frameHeight: 75, sheetWidth: 4, frameDuration: 0.1, frames: 4,
     loop: true,
     scale: .6,
     speed: 40,
-    health: 1500,
+    health: 750,
     armor: 10,
     isAir: false,
     damage: 70,
@@ -33,13 +17,32 @@ var overlord = {
         scale: 1
     }
 };
+
+var devourer = {
+    name: "devourer",
+    frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
+    loop: true,
+    scale: .6,
+    speed: 45,
+    health: 3000,
+    armor: 8,
+    isAir: false,
+    damage: 50,
+    deathAnimation: {
+        name: "devourer",
+        frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 1, frames: 6,
+        loop: false,
+        scale: 1
+    }
+};
+
 var ultralisk = {
     name: "ultralisk",
     frameWidth: 98, frameHeight: 105, sheetWidth: 7, frameDuration: 0.1, frames: 7,
     loop: true,
     scale: 0.55,
     speed: 35,
-    health: 2000,
+    health: 4000,
     armor: 10,
     isAir: false,
     damage: 50,
