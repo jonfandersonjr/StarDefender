@@ -32,7 +32,7 @@ function UI(mouse, startHealth, maxHealth,
         this.audio.play();
     }, true);
     this.audio.volume = 0.3;
-    this.audio.loop = false;
+    this.audio.loop = true;
     this.audio.src = this.playlist[0];
     this.audio.play();
     this.attachKeybinds();
