@@ -7,7 +7,7 @@ var dropship = {
     frames: 32,
     loop: true,
     scale: .9,
-    speed: 160
+    speed: 175
 };
 
 function Dropship(game, map, assetManager, unitStartColumn, unitStartRow, unitEndColumn, unitEndRow, theDefender) {
