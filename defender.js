@@ -235,7 +235,10 @@ Defender.prototype.shoot = function(enemy) {
                     this.trueX, this.trueY, enemy,
                     this.damage, 1000, this.armorPiercing));
             } else {
-                this.gameEngine.addProjectile(new DirectionalProjectile(this.gameEngine, this.unit.name, {trueX: this.trueX, trueY: this.trueY}, enemy, 1000, this.ctx, this.armorPiercing, this.damage, this.unit.sheetWidth / 2));
+                this.gameEngine.addProjectile(new DirectionalProjectile(this.gameEngine, this.unit.name, 
+                                                                        {trueX: this.trueX, trueY: this.trueY}, 
+                                                                        enemy, 1000, this.ctx, this.armorPiercing, 
+                                                                        this.damage, this.unit.frameWidth / 2));
             }
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
