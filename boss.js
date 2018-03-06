@@ -21,8 +21,8 @@ var overlord = {
     frameWidth: 60, frameHeight: 75, sheetWidth: 4, frameDuration: 0.1, frames: 4,
     loop: true,
     scale: .6,
-    speed: 40,
-    health: 1500,
+    speed: 20,
+    health: 600,
     armor: 10,
     isAir: false,
     damage: 70,
@@ -123,6 +123,7 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "ultralisk":
             this.unit = ultralisk;
             this.deathSound = './soundfx/deathUltralisk.wav';
+            this.armorTrigger = false;
             break;
         case "infestedkerrigan":
             this.unit = infestedkerrigan;
@@ -137,7 +138,7 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "overlord":
             this.unit = overlord;
             this.deathSound = './soundfx/deathOverlord.wav';
-            this.armorTrigger = false;
+            this.sizeTrigger = false;
             break;
         default:
             console.log("Problem creating Boss");
@@ -191,10 +192,17 @@ Boss.prototype.update = function() {
         this.soundTrigger = true;
         this.playSound(this.hurtSound);
     }
-    if (this.unit === overlord && this.currentHealth < 500 && this.armorTrigger === false) {
+    
+    if (this.unit === ultralisk && this.currentHealth < 500 && this.armorTrigger === false) {
         this.armorTrigger = true;
-        this.armor = 20;
+        this.armor = 30;
     }
+    if (this.unit === overlord && this.currentHealth < 500 && this.sizeTrigger === false) {
+        console.log("overlord");
+        this.unit.scale = 10;
+        this.scale = 10;
+    }
+
     if (this.unit === devourer && this.currentHealth < 500 && this.speedTrigger === false) {
         this.speed = 80;
         this.speedTrigger === false;
