@@ -313,7 +313,7 @@ UI.prototype.displayTutorial = function() {
         ["./img/tutorial/information.png", 285, 0],
         ["./img/tutorial/health.png", 285, 0],
         ["./img/tutorial/resources.png", 285, 0],
-        ["./img/tutorial/base.png", 150, 500],
+        ["./img/tutorial/base.png", 0, 410],
         ["./img/tutorial/lane.png", 125, 300],
         ["./img/tutorial/pickup.png", 125, 300],
         ["./img/tutorial/defenders.png", 285, 250],
@@ -336,6 +336,7 @@ UI.prototype.displayTutorial = function() {
     that.t;
 
     function drawTutorialImages() {
+
         that.t = setTimeout(function() {
             ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
             var tempSrc = tutorialImages[i][0];
@@ -356,7 +357,7 @@ UI.prototype.displayTutorial = function() {
                 that.gameEngine.pause(true);
             }
 
-        }, 5000);
+        }, 4000);
     }
     drawTutorialImages();
 }
@@ -443,17 +444,18 @@ function generateGameInfo() {
     }, false);
     this.gameInfoBox.value = "Star Defender\n" +
         "*************************\n" +
-        "Keybinds:\n" +
+        "Keybinds\n" +
         "----\n" +
-        "(A) Marine\n    (Low DMG)\n    (Fast RoF)\n" +
-        "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
-        "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
-        "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
-        "(Q) Firebat\n      (High DMG)\n      (AOE Low RoF)\n" +
-        "(F) Spawn SCV\n    (Generates Resources)\n" +
-        "----\n" +
-        "(M) Music (On/Off)\n" +
-        "(T) Skip Tutorial\n" +
+        "(A) Marine:\n    Med Damage\n    Weak vs Armor\n    Hits Air and Ground\n" +
+        "(Q) Firebat:\n    High DPS\n    AoE Damage\n    Limited Range\n" +
+        "(S) Ghost:\n    Medium Damage\n    Armor Piercing\n    Ground Specialist\n" +
+        "(D) Battlecruiser:\n    High Damage\n    Long Range\n    Low Rate of Fire\n" +
+        "(W) Anti Air:\n    High Damage\n    Armor Piercing\n    Hits Air Only\n" +
+        "(F) SCV:\n    Collects 25 Resources\n" +
+        "-----\n" +
         "(R) Restart Current Level\n" +
-        "(P) Pause/Resume Game\n";
+        "(P) Pause/Resume Game\n" +
+        "(M) Music (On/Off)\n" +
+        "(T) Skip Tutorial\n";
+
 }

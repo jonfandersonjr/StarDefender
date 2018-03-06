@@ -9,7 +9,7 @@ var overlord = {
     health: 750,
     armor: 10,
     isAir: false,
-    damage: 70,
+    damage: 50,
     deathAnimation: {
         name: "overlord",
         frameWidth: 60, frameHeight: 75, sheetWidth: 1, frameDuration: 1, frames: 1,
@@ -24,10 +24,10 @@ var devourer = {
     loop: true,
     scale: .6,
     speed: 45,
-    health: 3000,
+    health: 2500,
     armor: 8,
     isAir: false,
-    damage: 50,
+    damage: 65,
     deathAnimation: {
         name: "devourer",
         frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 1, frames: 6,
@@ -45,7 +45,7 @@ var ultralisk = {
     health: 4000,
     armor: 10,
     isAir: false,
-    damage: 50,
+    damage: 80,
     deathAnimation: {
         name: "ultralisk",
         frameWidth: 98, frameHeight: 105, sheetWidth: 10, frameDuration: 0.1, frames: 10,
@@ -67,7 +67,7 @@ var sarahkerrigan = {
     health: 3000,
     armor: 10,
     isAir: false,
-    damage: 1000,
+    damage: 100,
     deathAnimation: {
         name: "sarahkerrigan",
         frameWidth: 78,
@@ -93,7 +93,7 @@ var infestedkerrigan = {
     health: 3000,
     armor: 15,
     isAir: false,
-    damage: 1000,
+    damage: 100,
     deathAnimation: {
         name: "infestedkerrigan",
         frameWidth: 56,
@@ -198,9 +198,9 @@ Boss.prototype.update = function() {
         this.armorTrigger = true;
         this.armor = 20;
     }
-    if (this.unit === devourer && this.currentHealth < 500 && this.speedTrigger === false) {
-        this.speed = 80;
-        this.speedTrigger === false;
+    if (this.unit === devourer && this.currentHealth < this.unit.health/2 && this.speedTrigger === false) {
+        this.speed += 20;
+        this.speedTrigger = true;
     } 
     if (this.unit === infestedkerrigan && this.currentHealth < 200 && this.healthTrigger === false) {
         this.currentHealth = 600;
