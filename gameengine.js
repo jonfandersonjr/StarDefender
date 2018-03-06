@@ -199,14 +199,42 @@ GameEngine.prototype.runLevel = function() {
         if (this.unitEntities.length === 0) {
             if (this.levelNum === 5) {
                 //**WIN SCREEN**//
+                var canvasThree = document.getElementById("gameOverlayScreen");
+                var ctxThree = canvasThree.getContext("2d");
+                won_img = new Image();
+                won_img.onload = function() {
+                    ctxThree.drawImage(won_img, 100, -100);
+                }
+                won_img.src = './img/ui/gameWon.png';
+                this.pause(true, true);
+
             } else {
                 //**NEXT LEVEL SCREEN**//
+                var canvasThree = document.getElementById("gameOverlayScreen");
+                var ctxThree = canvasThree.getContext("2d");
+                lvl_img = new Image();
+                lvl_img.onload = function() {
+                    ctxThree.drawImage(lvl_img, 100, -100);
+                }
+                lvl_img.src = './img/ui/levelComplete.png';
+
+                //Next level
                 this.levelNum++;
                 this.gameUI.adjustLevel(1); //Updates game text info
                 this.isNewLevel = true;
                 this.waveDelay = levelWaveDelay[this.levelNum - 1];
                 this.defenderEntities = [];
                 this.scvEntities = [];
+
+                function delayClear() {
+                    setTimeout(function() {
+                        var canvasThree = document.getElementById("gameOverlayScreen");
+                        var ctxThree = canvasThree.getContext("2d");
+                        ctxThree.clearRect(0, 0, canvasThree.width, canvasThree.height);
+                    }, 3000);
+                };
+
+                delayClear();
             }
 
         }
@@ -291,19 +319,6 @@ GameEngine.prototype.update = function() {
         }
     }
     this.tileBox.update();
-
-    //Map Won Screen?
-    if (this.levelNum > 3 && this.unitEntities.length === 0) {
-        var canvasThree = document.getElementById("gameOverlayScreen");
-        var ctxThree = canvasThree.getContext("2d");
-        won_img = new Image();
-        won_img.onload = function() {
-            ctxThree.drawImage(won_img, 100, 0);
-        }
-        won_img.src = './img/ui/levelComplete.png';
-        this.pause(true, true);
-    }
-
     resize();
 }
 

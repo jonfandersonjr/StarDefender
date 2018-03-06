@@ -131,8 +131,8 @@ UI.prototype.attachKeybinds = function() {
                 that.mouse.selectDefender("ghost");
             }
         } else if (mousePos.x >= 110 && mousePos.x <= 210 && mousePos.y >= 0 && mousePos.y <= 100) {
-            that.mouse.unitCost = 250;
-            that.mouse.tileBox.unitCost = 250;
+            that.mouse.unitCost = 200;
+            that.mouse.tileBox.unitCost = 200;
             if (!(that.gameEngine.getPauseBool())) {
                 that.mouse.selectDefender("battlecruiser");
             }
@@ -262,7 +262,7 @@ UI.prototype.reset = function() {
 }
 
 //Reset this to init values from initial new Stat() call
-UI.prototype.newLevel = function () {
+UI.prototype.newLevel = function() {
     this.healthCur = this.inithealthCur;
     this.healthMax = this.inithealthMax;
     this.resourcesTotal = this.initresourcesTotal;
@@ -435,9 +435,10 @@ function generateGameInfo() {
         "(S) Ghost\n    (Medium DMG)\n    (Medium RoF)\n" +
         "(D) Battlecruiser\n    (High DMG)\n    (Low RoF)\n" +
         "(W) Anti Air Structure\n    (High DMG)\n    (Medium RoF)\n" +
-        "(R) Firebat\n      (High DMG)\n      (AOE Low RoF)\n" +
+        "(Q) Firebat\n      (High DMG)\n      (AOE Low RoF)\n" +
         "(F) Spawn SCV\n    (Generates Resources)\n" +
         "----\n" +
         "(M) Music (On/Off)\n" +
+        "(R) Restart Current Level\n" +
         "(P) Pause/Resume Game\n";
 }

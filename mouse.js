@@ -56,7 +56,7 @@ Mouse.prototype.setMap = function(gameMap) {
     this.map = gameMap;
 }
 
-Mouse.prototype.newLevel = function (map) {
+Mouse.prototype.newLevel = function(map) {
     this.resources.scv = -50;
     this.ui.drawSCVImage(this.resources.scv);
     this.map = map;
@@ -107,7 +107,7 @@ Mouse.prototype.dropTower = function(e) {
             defenderKey = 's';
             break;
         case "battlecruiser":
-            this.unitCost = 250;
+            this.unitCost = 200;
             defenderKey = 'd';
             break;
         case "antiair":
@@ -175,7 +175,7 @@ Mouse.prototype.attachListeners = function() {
 
     //On mouse click, check if button was selected (isBusy = true), if so drop tower on click location
     that.canvas.addEventListener("click", (e) => {
-        
+
         if (that.isBusy && !that.isMoving && !(that.gameEngine.getPauseBool())) {
             that.dropTower(e);
             that.ctx2.clearRect(0, 0, that.canvas2.width, that.canvas2.height);
@@ -267,7 +267,7 @@ Mouse.prototype.attachListeners = function() {
             if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("battlecruiser");
             }
-        } else if (e.keyCode === 82) {
+        } else if (e.keyCode === 81) {
             that.unitCost = 150;
             that.tileBox.unitCost = 150;
             if (!(that.gameEngine.getPauseBool())) {
@@ -295,6 +295,9 @@ Mouse.prototype.attachListeners = function() {
                     that.gameEngine.pause(true, false);
                 }
             }
+        } else if (e.keyCode === 82) {
+            //Restart level
+
         }
     }, false);
 
