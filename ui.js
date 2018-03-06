@@ -25,14 +25,14 @@ function UI(mouse, startHealth, maxHealth,
     //Music
     this.audio = new Audio(),
         i = 0;
-    this.playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3');
+    this.playlist = new Array('./music/1.mp3', './music/2.mp3', './music/3.mp3', './music/4.mp3', './music/5.mp3');
     this.audio.addEventListener('ended', function() {
         i = ++i < playlist.length ? i : 0;
         this.audio.src = playlist[i];
         this.audio.play();
     }, true);
     this.audio.volume = 0.3;
-    this.audio.loop = false;
+    this.audio.loop = true;
     this.audio.src = this.playlist[0];
     this.audio.play();
     this.attachKeybinds();

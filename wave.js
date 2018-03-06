@@ -28,6 +28,11 @@ var zerglingWave = {
     delay: .65,
     isBoss: false
 };
+var broodlingWave = {
+    name: "broodling",
+    delay: .65,
+    isBoss: false
+};
 var lurkerWave = {
     name: "lurker",
     delay: .65,
@@ -138,6 +143,9 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "zergling":
             this.unit = zerglingWave;
+            break;
+        case "broodling":
+            this.unit = broodlingWave;
             break;
         case "lurker":
             this.unit = lurkerWave;

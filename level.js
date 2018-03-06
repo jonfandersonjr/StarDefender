@@ -7,6 +7,7 @@
 
 //**Default Stats**//
 //Ground Enemies
+var b = "broodling";
 var i = "infestedterran"; // HP:40  Speed:60  Armor:1
 var dr = "drone"; // HP:50  Speed:35  Armor:0
 var z = "zergling"; // HP:60  Speed:80  Armor:0
@@ -28,12 +29,14 @@ var S = "sarahkerrigan"; // HP:3000  Speed:40  Armor:10    //Revives upon death 
 
 //var I = "infestedkerrigan";
 
+
 //Level One (Easy) - Grass
 var firstLevelEnemies     = [i, z, s, l, d, m, q, D, 0];
 var firstLevelWaveSize    = [2, 3, 2, 3, 5, 1, 4, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0,-.2,0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 3, 1, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
+
 
 //Level Two (Medium) - Blue
 var secondLevelEnemies     = [dr, z, s, q, h, d, g, D, d, z, d, O, m, d, z, g, h, S, 0];
@@ -65,7 +68,7 @@ var fifthLevelEntranceNum  = [1, 2, 3, 3, 1, 2, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3,
 
 // test case
 /*
-var firstLevelEnemies = [z, h, d, q, dr, l, i, z, U, s, m, O, z, z, g, z, q, U, 0];
+var firstLevelEnemies = [b, h, d, q, dr, l, i, z, U, s, m, O, z, z, g, z, q, U, 0];
 var firstLevelWaveSize = [3, 3, 3, 4, 7, 5, 5, 5, 2, 5, 5, 1, 5, 5, 1, 8, 5, 2, 0];
 var firstLevelSpeedBuff = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, .5, .2, .2, .3, .5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff = [0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, .5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
