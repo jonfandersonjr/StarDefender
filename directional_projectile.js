@@ -22,6 +22,18 @@ var antiair_projectile = {
     isMultipleSprites: false
 };
 
+var firebat_projectile = {
+    name: "firebat",
+    frameWidth: 70,
+    frameHeight: 70,
+    sheetWidth: 8,
+    frameDuration: 0.1,
+    frames: 112,
+    loop: true,
+    scale: 0.2,
+    isMultipleSprites: false
+};
+
 class DirectionalProjectile {
     constructor(gameEngine, unitName, defenderCoordinates, enemy, speed, ctx, armorPiercing, damage, offset) {
         switch (unitName) {
@@ -30,6 +42,9 @@ class DirectionalProjectile {
                 break;
             case "antiair":
                 this.properties = antiair_projectile;
+                break;
+            case "firebat":
+                this.properties = firebat_projectile;
                 break;
             default:
                 console.log("Problem creating projectile");
