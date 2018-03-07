@@ -23,15 +23,9 @@ var devourer = {
     frameWidth: 70, frameHeight: 83, sheetWidth: 6, frameDuration: 0.1, frames: 6,
     loop: true,
     scale: .6,
-<<<<<<< HEAD
-    speed: 20,
-    health: 600,
-    armor: 10,
-=======
     speed: 45,
     health: 2500,
     armor: 8,
->>>>>>> a9433a0a37a3a56413db5506bb6f108413bd7866
     isAir: false,
     damage: 65,
     deathAnimation: {
@@ -342,7 +336,7 @@ Boss.prototype.update = function() {
 
 Boss.prototype.draw = function() {
     if (!this.isDead) {
-        this.animation.drawBoss(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth);
+        this.animation.drawBoss(this.game.clockTick, this.ctx, this.x, this.y, this.currentHealth, this.maxHealth, this.unitName);
     } else {
         this.animation.drawDeathFrame(this.game.clockTick, this.ctx, this.x, this.y, this.deadAnimationTimme);
     }

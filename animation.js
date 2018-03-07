@@ -80,7 +80,7 @@ Animation.prototype.drawEnemy = function (tick, ctx, x, y, currentHealth, maxHea
     }
 }
 
-Animation.prototype.drawBoss = function (tick, ctx, x, y, currentHealth, maxHealth) {
+Animation.prototype.drawBoss = function (tick, ctx, x, y, currentHealth, maxHealth, name) {
     if (this.damageTime > 0) {
         this.damageTime -= tick;
     }
@@ -102,7 +102,7 @@ Animation.prototype.drawBoss = function (tick, ctx, x, y, currentHealth, maxHeal
         this.frameWidth * this.scale,
         this.frameHeight * this.scale);
     if (currentHealth > 0) {
-        ctx.fillStyle = "green";
+        ctx.fillStyle = "purple";
         ctx.fillRect(x, y - 2, this.frameWidth * this.scale * (currentHealth / maxHealth), 5);
         if (currentHealth !== this.lastHealth) {
             this.damageTime = 1;
