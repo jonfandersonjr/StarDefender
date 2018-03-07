@@ -20,7 +20,7 @@ var marine = {
     targetFlying: true,
 };
 
-//DPS = 83.3
+//DPS = 91.3
 var battlecruiser = {
     name: "battlecruiser",
     frameWidth: 111,
@@ -32,14 +32,14 @@ var battlecruiser = {
     scale: .5,
     range: 250,
     cooldown: 3,
-    damage: 250,
+    damage: 275,
     armorPiercing: true,
     mapKey: 'd',
     targetGround: true,
     targetFlying: false,
 };
 
-//DPS = 68
+//DPS = 70
 var ghost = {
     name: "ghost",
     frameWidth: 40,
@@ -51,14 +51,14 @@ var ghost = {
     scale: 1.2,
     range: 100,
     cooldown: 0.5,
-    damage: 34,
+    damage: 35,
     armorPiercing: true,
     mapKey: 's',
     targetGround: true,
     targetFlying: false,
 };
 
-//DPS = 100
+//DPS = 130
 var antiair = {
     name: "antiair",
     frameWidth: 43,
@@ -69,8 +69,8 @@ var antiair = {
     loop: true,
     scale: 1,
     range: 150,
-    cooldown: 0.5,
-    damage: 50,
+    cooldown: 0.55,
+    damage: 60,
     armorPiercing: true,
     mapKey: 'w',
     targetGround: false,

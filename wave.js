@@ -33,6 +33,11 @@ var broodlingWave = {
     delay: .65,
     isBoss: false
 };
+var darktemplarWave = {
+    name: "darktemplar",
+    delay: 1,
+    isBoss: true
+}
 var lurkerWave = {
     name: "lurker",
     delay: .65,
@@ -173,6 +178,9 @@ Wave.prototype.setWave = function(unitName, unitAmount, theSpeedBuff, theHealthB
             break;
         case "overlord":
             this.unit = overlordWave;
+            break;
+        case "darktemplar":
+            this.unit = darktemplarWave;
             break;
         case "sarahkerrigan":
             this.unit = sarahkerriganWave;
