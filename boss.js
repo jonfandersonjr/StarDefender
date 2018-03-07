@@ -6,7 +6,7 @@ var overlord = {
     loop: true,
     scale: .6,
     speed: 40,
-    health: 750,
+    health: 1000,
     armor: 10,
     isAir: false,
     damage: 50,
@@ -159,6 +159,7 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
         case "darktemplar":
             this.unit = darktemplar;
             this.deathSound = "./soundfx/deathDarkTemplar.wav";
+            this.damageTrigger === false;
             break;    
         case "overlord":
             this.unit = overlord;
@@ -222,13 +223,17 @@ Boss.prototype.update = function() {
         this.armorTrigger = true;
         this.armor = 30;
     }
-    /*
+
     if (this.unit === overlord && this.currentHealth < 500 && this.sizeTrigger === false) {
-        console.log("overlord");
-        this.unit.scale = 10;
-        this.scale = 10;
+        this.sizeTrigger = true;
+        this.unit.scale = .3;
+        this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
+                this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
     }
-    */
+    if (this.unit === darktemplar && this.currentHealth < 500 && this.damageTrigger === false) {
+        this.damageTrigger = true;
+        this.damage = 1000;
+    }
     if (this.unit === devourer && this.currentHealth < this.unit.health/2 && this.speedTrigger === false) {
         this.speed += 20;
         this.speedTrigger = true;

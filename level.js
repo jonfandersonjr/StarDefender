@@ -22,6 +22,7 @@ var m = "mutalisk"; // HP:110  Speed:45  Armor:6
 var g = "guardian"; // HP:200  Speed:40  Armor:10
 
 //Special Enemies            //**NOTE: Need one more boss!**//
+var T = "darktemplar";
 var D = "devourer"; // HP:1000  Speed:40  Armor:6     //Increases its own speed once half health
 var O = "overlord"; // HP:1500  Speed:40  Armor:10    //Possibly drops some zergs upon death?
 var U = "ultralisk"; // HP:2000  Speed:35  Armor:10    //No special features yet
@@ -46,7 +47,7 @@ var secondLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0,.5,.5,.5, 0, 0,.5, 1,.2,.3,
 var secondLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 3, 3, 3, 3, 1, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Three (???) - Metal
-var thirdLevelEnemies      = [dr, dr, dr, z, i, s, z, s, m, m, m, s, g, m, s, g, m, D, 0];
+var thirdLevelEnemies      = [dr, dr, dr, z, i, s, z, s, m, m, m, s, g, m, s, g, m, T, 0];
 var thirdLevelWaveSize     = [3, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
 var thirdLevelSpeedBuff    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var thirdLevelHealthBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
