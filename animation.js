@@ -170,7 +170,7 @@ Animation.prototype.drawDeathFrame = function (tick, ctx, x, y, deathAnimationTi
         this.frameHeight * this.scale);
 }
 
-Animation.prototype.drawDirectional = function (tick, ctx, xCenter, yCenter, offset, radianAngle, isMultipleSprites) {
+Animation.prototype.drawDirectional = function (tick, ctx, xCenter, yCenter, offset, radianAngle, isMultipleSprites, numberOfProjectiles) {
     this.elapsedTime += tick;
     if (this.isDone()) {
         if (this.loop)
@@ -180,34 +180,23 @@ Animation.prototype.drawDirectional = function (tick, ctx, xCenter, yCenter, off
     var spriteRadianAngle = Math.floor(radianAngle / frameAngle) * frameAngle;
     var x = 0;
     var y = 0;
-    var xindex =  Math.floor(spriteRadianAngle / (2 * Math.PI / this.frames));
+    var xindex =  Math.floor(spriteRadianAngle / (2 * Math.PI / this.sheetWidth));
     var yindex = 0
     if (isMultipleSprites) {
-        yindex = this.currentFrame();
+        yindex = this.currentFrame() % Math.ceil(this.frames / this.sheetWidth);
     }
-    if (spriteRadianAngle < Math.PI / 2) {
-        let xOffset = Math.cos(spriteRadianAngle) / (offset + this.frameWidth / 2);
-        x = xCenter - xOffset;
-        let yOffset = Math.sin(spriteRadianAngle) / (offset + this.frameHeight / 2);
-        y = yCenter - yOffset;
-    } else if (spriteRadianAngle < Math.PI) {
-        let angle = spriteRadianAngle - Math.PI / 2;
-        let xOffset = Math.sin(angle) / (offset + this.frameWidth / 2);
-        x = xCenter + xOffset;
-        let yOffset = Math.cos(spriteRadianAngle) / (offset + this.frameHeight / 2);
-        y = yCenter - yOffset;
-    } else if (spriteRadianAngle < (3 / 2) * Math.PI) {
-        let angle = spriteRadianAngle - Math.PI;
-        let xOffset = Math.cos(angle) / (offset + this.frameWidth / 2);
-        x = xCenter + xOffset;
-        let yOffset = Math.sin(spriteRadianAngle) / (offset + this.frameHeight / 2);
-        y = yCenter + yOffset;
-    } else {
-        let angle = spriteRadianAngle - (3 / 2) * Math.PI;
-        let xOffset = Math.sin(angle) / (offset + this.frameWidth / 2);
-        x = xCenter - xOffset;
-        let yOffset = Math.cos(spriteRadianAngle) / (offset + this.frameHeight / 2);
-        y = yCenter + yOffset;
+    var xOffset = Math.cos(spriteRadianAngle) * (offset + this.frameWidth * this.scale / 2);
+    x = xCenter - xOffset - this.frameWidth * this.scale / 2;
+    var yOffset = Math.sin(spriteRadianAngle) * (offset + this.frameHeight * this.scale / 2);
+    y = yCenter - yOffset - this.frameHeight * this.scale / 2;
+    var x1 = x;
+    var y1 = y;
+    var spaceBetweenProjectiles = 7;
+    if (numberOfProjectiles === 2) {
+        x += Math.cos(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
+        y += Math.sin(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
+        x1 -= Math.cos(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
+        y1 -= Math.sin(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
     }
     ctx.drawImage(this.spriteSheet,
         xindex * this.frameWidth, yindex * this.frameHeight, // source from sheet
@@ -215,7 +204,14 @@ Animation.prototype.drawDirectional = function (tick, ctx, xCenter, yCenter, off
         x, y,
         this.frameWidth * this.scale,
         this.frameHeight * this.scale);
-    console.log('x : ' + x + ', y : ' + y);
+    if (numberOfProjectiles === 2) {
+        ctx.drawImage(this.spriteSheet,
+            xindex * this.frameWidth, yindex * this.frameHeight, // source from sheet
+            this.frameWidth, this.frameHeight,
+            x1, y1,
+            this.frameWidth * this.scale,
+            this.frameHeight * this.scale);
+    }
 }
 
 Animation.prototype.drawLine = function (ctx, x0, y0, x1, y1) {

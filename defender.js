@@ -88,10 +88,10 @@ var firebat = {
     loop: true,
     scale: 1.2,
     range: 2 * tileSize,
-    cooldown: 0,
-    damage: 50,
+    cooldown: 1,
+    damage: 1,
     armorPiercing: false,
-    mapKey: 'f',
+    mapKey: 'q',
     targetGround: true,
     targetFlying: false,
 };
@@ -141,6 +141,15 @@ function Defender(game, unitName, row, column, map, assetManager, isDummy) {
     this.frame = 0;
     this.isDummy = isDummy;
     this.speed = 100;
+    
+    //for firebat
+    if (unitName === 'firebat') {
+        this.firebatProjectile = new DirectionalProjectile(this.gameEngine, this.unit.name, 
+                                                    {trueX: this.trueX, trueY: this.trueY}, 
+                                                    null, 1000, this.ctx, this.armorPiercing, 
+                                                    this.damage, this.unit.scale * this.unit.frameWidth / 2);
+        this.firebatProjectile.removeFromWorld = true;
+    }
     Entity.call(this, this.gameEngine, this.x, this.y);
 }
 
@@ -234,8 +243,17 @@ Defender.prototype.shoot = function(enemy) {
                 this.gameEngine.addProjectile(new Projectile(this.gameEngine, this.AM, this.unit.name,
                     this.trueX, this.trueY, enemy,
                     this.damage, 1000, this.armorPiercing));
+            } else if (this.unit.name === 'firebat'){
+                this.firebatProjectile.enemy = enemy;
+                if (this.firebatProjectile.removeFromWorld === true) {
+                    this.firebatProjectile.removeFromWorld = false;
+                    this.gameEngine.addProjectile(this.firebatProjectile);
+                }
             } else {
-                this.gameEngine.addProjectile(new DirectionalProjectile(this.gameEngine, this.unit.name, {trueX: this.trueX, trueY: this.trueY}, enemy, 1000, this.ctx, this.armorPiercing, this.damage, this.unit.sheetWidth / 2));
+                this.gameEngine.addProjectile(new DirectionalProjectile(this.gameEngine, this.unit.name, 
+                                                                        {trueX: this.trueX, trueY: this.trueY}, 
+                                                                        enemy, 1000, this.ctx, this.armorPiercing, 
+                                                                        this.damage, this.unit.scale * this.unit.frameWidth / 2));
             }
             this.isBusy = true;
             this.animation.spriteSheet = this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_shoot.png`);
