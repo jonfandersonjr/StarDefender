@@ -7,7 +7,8 @@ var battlecruiser_projectile = {
     frames: 16,
     loop: true,
     scale: 0.2,
-    isMultipleSprites: false
+    isMultipleSprites: false,
+    projectileAmount: 2
 };
 
 var antiair_projectile = {
@@ -19,7 +20,8 @@ var antiair_projectile = {
     frames: 16,
     loop: true,
     scale: 0.4,
-    isMultipleSprites: false
+    isMultipleSprites: false,
+    projectileAmount: 2
 };
 
 var firebat_projectile = {
@@ -30,8 +32,9 @@ var firebat_projectile = {
     frameDuration: 0.1,
     frames: 112,
     loop: true,
-    scale: 0.2,
-    isMultipleSprites: false
+    scale: 0.5,
+    isMultipleSprites: true,
+    projectileAmount: 1
 };
 
 class DirectionalProjectile {
@@ -65,12 +68,26 @@ class DirectionalProjectile {
     }
 
     update() {
-        if(!this.move(this.enemy.trueX, this.enemy.trueY)) {
-            if (this.armorPiercing) {
-                this.enemy.currentHealth -= this.damage;
-                this.removeFromWorld = true;
+        if (this.properties.name !== 'firebat') {
+            if(!this.move(this.enemy.trueX, this.enemy.trueY)) {
+                if (this.armorPiercing) {
+                    this.enemy.currentHealth -= this.damage;
+                    this.removeFromWorld = true;
+                } else {
+                    this.enemy.currentHealth -= (this.damage - this.enemy.armor);
+                    this.removeFromWorld = true;
+                }
+            }
+        } else {
+            let distance = Math.sqrt(Math.pow(this.x - this.enemy.trueX, 2) + Math.pow(this.y - this.enemy.trueY, 2));
+            if (distance < 2 * tileSize && this.enemy.currentHealth > 0) {
+                this.radianAngle = this.calculateRadianAngle();
+                var damage = this.damage - this.enemy.armor;
+                if(damage <= 0) {
+                    damage = 1;
+                }
+                this.enemy.currentHealth -= damage;
             } else {
-                this.enemy.currentHealth -= (this.damage - this.enemy.armor);
                 this.removeFromWorld = true;
             }
         }
@@ -79,7 +96,7 @@ class DirectionalProjectile {
     draw() {
         this.animation.drawDirectional(this.gameEngine.clockTick, this.ctx,
                                         this.x, this.y, this.offset,
-                                        this.radianAngle, this.properties.isMultipleSprites, 2);
+                                        this.radianAngle, this.properties.isMultipleSprites, this.properties.projectileAmount);
     }
 
     calculateRadianAngle() {

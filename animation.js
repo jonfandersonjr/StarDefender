@@ -178,24 +178,23 @@ Animation.prototype.drawDirectional = function (tick, ctx, xCenter, yCenter, off
     }
     var frameAngle = (2 * Math.PI) / this.sheetWidth;
     var spriteRadianAngle = Math.floor(radianAngle / frameAngle) * frameAngle;
-
     var x = 0;
     var y = 0;
-    var xindex =  Math.floor(spriteRadianAngle / (2 * Math.PI / this.frames));
+    var xindex =  Math.floor(spriteRadianAngle / (2 * Math.PI / this.sheetWidth));
     var yindex = 0
     if (isMultipleSprites) {
-        yindex = this.currentFrame();
+        yindex = this.currentFrame() % Math.ceil(this.frames / this.sheetWidth);
     }
-    var xOffset = Math.cos(spriteRadianAngle) * (offset);
-    x = xCenter - xOffset;
-    var yOffset = Math.sin(spriteRadianAngle) * (offset);
-    y = yCenter - yOffset;
+    var xOffset = Math.cos(spriteRadianAngle) * (offset + this.frameWidth * this.scale / 2);
+    x = xCenter - xOffset - this.frameWidth * this.scale / 2;
+    var yOffset = Math.sin(spriteRadianAngle) * (offset + this.frameHeight * this.scale / 2);
+    y = yCenter - yOffset - this.frameHeight * this.scale / 2;
     var x1 = x;
     var y1 = y;
     var spaceBetweenProjectiles = 7;
     if (numberOfProjectiles === 2) {
-        // x += Math.cos(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
-        // y += Math.sin(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
+        x += Math.cos(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
+        y += Math.sin(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
         x1 -= Math.cos(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
         y1 -= Math.sin(Math.PI / 2 - spriteRadianAngle) * spaceBetweenProjectiles;
     }
