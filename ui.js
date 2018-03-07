@@ -181,8 +181,10 @@ UI.prototype.pauseMusic = function(bool) {
 UI.prototype.drawSCVImage = function(theInt) {
     var scv_img = new Image();
     var that = this;
+    var canvasBut = document.getElementById("uiButtons");
+    var ctxBut = canvasBut.getContext("2d");
     scv_img.onload = function() {
-        that.ctx.drawImage(scv_img, 110, 220);
+        ctxBut.drawImage(scv_img, 110, 220);
     };
     theInt *= -1;
     scv_img.src = './img/buttons/scv_portrait' + theInt + '.png';
