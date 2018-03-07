@@ -315,6 +315,7 @@ UI.prototype.displayTutorial = function() {
         ["./img/tutorial/resources.png", 285, 0],
         ["./img/tutorial/base.png", 0, 410],
         ["./img/tutorial/lane.png", 125, 300],
+        ["./img/tutorial/armor.png", 125, 300],
         ["./img/tutorial/pickup.png", 125, 300],
         ["./img/tutorial/defenders.png", 285, 250],
         ["./img/tutorial/ghost.png", 285, 250],
@@ -357,7 +358,7 @@ UI.prototype.displayTutorial = function() {
                 that.gameEngine.pause(true);
             }
 
-        }, 4000);
+        }, 5000);
     }
     drawTutorialImages();
 }
@@ -376,29 +377,29 @@ UI.prototype.buttonHighlight = function(i) {
     var that = this;
     var tempX;
     var tempY;
-    //Coordinated based on i 9-14 defenders
+    //Coordinated based on i 10-15 defenders
     switch (i) {
-        case 9:
-            tempX = 0;
-            tempY = 0;
-            break;
         case 10:
-            tempX = 110;
+            tempX = 0;
             tempY = 0;
             break;
         case 11:
-            tempX = 0;
-            tempY = 110;
+            tempX = 110;
+            tempY = 0;
             break;
         case 12:
-            tempX = 110;
+            tempX = 0;
             tempY = 110;
             break;
         case 13:
+            tempX = 110;
+            tempY = 110;
+            break;
+        case 14:
             tempX = 0;
             tempY = 220;
             break;
-        case 14:
+        case 15:
             tempX = 110;
             tempY = 220;
         default:
