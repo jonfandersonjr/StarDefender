@@ -55,7 +55,7 @@ AM.downloadAll(function() {
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
-    var ui = new UI(myMouse, 100 /*startHealth*/ , 100 /*maxHealth*/ , 200 /*resources*/ ,
+    var ui = new UI(myMouse, 100 /*startHealth*/ , 100 /*maxHealth*/ , 250 /*resources*/ ,
         1 /*startLevel*/ , -1 /*wavesCleared*/ , 0 /*enemiesKilled*/ );
     myMouse.attachUI(ui);
 
