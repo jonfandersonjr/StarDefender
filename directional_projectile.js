@@ -18,7 +18,7 @@ var antiair_projectile = {
     frameDuration: 0.1,
     frames: 16,
     loop: true,
-    scale: 0.2,
+    scale: 0.4,
     isMultipleSprites: false
 };
 
@@ -52,10 +52,7 @@ class DirectionalProjectile {
         }
         this.animation = new Animation(AM.getAsset(`./img/${this.properties.name}/${this.properties.name}_projectile.png`),
                                                     this.properties.frameWidth, this.properties.frameHeight, this.properties.sheetWidth, 
-                                                    this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
-        this.animation1 = new Animation(AM.getAsset(`./img/${this.properties.name}/${this.properties.name}_projectile.png`),
-                                                    this.properties.frameWidth, this.properties.frameHeight, this.properties.sheetWidth, 
-                                                    this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale * tileSize / 31);
+                                                    this.properties.frameDuration, this.properties.frames, this.properties.loop, this.properties.scale);
         this.gameEngine = gameEngine;
         this.enemy = enemy;
         this.speed = speed;
@@ -82,11 +79,11 @@ class DirectionalProjectile {
     draw() {
         this.animation.drawDirectional(this.gameEngine.clockTick, this.ctx,
                                         this.x, this.y, this.offset,
-                                        this.radianAngle, this.properties.isMultipleSprites);
+                                        this.radianAngle, this.properties.isMultipleSprites, 2);
     }
 
     calculateRadianAngle() {
-        return angleRadian(this.x, this.y, this.enemy.trueX, this.enemy.trueY);;
+        return angleRadian(this.x, this.y, this.enemy.trueX, this.enemy.trueY);
     }
 
     move(destinationX, destinationY) {
@@ -95,9 +92,9 @@ class DirectionalProjectile {
         if (this.dist > 20 && this.enemy.currentHealth > 0) {
             this.x -= this.gameEngine.clockTick * this.xSpeed;
             this.y -= this.gameEngine.clockTick * this.ySpeed;
+            this.radianAngle = this.calculateRadianAngle();
             return true;
         }
-        this.radianAngle = this.calculateRadianAngle();
         return false;
     }
 
