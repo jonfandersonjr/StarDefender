@@ -222,6 +222,7 @@ UI.prototype.gameOverScreen = function() {
         that.ctx.drawImage(gameOverImg, 40, 50);
     };
     gameOverImg.src = './img/ui/gameOver.png';
+    this.gameEngine.isPlaying = false;
     this.gameEngine.pause(true, true);
 }
 
