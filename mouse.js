@@ -12,8 +12,8 @@ function Mouse(map, ctx) {
     this.musicOn = true;
     this.resources = {
         marine: -50,
-        ghost: -100,
-        battlecruiser: -150,
+        ghost: -150,
+        battlecruiser: -200,
         scv: -50,
         antiair: -100,
         firebat: -100
@@ -382,7 +382,7 @@ TileBox.prototype.draw = function() {
 }
 
 function isDefender(mapKey) {
-    return mapKey === 'a' || mapKey === 's' || mapKey === 'd' || mapKey === 'r';
+    return mapKey === 'a' || mapKey === 's' || mapKey === 'd';
 }
 
 

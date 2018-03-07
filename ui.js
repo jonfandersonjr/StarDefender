@@ -447,7 +447,7 @@ function generateGameInfo() {
         "Keybinds\n" +
         "----\n" +
         "(A) Marine:\n    Med Damage\n    Weak vs Armor\n    Hits Air and Ground\n" +
-        "(Q) Firebat:\n    High DPS\n    AoE Damage\n    Limited Range\n" +
+        "(Q) Firebat:\n    High DPS\n    Limited Range\n    Cannot be Moved\n" +
         "(S) Ghost:\n    Medium Damage\n    Armor Piercing\n    Ground Specialist\n" +
         "(D) Battlecruiser:\n    High Damage\n    Long Range\n    Low Rate of Fire\n" +
         "(W) Anti Air:\n    High Damage\n    Armor Piercing\n    Hits Air Only\n" +

@@ -50,7 +50,8 @@ AM.downloadAll(function() {
     var map = new Map(map_1);
     var myMouse = new Mouse(map, ctx);
 
-    window.alert("Please wait until the game is finished by Wednesday 6PM to play test and grade. \nThis is a work in progress with only 3/5 completed levels and firebat non-functional :)");
+    window.alert("Please wait until the game is finished by Wednesday 6PM to play test and grade. \n" +
+        "This is a work in progress with 3/ 5 completed levels and restart level only working if you have't died :)");
 
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting

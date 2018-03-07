@@ -190,6 +190,8 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
     this.y = entrance.row * this.map.tileSize;
     this.getTrueCordinates();
 
+    this.scale = this.unit.scale;
+
     //perform statbuffs depending on wave
     this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
@@ -226,16 +228,17 @@ Boss.prototype.update = function() {
 
     if (this.unit === overlord && this.currentHealth < 500 && this.sizeTrigger === false) {
         this.sizeTrigger = true;
-        this.unit.scale = .3;
+        this.speed += 10;
+        this.scale = .3;
         this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
-                this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
+                this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.scale * this.map.tileSize / 31);
     }
     if (this.unit === darktemplar && this.currentHealth < 500 && this.damageTrigger === false) {
         this.damageTrigger = true;
         this.damage = 1000;
     }
     if (this.unit === devourer && this.currentHealth < this.unit.health/2 && this.speedTrigger === false) {
-        this.speed += 20;
+        this.speed += 30;
         this.speedTrigger = true;
     } 
     if (this.unit === infestedkerrigan && this.currentHealth < 200 && this.healthTrigger === false) {

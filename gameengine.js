@@ -206,7 +206,7 @@ GameEngine.prototype.runLevel = function() {
 
     //Level is finished so allow user to play more levels
     if (this.level.isDone) {
-        if (this.unitEntities.length === 0) {
+        if (this.unitEntities.length === 0 && this.gameUI.healthCur > 0) {
             if (this.levelNum === 5) {
                 //**WIN SCREEN**//
                 var canvasThree = document.getElementById("gameOverlayScreen");
