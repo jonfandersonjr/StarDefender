@@ -6,7 +6,7 @@ var overlord = {
     loop: true,
     scale: .6,
     speed: 40,
-    health: 1000,
+    health: 600,
     armor: 10,
     isAir: false,
     damage: 50,
@@ -189,7 +189,7 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
     this.x = entrance.column * this.map.tileSize;
     this.y = entrance.row * this.map.tileSize;
     this.getTrueCordinates();
-
+    this.scale = this.unit.scale;
     //perform statbuffs depending on wave
     this.speedBuff = theSpeedBuff;
     this.speed = this.unit.speed * theSpeedBuff;
@@ -226,9 +226,9 @@ Boss.prototype.update = function() {
 
     if (this.unit === overlord && this.currentHealth < 500 && this.sizeTrigger === false) {
         this.sizeTrigger = true;
-        this.unit.scale = .3;
+        this.scale = .3;
         this.animation = new Animation(this.AM.getAsset(`./img/${this.unit.name}/${this.unit.name}_${this.direction}.png`),
-                this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.unit.scale * this.map.tileSize / 31);
+                this.unit.frameWidth, this.unit.frameHeight, this.unit.sheetWidth, this.unit.frameDuration, this.unit.frames, this.unit.loop, this.scale * this.map.tileSize / 31);
     }
     if (this.unit === darktemplar && this.currentHealth < 500 && this.damageTrigger === false) {
         this.damageTrigger = true;
