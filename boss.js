@@ -23,8 +23,8 @@ var darktemplar = {
     loop: true,
     scale: .6,
     speed: 40,
-    health: 1500,
-    armor: 10,
+    health: 500,
+    armor: 0,
     isAir: false,
     damage: 50,
     deathAnimation: {
