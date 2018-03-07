@@ -31,13 +31,12 @@ var S = "sarahkerrigan"; // HP:3000  Speed:40  Armor:10    //Revives upon death 
 
 
 //Level One (Easy) - Grass
-/*
 var firstLevelEnemies     = [i, z, s, l, d, m, q, O, 0];
 var firstLevelWaveSize    = [2, 3, 2, 3, 5, 1, 3, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 3, 1, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
-*/
+
 
 //Level Two (Medium) - Blue
 var secondLevelEnemies     = [dr,z, s, q, h, d, g, O, z, d, q, z, m, d, z, g, h, q, D, 0];
@@ -68,12 +67,13 @@ var fifthLevelHealthBuff   = [1, 2, 3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
 var fifthLevelEntranceNum  = [1, 2, 3, 3, 1, 2, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 // test case
-
+/*
 var firstLevelEnemies = [dr, dr, dr, z, i, q, z, s, m, m, m, s, g, m, s, q, m, D, 0];
 var firstLevelWaveSize = [1, 3, 1, 2, 3, 1, 5, 5, 7, 8, 9, 1, 8, 5, 9, 4, 8, 1, 0];
 var firstLevelSpeedBuff = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 3, 3, 1, 2, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1];
+*/
 
 function Level(levelNum, waveObject) {
     this.canvas = document.getElementById("gameWorld");

@@ -17,6 +17,24 @@ var overlord = {
         scale: 1
     }
 };
+var darktemplar = {
+    name: "darktemplar",
+    frameWidth: 54, frameHeight: 59, sheetWidth: 11, frameDuration: 0.1, frames: 11,
+    loop: true,
+    scale: .6,
+    speed: 40,
+    health: 1500,
+    armor: 10,
+    isAir: false,
+    damage: 50,
+    deathAnimation: {
+        name: "darktemplar",
+        frameWidth: 54, frameHeight: 72, sheetWidth: 7, frameDuration: 1, frames: 7,
+        loop: false,
+        scale: 1
+    }
+};
+
 
 var devourer = {
     name: "devourer",
@@ -138,6 +156,10 @@ function Boss(game, unitName, entrance, map, assetManager, theSpeedBuff, theHeal
             this.deathSound = './soundfx/deathDevourer.wav';
             this.speedTrigger = false;
             break;
+        case "darktemplar":
+            this.unit = darktemplar;
+            this.deathSound = "./soundfx/deathDarkTemplar.wav";
+            break;    
         case "overlord":
             this.unit = overlord;
             this.deathSound = './soundfx/deathOverlord.wav';
@@ -200,12 +222,13 @@ Boss.prototype.update = function() {
         this.armorTrigger = true;
         this.armor = 30;
     }
+    /*
     if (this.unit === overlord && this.currentHealth < 500 && this.sizeTrigger === false) {
         console.log("overlord");
         this.unit.scale = 10;
         this.scale = 10;
     }
-
+    */
     if (this.unit === devourer && this.currentHealth < this.unit.health/2 && this.speedTrigger === false) {
         this.speed += 20;
         this.speedTrigger = true;
