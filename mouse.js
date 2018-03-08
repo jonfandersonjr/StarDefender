@@ -268,8 +268,8 @@ Mouse.prototype.attachListeners = function() {
                 that.selectDefender("battlecruiser");
             }
         } else if (e.keyCode === 81) {
-            that.unitCost = 150;
-            that.tileBox.unitCost = 150;
+            that.unitCost = 100;
+            that.tileBox.unitCost = 100;
             if (!(that.gameEngine.getPauseBool())) {
                 that.selectDefender("firebat");
             }
@@ -303,6 +303,9 @@ Mouse.prototype.attachListeners = function() {
             that.gameEngine.resetLevel(that.gameEngine.levelNum);
             if (!that.gameEngine.isPlaying) {
                 that.gameEngine.isPlaying = true;
+                var gameOverlay = document.getElementById("gameOverlayScreen").getContext("2d");
+                gameOverlay.clearRect(0, 0, 770, 770);
+                that.gameEngine.pauseBool = false;
             }
             if (that.gameEngine.levelNum === 1) {
                 that.gameEngine.levelNum = 8;

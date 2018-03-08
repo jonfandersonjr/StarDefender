@@ -7,17 +7,17 @@
 
 //**Default Stats**//
 //Ground Enemies
-var b = "broodling"; // HP:40  Speed:60  Armor:1
-var i = "infestedterran"; // HP:40  Speed:60  Armor:1
-var dr = "drone"; // HP:50  Speed:35  Armor:0
-var z = "zergling"; // HP:60  Speed:80  Armor:0
-var l = "lurker"; // HP:90  Speed:50  Armor:2
-var d = "defiler"; // HP:180  Speed:60  Armor:5
-var q = "queen"; //yaas   // HP:225  Speed:50  Armor:5
-var h = "hydralisk"; // HP:250  Speed:60  Armor:8
+var b = "broodling";          // HP:40  Speed:60  Armor:1
+var i = "infestedterran";     // HP:40  Speed:60  Armor:1
+var dr = "drone";             // HP:50  Speed:35  Armor:0
+var z = "zergling";           // HP:60  Speed:80  Armor:0
+var l = "lurker";             // HP:90  Speed:50  Armor:2
+var d = "defiler";            // HP:180  Speed:60  Armor:5
+var q = "queen";     //yaas   // HP:225  Speed:50  Armor:5
+var h = "hydralisk";          // HP:250  Speed:60  Armor:8
 
 //Flying Enemies
-var s = "scourge"; // HP:40   Speed:65  Armor:0
+var s = "scourge";  // HP:40   Speed:65  Armor:0
 var m = "mutalisk"; // HP:110  Speed:45  Armor:6
 var g = "guardian"; // HP:200  Speed:40  Armor:10
 
@@ -32,17 +32,17 @@ var S = "sarahkerrigan"; // HP:3000  Speed:40  Armor:10    //Revives upon death 
 
 
 //Level One (Easy) - Grass
-var firstLevelEnemies = [i, z, s, l, d, m, q, O, 0];
-var firstLevelWaveSize = [2, 3, 2, 3, 5, 1, 3, 1, 0];
-var firstLevelSpeedBuff = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var firstLevelHealthBuff = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var firstLevelEnemies     = [i, z, s, l, d, m, q, O, 0];
+var firstLevelWaveSize    = [2, 3, 2, 3, 5, 1, 3, 1, 0];
+var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 3, 1, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Two (Medium) - Blue
-var secondLevelEnemies = [dr, z, s, q, h, d, g, O, z, d, q, z, m, d, z, g, h, q, D, 0];
-var secondLevelWaveSize = [3, 5, 1, 2, 2, 3, 1, 1, 5, 7, 5, 8, 3, 5, 9, 2, 5, 4, 1, 0];
-var secondLevelSpeedBuff = [0, 0, 0, 0, 0, 0, 0, 0, 0, .5, 0, .2, 0, .5, .2, .2, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var secondLevelHealthBuff = [0, 0, 0, 0, 0, 0, 0, 0, .5, .5, .5, 0, 0, .5, 1, .2, .3, .5, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var secondLevelEnemies     = [dr,z, s, q, h, d, g, O, z, d, q, z, m, d, z, g, h, q, D, 0];
+var secondLevelWaveSize    = [3, 5, 1, 2, 2, 3, 1, 1, 5, 7, 5, 8, 3, 5, 9, 2, 5, 4, 1, 0];
+var secondLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0,.5, 0,.2, 0,.5,.2,.2, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var secondLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0,.5,.5,.5, 0, 0,.5, 1,.2,.3,.5, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var secondLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 3, 3, 3, 3, 1, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Three (medium hard) - Metal

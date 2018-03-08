@@ -50,9 +50,6 @@ AM.downloadAll(function() {
     var map = new Map(map_1);
     var myMouse = new Mouse(map, ctx);
 
-    window.alert("Please wait until the game is finished by Wednesday 6PM to play test and grade. \n" +
-        "This is a work in progress with 4/ 5 completed levels and 'restart level' only working if you haven't died :)");
-
     //UI Load
     canvas.style.outlineColor = "#000000"; //prevent highlighting
     var ui = new UI(myMouse, 100 /*startHealth*/ , 100 /*maxHealth*/ , 200 /*resources*/ ,
