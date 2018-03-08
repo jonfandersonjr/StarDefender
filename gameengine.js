@@ -9,7 +9,7 @@ window.requestAnimFrame = (function() {
         };
 })();
 
-var levelWaveDelay = [6, 10, 10, 10, 10];
+var levelWaveDelay = [6, 10, 5, 10, 10];
 
 function GameEngine(mouse, ui, theMap, AM) {
     this.canvas = document.getElementById("gameWorld");

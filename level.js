@@ -46,18 +46,18 @@ var secondLevelHealthBuff  = [ 0, 0, 0, 0, 0, 0, 0, 0, .5, .5, .5,  0, 0, .5,  1
 var secondLevelEntranceNum = [ 1, 2, 3, 3, 1, 3, 3, 2,  3,  1,  3,  3, 3,  3,  3,  3,  3,  1, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Three (medium hard) - Metal
-var thirdLevelEnemies       = [dr, dr, dr,  z,  i,  s,  z,  s,  m,  m,  m,  s,  g,  m,  s,  g,  m,  T, 0];
-var thirdLevelWaveSize      = [ 3,  3,  1,  2,  3,  1,  5,  5,  7,  4,  4,  3,  3,  3,  7,  4,  4, 10, 0];
-var thirdLevelSpeedBuff     = [.1, .1, .1, .1, .1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var thirdLevelHealthBuff    = [.2, .2, .2, .1, .2, .3, .1, .3, .1, .1, .1, .1, .3, .2, .1, .3, .1,  0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var thirdLevelEntranceNum   = [ 1,  2,  3,  3,  1,  3,  3,  3,  2,  1,  3,  3,  3,  3,  3,  3,  3,  1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+var thirdLevelEnemies     = [dr, dr,dr,z, i, s, z, s, m, m, m, s, g, m, s, g, m, T, 0];
+var thirdLevelWaveSize    = [3,  3, 1, 2, 3, 1, 5, 5, 7, 4, 4, 3, 3, 3, 7, 4, 4, 9, 0];
+var thirdLevelSpeedBuff   = [.1,.1,.1,.1,.1,.2,.1,.1,.2,.2,.2,.3,.3,.3,.2,.2,.3, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var thirdLevelHealthBuff  = [.2,.2,.2,.1,.2,.3,.2,.4,.2,.2,.2,.3,.3,.3,.2,.4,.2, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var thirdLevelEntranceNum = [1,  2, 3, 3, 1, 3, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Four (Hard) = Fire
-var fourthLevelEnemies      = [z, z, h, d, q, dr, l, i, z, U, s, m, O, z,  z,  g,  z,  q,  U, 0];
-var fourthLevelWaveSize     = [2, 4, 2, 2, 4,  4, 3, 3, 3, 1, 3, 3, 1, 3,  3,  1,  4,  3,  2, 0];
-var fourthLevelSpeedBuff    = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, .5, .2, .2, .3, .5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var fourthLevelHealthBuff   = [0, 0, 0, 0, 0,  0, 0, 0, 1, 0, 1, 0, 0, 0, .5,  1,  0,  1,  0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var fourthLevelEntranceNum  = [3, 3, 3, 3, 3,  3, 3, 3, 3, 3, 3, 3, 3, 3,  3,  3,  3,  3,  3, 0];
+var fourthLevelEnemies     = [z, z, h, d, q, dr,l, i, z, h, s, m, O, z, D, g, z, q, d, U, 0];
+var fourthLevelWaveSize    = [2, 4, 2, 2, 4, 4, 3, 3, 3, 1, 4, 3, 1, 7, 1, 1, 4, 3, 1, 0, 0];
+var fourthLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,.2,.2, 0,.5, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var fourthLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1,.5, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var fourthLevelEntranceNum = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 0];
 
 //Level Five (HARD EXTRA) = Ice
 var firstLevelEnemies     = [b, b, i, s, dr, z, l, d, O, z, dr, l, U, m, s, m, q, z, m, O, S, 0];

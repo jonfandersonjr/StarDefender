@@ -17,12 +17,13 @@ var overlord = {
         scale: 1
     }
 };
+
 var darktemplar = {
     name: "darktemplar",
     frameWidth: 54, frameHeight: 59, sheetWidth: 11, frameDuration: 0.1, frames: 11,
     loop: true,
-    scale: .6,
-    speed: 40,
+    scale: .8,
+    speed: 50,
     health: 500,
     armor: 0,
     isAir: false,
@@ -34,7 +35,6 @@ var darktemplar = {
         scale: 1
     }
 };
-
 
 var devourer = {
     name: "devourer",
@@ -60,7 +60,7 @@ var ultralisk = {
     loop: true,
     scale: 0.55,
     speed: 35,
-    health: 4000,
+    health: 3000,
     armor: 10,
     isAir: false,
     damage: 80,
