@@ -17,6 +17,7 @@ var overlord = {
         scale: 1
     }
 };
+
 var darktemplar = {
     name: "darktemplar",
     frameWidth: 54, frameHeight: 59, sheetWidth: 11, frameDuration: 0.1, frames: 11,
@@ -34,7 +35,6 @@ var darktemplar = {
         scale: 1
     }
 };
-
 
 var devourer = {
     name: "devourer",
