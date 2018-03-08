@@ -30,41 +30,41 @@ var S = "sarahkerrigan"; // HP:3000  Speed:40  Armor:10    //Revives upon death 
 
 //var I = "infestedkerrigan";
 
-
+/*
 //Level One (Easy) - Grass
 var firstLevelEnemies     = [i, z, s, l, d, m, q, O, 0];
 var firstLevelWaveSize    = [2, 3, 2, 3, 5, 1, 3, 1, 0];
 var firstLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
 var firstLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
 var firstLevelEntranceNum = [1, 2, 1, 3, 2, 3, 3, 1, 0] //1 = first entrance, 2 = second entrance, 3 = both entrances
-
+*/
 //Level Two (Medium) - Blue
-var secondLevelEnemies     = [dr,z, s, q, h, d, g, O, z, d, q, z, m, d, z, g, h, q, D, 0];
-var secondLevelWaveSize    = [3, 5, 1, 2, 2, 3, 1, 1, 5, 7, 5, 8, 3, 5, 9, 2, 5, 4, 1, 0];
-var secondLevelSpeedBuff   = [0, 0, 0, 0, 0, 0, 0, 0, 0,.5, 0,.2, 0,.5,.2,.2, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var secondLevelHealthBuff  = [0, 0, 0, 0, 0, 0, 0, 0,.5,.5,.5, 0, 0,.5, 1,.2,.3,.5, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var secondLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3, 2, 3, 1, 3, 3, 3, 3, 3, 3, 3, 1, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+var secondLevelEnemies     = [dr, z, s, q, h, d, g, O,  z,  d,  q,  z, m,  d,  z,  g,  h,  q, D, 0];
+var secondLevelWaveSize    = [ 3, 5, 1, 2, 2, 3, 1, 1,  5,  7,  5,  8, 3,  5,  9,  2,  5,  4, 1, 0];
+var secondLevelSpeedBuff   = [ 0, 0, 0, 0, 0, 0, 0, 0,  0, .5,  0, .2, 0, .5, .2, .2,  0,  0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var secondLevelHealthBuff  = [ 0, 0, 0, 0, 0, 0, 0, 0, .5, .5, .5,  0, 0, .5,  1, .2, .3, .5, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var secondLevelEntranceNum = [ 1, 2, 3, 3, 1, 3, 3, 2,  3,  1,  3,  3, 3,  3,  3,  3,  3,  1, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Three (medium hard) - Metal
-var thirdLevelEnemies = [dr, dr, dr, z, i, s, z, s, m, m, m, s, g, m, s, g, m, T, 0];
-var thirdLevelWaveSize = [3, 3, 1, 2, 3, 1, 5, 5, 7, 4, 4, 3, 3, 3, 7, 4, 4, 10, 0];
-var thirdLevelSpeedBuff = [.1, .1, .1, .1, .1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var thirdLevelHealthBuff = [.2, .2, .2, .1, .2, .3, .1, .3, .1, .1, .1, .1, .3, .2, .1, .3, .1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var thirdLevelEntranceNum = [1, 2, 3, 3, 1, 3, 3, 3, 2, 1, 3, 3, 3, 3, 3, 3, 3, 1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+var thirdLevelEnemies       = [dr, dr, dr,  z,  i,  s,  z,  s,  m,  m,  m,  s,  g,  m,  s,  g,  m,  T, 0];
+var thirdLevelWaveSize      = [ 3,  3,  1,  2,  3,  1,  5,  5,  7,  4,  4,  3,  3,  3,  7,  4,  4, 10, 0];
+var thirdLevelSpeedBuff     = [.1, .1, .1, .1, .1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var thirdLevelHealthBuff    = [.2, .2, .2, .1, .2, .3, .1, .3, .1, .1, .1, .1, .3, .2, .1, .3, .1,  0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var thirdLevelEntranceNum   = [ 1,  2,  3,  3,  1,  3,  3,  3,  2,  1,  3,  3,  3,  3,  3,  3,  3,  1, 1]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 //Level Four (Hard) = Fire
-var fourthLevelEnemies = [z, z, h, d, q, dr, l, i, z, U, s, m, O, z, z, g, z, q, U, 0];
-var fourthLevelWaveSize = [2, 4, 2, 2, 4, 4, 3, 3, 3, 1, 3, 3, 1, 3, 3, 1, 4, 3, 2, 0];
-var fourthLevelSpeedBuff = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, .5, .2, .2, .3, .5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var fourthLevelHealthBuff = [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, .5, 1, 0, 1, 0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var fourthLevelEntranceNum = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0];
+var fourthLevelEnemies      = [z, z, h, d, q, dr, l, i, z, U, s, m, O, z,  z,  g,  z,  q,  U, 0];
+var fourthLevelWaveSize     = [2, 4, 2, 2, 4,  4, 3, 3, 3, 1, 3, 3, 1, 3,  3,  1,  4,  3,  2, 0];
+var fourthLevelSpeedBuff    = [0, 0, 0, 0, 0,  0, 0, 0, 0, 0, 0, 0, 0, 0, .5, .2, .2, .3, .5, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var fourthLevelHealthBuff   = [0, 0, 0, 0, 0,  0, 0, 0, 1, 0, 1, 0, 0, 0, .5,  1,  0,  1,  0, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var fourthLevelEntranceNum  = [3, 3, 3, 3, 3,  3, 3, 3, 3, 3, 3, 3, 3, 3,  3,  3,  3,  3,  3, 0];
 
 //Level Five (HARD EXTRA) = Ice
-var fifthLevelEnemies     = [z, z, z, D, D, D, O, O, O, z, q, d, U, m, s, m, q, z, m, O, S, 0];
-var fifthLevelWaveSize    = [4, 4, 7, 2, 3, 1, 3, 2, 2, 8, 9, 1, 8, 5, 9, 4, 8, 8, 4, 2, 1, 0];
-var fifthLevelSpeedBuff   = [1, 1, 1, 1, 1, 1, 0,.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
-var fifthLevelHealthBuff  = [1, 2, 3, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
-var fifthLevelEntranceNum = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
+var firstLevelEnemies     = [b, b, i, s, dr, z, l, d, O, z, dr, l, U, m, s, m, q, z, m, O, S, 0];
+var firstLevelWaveSize    = [4, 4, 4, 2,  3, 5, 1, 4, 1, 5,  9, 3, 8, 5, 9, 4, 8, 8, 4, 2, 1, 0];
+var firstLevelSpeedBuff   = [0, 0, 0, 0,  1, 0, 0, 0, 0, 1,  0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0]; //unit is buffed by ->> unitSpeed * (1 + speedBuff) for readability here
+var firstLevelHealthBuff  = [0, 0, 2, 0,  1, 1, 0, 0, 0, 0,  2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 0]; //unit is buffed by ->> unitHealth * (1 + healthBuff) for readability here
+var firstLevelEntranceNum = [1, 2, 2, 1,  3, 1, 2, 2, 1, 3,  1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 0]; //1 = first entrance, 2 = second entrance, 3 = both entrances
 
 // test case
 /*
