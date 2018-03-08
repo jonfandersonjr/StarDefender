@@ -97,7 +97,11 @@ Projectile.prototype.update = function() {
             this.enemy.currentHealth -= this.damage;
             this.removeFromWorld = true;
         } else {
-            this.enemy.currentHealth -= (this.damage - this.enemy.armor);
+            var damage = this.damage - this.enemy.armor;
+            if (damage <= 0) {
+                damage = 1;
+            }
+            this.enemy.currentHealth -= damage;
             this.removeFromWorld = true;
         }
     }
