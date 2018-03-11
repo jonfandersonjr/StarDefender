@@ -271,6 +271,7 @@ GameEngine.prototype.resetLevel = function (newLevel) {
     this.defenderEntities = [];
     this.scvEntities = [];
     this.unitEntities = [];
+    this.projectileEntities = [];
 }
 
 GameEngine.prototype.findDefender = function(row, column) {
